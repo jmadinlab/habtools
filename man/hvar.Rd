@@ -2,16 +2,33 @@
 % Please edit documentation in R/hvar.R
 \name{hvar}
 \alias{hvar}
-\title{Calculate height variation}
+\title{Height Variation in cells at different scales}
 \usage{
-hvar(x, y, s)
+hvar(dem, x, y, L, Lvec)
 }
 \arguments{
-\item{s}{}
+\item{dem}{Digital elevation model in raster format.}
+
+\item{x}{Bottom-left of bounding box.}
+
+\item{y}{Bottom-left of bounding box.}
+
+\item{L}{Bounding box extent (i.e., side length).}
+
+\item{Lvec}{A vector of scales to collate.}
 }
 \value{
-
+A dataframe containing height ranges of cells at different scales.
 }
 \description{
-Calculate height variation
+Height Variation in cells at different scales
+}
+\details{
+This function is used for calculating fractal dimension using the
+height variation method.
+It is separated from the \code{FD} function because it takes a while to run, and so it is useful
+to save the output before using the \code{FD} function.
+}
+\examples{
+hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
 }
