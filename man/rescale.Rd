@@ -4,7 +4,7 @@
 \alias{rescale}
 \title{Rescale}
 \usage{
-rescale(x, x0, xm, n)
+rescale(x, xmin, xmax, n)
 }
 \arguments{
 \item{n}{}

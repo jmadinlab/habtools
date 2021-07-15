@@ -1,21 +1,21 @@
 #' Count filled cells
 #'
-#' @param data
+#' @param pts
 #' @param xmin
 #' @param xmax
 #' @param ymin
 #' @param ymax
 #' @param zmin
 #' @param zmax
-#' @param ngrid
+#' @param n
 #'
 #' @return
 #' @export
 #'
 #' @examples
-cell_count <- function(data, xmin, xmax, ymin, ymax, zmin, zmax, ngrid) {
-  cnt <- table(ceiling(rescale(data[,1], xmin, xmax, ngrid)),
-               ceiling(rescale(data[,2], ymin, ymax, ngrid)),
-               ceiling(rescale(data[,3], zmin, zmax, ngrid)))
+cell_count <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
+  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
+               ceiling(rescale(pts$y, ymin, ymax, n)),
+               ceiling(rescale(pts$z, zmin, zmax, n)))
   sum(cnt > 0)
 }

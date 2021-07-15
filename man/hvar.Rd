@@ -18,7 +18,7 @@ hvar(dem, x, y, L, Lvec)
 \item{Lvec}{A vector of scales to collate.}
 }
 \value{
-A dataframe containing height ranges of cells at different scales.
+A \code{data.frame} containing height ranges of cells at different scales.
 }
 \description{
 Height Variation in cells at different scales

@@ -4,22 +4,36 @@
 \alias{cubes}
 \title{Cube counting for 3D mesh}
 \usage{
-cubes(mesh, L0, plot = FALSE)
+cubes(mesh, L0, cubes, plot = FALSE)
 }
 \arguments{
 \item{mesh}{3D mesh with vertices}
 
-\item{L0}{The grain or resolution (i.e., smallest cube size)}
+\item{L0}{(Optional) The grain or resolution (i.e., smallest cube size)}
+
+\item{cubes}{(Optional) A vector of number of cubes to be fitted
+at different scales.}
 
 \item{plot}{Plot number of filled cubes at different scales}
 }
 \value{
-The fractal dimension value
+A \code{data.frame} of number of cubes (\code{n}) intersecting mesh points at different cube sizes (\code{L}) and a fractal dimension value. Note that cube size is the length of a side.
 }
 \description{
 Cube counting for 3D mesh
 }
+\details{
+This tool creates arrays of cubes of different sizes and counts mesh points that fall within cubes. The number of cubes for each scale can be selected (optionally), but ensure you start with 1 (i.e., a cube that encapsulates the whole mesh) and keep in mind fractals are calculated over log scales. For instance, the default \code{cubes} is a vector of doubling numbers \code{c(1, 2, 4, 8, 16, 32, ...)}. The actual array of cubes will be these numbers to the third power. The tool will not allow the number of cubes to cause the cube size to fall below the resolution \code{L0} of the mesh, because this will increase the chance that smaller cubes fall between mesh points and so underestimate cube counts. If \code{L0} is not given, it will be calculated as \code{sqrt(2)} multiplied by the largest nearest neighbor distance of points. Most meshes are not perfectly fractal, and so use the \code{plot} parameter to look for scale transitions.
+}
 \examples{
 cubes(mcap)
+cubes(mcap, plot=TRUE)
+cubes(mcap, cubes=c(1, 2, 3, 4, 5, 6, 7, 8), plot=TRUE)
 
+}
+\references{
+
+}
+\seealso{
+\code{\link[=fd]{fd()}} for fractal dimension from variation method
 }

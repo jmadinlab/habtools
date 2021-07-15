@@ -4,10 +4,10 @@
 \alias{cell_count}
 \title{Count filled cells}
 \usage{
-cell_count(data, xmin, xmax, ymin, ymax, zmin, zmax, ngrid)
+cell_count(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 }
 \arguments{
-\item{ngrid}{}
+\item{n}{}
 }
 \value{
 

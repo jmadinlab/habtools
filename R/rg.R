@@ -18,7 +18,7 @@
 #'
 rg <- function(dem, x, y, L, L0, plot=FALSE) {
   cells <- expand.grid(x=seq(x, x+L-L0, L0), y=seq(y, y+L-L0, L0))
-  H0 <- mapply(hr, x=cells$x, y=cells$y, MoreArgs=list(L=L0, dem=dem, plot=plot))
+  H0 <- mapply(hr, x=cells$x, y=cells$y, MoreArgs=list(L=L0, data=dem, plot=plot))
   H0 <- mean(H0)
   rg <- sqrt((H0^2) / (2 * L0^2) + 1)
   return(rg)

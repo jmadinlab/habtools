@@ -6,7 +6,7 @@
 #' @param L Bounding box extent (i.e., side length).
 #' @param Lvec A vector of scales to collate.
 #'
-#' @return A dataframe containing height ranges of cells at different scales.
+#' @return A `data.frame` containing height ranges of cells at different scales.
 #' @export
 #'
 #' @details
@@ -21,7 +21,7 @@ hvar <- function(dem, x, y, L, Lvec) {
   hvar <- data.frame()
   for (L0 in Lvec) {
     cells <- expand.grid(x=seq(x, x+L-L0, L0), y=seq(y, y+L-L0, L0))
-    H0 <- mapply(hr, x=cells$x, y=cells$y, MoreArgs=list(L=L0, dem=dem))
+    H0 <- mapply(hr, x=cells$x, y=cells$y, MoreArgs=list(L=L0, data=dem))
     hvar <- rbind(hvar, data.frame(L0=L0, H0=H0))
   }
   return(hvar)
