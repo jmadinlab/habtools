@@ -17,7 +17,8 @@ the number of tools and contributors will grow through time.
 
 ## Installation
 
-Install the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -36,7 +37,9 @@ developed in Torres-Pulliza et al. (2020).
 
 ``` r
 library(habtools)
-raster::plot(horseshoe)
+#> Loading required package: raster
+#> Loading required package: sp
+plot(horseshoe)
 
 # height range
 hr(horseshoe, x=-470, y=1266, L=2, plot=TRUE)
@@ -101,18 +104,12 @@ not 3D).
 
 ``` r
 dem <- mesh_to_dem(mcap, res=0.015)
-L <- dim(dem)[1] * raster::res(dem)[1]
+L <- dim(dem)[1] * res(dem)[1]
 
-hts <- hvar(dem, raster::xmin(dem), raster::ymin(dem), L, Lvec=L/c(1, 2, 3, 4, 6, 8, 10))
+hts <- hvar(dem, xmin(dem), ymin(dem), L, Lvec=L/c(1, 2, 3, 4, 6, 8, 10))
 fd(hts, plot=TRUE)
 ```
 
 <img src="man/figures/README-example3-1.png" width="100%" />
 
     #> [1] 2.287082
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
