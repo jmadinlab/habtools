@@ -30,5 +30,6 @@ It is separated from the \code{FD} function because it takes a while to run, and
 to save the output before using the \code{FD} function.
 }
 \examples{
+
 hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
 }

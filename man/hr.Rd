@@ -4,15 +4,24 @@
 \alias{hr}
 \title{Height range}
 \usage{
-hr(data, method = "dem")
+hr(data, x, y, L, method = "dem", plot = FALSE)
 }
 \arguments{
-\item{data}{A 3D object.}
+\item{data}{A digital elevation model (DEM) in raster format.}
+
+\item{x}{The lower-left x-coordinate of bounding box.}
+
+\item{y}{The lower-left y-coordinate of bounding box.}
+
+\item{L}{The bounding box size (i.e., side length).}
 
 \item{method}{\code{dem} (default) is digital elevation model (DEM) in raster format; \code{mesh} is a 3D mesh model with vertices.}
+
+\item{plot}{Add bounding box to existing plot of \code{dem}.}
 }
 \value{
-The difference between the lowest and highest point in a 3D object.
+The difference between the lowest and highest point in the
+bounding box.
 }
 \description{
 Height range
@@ -20,16 +29,9 @@ Height range
 \examples{
 hr(horseshoe)
 
-raster::plot(horseshoe)
-
-# Within a bounding box
-x <- -470
-y <- 1266
-L <- 2
-rect(x, xy, x+L, y+L)
-
-ext <- raster::extent(x, x+L, y, y+L)
-hr(raster::crop(horseshoe, ext))
+plot(horseshoe)
+hr(horseshoe, plot=TRUE)
+hr(horseshoe, -470, 1266, 2, plot=TRUE)
 
 # For a 3D mesh.
 hr(mcap, method="mesh")
