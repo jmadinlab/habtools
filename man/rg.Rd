@@ -4,11 +4,9 @@
 \alias{rg}
 \title{Rugosity}
 \usage{
-rg(dem, x, y, L, L0, plot = FALSE)
+rg(data, x, y, L, L0, method = "dem", plot = FALSE)
 }
 \arguments{
-\item{dem}{Digital elevation model in raster format.}
-
 \item{x}{Bottom-left of bounding box.}
 
 \item{y}{Bottom-left of bounding box.}
@@ -18,6 +16,8 @@ rg(dem, x, y, L, L0, plot = FALSE)
 \item{L0}{Grain or resolution of calculation.}
 
 \item{plot}{Add bounding box to plot.}
+
+\item{dem}{Digital elevation model in raster format.}
 }
 \value{
 

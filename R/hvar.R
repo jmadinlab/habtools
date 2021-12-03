@@ -18,6 +18,9 @@
 #' @examples
 #' hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
 hvar <- function(dem, x, y, L, Lvec) {
+  if (missing(x)) x <- raster::xmin(dem)
+  if (missing(y)) y <- raster::ymin(dem)
+  if (missing(L)) L <- min(dim(dem)[1:2] * raster::res(dem))
   hvar <- data.frame()
   for (L0 in Lvec) {
     cells <- expand.grid(x=seq(x, x+L-L0, L0), y=seq(y, y+L-L0, L0))

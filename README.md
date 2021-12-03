@@ -17,14 +17,7 @@ the number of tools and contributors will grow through time.
 
 ## Installation
 
-You can install the released version of habtools from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("habtools")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

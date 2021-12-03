@@ -2,6 +2,7 @@
 
 export(cell_count)
 export(cubes)
+export(dem_to_mesh)
 export(fd)
 export(hr)
 export(hvar)

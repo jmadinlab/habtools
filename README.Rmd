@@ -36,6 +36,7 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("jmadinlab/habtools")
 ```
+
 ## Examples
 
 There are currently to data set accompanying this package. `horseshoe` is a digital elevation model of a reef, and `mcap` is a 3D mesh of a coral growing on a reef. 
