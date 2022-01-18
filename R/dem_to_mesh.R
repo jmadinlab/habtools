@@ -8,6 +8,7 @@
 #'
 #' @examples
 #' mesh <- dem_to_mesh(horseshoe)
+
 #' # library(rgl)
 #' plot3d(mesh)
 #'

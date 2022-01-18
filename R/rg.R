@@ -17,17 +17,19 @@
 #' rg(horseshoe, x=-470, y=1266, L=2, L0=0.5, plot=TRUE)
 #'
 rg <- function(data, x, y, L, L0, method="dem", plot=FALSE) {
-  if (method=="dem") {
+  if (method =="dem") {
     if (missing(x)) x <- raster::xmin(data)
     if (missing(y)) y <- raster::ymin(data)
     if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
 
-    cells <- expand.grid(x=seq(x, x+L-L0, L0), y=seq(y, y+L-L0, L0))
-    hs <- mapply(hr, x=cells$x, y=cells$y, MoreArgs=list(L=L0, data=data, plot=plot))
+    cells <- expand.grid(x = seq(x, x + L - L0, L0),
+                         y = seq(y, y + L - L0, L0))
+    hs <- mapply(hr, x = cells$x, y = cells$y, MoreArgs =
+                   list(L = L0, data = data, plot = plot))
     H0 <- mean(hs)
     rg <- sqrt((H0^2) / (2 * L0^2) + 1)
   }
-  if (method=="mesh") {
+  if (method =="mesh") {
   }
   return(rg)
 }
