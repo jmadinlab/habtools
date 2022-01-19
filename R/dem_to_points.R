@@ -6,12 +6,15 @@
 #' @export
 #'
 #' @examples
-dem_to_points <-function(dem){
-  res <- (raster::xmax(dem) - raster::xmin(dem))/nrow(dem)
-  xmin <- raster::xmin(dem)
-  xmax <- raster::xmax(dem)
-  ymin <- raster::ymin(dem)
-  ymax <- raster::ymax(dem)
+dem_to_points <-function(dem, bh = NULL, parallel = F){
+
+  res <- res(dem)
+  res_x <- res[1]
+  res_y <- res[2]
+
+  if (is.null(bh)) {
+    bh <- res_x
+  }
 
   pts <- as.data.frame(raster::rasterToPoints(dem))
   colnames(pts) <- c("x", "y", "z")
@@ -19,22 +22,34 @@ dem_to_points <-function(dem){
   out <- suppressWarnings(lapply(1:nrow(pts), function(i){
     p <- purrr::simplify(pts[i,])
     data.frame(
-      x = c(p[1] - res/2, p[1] - res/2, p[1] + res/2, p[1] + res/2),
-      y = c(p[2] - res/2, p[2] + res/2, p[2] - res/2, p[2] + res/2),
+      x = c(p[1] - res_x/2, p[1] - res_x/2, p[1] + res_x/2, p[1] + res_x/2),
+      y = c(p[2] - res_y/2, p[2] + res_y/2, p[2] - res_y/2, p[2] + res_y/2),
       z = p[3]
     )
   })) %>% dplyr::bind_rows()
 
   # add bottom
   add <- rbind(
-    unique(out[out$x == xmin, 1:2]),
-    unique(out[out$x == xmax, 1:2]),
-    unique(out[out$y == ymin, 1:2]),
-    unique(out[out$y == ymax, 1:2])
+    unique(out[out$x == min(out$x), 1:2]),
+    unique(out[out$x == max(out$x), 1:2]),
+    unique(out[out$y == min(out$y), 1:2]),
+    unique(out[out$y == max(out$y), 1:2])
   )
-  add$z = 0
+  add$z <- min(out$z) - bh
   out <- rbind(out, add) %>%
     unique()
 
+  # remove duplicates
+  out_r <- out
+  rownames(out_r) <- 1:nrow(out)
+  out_r <- out_r %>%
+    dplyr::mutate_if(is.numeric, round, 5) %>%
+    unique()
+  out <- out[as.integer(rownames(out_r)),]
+
   out
 }
+
+
+
+

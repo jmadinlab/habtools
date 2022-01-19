@@ -7,35 +7,140 @@
 #' @description This function is very slow and needs work.
 #'
 #' @examples
-#' mesh <- dem_to_mesh(horseshoe)
-
-#' # library(rgl)
+#' ext <- raster::extent(cbind(c(-470, 1264), c(-469.5, 1264.5)))
+#' raster <- raster::crop(horseshoe, ext)
+#' raster_lowres <- aggregate(raster, fact = 8)
+#' mesh <- dem_to_mesh(raster_lowres)
+#' library(rgl)
 #' plot3d(mesh)
-#'
-dem_to_mesh <- function(dem) {
-  pts <- as.data.frame(rasterToPoints(dem))
-  names(pts) <- c("x", "y", "z")
+
+
+dem_to_mesh <- function(dem){
+
+  # get points of all corners
+  p1 <- dem_to_points(dem)
+
+
+  xmin <- min(p1$x)
+  xmax <- max(p1$x)
+  ymin <- min(p1$y)
+  ymax <- max(p1$y)
+
+  zmin <- min(p1$z)
+
   res <- res(dem)
+  res_x <- res[1]
+  res_y <- res[2]
 
-  corns <- data.frame()
-  for (i in 1:nrow(pts)) {
-    corns <- rbind(corns, data.frame(x=pts$x[i]+res[1]/2, y=pts$y[i]+res[2]/2, z=pts$z[i]))
-    corns <- rbind(corns, data.frame(x=pts$x[i]+res[1]/2, y=pts$y[i]-res[2]/2, z=pts$z[i]))
-    corns <- rbind(corns, data.frame(x=pts$x[i]-res[1]/2, y=pts$y[i]+res[2]/2, z=pts$z[i]))
-    corns <- rbind(corns, data.frame(x=pts$x[i]-res[1]/2, y=pts$y[i]-res[2]/2, z=pts$z[i]))
-  }
-  corns <- round(corns, 6)
-  corns <- corns[!duplicated(corns),]
+  # add index
+  p1$index <- 1:nrow(p1)
 
-  pts <- data.frame()
-  while (nrow(corns) > 0) {
-    temp <- corns[corns$x == corns$x[1] & corns$y == corns$y[1],]
-    corns <- corns[!(corns$x == corns$x[1] & corns$y == corns$y[1]),]
-    pts <- rbind(pts, data.frame(x=temp$x[1], y=temp$y[1], z=c(seq(min(temp$z), max(temp$z), min(res)), max(temp$z))))
-  }
-  pts <- pts[!duplicated(pts),]
+  ### get all faces ###
+  # bottom
+  b <- p1[p1$z == zmin,]
+  i_b <-
+    c(b[b$x == min(b$x) & b$y == min(b$y), "index"],
+      b[b$x == min(b$x) & b$y == max(b$y), "index"],
+      b[b$x == max(b$x) & b$y == max(b$y), "index"],
+      b[b$x == max(b$x) & b$y == min(b$y), "index"]) %>%
+    as.matrix(nrow = 4)
 
-  return(pts)
+  # top
+  t <- p1[!abs(p1$z - min(p1$z))<0.1*res_x,]
+  topgr <- expand.grid(x = seq(xmin, (xmax - res_x), by = res_x),
+                       y = seq(ymin, (ymax - res_y), by = res_y))
+  i_t <- sapply(1:nrow(topgr), function(i){
+    px <- topgr[i,"x"]
+    py <- topgr[i,"y"]
+
+    pz <- dplyr::intersect((t[abs(t$x - px)<(0.1*res_x)
+                              & abs(t$y - py)<(0.1*res_y), "z"]),
+                           (t[abs(t$x - (px + res_x))<(0.1*res_x) &
+                                abs(t$y - (py +res_y))<(0.1*res_y), "z"]))
+
+    c(t[abs(t$x - px)<(0.1*res_x)  & abs(t$y - py)<(0.1*res_y)  & t$z == pz , "index"],
+      t[abs(t$x - (px + res_x))<(0.1*res_x) & abs(t$y - py)<(0.1*res_y)  & t$z == pz, "index"],
+      t[abs(t$x - (px + res_x))<(0.1*res_x) & abs(t$y - (py + res_y))<(0.1*res_y) & t$z == pz, "index"],
+      t[abs(t$x - px)<(0.1*res_x)  & abs(t$y - (py + res_y))<(0.1*res_y) & t$z == pz, "index"])
+  })
+
+  # sides
+  gr <- expand.grid(x = seq(xmin, (xmax - res_x), by = res_x),
+                    y = seq(ymin, (ymax - res_y), by = res_y))
+
+  i_s1 <- sapply(1:nrow(gr), function(i){
+    px <- gr[i,"x"]
+    py <- gr[i,"y"]
+    z <- dplyr::intersect((p1[abs(p1$x - px) < (0.1 * res_x) &
+                                abs(p1$y - py) < (0.1 * res_y), "z"]),
+                          (p1[abs(p1$x - px) < (0.1 * res_x) &
+                                abs(p1$y - (py + res_y)) < (0.1 * res_y), "z"]))
+    zmin <- min(z)
+    zmax <- max(z)
+
+    c(p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & p1$z == zmin, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & p1$z == zmax, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - (py + res_y)) < (0.1 * res_y) & p1$z == zmax, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - (py + res_y)) < (0.1 * res_y) & p1$z == zmin, "index"]
+    )
+  })
+
+  i_s2 <- sapply(1:nrow(gr), function(i){
+    px <- gr[i,"x"]
+    py <- gr[i,"y"]
+    z <- dplyr::intersect((p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y), "z"]),
+                          (p1[abs(p1$x - (px  + res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y), "z"]))
+    zmin <- min(z)
+    zmax <- max(z)
+
+    c(p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"],
+      p1[abs(p1$x - (px + res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"],
+      p1[abs(p1$x - (px + res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"]
+    )
+  })
+
+  ### add outer sides
+  gr <- expand.grid(x = xmax,
+                    y = seq(ymin + res_y, ymax, by = res_y))
+  i_s3 <- sapply(1:nrow(gr), function(i){
+    px <- gr[i,"x"]
+    py <- gr[i,"y"]
+    z <- dplyr::intersect((p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y), "z"]),
+                          (p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - (py - res_y)) < (0.1 * res_y), "z"]))
+    zmin <- min(z)
+    zmax <- max(z)
+
+    c(p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - (py - res_y)) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - (py - res_y)) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"]
+    )
+  })
+
+  gr <- expand.grid(x = seq(xmin + res_x, xmax, by = res_x),
+                    y = ymax)
+  i_s4 <- sapply(1:nrow(gr), function(i){
+    px <- gr[i,"x"]
+    py <- gr[i,"y"]
+    z <- dplyr::intersect((p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y), "z"]),
+                          (p1[abs(p1$x - (px - res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y), "z"]))
+    zmin <- min(z)
+    zmax <- max(z)
+
+    c(p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"],
+      p1[abs(p1$x - (px - res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmin) < 0.00001, "index"],
+      p1[abs(p1$x - (px - res_x)) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"],
+      p1[abs(p1$x - px) < (0.1 * res_x) & abs(p1$y - py) < (0.1 * res_y) & abs(p1$z - zmax) < 0.00001, "index"]
+    )
+  })
+
+  index <- cbind(i_b, i_t, i_s1, i_s2, i_s3, i_s4)
+
+  mesh1 <- rgl::mesh3d(x = p1$x, y = p1$y, z = p1$z, quads = index)
+
+  plot3d(mesh1, alpha = 0.5)
+
+  return(mesh1)
+
 }
-
-# plot3d(pts)

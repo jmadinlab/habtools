@@ -17,7 +17,7 @@
 #' These methods will converge on purely fractal surfaces.
 #'
 #' @examples
-#' data <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5, 0.25))
+#' data <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5, 0.25, 0.12))
 #' fd(data)
 #' fd(data, method="raw")
 #' fd(data, method="raw", plot=TRUE)
