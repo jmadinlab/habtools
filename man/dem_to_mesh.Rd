@@ -16,8 +16,8 @@ A 3D points cloud for raster cell corners
 This function is very slow and needs work.
 }
 \examples{
-mesh <- dem_to_mesh(horseshoe)
-# library(rgl)
-plot3d(mesh)
-
+ext <- raster::extent(cbind(c(-470, 1264), c(-469.5, 1264.5)))
+raster <- raster::crop(horseshoe, ext)
+raster_lowres <- aggregate(raster, fact = 8)
+mesh <- dem_to_mesh(raster_lowres)
 }

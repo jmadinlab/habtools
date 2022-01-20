@@ -11,8 +11,7 @@
 #' raster <- raster::crop(horseshoe, ext)
 #' raster_lowres <- aggregate(raster, fact = 8)
 #' mesh <- dem_to_mesh(raster_lowres)
-#' library(rgl)
-#' plot3d(mesh)
+
 
 
 dem_to_mesh <- function(dem){
