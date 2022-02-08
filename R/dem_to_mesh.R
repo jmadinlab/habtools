@@ -7,10 +7,8 @@
 #' @description This function is very slow and needs work.
 #'
 #' @examples
-#' ext <- raster::extent(cbind(c(-470, 1264), c(-469.5, 1264.5)))
-#' raster <- raster::crop(horseshoe, ext)
-#' raster_lowres <- aggregate(raster, fact = 8)
-#' mesh <- dem_to_mesh(raster_lowres)
+#' raster <- raster(nrows = 10, ncols = 10, vals = rnorm(100, -10, 5))
+#' mesh <- habtools::dem_to_mesh(raster)
 
 
 
@@ -138,7 +136,7 @@ dem_to_mesh <- function(dem){
 
   mesh1 <- rgl::mesh3d(x = p1$x, y = p1$y, z = p1$z, quads = index)
 
-  plot3d(mesh1, alpha = 0.5)
+  rgl::plot3d(mesh1, alpha = 0.5)
 
   return(mesh1)
 
