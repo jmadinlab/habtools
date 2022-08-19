@@ -1,14 +1,13 @@
 #' Rescale
 #'
-#' @param x
-#' @param xmin
-#' @param xmax
-#' @param n
+#' @param x vector
+#' @param xmin minimum value
+#' @param xmax maximum value
+#' @param n multiplier
 #'
 #' @return
 #' @export
 #'
-#' @examples
 rescale <- function(x, xmin, xmax, n) {
   return((x - xmin) / (xmax - xmin) * n)
 }

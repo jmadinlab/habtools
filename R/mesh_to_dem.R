@@ -39,10 +39,8 @@ mesh_to_dem <- function(mesh, res, fill=TRUE) {
   sp::coordinates(pts) = ~x+y
 
   if (missing(res)) {
-    dts <- as.matrix(dist(sp::coordinates(pts), diag=FALSE, upper=TRUE))
-    dts[dts==0] <- NA
-    res <- apply(dts, 1, min, na.rm=TRUE)
-    res <- max(res)*sqrt(2)
+    res <- Rvcg::vcgMeshres(mesh)[[2]]
+    res <- max(res)
   }
 
   rast <- raster::raster(ext=raster::extent(pts), resolution=res)

@@ -1,11 +1,12 @@
 #' Rugosity
 #'
-#' @param dem Digital elevation model in raster format.
+#' @param data Digital elevation model in raster format.
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
 #' @param L0 Grain or resolution of calculation.
 #' @param plot Add bounding box to plot.
+#' @param method "mesh" or "dem"
 #'
 #' @return
 #' @export

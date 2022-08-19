@@ -1,12 +1,11 @@
 
 #' Correct the tilt of the DEM
 #'
-#' @param data
+#' @param data digital evelevation model (DEM)
 #'
-#' @return
+#' @return DEM with corrected tilt
 #' @export
 #'
-#' @examples
 correct_tilt <- function(data){
   x <- seq(data@extent[1]+res(data)[1]/2, data@extent[2]-res(data)[1]/2, res(data)[1])
   y <- seq(data@extent[3]+res(data)[2]/2, data@extent[4]-res(data)[2]/2, res(data)[2])

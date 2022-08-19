@@ -26,4 +26,15 @@ Depends:
     raster (>= 3.5),
     rgl
 Imports: 
-    magrittr
+    dplyr,
+    ggplot2,
+    magrittr,
+    MASS,
+    plyr,
+    purrr,
+    rgdal,
+    Rvcg,
+    sp,
+    tidyr,
+    raster (>= 3.5),
+    rgl

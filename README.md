@@ -27,7 +27,7 @@ devtools::install_github("jmadinlab/habtools")
 
 ## Examples
 
-There are currently to data set accompanying this package. `horseshoe`
+There are currently two data set accompanying this package. `horseshoe`
 is a digital elevation model of a reef, and `mcap` is a 3D mesh of a
 coral growing on a reef.
 
@@ -39,6 +39,8 @@ developed in Torres-Pulliza et al. (2020).
 library(habtools)
 #> Loading required package: raster
 #> Loading required package: sp
+#> Warning: multiple methods tables found for 'direction'
+#> Loading required package: rgl
 plot(horseshoe)
 
 # height range
@@ -55,18 +57,18 @@ rg(horseshoe, x=-470, y=1266, L=2, L0=0.25, plot=TRUE)
 
     # fractal dimension is broken into two parts
     # 1. Collate height variation in grids of different resolutions
-    hts <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec=2/c(1, 2, 4, 8))
+    hts <- hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.25)
 
     # 2. Use the height variation data to calculate fractal dimension
     fd(hts)
-    #> [1] 2.289402
+    #> [1] 2.280339
 
     # Here is the log-log plot with various `methods` superimposed
     fd(hts, plot=TRUE)
 
 <img src="man/figures/README-example1-2.png" width="100%" />
 
-    #> [1] 2.289402
+    #> [1] 2.280339
 
 The next example calculates height range, rugosity and fractal dimension
 for a 3D mesh of a coral colony. Because meshes can have more than one
@@ -80,21 +82,21 @@ hr(mcap, method="mesh")
 #> [1] 0.2185397
 
 # fractal dimension
-cubes(mcap, L0=0.015, plot=TRUE)
+cubes(mcap, L0 = 0.05, plot=TRUE)
 ```
 
-<img src="man/figures/README-example 2-1.png" width="100%" />
+<img src="man/figures/README-example2-1.png" width="100%" />
 
     #> $cubes
     #>           L0   n
-    #> 1 0.40931573   1
-    #> 2 0.20465787   8
-    #> 3 0.10232893  31
-    #> 4 0.05116447 141
-    #> 5 0.02558223 528
+    #> 1 0.04793157 156
+    #> 2 0.07988596  67
+    #> 3 0.11982893  29
+    #> 4 0.23965787   8
+    #> 5 0.47931573   1
     #> 
     #> $fd
-    #> [1] 2.222834
+    #> [1] 2.162709
 
 You can use the `mesh_to_dem` function and now compare fractal dimension
 calculated with the two methods. Note that we expect these to be
@@ -103,13 +105,19 @@ they have one `z` per `xy` pair; or as some people say, they are 2.5D,
 not 3D).
 
 ``` r
-dem <- mesh_to_dem(mcap, res=0.015)
-L <- dim(dem)[1] * res(dem)[1]
-
-hts <- hvar(dem, xmin(dem), ymin(dem), L, Lvec=L/c(1, 2, 3, 4, 6, 8, 10))
-fd(hts, plot=TRUE)
+dem <- mesh_to_dem(mcap, res = 0.01)
+plot(dem)
 ```
 
 <img src="man/figures/README-example3-1.png" width="100%" />
 
-    #> [1] 2.287082
+``` r
+L <- min(dim(dem)[c(1,2)]) * res(dem)[1]
+
+hts <- hvar(dem, x = xmin(dem), y = ymin(dem), L = L, L0 = 0.05)
+fd(hts, plot = TRUE)
+```
+
+<img src="man/figures/README-example3-2.png" width="100%" />
+
+    #> [1] 2.521731

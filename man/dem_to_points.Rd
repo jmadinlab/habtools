@@ -8,6 +8,10 @@ dem_to_points(dem, bh = NULL, parallel = F)
 }
 \arguments{
 \item{dem}{A digital elevation model in raster format}
+
+\item{bh}{border height from lowest point of mesh}
+
+\item{parallel}{TRUE or FALSE to define use of parallel computation}
 }
 \value{
 A 3D point cloud for raster cell corners

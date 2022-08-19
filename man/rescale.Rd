@@ -7,7 +7,13 @@
 rescale(x, xmin, xmax, n)
 }
 \arguments{
-\item{n}{}
+\item{x}{vector}
+
+\item{xmin}{minimum value}
+
+\item{xmax}{maximum value}
+
+\item{n}{multiplier}
 }
 \value{
 

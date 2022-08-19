@@ -25,6 +25,10 @@ hvar(
 \item{L0}{Resolution}
 
 \item{L}{Bounding box extent (i.e., side length).}
+
+\item{parallel}{TRUE or FALSE. Use parallel computation?}
+
+\item{ncores}{number of cores to use when parallel = TRUE.}
 }
 \value{
 A \code{data.frame} containing height ranges of cells at different scales.
@@ -40,5 +44,5 @@ to save the output before using the \code{fd} function.
 }
 \examples{
 
-hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
+hvar(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5)
 }

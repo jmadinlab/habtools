@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' d <- sim_xyz(10, 6, 0.1, 2, dem = T)
+#' d <- sim_xyz(10, 6, 0.1, 2, dem = TRUE)
 #' plot(d)
 
 sim_xyz <- function(n, mu, phisq, sigmasq, dem = FALSE){
@@ -20,7 +20,7 @@ sim_xyz <- function(n, mu, phisq, sigmasq, dem = FALSE){
   gr$z <- MASS::mvrnorm(n = 1, rep(mu, n*n), Sigma)
   gr <- as.data.frame(gr)
   if (dem == TRUE) {
-    rasterFromXYZ(gr)
+    raster::rasterFromXYZ(gr)
   } else {
     as.data.frame(gr)
   }

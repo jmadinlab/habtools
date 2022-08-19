@@ -1,11 +1,12 @@
 #' Transform dem to 3D pointcloud of raster corners.
 #'
 #' @param dem A digital elevation model in raster format
+#' @param bh border height from lowest point of mesh
+#' @param parallel TRUE or FALSE to define use of parallel computation
 #'
 #' @return A 3D point cloud for raster cell corners
 #' @export
 #'
-#' @examples
 dem_to_points <-function(dem, bh = NULL, parallel = F){
 
   res <- res(dem)

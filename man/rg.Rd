@@ -7,6 +7,8 @@
 rg(data, x, y, L, L0, method = "dem", plot = FALSE)
 }
 \arguments{
+\item{data}{Digital elevation model in raster format.}
+
 \item{x}{Bottom-left of bounding box.}
 
 \item{y}{Bottom-left of bounding box.}
@@ -15,9 +17,9 @@ rg(data, x, y, L, L0, method = "dem", plot = FALSE)
 
 \item{L0}{Grain or resolution of calculation.}
 
-\item{plot}{Add bounding box to plot.}
+\item{method}{"mesh" or "dem"}
 
-\item{dem}{Digital elevation model in raster format.}
+\item{plot}{Add bounding box to plot.}
 }
 \value{
 

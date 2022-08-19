@@ -7,7 +7,21 @@
 cell_count(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 }
 \arguments{
-\item{n}{}
+\item{pts}{data}
+
+\item{xmin}{minimum x-value}
+
+\item{xmax}{maximum x-value}
+
+\item{ymin}{minimum y-value}
+
+\item{ymax}{maximum y-value}
+
+\item{zmin}{minimum z-value}
+
+\item{zmax}{maximum z-value}
+
+\item{n}{multiplier}
 }
 \value{
 
