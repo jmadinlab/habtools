@@ -4,7 +4,16 @@
 \alias{hvar}
 \title{Height Variation in cells at different scales}
 \usage{
-hvar(dem, x, y, L, Lvec)
+hvar(
+  dem,
+  x,
+  y,
+  L0,
+  L,
+  n = 5,
+  parallel = FALSE,
+  ncores = (parallel::detectCores() - 1)
+)
 }
 \arguments{
 \item{dem}{Digital elevation model in raster format.}
@@ -13,9 +22,9 @@ hvar(dem, x, y, L, Lvec)
 
 \item{y}{Bottom-left of bounding box.}
 
-\item{L}{Bounding box extent (i.e., side length).}
+\item{L0}{Resolution}
 
-\item{Lvec}{A vector of scales to collate.}
+\item{L}{Bounding box extent (i.e., side length).}
 }
 \value{
 A \code{data.frame} containing height ranges of cells at different scales.
@@ -26,10 +35,10 @@ Height Variation in cells at different scales
 \details{
 This function is used for calculating fractal dimension using the
 height variation method.
-It is separated from the \code{FD} function because it takes a while to run, and so it is useful
-to save the output before using the \code{FD} function.
+It is separated from the \code{fd} function because it takes a while to run, and so it is useful
+to save the output before using the \code{fd} function.
 }
 \examples{
 
-hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
+hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
 }

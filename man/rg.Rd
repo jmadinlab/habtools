@@ -31,4 +31,6 @@ rg(horseshoe, x=-470, y=1266, L=2, L0=0.5)
 plot(horseshoe, asp=1)
 rg(horseshoe, x=-470, y=1266, L=2, L0=0.5, plot=TRUE)
 
+rg(mcap, L0 = 0.01, method = "mesh")
+
 }
