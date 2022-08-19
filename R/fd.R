@@ -17,7 +17,7 @@
 #' These methods will converge on purely fractal surfaces.
 #'
 #' @examples
-#' data <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5, 0.25, 0.12))
+#' data <- hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
 #' fd(data)
 #' fd(data, method="raw")
 #' fd(data, method="raw", plot=TRUE)
@@ -33,6 +33,7 @@ fd <- function(data, method="mean", plot=FALSE) {
   if (method == "mean") fd <- 3 - coef(lm(H0 ~ L0, data_mean))[2]
   if (method == "median") fd <- 3 - coef(lm(H0 ~ L0, data_median))[2]
   if (method == "ends") fd <- 3 - coef(lm(H0 ~ L0, data_ends))[2]
+
 
   if (plot) {
     plot(data, xlab="log10(L0)", ylab="log10(H0)")

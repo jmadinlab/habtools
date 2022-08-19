@@ -16,6 +16,8 @@
 #' plot(horseshoe, asp=1)
 #' rg(horseshoe, x=-470, y=1266, L=2, L0=0.5, plot=TRUE)
 #'
+#' rg(mcap, L0 = 0.01, method = "mesh")
+#'
 rg <- function(data, x, y, L, L0, method="dem", plot=FALSE) {
   if (method =="dem") {
     if (missing(x)) x <- raster::xmin(data)
@@ -30,6 +32,15 @@ rg <- function(data, x, y, L, L0, method="dem", plot=FALSE) {
     rg <- sqrt((H0^2) / (2 * L0^2) + 1)
   }
   if (method =="mesh") {
+    res <- Rvcg::vcgMeshres(data)$res[[1]]
+    if (L0 < res) {
+      warning("L0 is smaller than mesh resolution")
+    }
+    mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0)
+    area <- Rvcg::vcgArea(mesh)
+    planar <- (max(data$vb[1,]) - min(data$vb[1,])) * (max(data$vb[2,]) - min(data$vb[2,]))
+    rg <- area/planar
   }
   return(rg)
 }
+

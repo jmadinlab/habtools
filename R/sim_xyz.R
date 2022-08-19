@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' d <- sim_xyz(10, 6, 0.1, 2, T)
+#' d <- sim_xyz(10, 6, 0.1, 2, dem = T)
 #' plot(d)
 
 sim_xyz <- function(n, mu, phisq, sigmasq, dem = FALSE){

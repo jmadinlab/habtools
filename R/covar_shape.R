@@ -8,9 +8,10 @@
 #' @import ggplot2
 #'
 #' @examples
-#' data <- expand.grid(x = 1:10, y = 1:10)
-#' data$z <- rnorm(100, 5, 1)
-#' habtools::covar_shape(data)
+#' library(habtools)
+#' raster <- raster::aggregate(horseshoe, 60)
+#' data <- raster::rasterToPoints(raster)
+#' covar_shape(data)
 #'
 covar_shape <- function(data) {
 
@@ -52,11 +53,13 @@ covar_shape <- function(data) {
   rhosq <- mod$coefficients[1,1]
   sigmasq <- mod$coefficients[2,1]
 
+  print(
   ggplot(sub) +
     geom_point(aes(x = dist_rounded, y = covar)) +
     geom_line(aes(x = dist_rounded,
                   y = sigmasq*(exp(-rhosq * dist_rounded^2)))) +
     labs(x = "Distance", y = "Covariance")
+  )
 
   return(list(rhosq = rhosq, range = range))
 }

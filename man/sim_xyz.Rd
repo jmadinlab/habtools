@@ -24,6 +24,6 @@ a xyz dataframe or raster (if dem = T)
 Simulate z values
 }
 \examples{
-d <- sim_xyz(10, 6, 0.1, 2, T)
+d <- sim_xyz(10, 6, 0.1, 2, dem = T)
 plot(d)
 }

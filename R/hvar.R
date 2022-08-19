@@ -4,7 +4,7 @@
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
-#' @param Lvec A vector of scales to collate.
+#' @param L0 Resolution
 #'
 #' @return A `data.frame` containing height ranges of cells at different scales.
 #' @export
@@ -17,11 +17,13 @@
 #'
 #' @examples
 #'
-#' hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
+#' hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
 
-hvar <- function(dem, x, y, L, Lvec,
+hvar <- function(dem, x, y, L0, L, n = 5,
                  parallel = FALSE,
                  ncores = (parallel::detectCores()-1)) {
+
+  Lvec <- 10^seq(log10(L0), log10(L), (log10(L)-log10(L0))/n)
   if (parallel == FALSE){
     hvar <-
       lapply(Lvec, function(L0){

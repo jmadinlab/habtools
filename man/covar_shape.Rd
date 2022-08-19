@@ -16,8 +16,9 @@ list including rhosq and range
 Fit covariance-distance curve
 }
 \examples{
-data <- expand.grid(x = 1:10, y = 1:10)
-data$z <- rnorm(100, 5, 1)
-habtools::covar_shape(data)
+library(habtools)
+raster <- raster::aggregate(horseshoe, 60)
+data <- raster::rasterToPoints(raster)
+covar_shape(data)
 
 }

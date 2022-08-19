@@ -4,17 +4,18 @@
 \alias{cubes}
 \title{Cube counting for 3D mesh}
 \usage{
-cubes(mesh, L0, cubes, plot = FALSE)
+cubes(mesh, L0, Lmax, plot = FALSE, n = 5)
 }
 \arguments{
 \item{mesh}{3D mesh with vertices}
 
-\item{L0}{(Optional) The grain or resolution (i.e., smallest cube size)}
+\item{L0}{The grain or resolution (i.e., smallest cube size)}
 
-\item{cubes}{(Optional) A vector of number of cubes to be fitted
-at different scales.}
+\item{Lmax}{The grain of the biggest cube (default: cube encapsulating mesh)}
 
 \item{plot}{Plot number of filled cubes at different scales}
+
+\item{n}{The number of cube sizes to include.}
 }
 \value{
 A \code{data.frame} of number of cubes (\code{n}) intersecting mesh points at different cube sizes (\code{L}) and a fractal dimension value. Note that cube size is the length of a side.
@@ -28,7 +29,7 @@ This tool creates arrays of cubes of different sizes and counts mesh points that
 \examples{
 cubes(mcap)
 cubes(mcap, plot=TRUE)
-cubes(mcap, cubes=c(1, 2, 3, 4, 5, 6, 7, 8), plot=TRUE)
+cubes(mcap, L0 =  0.05, plot=TRUE)
 
 }
 \references{

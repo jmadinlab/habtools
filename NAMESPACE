@@ -2,6 +2,7 @@
 
 export("%>%")
 export(cell_count)
+export(correct_tilt)
 export(covar_shape)
 export(cubes)
 export(dem_to_mesh)

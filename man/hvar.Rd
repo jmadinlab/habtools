@@ -8,8 +8,9 @@ hvar(
   dem,
   x,
   y,
+  L0,
   L,
-  Lvec,
+  n = 5,
   parallel = FALSE,
   ncores = (parallel::detectCores() - 1)
 )
@@ -21,9 +22,9 @@ hvar(
 
 \item{y}{Bottom-left of bounding box.}
 
-\item{L}{Bounding box extent (i.e., side length).}
+\item{L0}{Resolution}
 
-\item{Lvec}{A vector of scales to collate.}
+\item{L}{Bounding box extent (i.e., side length).}
 }
 \value{
 A \code{data.frame} containing height ranges of cells at different scales.
@@ -39,5 +40,5 @@ to save the output before using the \code{fd} function.
 }
 \examples{
 
-hvar(horseshoe, x=-470, y=1266, L=2, Lvec=c(2, 1, 0.5))
+hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
 }

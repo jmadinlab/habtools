@@ -9,6 +9,9 @@
 #' @examples
 #' raster <- raster(nrows = 10, ncols = 10, vals = rnorm(100, -10, 5))
 #' mesh <- habtools::dem_to_mesh(raster)
+#'
+#' horse <- aggregate(habtools::horseshoe, 100)
+#' mesh_horse <- habtools::dem_to_mesh(horse)
 
 
 
