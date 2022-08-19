@@ -7,6 +7,7 @@
 #' @param L0 Resolution
 #' @param parallel TRUE or FALSE. Use parallel computation?
 #' @param ncores number of cores to use when parallel = TRUE.
+#' @param n number of scales to use
 #'
 #' @return A `data.frame` containing height ranges of cells at different scales.
 #' @export

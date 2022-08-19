@@ -26,6 +26,8 @@ hvar(
 
 \item{L}{Bounding box extent (i.e., side length).}
 
+\item{n}{number of scales to use}
+
 \item{parallel}{TRUE or FALSE. Use parallel computation?}
 
 \item{ncores}{number of cores to use when parallel = TRUE.}
