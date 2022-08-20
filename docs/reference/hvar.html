@@ -44,40 +44,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hvar</span><span class="op">(</span>
-  <span class="va">dem</span>,
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  <span class="va">L0</span>,
-  <span class="va">L</span>,
-  n <span class="op">=</span> <span class="fl">5</span>,
-  parallel <span class="op">=</span> <span class="cn">FALSE</span>,
-  ncores <span class="op">=</span> <span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hvar</span><span class="op">(</span></span>
+<span>  <span class="va">dem</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  <span class="va">L0</span>,</span>
+<span>  <span class="va">L</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncores <span class="op">=</span> <span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dem</dt>
 <dd><p>Digital elevation model in raster format.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>L0</dt>
 <dd><p>Resolution</p></dd>
+
+
 <dt>L</dt>
 <dd><p>Bounding box extent (i.e., side length).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>number of scales to use</p></dd>
+
+
 <dt>parallel</dt>
 <dd><p>TRUE or FALSE. Use parallel computation?</p></dd>
+
+
 <dt>ncores</dt>
 <dd><p>number of cores to use when parallel = TRUE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.frame</code> containing height ranges of cells at different scales.</p>
+    
+
+<p>A <code>data.frame</code> containing height ranges of cells at different scales.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -89,41 +106,9 @@ to save the output before using the <code>fd</code> function.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">hvar</span><span class="op">(</span><span class="va">horseshoe</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           L0        H0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.5000000 0.2930083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.5000000 0.5216577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.5000000 0.9197886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.5000000 0.7609899</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.5000000 0.6210294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.5000000 0.8130283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  0.5000000 0.6640019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  0.5000000 0.1832321</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  0.5000000 0.9781842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 0.5000000 0.8325553</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 0.5000000 0.2785048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 0.5000000 0.1432183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 0.5000000 0.7134392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 0.5000000 0.7151203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 0.5000000 0.6334853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 0.5000000 0.1260359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 0.6597540 0.4046052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 0.6597540 0.8875833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 0.6597540 0.9153261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 0.6597540 1.0143380</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21 0.6597540 1.0150182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22 0.6597540 0.1954219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23 0.6597540 0.9852901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24 0.6597540 0.9052749</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25 0.6597540 0.2543252</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26 0.8705506 0.8130283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27 0.8705506 1.0453691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28 0.8705506 1.0463586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29 0.8705506 0.7587984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30 1.1486984 0.9395239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31 1.5157166 1.0660069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32 2.0000000 1.0917811</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hvar</span><span class="op">(</span><span class="va">horseshoe</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in hvar(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5):</span> unused argument (L0 = 0.5)</span>
 </code></pre></div>
     </div>
   </div>
@@ -134,11 +119,11 @@ to save the output before using the <code>fd</code> function.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Joshua Madin.</p>
+  <p></p><p>Developed by Joshua Madin, Nini Schiettekatte.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

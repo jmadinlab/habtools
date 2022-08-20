@@ -2,7 +2,7 @@ Package: habtools
 Title: Useful 3D metrics for organisms and habitats
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Joshua",
+    c(person(given = "Joshua",
            family = "Madin",
            role = c("aut", "cre"),
            email = "jmadin@hawaii.edu",
@@ -11,7 +11,7 @@ Authors@R:
        family = "Schiettekatte",
        role = c("aut", "cre"),
        email = "ninamds@hawaii.edu",
-       comment = c(ORCID = "0000-0002-1925-3484"))
+       comment = c(ORCID = "0000-0002-1925-3484")))
 Description: This package is a collection of tools for 3D 
   meshes and digital elevation models (DEM) targetted at biologists
   and ecologists. Tools calculate metrics like surface area, rugosity, 
