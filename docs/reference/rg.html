@@ -44,49 +44,80 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rg</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, <span class="va">L0</span>, method <span class="op">=</span> <span class="st">"dem"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rg</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, <span class="va">L0</span>, method <span class="op">=</span> <span class="st">"dem"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>Digital elevation model in raster format.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>L</dt>
 <dd><p>Bounding box extent (i.e., side length).</p></dd>
+
+
 <dt>L0</dt>
 <dd><p>Grain or resolution of calculation.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>"mesh" or "dem"</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>Add bounding box to plot.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
+
+
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.288743</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="rg-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.288743</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.01</span>, method <span class="op">=</span> <span class="st">"mesh"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> reducing it to 6708 faces</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Initial Heap Size 65634</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Result: 3436 vertices and 6708 faces.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated error: 0.000238648 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Edge length is 0.0102728071320144 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.931974</span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'getValues': </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(.Object, ...):</span> </span>
+<span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'getValues': </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.01</span>, method <span class="op">=</span> <span class="st">"mesh"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (data, x, y, L, L0, method = "dem", plot = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     if (method == "dem") {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         if (missing(x)) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             x &lt;- raster::xmin(data)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         if (missing(y)) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             y &lt;- raster::ymin(data)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         if (missing(L)) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             L &lt;- min(dim(data)[1:2] * raster::res(data))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         cells &lt;- expand.grid(x = seq(x, x + L - L0, L0), y = seq(y, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             y + L - L0, L0))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         hs &lt;- mapply(hr, x = cells$x, y = cells$y, MoreArgs = list(L = L0, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             data = data, plot = plot))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         H0 &lt;- mean(hs)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         rg &lt;- sqrt((H0^2)/(2 * L0^2) + 1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     if (method == "mesh") {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     return(rg)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7fcd5be39af0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:habtools&gt;</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -97,11 +128,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Joshua Madin.</p>
+  <p></p><p>Developed by Joshua Madin, Nini Schiettekatte.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

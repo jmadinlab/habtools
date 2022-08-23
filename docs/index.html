@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Useful 3D metrics fororganisms and habitats • habtools</title>
+<title>Useful 3D metrics for organisms and habitats • habtools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Useful 3D metrics fororganisms and habitats">
+<script src="pkgdown.js"></script><meta property="og:title" content="Useful 3D metrics for organisms and habitats">
 <meta property="og:description" content="This package is a collection of tools for 3D 
   meshes and digital elevation models (DEM) targetted at biologists
   and ecologists. Tools calculate metrics like surface area, rugosity, 
@@ -74,8 +74,8 @@
 </h2>
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jmadinlab/habtools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jmadinlab/habtools"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -83,19 +83,19 @@
 <p>There are currently two data set accompanying this package. <code>horseshoe</code> is a digital elevation model of a reef, and <code>mcap</code> is a 3D mesh of a coral growing on a reef.</p>
 <p>The following example calculates height range, rugosity and fractal dimension of a 2 x 2 m plot of reef using the height range method developed in Torres-Pulliza et al. (2020).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: raster</span>
-<span class="co">#&gt; Loading required package: sp</span>
-<span class="co">#&gt; Warning: multiple methods tables found for 'direction'</span>
-<span class="co">#&gt; Loading required package: rgl</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span>
-
-<span class="co"># height range</span>
-<span class="fu"><a href="reference/hr.html">hr</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] 1.091781</span>
-
-<span class="co"># rugosity; note that rugosity will increase with grain (L0)</span>
-<span class="fu"><a href="reference/rg.html">rg</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.25</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: raster</span></span>
+<span><span class="co">#&gt; Loading required package: sp</span></span>
+<span><span class="co">#&gt; Warning: multiple methods tables found for 'direction'</span></span>
+<span><span class="co">#&gt; Loading required package: rgl</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># height range</span></span>
+<span><span class="fu"><a href="reference/hr.html">hr</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1.091781</span></span>
+<span></span>
+<span><span class="co"># rugosity; note that rugosity will increase with grain (L0)</span></span>
+<span><span class="fu"><a href="reference/rg.html">rg</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.25</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example1-1.png" width="100%"></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1.398074</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -113,12 +113,12 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.280339</span></span></code></pre></div>
 <p>The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one <code>z</code> coordinate for a given <code>xy</code> (i.e., they have overhangs), we use the cube counting fractal dimension method developed in Zawada et al. (2019).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># height range</span>
-<span class="fu"><a href="reference/hr.html">hr</a></span><span class="op">(</span><span class="va">mcap</span>, method<span class="op">=</span><span class="st">"mesh"</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.2185397</span>
-
-<span class="co"># fractal dimension</span>
-<span class="fu"><a href="reference/cubes.html">cubes</a></span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># height range</span></span>
+<span><span class="fu"><a href="reference/hr.html">hr</a></span><span class="op">(</span><span class="va">mcap</span>, method<span class="op">=</span><span class="st">"mesh"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2185397</span></span>
+<span></span>
+<span><span class="co"># fractal dimension</span></span>
+<span><span class="fu"><a href="reference/cubes.html">cubes</a></span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example2-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $cubes</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           L0   n</span></span>
@@ -132,14 +132,14 @@
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.162709</span></span></code></pre></div>
 <p>You can use the <code>mesh_to_dem</code> function and now compare fractal dimension calculated with the two methods. Note that we expect these to be somewhat different is only because DEMs do not include overhangs (i.e., they have one <code>z</code> per <code>xy</code> pair; or as some people say, they are 2.5D, not 3D).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mesh_to_dem.html">mesh_to_dem</a></span><span class="op">(</span><span class="va">mcap</span>, res <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mesh_to_dem.html">mesh_to_dem</a></span><span class="op">(</span><span class="va">mcap</span>, res <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example3-1.png" width="100%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/dimensions.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html" class="external-link">res</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-
-<span class="va">hts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hvar.html">hvar</a></span><span class="op">(</span><span class="va">dem</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/coords.html" class="external-link">xmin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/coords.html" class="external-link">ymin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, L <span class="op">=</span> <span class="va">L</span>, L0 <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
-<span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">hts</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">res</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">hts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hvar.html">hvar</a></span><span class="op">(</span><span class="va">dem</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/xmin.html" class="external-link">xmin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/xmin.html" class="external-link">ymin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, L <span class="op">=</span> <span class="va">L</span>, L0 <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">hts</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example3-2.png" width="100%"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.521731</span></span></code></pre></div>
 </div>
@@ -167,6 +167,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Joshua Madin <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5005-6227" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nini Schiettekatte <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1925-3484" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -178,12 +179,12 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Joshua Madin.</p>
+<p>Developed by Joshua Madin, Nini Schiettekatte.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
