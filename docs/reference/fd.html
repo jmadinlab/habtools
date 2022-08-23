@@ -44,28 +44,21 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method <span class="op">=</span> <span class="st">"mean"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method <span class="op">=</span> <span class="st">"mean"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>A <code>hvar</code> <code>data.frame</code>.</p></dd>
-
-
 <dt>method</dt>
 <dd><p>One of <code>raw</code>, <code>mean</code> (default), <code>median</code> or <code>ends</code></p></dd>
-
-
 <dt>plot</dt>
 <dd><p>Diagnostic plot</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A value for fractal dimension, hopefully between 2 and 3.</p>
+    <p>A value for fractal dimension, hopefully between 2 and 3.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -81,15 +74,15 @@ These methods will converge on purely fractal surfaces.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="hvar.html">hvar</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in hvar(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5):</span> unused argument (L0 = 0.5)</span>
-<span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in log10(data):</span> non-numeric argument to mathematical function</span>
-<span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method<span class="op">=</span><span class="st">"raw"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in log10(data):</span> non-numeric argument to mathematical function</span>
-<span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method<span class="op">=</span><span class="st">"raw"</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in log10(data):</span> non-numeric argument to mathematical function</span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="hvar.html">hvar</a></span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">fd</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.41179</span>
+<span class="r-in"><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method<span class="op">=</span><span class="st">"raw"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.247625</span>
+<span class="r-in"><span class="fu">fd</span><span class="op">(</span><span class="va">data</span>, method<span class="op">=</span><span class="st">"raw"</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="fd-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.247625</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -100,11 +93,11 @@ These methods will converge on purely fractal surfaces.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Joshua Madin, Nini Schiettekatte.</p>
+  <p></p><p>Developed by Joshua Madin, Nina Schiettekatte.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

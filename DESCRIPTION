@@ -7,10 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jmadin@hawaii.edu",
            comment = c(ORCID = "0000-0002-5005-6227")),
-    person(given = "Nini",
+    person(given = "Nina",
        family = "Schiettekatte",
-       role = c("aut", "cre"),
-       email = "ninamds@hawaii.edu",
+       role = "aut",
+       email = "nina.schiettekatte@gmail.com",
        comment = c(ORCID = "0000-0002-1925-3484")))
 Description: This package is a collection of tools for 3D 
   meshes and digital elevation models (DEM) targetted at biologists

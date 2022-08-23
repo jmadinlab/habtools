@@ -4,7 +4,17 @@
 \alias{rg}
 \title{Rugosity}
 \usage{
-rg(data, x, y, L, L0, method = "dem", plot = FALSE)
+rg(
+  data,
+  x,
+  y,
+  L,
+  L0,
+  method = "dem",
+  plot = FALSE,
+  parallel = FALSE,
+  ncores = (parallel::detectCores() - 1)
+)
 }
 \arguments{
 \item{data}{Digital elevation model in raster format.}

@@ -44,31 +44,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dem</dt>
 <dd><p>A digital elevation model in raster format</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A 3D points cloud for raster cell corners</p>
+    <p>A 3D points cloud for raster cell corners</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows <span class="op">=</span> <span class="fl">10</span>, ncols <span class="op">=</span> <span class="fl">10</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">raster</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">horse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="fu">habtools</span><span class="fu">::</span><span class="va"><a href="horseshoe.html">horseshoe</a></span>, <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(.Object, ...):</span> </span>
-<span class="r-in"><span><span class="va">mesh_horse</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">horse</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'nlayers': object 'horse' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows <span class="op">=</span> <span class="fl">10</span>, ncols <span class="op">=</span> <span class="fl">10</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">raster</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">horse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="fu">habtools</span><span class="fu">::</span><span class="va"><a href="horseshoe.html">horseshoe</a></span>, <span class="fl">100</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mesh_horse</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">horse</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -79,11 +74,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Joshua Madin, Nini Schiettekatte.</p>
+  <p></p><p>Developed by Joshua Madin, Nina Schiettekatte.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
