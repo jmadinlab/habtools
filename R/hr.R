@@ -24,12 +24,12 @@
 #'
 hr <- function(data, x, y, L, method="dem", plot=FALSE) {
   if (method=="dem") {
-    if (missing(x)) x <- raster::xmin(data)
-    if (missing(y)) y <- raster::ymin(data)
-    if (missing(L)) L <- dim(data)[1:2] * raster::res(data)
+    if (missing(x)) x <- min(data$x)
+    if (missing(y)) y <- min(data$y)
+    if (missing(L)) L <- max(data$x) - min(data$x)
 
-    ext <- raster::extent(cbind(c(x, y), c(x + L, y + L)))
-    hr <- diff(range(raster::getValues(raster::crop(data, ext)), na.rm=TRUE))
+    sub <- data[data$x > x & data$x<= x + L &  data$y > y & data$y<= y + L, ]
+    out <- max(sub[,3], na.rm = TRUE) - min(sub[,3], na.rm = TRUE)
   }
   if (method=="mesh") {
     pts <- data.frame(t(data$vb)[,1:3])
@@ -40,8 +40,8 @@ hr <- function(data, x, y, L, method="dem", plot=FALSE) {
     if (missing(L)) L <- min(c(diff(range(pts$x)), diff(range(pts$y))))
 
     pts <- pts[pts$x >= x & pts$x <= x+L & pts$y >= y & pts$y <= y+L,]
-    hr <- diff(range(pts$z))
+    out <- diff(range(pts$z))
   }
   if (plot) rect(x, y, x + L, y + L)
-  return(hr)
+  return(out)
 }

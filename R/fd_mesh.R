@@ -1,8 +1,8 @@
 fd_mesh <- function(m, n = 10, fold = 100, cores = 4, plot = T){
   r0 <- Rvcg::vcgMeshres(m)$res
-  r <- exp(seq(log(r0), log(fold*r0),  (log(fold*r0) - log(r0))/(n-1))[-1])
+  r <- 10^(seq(log10(r0), log10(fold*r0),  (log10(fold*r0) - log10(r0))/(n-1))[-1])
 
-  r <- 10^(seq(log10(0.02), log10(0.08),  (log10(0.08) - log10(0.02))/5))
+  r <- 10^(seq(log10(0.01), log10(0.1),  (log10(0.08) - log10(0.02))/n))
 
   a1 <-  data.frame(res = r0,
                     area = Rvcg::vcgArea(m))

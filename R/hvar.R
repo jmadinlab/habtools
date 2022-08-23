@@ -27,24 +27,21 @@ hvar <- function(dem, x, y, L0, L, n = 5,
                  ncores = (parallel::detectCores()-1)) {
 
   Lvec <- 10^seq(log10(L0), log10(L), (log10(L)-log10(L0))/n)
-  if (parallel == FALSE){
-    hvar <-
-      lapply(Lvec, function(L0){
-        cells <- expand.grid(x = seq(x, x + L - L0, L0),
-                             y = seq(y, y + L - L0, L0))
-        H0 <- mapply(hr, x = cells$x, y = cells$y, MoreArgs = list(L = L0, data = dem))
-        data.frame(L0 = L0, H0 = H0)
-      }) %>% dplyr::bind_rows()
-  } else if (parallel == T) {
-    hvar <-
-      lapply(Lvec, function(L0){
-        cells <- expand.grid(x = seq(x, x + L - L0, L0),
-                             y = seq(y, y + L - L0, L0))
-        H0 <- parallel::mclapply(1:nrow(cells), function(i){
-          hr(x = cells[i, "x"], y = cells[i, "y"], L = L0, data = dem)
-        }, mc.cores = ncores) %>% simplify2array()
-        data.frame(L0 = L0, H0 = H0)
-      }) %>% dplyr::bind_rows()
-  }
+  hvar <-
+    lapply(Lvec, function(L0){
+      cells <- expand.grid(x = seq(x, x + L - L0, L0),
+                           y = seq(y, y + L - L0, L0))
+      df  <- terra::as.data.frame(dem, xy = TRUE)
+      if (parallel){
+        h0 <- parallel::mclapply(1:nrow(cells), function(i){
+          hr(df, x = cells$x[i],  y = cells$y[i], L = L0, plot = FALSE)
+        }, mc.cores = ncores) %>% unlist()
+      } else{
+        h0 <- lapply(1:nrow(cells), function(i){
+          hr(df, x = cells$x[i],  y = cells$y[i], L = L0, plot = FALSE)
+        }) %>% unlist()
+      }
+      data.frame(L0 = L0, H0 = h0)
+    }) %>% dplyr::bind_rows()
   return(hvar)
 }

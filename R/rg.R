@@ -19,7 +19,8 @@
 #'
 #' rg(mcap, L0 = 0.01, method = "mesh")
 #'
-rg <- function(data, x, y, L, L0, method="dem", plot=FALSE) {
+rg <- function(data, x, y, L, L0, method="dem", plot=FALSE, parallel = FALSE,
+               ncores = (parallel::detectCores()-1)) {
   if (method =="dem") {
     if (missing(x)) x <- raster::xmin(data)
     if (missing(y)) y <- raster::ymin(data)
@@ -27,10 +28,21 @@ rg <- function(data, x, y, L, L0, method="dem", plot=FALSE) {
 
     cells <- expand.grid(x = seq(x, x + L - L0, L0),
                          y = seq(y, y + L - L0, L0))
-    hs <- mapply(hr, x = cells$x, y = cells$y, MoreArgs =
-                   list(L = L0, data = data, plot = plot))
-    H0 <- mean(hs)
-    rg <- sqrt((H0^2) / (2 * L0^2) + 1)
+
+    df  <- terra::as.data.frame(data, xy = TRUE)
+
+    if (parallel){
+      hs <- parallel::mclapply(1:nrow(cells), function(i){
+        hr(df, x = cells$x[i],  y = cells$y[i], L = L0, plot = FALSE)
+      }, mc.cores = ncores) %>% unlist()
+    } else{
+      hs <- lapply(1:nrow(cells), function(i){
+        hr(df, x = cells$x[i],  y = cells$y[i], L = L0, plot = FALSE)
+      }) %>% unlist()
+    }
+
+    #H0 <- mean(hs)
+    rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1))
   }
   if (method =="mesh") {
     res <- Rvcg::vcgMeshres(data)$res[[1]]
