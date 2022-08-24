@@ -46,13 +46,19 @@ rg <- function(data, x, y, L, L0, method="dem", plot=FALSE, parallel = FALSE,
   }
   if (method =="mesh") {
     res <- Rvcg::vcgMeshres(data)$res[[1]]
+    if (missing(L0)){
+      L0 <- res
+      message(paste("L0 is set to mesh resolution (", L0, ")", sep = ""))
+    }
     if (L0 < res) {
       warning("L0 is smaller than mesh resolution")
     }
-    mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0)
-    area <- Rvcg::vcgArea(mesh)
-    planar <- (max(data$vb[1,]) - min(data$vb[1,])) * (max(data$vb[2,]) - min(data$vb[2,]))
-    rg <- area/planar
+    if (!L0==res){
+      mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0, silent = T)
+    } else {
+      mesh <- data
+    }
+    rg <- Rvcg::vcgArea(mesh)/planar(mesh, silent = T)
   }
   return(rg)
 }
