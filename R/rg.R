@@ -7,6 +7,8 @@
 #' @param L0 Grain or resolution of calculation.
 #' @param plot Add bounding box to plot.
 #' @param method "mesh" or "dem"
+#' @param parallel parallel
+#' @param ncores number of cores to use if parallel = T
 #'
 #' @return
 #' @export

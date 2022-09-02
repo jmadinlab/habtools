@@ -42,4 +42,5 @@ Imports:
     sp,
     tidyr,
     raster (>= 3.5),
-    rgl
+    rgl,
+    terra

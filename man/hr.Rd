@@ -27,7 +27,6 @@ bounding box.
 Height range
 }
 \examples{
-hr(horseshoe)
 
 plot(horseshoe)
 hr(horseshoe, plot=TRUE)

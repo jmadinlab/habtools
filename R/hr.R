@@ -13,7 +13,6 @@
 #' @export
 #'
 #' @examples
-#' hr(horseshoe)
 #'
 #' plot(horseshoe)
 #' hr(horseshoe, plot=TRUE)
@@ -24,6 +23,8 @@
 #'
 hr <- function(data, x, y, L, method="dem", plot=FALSE) {
   if (method=="dem") {
+    data <- terra::as.data.frame(data, xy = T)
+
     if (missing(x)) x <- min(data$x)
     if (missing(y)) y <- min(data$y)
     if (missing(L)) L <- max(data$x) - min(data$x)
