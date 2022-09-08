@@ -31,9 +31,6 @@ rg(
 
 \item{plot}{Add bounding box to plot.}
 }
-\value{
-
-}
 \description{
 Rugosity
 }

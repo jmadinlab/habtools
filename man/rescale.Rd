@@ -15,9 +15,6 @@ rescale(x, xmin, xmax, n)
 
 \item{n}{multiplier}
 }
-\value{
-
-}
 \description{
 Rescale
 }

@@ -32,9 +32,6 @@ cubes(mcap, plot=TRUE)
 cubes(mcap, L0 =  0.05, plot=TRUE)
 
 }
-\references{
-
-}
 \seealso{
 \code{\link[=fd]{fd()}} for fractal dimension from variation method
 }
