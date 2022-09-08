@@ -30,7 +30,11 @@ hr <- function(data, x, y, L, method="dem", plot=FALSE) {
     if (missing(L)) L <- max(data$x) - min(data$x)
 
     sub <- data[data$x > x & data$x<= x + L &  data$y > y & data$y<= y + L, ]
-    out <- max(sub[,3], na.rm = TRUE) - min(sub[,3], na.rm = TRUE)
+
+    out <- NA
+    if (!all(is.na(sub[,3]))) {
+      out <- max(sub[, 3], na.rm = TRUE) - min(sub[, 3], na.rm = TRUE)
+    }
   }
   if (method=="mesh") {
     pts <- data.frame(t(data$vb)[,1:3])
