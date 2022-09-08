@@ -7,6 +7,8 @@
 #' @param L0 Grain or resolution of calculation.
 #' @param plot Add bounding box to plot.
 #' @param method "mesh" or "dem"
+#' @param parallel parallel
+#' @param ncores number of cores to use if parallel = T
 #'
 #' @return
 #' @export
@@ -42,7 +44,7 @@ rg <- function(data, x, y, L, L0, method="dem", plot=FALSE, parallel = FALSE,
     }
 
     #H0 <- mean(hs)
-    rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1))
+    rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1), na.rm = T)
   }
   if (method =="mesh") {
     res <- Rvcg::vcgMeshres(data)$res[[1]]

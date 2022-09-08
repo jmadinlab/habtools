@@ -30,6 +30,10 @@ rg(
 \item{method}{"mesh" or "dem"}
 
 \item{plot}{Add bounding box to plot.}
+
+\item{parallel}{parallel}
+
+\item{ncores}{number of cores to use if parallel = T}
 }
 \description{
 Rugosity
