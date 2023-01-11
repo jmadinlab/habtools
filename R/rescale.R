@@ -5,7 +5,7 @@
 #' @param xmax maximum value
 #' @param n multiplier
 #'
-#' @return
+#' @return Vector
 #' @export
 #'
 rescale <- function(x, xmin, xmax, n) {

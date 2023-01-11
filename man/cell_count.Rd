@@ -23,6 +23,9 @@ cell_count(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 
 \item{n}{multiplier}
 }
+\value{
+Number of filled cells
+}
 \description{
 Count filled cells
 }

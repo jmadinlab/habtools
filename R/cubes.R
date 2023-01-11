@@ -11,7 +11,6 @@
 #' @return A `data.frame` of number of cubes (`n`) intersecting mesh points at different cube sizes (`L`) and a fractal dimension value. Note that cube size is the length of a side.
 #' @export
 #' @seealso [fd()] for fractal dimension from variation method
-#' @references
 #' @examples
 #' cubes(mcap)
 #' cubes(mcap, plot=TRUE)

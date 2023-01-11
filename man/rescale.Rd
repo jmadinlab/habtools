@@ -15,6 +15,9 @@ rescale(x, xmin, xmax, n)
 
 \item{n}{multiplier}
 }
+\value{
+Vector
+}
 \description{
 Rescale
 }

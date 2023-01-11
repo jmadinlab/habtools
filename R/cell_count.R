@@ -9,7 +9,7 @@
 #' @param zmax maximum z-value
 #' @param n multiplier
 #'
-#' @return
+#' @return Number of filled cells
 #' @export
 #'
 cell_count <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {

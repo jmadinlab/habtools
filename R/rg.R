@@ -10,20 +10,20 @@
 #' @param parallel parallel
 #' @param ncores number of cores to use if parallel = T
 #'
-#' @return
+#' @return Rugosity value
 #' @export
 #'
 #' @examples
-#' rg(horseshoe, x=-470, y=1266, L=2, L0=0.5)
+#' rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5)
 #'
-#' plot(horseshoe, asp=1)
-#' rg(horseshoe, x=-470, y=1266, L=2, L0=0.5, plot=TRUE)
+#' plot(horseshoe, asp = 1)
+#' rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5, plot = TRUE)
 #'
 #' rg(mcap, L0 = 0.01, method = "mesh")
 #'
-rg <- function(data, x, y, L, L0, method="dem", plot=FALSE, parallel = FALSE,
-               ncores = (parallel::detectCores()-1)) {
-  if (method =="dem") {
+rg <- function(data, x, y, L, L0, method = "dem", plot = FALSE, parallel = FALSE,
+               ncores = (parallel::detectCores() - 1)) {
+  if (method == "dem") {
     if (missing(x)) x <- raster::xmin(data)
     if (missing(y)) y <- raster::ymin(data)
     if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
