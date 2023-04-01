@@ -46,7 +46,7 @@ rg <- function(data, x, y, L, L0, method = "dem", plot = FALSE, parallel = FALSE
     #H0 <- mean(hs)
     rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1), na.rm = T)
   }
-  if (method =="mesh") {
+  if (method == "mesh") {
     res <- Rvcg::vcgMeshres(data)$res[[1]]
     if (missing(L0)){
       L0 <- res
@@ -55,7 +55,7 @@ rg <- function(data, x, y, L, L0, method = "dem", plot = FALSE, parallel = FALSE
     if (L0 < res) {
       warning("L0 is smaller than mesh resolution")
     }
-    if (!L0==res){
+    if (!L0 == res){
       mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0, silent = T)
     } else {
       mesh <- data

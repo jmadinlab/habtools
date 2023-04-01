@@ -27,10 +27,10 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
-    R (>= 2.10),
-    raster (>= 3.5),
-    rgl
+    R (>= 2.10)
 Imports: 
+    raster (>= 3.5),
+    rgl,
     dplyr,
     ggplot2,
     magrittr,
@@ -41,4 +41,9 @@ Imports:
     Rvcg,
     sp,
     tidyr,
-    terra
+    terra,
+    geometry
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -16,7 +16,7 @@ A 3D points cloud for raster cell corners
 This function is very slow and needs work.
 }
 \examples{
-raster <- raster(nrows = 10, ncols = 10, vals = rnorm(100, -10, 5))
+raster <- sim_xyz(10, 6, 0.1, 2, dem = TRUE)
 mesh <- habtools::dem_to_mesh(raster)
 
 horse <- aggregate(habtools::horseshoe, 100)

@@ -19,7 +19,7 @@ rdh <- function(data, x, y, L, L0, parallel = FALSE, ncores = (parallel::detectC
              parallel = parallel, ncores = ncores)
   hs <- hv[hv$L0 == min(hv$L0, na.rm = T), "H0"]
   rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1), na.rm = T)
-  d <- fd(hv)
+  d <- fd_hvar(hv)
   h <- hv[hv$L0 == L, "H0"]
 
   data.frame(R = rg, D = d, H = h)

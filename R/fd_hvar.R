@@ -18,11 +18,11 @@
 #'
 #' @examples
 #' data <- hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
-#' fd(data)
-#' fd(data, method="raw")
-#' fd(data, method="raw", plot=TRUE)
+#' fd_hvar(data)
+#' fd_hvar(data, method = "raw")
+#' fd_hvar(data, method = "raw", plot=TRUE)
 #'
-fd <- function(data, method="mean", plot=FALSE) {
+fd_hvar <- function(data, method = "mean", plot = FALSE) {
   data <- log10(data)
   data <- data[is.finite(rowSums(data)),]
   data_mean <- aggregate(H0 ~ L0, data, mean)

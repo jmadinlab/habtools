@@ -7,7 +7,7 @@
 correct_tilt(data)
 }
 \arguments{
-\item{data}{digital evelevation model (DEM)}
+\item{data}{digital elevation model (DEM)}
 }
 \value{
 DEM with corrected tilt

@@ -1,7 +1,7 @@
 
 #' Correct the tilt of the DEM
 #'
-#' @param data digital evelevation model (DEM)
+#' @param data digital elevation model (DEM)
 #'
 #' @return DEM with corrected tilt
 #' @export
