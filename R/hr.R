@@ -1,28 +1,28 @@
 #' Height range
 #'
-#' @param data A digital elevation model (DEM) in raster format.
+#' @param data A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.
 #' @param x The lower-left x-coordinate of bounding box.
 #' @param y The lower-left y-coordinate of bounding box.
 #' @param L The bounding box size (i.e., side length).
-#' @param method `dem` (default) is digital elevation model (DEM) in raster format; `mesh` is a 3D mesh model with vertices.
-#' @param plot Add bounding box to existing plot of `dem`.
 #'
-#' @return The difference between the lowest and highest point in the
-#' bounding box.
+#' @return The difference between the lowest and highest point.
 #'
 #' @export
 #'
 #' @examples
 #'
+#' library(raster)
 #' plot(horseshoe)
-#' hr(horseshoe, plot=TRUE)
-#' hr(horseshoe, -470, 1266, 2, plot=TRUE)
+#' hr(horseshoe)
+#' hr(horseshoe, -470, 1266, 2)
 #'
 #' # For a 3D mesh.
-#' hr(mcap, method="mesh")
+#' hr(mcap)
 #'
-hr <- function(data, x, y, L, method="dem", plot=FALSE) {
-  if (method=="dem") {
+hr <- function(data, x, y, L, plot = FALSE) {
+
+
+  if (class(data) == "RasterLayer") {
     data <- terra::as.data.frame(data, xy = T)
 
     if (missing(x)) x <- min(data$x)
@@ -35,8 +35,7 @@ hr <- function(data, x, y, L, method="dem", plot=FALSE) {
     if (!all(is.na(sub[,3]))) {
       out <- max(sub[, 3], na.rm = TRUE) - min(sub[, 3], na.rm = TRUE)
     }
-  }
-  if (method=="mesh") {
+  } else if (class(data) == "mesh3d") {
     pts <- data.frame(t(data$vb)[,1:3])
     names(pts) <- c("x", "y", "z")
 
@@ -46,7 +45,8 @@ hr <- function(data, x, y, L, method="dem", plot=FALSE) {
 
     pts <- pts[pts$x >= x & pts$x <= x+L & pts$y >= y & pts$y <= y+L,]
     out <- diff(range(pts$z))
+  } else {
+    stop("data must be either an object of class RasterLayer or mesh3d")
   }
-  if (plot) rect(x, y, x + L, y + L)
   return(out)
 }
