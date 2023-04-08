@@ -4,22 +4,32 @@
 #' @param size size of tiles, relative to the unit of the RasterLayer
 #'
 #' @return List of RasterLayers
+#' @import raster
 #' @export
 #'
 #' @examples
-#' L <- res(data)[1] * nrow(data) # size of horseshoe = 8m
+#' L <- raster::res(horseshoe)[1] * nrow(horseshoe) # size of horseshoe = 8m
 #' size <- 2 # size of target tiles
 #' (L / size)^2 # number of target tiles = 16
 #' dem_list <- split_dem(horseshoe, 2)
 #' length(dem_list)
 #'
-split_dem <- function(data, size) {
-  L <- res(data)[1] * nrow(data)
-  if(!round(L/size, 5) == round(L/size)){
-    stop("Specify size so that the RasterLayer can be divided into equal tiles")
+split_dem <- function(data,
+                      size,
+                      parallel = FALSE,
+                      ncores = (parallel::detectCores() - 1)) {
+  L <- raster::res(data)[1] * nrow(data)
+  if (!round(L / size, 5) == round(L / size)) {
+    warning("With the specified size, the RasterLayer is not divided across the full extent")
   }
-  t <- nrow(data) / (L/size)
-  a <- aggregate(data, t)
+  t <- nrow(data) / (L / size)
+  a <- raster::aggregate(data, t)
   p <- as(a, 'SpatialPolygons')
-  lapply(seq_along(p), function(i) crop(horseshoe, p[i]))
+  if (parallel) {
+    parallel::mclapply(seq_along(p), function(i)
+      raster::crop(horseshoe, p[i]), mc.cores = ncores)
+  } else {
+    lapply(seq_along(p), function(i)
+      raster::crop(horseshoe, p[i]))
   }
+}

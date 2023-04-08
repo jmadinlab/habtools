@@ -18,7 +18,7 @@ List of RasterLayers
 Split RasterLayer into smaller tiles
 }
 \examples{
-L <- res(data)[1] * nrow(data) # size of horseshoe = 8m
+L <- raster::res(horseshoe)[1] * nrow(horseshoe) # size of horseshoe = 8m
 size <- 2 # size of target tiles
 (L / size)^2 # number of target tiles = 16
 dem_list <- split_dem(horseshoe, 2)

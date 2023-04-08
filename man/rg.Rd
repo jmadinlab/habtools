@@ -10,14 +10,13 @@ rg(
   y,
   L,
   L0,
-  method = "dem",
-  plot = FALSE,
+  method = "hvar",
   parallel = FALSE,
   ncores = (parallel::detectCores() - 1)
 )
 }
 \arguments{
-\item{data}{Digital elevation model in raster format.}
+\item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
 
 \item{x}{Bottom-left of bounding box.}
 
@@ -27,13 +26,12 @@ rg(
 
 \item{L0}{Grain or resolution of calculation.}
 
-\item{method}{"mesh" or "dem"}
+\item{method}{If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".}
 
-\item{plot}{Add bounding box to plot.}
+\item{parallel}{Use parallel processing (Defaults to FALSE)}
 
-\item{parallel}{parallel}
-
-\item{ncores}{number of cores to use if parallel = T}
+\item{ncores}{number of cores to use if parallel = T.
+(Defaults to umber of available cores - 1)}
 }
 \value{
 Rugosity value
@@ -41,12 +39,20 @@ Rugosity value
 \description{
 Rugosity
 }
+\details{
+Rugosity is defined as the surface area divided by the planar area. For digital elevation models, we include two methods: "hvar" and "area". \cr
+The "hvar" method for calculating rugosity is described in Torres-Pulliza et al. (2004) and is based on height variations. \cr
+The "area" method uses the \code{\link[sp:surfaceArea]{sp::surfaceArea()}} function and is detailed in Jenness (2004). \cr
+\code{method} is ignored if \code{data} is a mesh3D object.
+In that case the function uses \code{\link[Rvcg:vcgArea]{Rvcg::vcgArea()}} to calculate surface area of a triangular mesh of class mesh3d.
+}
 \examples{
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5)
+rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1)
+rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1, method = "area")
+rg(mcap, L0 = 0.01)
 
-plot(horseshoe, asp = 1)
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.5, plot = TRUE)
-
-rg(mcap, L0 = 0.01, method = "mesh")
-
+}
+\references{
+Calculating Landscape Surface Area from Digital Elevation Models, Jeff S. Jenness Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n \cr
+Torres-Pulliza, D., Dornelas, M.A., Pizarro, O. et al. A geometric basis for surface habitat complexity and biodiversity. Nat Ecol Evol 4, 1495–1501 (2020). https://doi.org/10.1038/s41559-020-1281-8
 }
