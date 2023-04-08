@@ -2,37 +2,37 @@
 % Please edit documentation in R/fd_hvar.R
 \name{fd_hvar}
 \alias{fd_hvar}
-\title{Fractal Dimension}
+\title{Fractal Dimension using the height variation method}
 \usage{
-fd_hvar(data, method = "mean", plot = FALSE)
+fd_hvar(data, regmethod = "mean", plot = FALSE)
 }
 \arguments{
-\item{data}{A \code{hvar} \code{data.frame}.}
+\item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
 
-\item{method}{One of \code{raw}, \code{mean} (default), \code{median} or \code{ends}}
+\item{regmethod}{One of \code{raw}, \code{mean} (default), \code{median} or \code{ends}}
 
 \item{plot}{Diagnostic plot}
 }
 \value{
-A value for fractal dimension, hopefully between 2 and 3.
+A value for fractal dimension, normally between 2 and 3.
 }
 \description{
-Fractal Dimension
+Fractal Dimension using the height variation method
 }
 \details{
-Calculates fractal dimension using the height variation method.
-\code{data} can be any \code{data.frame} with columns labeled \code{L0} and \code{H0} for
+Calculates fractal dimension using the height variation regression.
+\code{data} can be any \code{data.frame} with columns labeled \code{l} and \code{h} for
 grid cell length and height range of that cell, respectively.
-A rule of thumb is that \code{L0} should range two orders of magnitude.
+A rule of thumb is that \code{l} should range an order of magnitude.
 However, large ranges also
 average-out fractal dimension of a surface that might have
-phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{diagnostic} plot, which plots all the methods.
-These methods will converge on purely fractal surfaces.
+phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{diagnostic} plot, which plots all the regressions.
+These regressions will converge on purely fractal surfaces.
 }
 \examples{
-data <- hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.5)
+data <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd_hvar(data)
-fd_hvar(data, method = "raw")
-fd_hvar(data, method = "raw", plot=TRUE)
+fd_hvar(data, regmethod = "ends")
+fd_hvar(data, regmethod = "median", plot=TRUE)
 
 }

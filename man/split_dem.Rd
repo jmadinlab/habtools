@@ -4,7 +4,7 @@
 \alias{split_dem}
 \title{Split RasterLayer into smaller tiles}
 \usage{
-split_dem(data, size)
+split_dem(data, size, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 }
 \arguments{
 \item{data}{RasterLayer}
