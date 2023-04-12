@@ -10,5 +10,6 @@
 #'   ...
 #' }
 #' @examples
+#' library(raster)
 #' plot(horseshoe)
 "horseshoe"

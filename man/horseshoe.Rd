@@ -20,6 +20,7 @@ A data set containing the prices and other attributes of almost 54,000
 diamonds.
 }
 \examples{
+library(raster)
 plot(horseshoe)
 }
 \keyword{datasets}
