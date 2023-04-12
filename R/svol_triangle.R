@@ -1,9 +1,3 @@
-#signedVolumeOfTriangle ====
-#Calculates the signed volume of a triangle based on a set of XYZCoords
-#Signed volume means that volumes can take on a negative value depending on whether the surface normal
-#of the triangle is facing towards or away from the origin. When all positive and negative volumes
-#are integrated across the entire mesh, they values cancel out so that the final volume is an approximation
-#of the total volume of the mesh.
 #' Signed volume of triangle
 #'
 #' Calculates the signed volume of a triangle based on a set of XYZCoords.

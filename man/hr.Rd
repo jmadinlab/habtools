@@ -4,7 +4,7 @@
 \alias{hr}
 \title{Height range}
 \usage{
-hr(data, x, y, L, plot = FALSE)
+hr(data, x, y, L)
 }
 \arguments{
 \item{data}{A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.}

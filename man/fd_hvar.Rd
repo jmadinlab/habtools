@@ -4,14 +4,18 @@
 \alias{fd_hvar}
 \title{Fractal Dimension using the height variation method}
 \usage{
-fd_hvar(data, regmethod = "mean", plot = FALSE)
+fd_hvar(data, regmethod = "median", keep_data = FALSE, plot = FALSE, ...)
 }
 \arguments{
-\item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
+\item{data}{Digital elevation model of class RasterLayer or dataframe (output of hvar function)}
 
-\item{regmethod}{One of \code{raw}, \code{mean} (default), \code{median} or \code{ends}}
+\item{regmethod}{One of \code{raw} (all data), \code{median} (default) or \code{ends} (minimum and maximum scale only)}
+
+\item{keep_data}{Keep the data used for fd calculation? defaults to FALSE}
 
 \item{plot}{Diagnostic plot}
+
+\item{...}{Additional arguments of see \code{\link[=hvar]{hvar()}}}
 }
 \value{
 A value for fractal dimension, normally between 2 and 3.
@@ -26,13 +30,16 @@ grid cell length and height range of that cell, respectively.
 A rule of thumb is that \code{l} should range an order of magnitude.
 However, large ranges also
 average-out fractal dimension of a surface that might have
-phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{diagnostic} plot, which plots all the regressions.
-These regressions will converge on purely fractal surfaces.
+phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{plot}.
+\code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points.
 }
 \examples{
-data <- hvar(horseshoe, x=-470, y=1266, L=2, Lvec = c(0.125, 0.25, 0.5, 1, 2))
+data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd_hvar(data)
+fd_hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd_hvar(data, regmethod = "ends")
-fd_hvar(data, regmethod = "median", plot=TRUE)
+fd_hvar(data, regmethod = "median", plot = TRUE, keep_data = TRUE)
+fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
+fd_hvar(data, regmethod = "raw", plot = TRUE, keep_data = TRUE)
 
 }

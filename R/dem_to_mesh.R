@@ -7,10 +7,10 @@
 #' @description This function is very slow and needs work.
 #'
 #' @examples
-#' raster <- sim_xyz(10, 6, 0.1, 2, dem = TRUE)
+#' raster <- habtools::sim_xyz(10, 6, 0.1, 2, dem = TRUE)
 #' mesh <- habtools::dem_to_mesh(raster)
 #'
-#' horse <- aggregate(habtools::horseshoe, 100)
+#' horse <- raster::aggregate(habtools::horseshoe, 100)
 #' mesh_horse <- habtools::dem_to_mesh(horse)
 
 

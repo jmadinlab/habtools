@@ -4,46 +4,46 @@
 \alias{fd}
 \title{fractal dimension}
 \usage{
-fd(data, method, x, y, L, Lvec)
+fd(data, method, x, y, L, lvec, ...)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
 
-\item{method}{If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".}
+\item{method}{If data is a RasterLayer, possible methods are:"hvar", "area", and "cubes" (defaults to "hvar").
+If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").}
 
-\item{x}{Bottom-left of bounding box.}
+\item{x}{Bottom-left of bounding box. Only considered if data is a RasterLayer.}
 
-\item{y}{Bottom-left of bounding box.}
+\item{y}{Bottom-left of bounding box. Only considered if data is a RasterLayer.}
 
-\item{L}{Bounding box extent (i.e., side length).}
+\item{L}{Bounding box extent (i.e., side length). Only considered if data is a RasterLayer.}
 
-\item{Lvec}{scales to use for calculation}
+\item{lvec}{scales to use for calculation}
 
-\item{parallel}{Use parallel processing (Defaults to FALSE)}
-
-\item{ncores}{number of cores to use if parallel = T.
-(Defaults to umber of available cores - 1)}
+\item{...}{Arguments from other fd_ functions.}
 }
 \value{
-A value for fractal dimension, hopefully between 2 and 3.
+A value for fractal dimension, typically between 2 and 3.
 }
 \description{
 fractal dimension
 }
 \details{
-Calculates fractal dimension using the height variation method.
-\code{data} can be any \code{data.frame} with columns labeled \code{l} and \code{h} for
-grid cell length and height range of that cell, respectively.
-A rule of thumb is that \code{l} should range two orders of magnitude.
-However, large ranges also
-average-out fractal dimension of a surface that might have
-phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{diagnostic} plot, which plots all the methods.
-These methods will converge on purely fractal surfaces.
+Calculates fractal dimension using the specified method. Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.
+The \code{cubes} method is not recommended if the height range is much smaller than the extent of a 3d object or DEM, which is typically the case for DEMs.
 }
 \examples{
-fd(horseshoe, method = "hvar", x=-470, y=1266, L=2, Lvec = c(0.125, 0.25, 0.5, 1, 2))
-fd(data)
-fd(data, method = "ends")
-fd_hvar(data, method = "median", plot = TRUE)
+library(habtools)
+fd(horseshoe, method = "hvar", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+fd(horseshoe, method = "area", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
+fd(mcap, method = "area", lvec = c(0.02, 0.04, 0.08, 0.16))
 
+}
+\seealso{
+\code{\link[=fd_hvar]{fd_hvar()}}
+
+\code{\link[=fd_area]{fd_area()}}
+
+\code{\link[=fd_cubes]{fd_cubes()}}
 }

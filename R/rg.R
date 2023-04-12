@@ -69,12 +69,12 @@ rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
     if (L0 < res) {
       warning("L0 is smaller than mesh resolution")
     }
-    if (!L0 == res){
+    if (!L0 == res) {
       mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0, silent = T)
     } else {
       mesh <- data
     }
-    rg <- Rvcg::vcgArea(mesh)/planar(mesh, silent = T)
+    rg <- Rvcg::vcgArea(mesh)/planar(mesh, silent = T) # method planar or bbbox
   } else {
     stop("data must be of class RasterLayer or mesh3d with triangular mesh")
   }

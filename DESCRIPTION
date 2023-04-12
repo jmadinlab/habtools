@@ -31,6 +31,7 @@ Depends:
 Imports: 
     raster (>= 3.5),
     rgl,
+    methods,
     dplyr,
     ggplot2,
     magrittr,

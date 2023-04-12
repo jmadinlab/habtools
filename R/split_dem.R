@@ -2,6 +2,8 @@
 #'
 #' @param data RasterLayer
 #' @param size size of tiles, relative to the unit of the RasterLayer
+#' @param parallel TRUE or FALSE. Use parallel processing? Note: parallel must be installed.
+#' @param ncores number of cores to use when parallel = TRUE.
 #'
 #' @return List of RasterLayers
 #' @import raster
@@ -13,6 +15,7 @@
 #' (L / size)^2 # number of target tiles = 16
 #' dem_list <- split_dem(horseshoe, 2)
 #' length(dem_list)
+#' sapply(dem_list, hr) # apply height range calculation on each tile
 #'
 split_dem <- function(data,
                       size,

@@ -1,43 +1,65 @@
 #' fractal dimension
 #'
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
-#' @param x Bottom-left of bounding box.
-#' @param y Bottom-left of bounding box.
-#' @param L Bounding box extent (i.e., side length).
-#' @param Lvec scales to use for calculation
-#' @param method If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".
-#' @param parallel Use parallel processing (Defaults to FALSE)
-#' @param ncores number of cores to use if parallel = T.
-#' (Defaults to umber of available cores - 1)
-#' @return A value for fractal dimension, hopefully between 2 and 3.
+#' @param x Bottom-left of bounding box. Only considered if data is a RasterLayer.
+#' @param y Bottom-left of bounding box. Only considered if data is a RasterLayer.
+#' @param L Bounding box extent (i.e., side length). Only considered if data is a RasterLayer.
+#' @param lvec scales to use for calculation
+#' @param method If data is a RasterLayer, possible methods are:"hvar", "area", and "cubes" (defaults to "hvar").
+#' If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").
+#' @param ... Arguments from other fd_ functions.
+#' @seealso [fd_hvar()]
+#' @seealso [fd_area()]
+#' @seealso [fd_cubes()]
+#' @return A value for fractal dimension, typically between 2 and 3.
 #' @export
 #'
-#' @details Calculates fractal dimension using the height variation method.
-#' `data` can be any `data.frame` with columns labeled `l` and `h` for
-#' grid cell length and height range of that cell, respectively.
-#' A rule of thumb is that `l` should range two orders of magnitude.
-#' However, large ranges also
-#' average-out fractal dimension of a surface that might have
-#' phase transitions, and therefore a thorough exploration of height ranges is suggested using the `diagnostic` plot, which plots all the methods.
-#' These methods will converge on purely fractal surfaces.
+#' @details Calculates fractal dimension using the specified method. Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.
+#' The `cubes` method is not recommended if the height range is much smaller than the extent of a 3d object or DEM, which is typically the case for DEMs.
 #'
 #' @examples
-#' fd(horseshoe, method = "hvar", x=-470, y=1266, L=2, Lvec = c(0.125, 0.25, 0.5, 1, 2))
-#' fd(data)
-#' fd(data, method = "ends")
-#' fd_hvar(data, method = "median", plot = TRUE)
+#' library(habtools)
+#' fd(horseshoe, method = "hvar", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' fd(horseshoe, method = "area", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
+#' fd(mcap, method = "area", lvec = c(0.02, 0.04, 0.08, 0.16))
 #'
-fd <- function(data,  method, x, y, L, Lvec) {
+fd <- function(data,  method, x, y, L, lvec, ...) {
 
-  if (method == "hvar") {
-    h <- hvar(data, x = x, y = y, L = L, Lvec = Lvec)
-    fd <- fd_hvar(h, plot = T)
-  } else if (method == "area") {
-    fd <- "a"
-  } else if (method == "cubes") {
-    fd <- "c"
-  } else {
-    stop("Please check method options.")
+  if (class(data) == "RasterLayer") {
+
+    # subset raster if needed
+    if (missing(x)) x <- raster::xmin(data)
+    if (missing(y)) y <- raster::ymin(data)
+    if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
+    if (L < min(dim(data)[1:2] * raster::res(data))) {
+      b <- as(raster::extent(x, x + L, y, y + L), 'SpatialPolygons')
+      raster::crs(b) <- raster::crs(data)
+      data <- raster::crop(data, b)
+    }
+
+    if (missing(method)) method <- "hvar"
+
+    # calculate fd
+    if (method == "hvar") {
+      f <- fd_hvar(data, lvec = lvec, ...)
+    } else if (method == "area") {
+      f <- fd_area(data, lvec = lvec, ...)
+    } else if (method == "cubes") {
+      f <- fd_cubes(data, lvec = lvec, ...)
+    } else {
+      stop("Please check appropriate method options.")
+    }
+
+  } else if (class(data) == "mesh3d") {
+    if (missing(method)) method <- "cubes"
+    if (method == "cubes") {
+      f <- fd_cubes(data, lvec = lvec, ...)
+    } else if (method == "area") {
+      f <- fd_area(data, lvec = lvec, ...)
+    } else {
+      stop("Please check appropriate method options.")
+    }
   }
-  return(as.vector(fd))
+  return(f)
 }

@@ -39,47 +39,34 @@ The following example calculates height range, rugosity and fractal dimension of
 
 ```{r example1}
 library(habtools)
+library(raster)
 plot(horseshoe)
 
 # height range
-hr(horseshoe, x=-470, y=1266, L=2, plot=TRUE)
+hr(horseshoe, x = -470, y = 1266, L = 2)
 
-# rugosity; note that rugosity will increase with grain (L0)
-rg(horseshoe, x=-470, y=1266, L=2, L0=0.25, plot=TRUE)
+# rugosity; note that rugosity will decrease with grain (L0)
+rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.125)
 
-# fractal dimension is broken into two parts
-# 1. Collate height variation in grids of different resolutions
-hts <- hvar(horseshoe, x=-470, y=1266, L=2, L0 = 0.25)
-
-# 2. Use the height variation data to calculate fractal dimension
-fd(hts)
-
-# Here is the log-log plot with various `methods` superimposed
-fd(hts, plot=TRUE)
+# fractal dimension
+fd(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.25, 0.5, 1, 2), plot = TRUE, method = "hvar")
 
 ```
 
-The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one `z` coordinate for a given `xy` (i.e., they have overhangs), we use the cube counting fractal dimension method developed in Zawada et al. (2019).
+The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one `z` coordinate for a given `xy` (i.e., they have overhangs), we advise the cube counting fractal dimension method presented in Zawada et al. (2019).
 
 ```{r example2}
 
 # height range
-hr(mcap, method="mesh")
+hr(mcap)
+
+# rugosity
+rg(mcap, L0 = 0.045)
 
 # fractal dimension
-cubes(mcap, L0 = 0.05, plot=TRUE)
+fd(mcap, lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE, method = "cubes")
 
 ```
 
-You can use the `mesh_to_dem` function and now compare fractal dimension calculated with the two methods. Note that we expect these to be somewhat different is only because DEMs do not include overhangs (i.e., they have one `z` per `xy` pair; or as some people say, they are 2.5D, not 3D).
 
-```{r example3}
-dem <- mesh_to_dem(mcap, res = 0.01)
-plot(dem)
-L <- min(dim(dem)[c(1,2)]) * res(dem)[1]
-
-hts <- hvar(dem, x = xmin(dem), y = ymin(dem), L = L, L0 = 0.05)
-fd(hts, plot = TRUE)
-
-```
 

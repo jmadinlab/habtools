@@ -16,13 +16,12 @@
 #'
 #' @examples
 #' smv(mcap)
-#' smv(mcap, scale = T)
 
-smv <- function(mesh, axis = "z", scale = FALSE, origin = TRUE){
-  if (origin == TRUE) {
+smv <- function(mesh, axis = "z", scale = TRUE, origin = TRUE){
+  if (origin) {
     mesh <- set_origin(mesh)
   }
-  if (scale == TRUE) {
+  if (scale) {
     mesh <- scale_volume(mesh)
   }
   Dim <- ifelse(axis == "z",3,ifelse(axis == "y",2,1)) #set the dimension based on Axis value

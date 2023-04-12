@@ -4,7 +4,7 @@
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
-#' @param Lvec scales to use for calculation
+#' @param lvec scales to use for calculation
 #' @param parallel TRUE or FALSE. Use parallel processing? Note: parallel must be installed.
 #' @param ncores number of cores to use when parallel = TRUE.
 #'
@@ -17,9 +17,9 @@
 #'
 #' @examples
 #'
-#' hvar(horseshoe, x = -470, y = 1266, L = 2, Lvec = c(0.125, 0.25, 0.5, 1))
+#' hvar(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1))
 
-hvar <- function(data, x, y, Lvec, L,
+hvar <- function(data, x, y, lvec, L,
                  parallel = FALSE,
                  ncores = (parallel::detectCores()-1)) {
 
@@ -33,7 +33,7 @@ hvar <- function(data, x, y, Lvec, L,
     data <- raster::crop(data, b)
   }
   hvar <-
-    lapply(Lvec, function(l){
+    lapply(lvec, function(l){
       list <- split_dem(data, l, parallel = parallel, ncores = ncores)
       h <- sapply(list, hr)
       data.frame(l = l, h = h)

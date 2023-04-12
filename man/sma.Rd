@@ -4,12 +4,14 @@
 \alias{sma}
 \title{Second moment area}
 \usage{
-sma(mesh, axis = "z", scale = FALSE, origin = TRUE)
+sma(mesh, axis = "z", scale = TRUE, origin = TRUE)
 }
 \arguments{
 \item{mesh}{A mesh object}
 
 \item{axis}{the axis along which to calculate the second moment of area. z is the default.}
+
+\item{scale}{scale object so that total area = 1}
 
 \item{origin}{set the origin to the bottom left corner of bounding box}
 }

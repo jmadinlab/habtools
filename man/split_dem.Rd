@@ -10,6 +10,10 @@ split_dem(data, size, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 \item{data}{RasterLayer}
 
 \item{size}{size of tiles, relative to the unit of the RasterLayer}
+
+\item{parallel}{TRUE or FALSE. Use parallel processing? Note: parallel must be installed.}
+
+\item{ncores}{number of cores to use when parallel = TRUE.}
 }
 \value{
 List of RasterLayers
@@ -23,5 +27,6 @@ size <- 2 # size of target tiles
 (L / size)^2 # number of target tiles = 16
 dem_list <- split_dem(horseshoe, 2)
 length(dem_list)
+sapply(dem_list, hr) # apply height range calculation on each tile
 
 }

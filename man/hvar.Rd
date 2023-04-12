@@ -8,7 +8,7 @@ hvar(
   data,
   x,
   y,
-  Lvec,
+  lvec,
   L,
   parallel = FALSE,
   ncores = (parallel::detectCores() - 1)
@@ -21,7 +21,7 @@ hvar(
 
 \item{y}{Bottom-left of bounding box.}
 
-\item{Lvec}{scales to use for calculation}
+\item{lvec}{scales to use for calculation}
 
 \item{L}{Bounding box extent (i.e., side length).}
 
@@ -41,5 +41,5 @@ height variation method.
 }
 \examples{
 
-hvar(horseshoe, x = -470, y = 1266, L = 2, Lvec = c(0.125, 0.25, 0.5, 1))
+hvar(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1))
 }

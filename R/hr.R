@@ -19,7 +19,7 @@
 #' # For a 3D mesh.
 #' hr(mcap)
 #'
-hr <- function(data, x, y, L, plot = FALSE) {
+hr <- function(data, x, y, L) {
 
 
   if (class(data) == "RasterLayer") {

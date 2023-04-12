@@ -2,20 +2,12 @@
 % Please edit documentation in R/rdh.R
 \name{rdh}
 \alias{rdh}
-\title{Calculate Rugosity, fractal dimension and height for a DEM}
+\title{Calculate rugosity, fractal dimension and height for a DEM}
 \usage{
-rdh(
-  data,
-  x,
-  y,
-  L,
-  L0,
-  parallel = FALSE,
-  ncores = (parallel::detectCores() - 1)
-)
+rdh(data, x, y, L, lvec, ...)
 }
 \arguments{
-\item{data}{A dem}
+\item{data}{A dem of class RasterLayer}
 
 \item{x}{minimum x-value}
 
@@ -23,18 +15,26 @@ rdh(
 
 \item{L}{Extent}
 
-\item{L0}{Minimum resolution}
+\item{lvec}{Scales to include in fd calculation see \code{\link[=fd]{fd()}}}
 
-\item{parallel}{use parallel processing}
-
-\item{ncores}{number of cores to use if parallel = TRUE}
+\item{...}{Additional arguments see \code{\link[=fd]{fd()}}}
 }
 \value{
 a dataframe with the three complexity measures
 }
 \description{
-Calculate Rugosity, fractal dimension and height for a DEM
+Calculate rugosity, fractal dimension and height for a DEM
+}
+\details{
+uses hvar method for rugosity and fractal dimension calculations.
 }
 \examples{
-rdh(horseshoe, x=-470, y=1266, L=2, L0=0.5)
+rdh(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+}
+\seealso{
+\code{\link[=fd]{fd()}}
+
+\code{\link[=rg]{rg()}}
+
+\code{\link[=hr]{hr()}}
 }

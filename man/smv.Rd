@@ -4,7 +4,7 @@
 \alias{smv}
 \title{Second moment volume}
 \usage{
-smv(mesh, axis = "z", scale = FALSE, origin = TRUE)
+smv(mesh, axis = "z", scale = TRUE, origin = TRUE)
 }
 \arguments{
 \item{mesh}{A 3D mesh object.}
@@ -27,5 +27,4 @@ Axis is z by default, meaning it will calculate the vertical second moment, but 
 }
 \examples{
 smv(mcap)
-smv(mcap, scale = T)
 }
