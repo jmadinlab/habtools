@@ -2,10 +2,7 @@
 % Please edit documentation in R/set_origin.R
 \name{set_origin}
 \alias{set_origin}
-\title{Set the origin of a mesh
-shift the values of a set of XYZ coordinates so that the
-origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates)
-Title}
+\title{Set the origin of a mesh}
 \usage{
 set_origin(mesh, reference = NULL)
 }
@@ -19,8 +16,7 @@ If left empty, this will default to the minimum of x, y, and z.}
 mesh3d object
 }
 \description{
-Set the origin of a mesh
-shift the values of a set of XYZ coordinates so that the
+Shift the values of a set of XYZ coordinates so that the
 origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates)
 Title
 }

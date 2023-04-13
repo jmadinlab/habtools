@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_dem.R
 \name{split_dem}
 \alias{split_dem}
-\title{Split RasterLayer into smaller tiles}
+\title{Split DEM into smaller tiles}
 \usage{
 split_dem(data, size, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 }
@@ -19,7 +19,7 @@ split_dem(data, size, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 List of RasterLayers
 }
 \description{
-Split RasterLayer into smaller tiles
+Split DEM into smaller tiles
 }
 \examples{
 L <- raster::res(horseshoe)[1] * nrow(horseshoe) # size of horseshoe = 8m

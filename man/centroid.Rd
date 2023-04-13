@@ -2,7 +2,7 @@
 % Please edit documentation in R/centroid.R
 \name{centroid}
 \alias{centroid}
-\title{centroid}
+\title{Centroid}
 \usage{
 centroid(XYZCoords)
 }

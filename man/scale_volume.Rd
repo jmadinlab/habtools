@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_volume.R
 \name{scale_volume}
 \alias{scale_volume}
-\title{Rescale mesh based on a fixed volume of 1}
+\title{Re-scale mesh based on a fixed volume of 1}
 \usage{
 scale_volume(mesh)
 }
@@ -13,7 +13,7 @@ scale_volume(mesh)
 A mesh with volume = 1
 }
 \description{
-Rescale mesh based on a fixed volume of 1
+Re-scale mesh based on a fixed volume of 1
 }
 \examples{
 Rvcg::vcgVolume(mcap)
