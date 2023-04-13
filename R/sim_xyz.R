@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' library(raster)
 #' d <- sim_xyz(10, 6, 0.1, 2, dem = TRUE)
 #' plot(d)
 
