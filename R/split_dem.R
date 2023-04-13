@@ -1,4 +1,4 @@
-#' Split RasterLayer into smaller tiles
+#' Split DEM into smaller tiles
 #'
 #' @param data RasterLayer
 #' @param size size of tiles, relative to the unit of the RasterLayer

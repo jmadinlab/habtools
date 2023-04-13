@@ -1,4 +1,4 @@
-#' surface area of triangle
+#' Surface area of triangle
 #'
 #' Calculates the surface area of a triangle based on a set of XYZCoords
 #'

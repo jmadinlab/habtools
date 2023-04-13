@@ -1,4 +1,4 @@
-#' Rescale mesh based on a fixed volume of 1
+#' Re-scale mesh based on a fixed volume of 1
 #'
 #' @param mesh A 3D mesh object
 #'

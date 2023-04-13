@@ -1,7 +1,7 @@
 #' Simulate z values
 #'
 #' Simulates z-values based on a spatoal covariance distribution.
-#' Caution: this function can currently only handle a small number for n.
+#' Warning: this function can currently only handle a small number for n.
 #'
 #' @param n number of rows or cols
 #' @param mu average z
