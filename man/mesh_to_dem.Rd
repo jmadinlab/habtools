@@ -31,9 +31,9 @@ raster cells. The default is to fill these cells with the
 minimum, non-\code{NA} raster value.
 }
 \examples{
+library(raster)
 dem <- mesh_to_dem(mcap)
 plot(dem)
-rg(dem, -1.35, 0.85, 0.2, 0.05, plot=TRUE)
 
 dem <- mesh_to_dem(mcap, res=0.05)
 plot(dem)

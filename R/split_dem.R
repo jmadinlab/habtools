@@ -30,9 +30,9 @@ split_dem <- function(data,
   p <- as(a, 'SpatialPolygons')
   if (parallel) {
     parallel::mclapply(seq_along(p), function(i)
-      raster::crop(horseshoe, p[i]), mc.cores = ncores)
+      raster::crop(data, p[i]), mc.cores = ncores)
   } else {
     lapply(seq_along(p), function(i)
-      raster::crop(horseshoe, p[i]))
+      raster::crop(data, p[i]))
   }
 }

@@ -22,9 +22,9 @@
 #' minimum, non-`NA` raster value.
 #'
 #' @examples
+#' library(raster)
 #' dem <- mesh_to_dem(mcap)
 #' plot(dem)
-#' rg(dem, -1.35, 0.85, 0.2, 0.05, plot=TRUE)
 #'
 #' dem <- mesh_to_dem(mcap, res=0.05)
 #' plot(dem)
@@ -33,7 +33,7 @@
 #' dem <- mesh_to_dem(mcap, res=0.05, fill=FALSE)
 #' plot(dem)
 #'
-mesh_to_dem <- function(mesh, res, fill=TRUE) {
+mesh_to_dem <- function(mesh, res, fill = TRUE) {
   pts <- data.frame(t(mesh$vb)[,1:3])
   names(pts) <- c("x", "y", "z")
   sp::coordinates(pts) = ~x+y

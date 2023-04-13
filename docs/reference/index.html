@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/intro.html">Introduction to habtools</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -46,6 +56,14 @@
         </td>
         <td><p>Count filled cells</p></td>
       </tr><tr><td>
+          <p><code><a href="centroid.html">centroid()</a></code> </p>
+        </td>
+        <td><p>centroid</p></td>
+      </tr><tr><td>
+          <p><code><a href="convexity.html">convexity()</a></code> </p>
+        </td>
+        <td><p>Calculate convexity</p></td>
+      </tr><tr><td>
           <p><code><a href="correct_tilt.html">correct_tilt()</a></code> </p>
         </td>
         <td><p>Correct the tilt of the DEM</p></td>
@@ -53,10 +71,6 @@
           <p><code><a href="covar_shape.html">covar_shape()</a></code> </p>
         </td>
         <td><p>Fit covariance-distance curve</p></td>
-      </tr><tr><td>
-          <p><code><a href="cubes.html">cubes()</a></code> </p>
-        </td>
-        <td><p>Cube counting for 3D mesh</p></td>
       </tr><tr><td>
           <p><code><a href="dem_to_mesh.html">dem_to_mesh()</a></code> </p>
         </td>
@@ -66,9 +80,25 @@
         </td>
         <td><p>Transform dem to 3D pointcloud of raster corners.</p></td>
       </tr><tr><td>
+          <p><code><a href="detect_drop.html">detect_drop()</a></code> </p>
+        </td>
+        <td><p>detect a sudden drop, edge, or overhang in a DEM</p></td>
+      </tr><tr><td>
           <p><code><a href="fd.html">fd()</a></code> </p>
         </td>
-        <td><p>Fractal Dimension</p></td>
+        <td><p>fractal dimension</p></td>
+      </tr><tr><td>
+          <p><code><a href="fd_area.html">fd_area()</a></code> </p>
+        </td>
+        <td><p>Calculate fractal dimension using the surface area method</p></td>
+      </tr><tr><td>
+          <p><code><a href="fd_cubes.html">fd_cubes()</a></code> </p>
+        </td>
+        <td><p>Fractal dimension calculation using cube counting</p></td>
+      </tr><tr><td>
+          <p><code><a href="fd_hvar.html">fd_hvar()</a></code> </p>
+        </td>
+        <td><p>Fractal Dimension using the height variation method</p></td>
       </tr><tr><td>
           <p><code><a href="horseshoe.html">horseshoe</a></code> </p>
         </td>
@@ -90,9 +120,21 @@
         </td>
         <td><p>3D Mesh to DEM</p></td>
       </tr><tr><td>
+          <p><code><a href="mesh_to_points.html">mesh_to_points()</a></code> </p>
+        </td>
+        <td><p>Transform dem to 3D pointcloud of raster corners.</p></td>
+      </tr><tr><td>
+          <p><code><a href="packing.html">packing()</a></code> </p>
+        </td>
+        <td><p>Calculate packing</p></td>
+      </tr><tr><td>
           <p><code><a href="planar.html">planar()</a></code> </p>
         </td>
         <td><p>Calculates planar area of a mesh</p></td>
+      </tr><tr><td>
+          <p><code><a href="rdh.html">rdh()</a></code> </p>
+        </td>
+        <td><p>Calculate rugosity, fractal dimension and height for a DEM</p></td>
       </tr><tr><td>
           <p><code><a href="rescale.html">rescale()</a></code> </p>
         </td>
@@ -102,9 +144,48 @@
         </td>
         <td><p>Rugosity</p></td>
       </tr><tr><td>
+          <p><code><a href="sa_triangle.html">sa_triangle()</a></code> </p>
+        </td>
+        <td><p>surface area of triangle</p></td>
+      </tr><tr><td>
+          <p><code><a href="scale_area.html">scale_area()</a></code> </p>
+        </td>
+        <td><p>Rescale mesh based on a fixed area.</p></td>
+      </tr><tr><td>
+          <p><code><a href="scale_volume.html">scale_volume()</a></code> </p>
+        </td>
+        <td><p>Rescale mesh based on a fixed volume of 1</p></td>
+      </tr><tr><td>
+          <p><code><a href="set_origin.html">set_origin()</a></code> </p>
+        </td>
+        <td><p>Set the origin of a mesh
+shift the values of a set of XYZ coordinates so that the
+origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates)
+Title</p></td>
+      </tr><tr><td>
           <p><code><a href="sim_xyz.html">sim_xyz()</a></code> </p>
         </td>
         <td><p>Simulate z values</p></td>
+      </tr><tr><td>
+          <p><code><a href="sma.html">sma()</a></code> </p>
+        </td>
+        <td><p>Second moment area</p></td>
+      </tr><tr><td>
+          <p><code><a href="smv.html">smv()</a></code> </p>
+        </td>
+        <td><p>Second moment volume</p></td>
+      </tr><tr><td>
+          <p><code><a href="sphericity.html">sphericity()</a></code> </p>
+        </td>
+        <td><p>Calculate sphericity</p></td>
+      </tr><tr><td>
+          <p><code><a href="split_dem.html">split_dem()</a></code> </p>
+        </td>
+        <td><p>Split RasterLayer into smaller tiles</p></td>
+      </tr><tr><td>
+          <p><code><a href="svol_triangle.html">svol_triangle()</a></code> </p>
+        </td>
+        <td><p>Signed volume of triangle</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

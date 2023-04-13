@@ -10,6 +10,12 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/intro.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -17,6 +23,12 @@
   </url>
   <url>
     <loc>/reference/cell_count.html</loc>
+  </url>
+  <url>
+    <loc>/reference/centroid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convexity.html</loc>
   </url>
   <url>
     <loc>/reference/correct_tilt.html</loc>
@@ -34,7 +46,19 @@
     <loc>/reference/dem_to_points.html</loc>
   </url>
   <url>
+    <loc>/reference/detect_drop.html</loc>
+  </url>
+  <url>
     <loc>/reference/fd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fd_area.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fd_cubes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fd_hvar.html</loc>
   </url>
   <url>
     <loc>/reference/horseshoe.html</loc>
@@ -55,10 +79,19 @@
     <loc>/reference/mesh_to_dem.html</loc>
   </url>
   <url>
+    <loc>/reference/mesh_to_points.html</loc>
+  </url>
+  <url>
+    <loc>/reference/packing.html</loc>
+  </url>
+  <url>
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
     <loc>/reference/planar.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rdh.html</loc>
   </url>
   <url>
     <loc>/reference/rescale.html</loc>
@@ -67,6 +100,33 @@
     <loc>/reference/rg.html</loc>
   </url>
   <url>
+    <loc>/reference/sa_triangle.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_area.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_volume.html</loc>
+  </url>
+  <url>
+    <loc>/reference/set_origin.html</loc>
+  </url>
+  <url>
     <loc>/reference/sim_xyz.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sma.html</loc>
+  </url>
+  <url>
+    <loc>/reference/smv.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sphericity.html</loc>
+  </url>
+  <url>
+    <loc>/reference/split_dem.html</loc>
+  </url>
+  <url>
+    <loc>/reference/svol_triangle.html</loc>
   </url>
 </urlset>

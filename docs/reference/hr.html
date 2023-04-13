@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/intro.html">Introduction to habtools</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -44,46 +54,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hr</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, method <span class="op">=</span> <span class="st">"dem"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hr</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>A digital elevation model (DEM) in raster format.</p></dd>
+<dd><p>A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.</p></dd>
 <dt>x</dt>
-<dd><p>The lower-left x-coordinate of bounding box.</p></dd>
+<dd><p>Only used for RasterLayers. The lower-left x-coordinate of bounding box. Default is the minimum x coordinate.</p></dd>
 <dt>y</dt>
-<dd><p>The lower-left y-coordinate of bounding box.</p></dd>
+<dd><p>The lower-left y-coordinate of bounding box. Default is the minimum y coordinate.</p></dd>
 <dt>L</dt>
-<dd><p>The bounding box size (i.e., side length).</p></dd>
-<dt>method</dt>
-<dd><p><code>dem</code> (default) is digital elevation model (DEM) in raster format; <code>mesh</code> is a 3D mesh model with vertices.</p></dd>
-<dt>plot</dt>
-<dd><p>Add bounding box to existing plot of <code>dem</code>.</p></dd>
+<dd><p>The bounding box size (i.e., side length). Default is the maximum.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The difference between the lowest and highest point in the
-bounding box.</p>
+    <p>The difference between the lowest and highest point.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(x, ...):</span> invalid layer names</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hr-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(x, ...):</span> invalid layer names</span>
-<span class="r-in"><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span>, <span class="op">-</span><span class="fl">470</span>, <span class="fl">1266</span>, <span class="fl">2</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'i' in selecting a method for function '[': invalid layer names</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># For a 3D mesh.</span></span>
-<span class="r-in"><span class="fu">hr</span><span class="op">(</span><span class="va">mcap</span>, method<span class="op">=</span><span class="st">"mesh"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.369283</span>
+<span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span>, <span class="op">-</span><span class="fl">470</span>, <span class="fl">1266</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.059676</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># For a 3D mesh.</span></span></span>
+<span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2185397</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

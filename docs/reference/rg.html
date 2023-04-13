@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/intro.html">Introduction to habtools</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -44,23 +54,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rg</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  <span class="va">L</span>,
-  <span class="va">L0</span>,
-  method <span class="op">=</span> <span class="st">"dem"</span>,
-  plot <span class="op">=</span> <span class="cn">FALSE</span>,
-  parallel <span class="op">=</span> <span class="cn">FALSE</span>,
-  ncores <span class="op">=</span> <span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rg</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  <span class="va">L</span>,</span>
+<span>  <span class="va">L0</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"hvar"</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncores <span class="op">=</span> <span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>Digital elevation model in raster format.</p></dd>
+<dd><p>Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.</p></dd>
 <dt>x</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
 <dt>y</dt>
@@ -70,28 +79,39 @@
 <dt>L0</dt>
 <dd><p>Grain or resolution of calculation.</p></dd>
 <dt>method</dt>
-<dd><p>"mesh" or "dem"</p></dd>
-<dt>plot</dt>
-<dd><p>Add bounding box to plot.</p></dd>
+<dd><p>If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".</p></dd>
+<dt>parallel</dt>
+<dd><p>Use parallel processing (Defaults to FALSE)</p></dd>
+<dt>ncores</dt>
+<dd><p>number of cores to use if parallel = T.
+(Defaults to umber of available cores - 1)</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
+    <p>Rugosity value</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>Rugosity is defined as the surface area divided by the planar area. For digital elevation models, we include two methods: "hvar" and "area". <br>
+The "hvar" method for calculating rugosity is described in Torres-Pulliza et al. (2004) and is based on height variations. <br>
+The "area" method uses the <code><a href="https://rdrr.io/pkg/sp/man/surfaceArea.html" class="external-link">sp::surfaceArea()</a></code> function and is detailed in Jenness (2004). <br><code>method</code> is ignored if <code>data</code> is a mesh3D object.
+In that case the function uses <code><a href="https://rdrr.io/pkg/Rvcg/man/vcgArea.html" class="external-link">Rvcg::vcgArea()</a></code> to calculate surface area of a triangular mesh of class mesh3d.</p>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Calculating Landscape Surface Area from Digital Elevation Models, Jeff S. Jenness Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n <br>
+Torres-Pulliza, D., Dornelas, M.A., Pizarro, O. et al. A geometric basis for surface habitat complexity and biodiversity. Nat Ecol Evol 4, 1495–1501 (2020). https://doi.org/10.1038/s41559-020-1281-8</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.327656</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="rg-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x<span class="op">=</span><span class="op">-</span><span class="fl">470</span>, y<span class="op">=</span><span class="fl">1266</span>, L<span class="op">=</span><span class="fl">2</span>, L0<span class="op">=</span><span class="fl">0.5</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.327656</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">rg</span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.01</span>, method <span class="op">=</span> <span class="st">"mesh"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.502029</span>
+<span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">horseshoe</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, L0 <span class="op">=</span> <span class="fl">0.1</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.545145</span>
+<span class="r-in"><span><span class="fu">rg</span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.33841</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
