@@ -1,4 +1,3 @@
-
 #' Correct the tilt of the DEM
 #'
 #' @param data digital elevation model (DEM)

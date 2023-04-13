@@ -1,4 +1,4 @@
-#' Transform dem to 3D pointcloud of raster corners.
+#' Transform DEM to 3D pointcloud of raster corners.
 #'
 #' @param dem A digital elevation model in raster format
 #' @param bh border height from lowest point of mesh

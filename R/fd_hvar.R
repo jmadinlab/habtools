@@ -1,4 +1,4 @@
-#' Fractal Dimension using the height variation method
+#' Calculate fractal Dimension using the height variation method
 #'
 #' @param data Digital elevation model of class RasterLayer or dataframe (output of hvar function)
 #' @param regmethod One of `raw` (all data), `median` (default) or `ends` (minimum and maximum scale only)

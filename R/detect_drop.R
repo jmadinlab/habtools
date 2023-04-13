@@ -1,4 +1,4 @@
-#' detect a sudden drop, edge, or overhang in a DEM
+#' Detect a sudden drop, edge, or overhang in a DEM
 #'
 #' @param data DEM of class RasterLayer
 #' @param d threshold height difference to define a drop
