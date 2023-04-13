@@ -17,6 +17,8 @@
 #' @details Calculates fractal dimension using the specified method. Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.
 #' The `cubes` method is not recommended if the height range is much smaller than the extent of a 3d object or DEM, which is typically the case for DEMs.
 #'
+#' @importFrom methods as
+#'
 #' @examples
 #' library(habtools)
 #' fd(horseshoe, method = "hvar", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))

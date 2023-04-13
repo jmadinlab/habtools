@@ -26,5 +26,5 @@ of area.
 }
 \examples{
 sma(mcap)
-sma(mcap, scale = T)
+sma(mcap, scale = TRUE)
 }

@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' sma(mcap)
-#' sma(mcap, scale = T)
+#' sma(mcap, scale = TRUE)
 
 sma <- function(mesh, axis = "z", scale = TRUE, origin = TRUE){
   if (origin) {
