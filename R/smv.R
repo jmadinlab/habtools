@@ -1,9 +1,9 @@
 #' Second moment volume
 #'
 #' Calculates the 2nd moment of volume by multiplying the volume of each
-#' triangle in the mesh by its distance from the origin (should be set to the attachment point
+#' triangle in the mesh by its centroids' distance from the origin (should be set to the attachment point
 #' of the mesh). The sum of these values is the 2nd moment of volume.
-#' To compare moments in terms of shape only, set scale = T.
+#' To compare moments in terms of shape only, set scale = TRUE.
 #' Axis is z by default, meaning it will calculate the vertical second moment, but this can be changed if needed.
 #'
 #' @param mesh A 3D mesh object.

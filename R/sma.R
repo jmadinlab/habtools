@@ -1,8 +1,9 @@
 #' Second moment area
 #'
-#' Calculates the 2nd moment of surface area by multiplying the surface area of each
-#' triangle in the mesh by it's distance from the origin (should be set to the attachment point
-#' of the mesh). The sum of these values is the 2nd moment of area.
+#' Calculates the 2nd moment of surface area about the origin by multiplying the surface area of
+#' each triangle in the mesh by it's distance from the origin (should be set to
+#' the attachment point of the mesh). The sum of these values is the 2nd moment
+#' of area.
 #'
 #' @param mesh A mesh object
 #' @param axis the axis along which to calculate the second moment of area. z is the default.

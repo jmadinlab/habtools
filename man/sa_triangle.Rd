@@ -2,7 +2,7 @@
 % Please edit documentation in R/sa_triangle.R
 \name{sa_triangle}
 \alias{sa_triangle}
-\title{surface area of triangle}
+\title{Surface area of triangle}
 \usage{
 sa_triangle(XYZcoords)
 }

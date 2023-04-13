@@ -2,7 +2,7 @@
 % Please edit documentation in R/mesh_to_points.R
 \name{mesh_to_points}
 \alias{mesh_to_points}
-\title{Transform dem to 3D pointcloud of raster corners.}
+\title{Transform DEM to 3D pointcloud of raster corners}
 \usage{
 mesh_to_points(mesh)
 }
@@ -13,5 +13,5 @@ mesh_to_points(mesh)
 A 3D point cloud
 }
 \description{
-Transform dem to 3D pointcloud of raster corners.
+Transform DEM to 3D pointcloud of raster corners
 }

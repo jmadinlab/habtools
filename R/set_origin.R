@@ -1,5 +1,6 @@
 #' Set the origin of a mesh
-#' shift the values of a set of XYZ coordinates so that the
+#'
+#' Shift the values of a set of XYZ coordinates so that the
 #' origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates)
 #' Title
 #'

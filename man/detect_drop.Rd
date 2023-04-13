@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect_drop.R
 \name{detect_drop}
 \alias{detect_drop}
-\title{detect a sudden drop, edge, or overhang in a DEM}
+\title{Detect a sudden drop, edge, or overhang in a DEM}
 \usage{
 detect_drop(data, d = 0.1)
 }
@@ -15,7 +15,7 @@ detect_drop(data, d = 0.1)
 A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells
 }
 \description{
-detect a sudden drop, edge, or overhang in a DEM
+Detect a sudden drop, edge, or overhang in a DEM
 }
 \examples{
 library(raster)

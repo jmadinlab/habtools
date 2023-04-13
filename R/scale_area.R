@@ -1,4 +1,4 @@
-#' Rescale mesh based on a fixed area.
+#' Re-scale mesh based on a fixed area
 #'
 #' @param mesh A 3D mesh object
 #' @param target_area The target area of the scaled 3D mesh. Defaults to 1.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd.R
 \name{fd}
 \alias{fd}
-\title{fractal dimension}
+\title{Fractal dimension}
 \usage{
 fd(data, method, x, y, L, lvec, ...)
 }
@@ -26,7 +26,7 @@ If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes
 A value for fractal dimension, typically between 2 and 3.
 }
 \description{
-fractal dimension
+Fractal dimension
 }
 \details{
 Calculates fractal dimension using the specified method. Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.

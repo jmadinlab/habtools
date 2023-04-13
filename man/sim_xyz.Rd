@@ -22,7 +22,7 @@ a xyz dataframe or raster (if dem = T)
 }
 \description{
 Simulates z-values based on a spatoal covariance distribution.
-Caution: this function can currently only handle a small number for n.
+Warning: this function can currently only handle a small number for n.
 }
 \examples{
 library(raster)

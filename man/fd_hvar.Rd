@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd_hvar.R
 \name{fd_hvar}
 \alias{fd_hvar}
-\title{Fractal Dimension using the height variation method}
+\title{Calculate fractal Dimension using the height variation method}
 \usage{
 fd_hvar(data, regmethod = "median", keep_data = FALSE, plot = FALSE, ...)
 }
@@ -21,7 +21,7 @@ fd_hvar(data, regmethod = "median", keep_data = FALSE, plot = FALSE, ...)
 A value for fractal dimension, normally between 2 and 3.
 }
 \description{
-Fractal Dimension using the height variation method
+Calculate fractal Dimension using the height variation method
 }
 \details{
 Calculates fractal dimension using the height variation regression.

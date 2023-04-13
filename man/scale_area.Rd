@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_area.R
 \name{scale_area}
 \alias{scale_area}
-\title{Rescale mesh based on a fixed area.}
+\title{Re-scale mesh based on a fixed area}
 \usage{
 scale_area(mesh, target_area = 1)
 }
@@ -15,7 +15,7 @@ scale_area(mesh, target_area = 1)
 A mesh with area = target_area (1 as default).
 }
 \description{
-Rescale mesh based on a fixed area.
+Re-scale mesh based on a fixed area
 }
 \examples{
 Rvcg::vcgArea(mcap)

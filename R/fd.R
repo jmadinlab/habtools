@@ -1,4 +1,4 @@
-#' fractal dimension
+#' Fractal dimension
 #'
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
 #' @param x Bottom-left of bounding box. Only considered if data is a RasterLayer.

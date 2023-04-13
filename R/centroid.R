@@ -1,4 +1,4 @@
-#' centroid
+#' Centroid
 #'
 #' Calculates the centroid for a given set of XYZ coordinates.
 #'

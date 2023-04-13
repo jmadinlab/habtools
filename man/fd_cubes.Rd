@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd_cubes.R
 \name{fd_cubes}
 \alias{fd_cubes}
-\title{Fractal dimension calculation using cube counting}
+\title{Calculate fractal dimension using cube counting}
 \usage{
 fd_cubes(data, lvec, plot = FALSE, keep_data = FALSE)
 }
@@ -19,7 +19,7 @@ fd_cubes(data, lvec, plot = FALSE, keep_data = FALSE)
 A \code{data.frame} of number of cubes (\code{n}) intersecting mesh points at different cube sizes (\code{L}) and a fractal dimension value. Note that cube size is the length of a side.
 }
 \description{
-Fractal dimension calculation using cube counting
+Calculate fractal dimension using cube counting
 }
 \details{
 This function calculates fractal dimension using the cube counting method.
