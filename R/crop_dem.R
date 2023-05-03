@@ -27,11 +27,11 @@ crop_dem <- function(data, x0, y0, L, plot = FALSE) {
     rect(x0 - (L/2), y0 - (L/2), x0 + (L/2), y0 + (L/2))
   }
   if (length(x0) == 1) {
-    out <- raster::crop(data, raster::extent(x0, y0, x0 + L, y0 + L))
+    out <- raster::crop(data, raster::extent(x0, y0, x0 + (L/2), y0 + (L/2)))
   } else if (length(x0) > 1) {
     out <-
       lapply(1:length(x0), function(i) {
-        raster::crop(data, raster::extent(x0[i], y0[i], x0[i] + L, y0[i] + L))
+        raster::crop(data, raster::extent(x0[i], y0[i], x0[i] + (L/2), y0[i] + (L/2)))
       })
   }
 
