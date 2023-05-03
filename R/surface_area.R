@@ -1,5 +1,3 @@
-
-
 #' Surface area
 #'
 #' Calculates surface area
