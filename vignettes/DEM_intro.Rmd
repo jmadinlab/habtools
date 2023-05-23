@@ -1,0 +1,103 @@
+---
+title: "Complexity metrics for DEMs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Complexity metrics for DEMs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(habtools)
+library(raster)
+library(dplyr)
+library(ggplot2)
+```
+
+In this vignette, we go over the basic steps to calculate standard complexity metrics for digital elevation models (DEMs).
+In this example, we use a DEM of 8x8m.
+
+```{r}
+# Load a raster
+dem <- horseshoe
+res(dem)
+plot(dem)
+# The resolution is 0.002m
+```
+Let's say we want complexity metrics for a certain square around xy-coordinates of size 2m.
+```{r}
+dem1 <- crop_dem(horseshoe, -466, 1269, L = 2, plot = TRUE)
+plot(dem1)
+```
+
+## Height range
+
+```{r}
+hr(dem1)
+```
+
+## Rugosity
+
+```{r}
+# Height variation method
+rg(dem1, L0 = 0.1, method = "hvar", parallel = TRUE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
+           
+# Area method
+rg(dem1, L0 = 0.1, method = "area")
+```
+
+## Fractal dimension
+
+```{r}
+# Height variation method
+fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar", parallel = TRUE)
+# Area method
+fd(dem1, lvec = c(0.05, 0.1, 0.25, 0.5), plot = T, method = "area")
+```
+
+## Multiple metrics
+
+```{r}
+rdh(dem1, lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), method = "hvar", parallel = TRUE)
+rdh(dem1, lvec =  c(0.05, 0.1, 0.25, 0.5), method = "area")
+```
+
+## Multiple squares
+The function `split_dem()` allows you to subdivide a DEM into equal parts. Let's divide the square into 2x2m squares. 
+```{r}
+dem_list <- split_dem(dem, size = 2)
+# calculate one metric for all squares
+sapply(dem_list, hr)
+
+# calculate multiple metrics
+data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), parallel = TRUE) %>%
+  bind_rows()
+
+data_rdh2 <- lapply(dem_list, rdh,  method = "area", lvec =  c(0.05, 0.1, 0.25, 0.5), parallel = TRUE) %>%
+  bind_rows()
+
+plot(data_rdh$D, data_rdh2$D)
+```
+
+```{r}
+ggplot(data_rdh) +
+  geom_point(aes(x = R, y = H, color = D, size = D)) +
+  theme_classic()
+```
+
+
+## Rules of thumb
+
+- all res have to be same across dems
+- smallest lvec hvar method at least 10x res
+- extent (heighest of lvec) 1 or 2 orders of magnitudes compared to smallest lvec (TEST THIS!) (or scales of interest)
+- lvec needs to be the same across all calculations to make comparisons
+
+
