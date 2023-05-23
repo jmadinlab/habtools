@@ -22,8 +22,15 @@ planar <- function(mesh, L0, silent = FALSE) {
       warning("L0 is smaller than mesh resolution")
     }
   }
-  m2 <- mesh
-  m2$vb[3,] <- 0
-  m2 <- Rvcg::vcgQEdecim(m2, edgeLength = L0, silent = T)
-  Rvcg::vcgArea(m2)
+  if (L0 > res) {
+    mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = T)
+  }
+  # get normals of faces
+  m <- mesh
+  n <- Rvcg::vcgFaceNormals(mesh)
+  # remove faces facing downward
+  t <- which(n[3,]<0)
+  m$it <- m$it[,-t]
+  m$vb[3,] <- 0
+  Rvcg::vcgArea(m)
 }

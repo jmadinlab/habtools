@@ -39,7 +39,7 @@ mesh_to_dem <- function(mesh, res, fill = TRUE) {
   sp::coordinates(pts) = ~x+y
 
   if (missing(res)) {
-    res <- Rvcg::vcgMeshres(mesh)[[2]]
+    res <- Rvcg::vcgMeshres(mesh)[[1]]
     res <- max(res)
   }
 
