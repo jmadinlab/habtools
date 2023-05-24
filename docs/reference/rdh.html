@@ -32,7 +32,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/intro.html">Introduction to habtools</a>
+      <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -54,27 +54,44 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rdh</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, <span class="va">lvec</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rdh</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, <span class="va">lvec</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>A dem of class RasterLayer</p></dd>
+
+
 <dt>x</dt>
 <dd><p>minimum x-value</p></dd>
+
+
 <dt>y</dt>
 <dd><p>minimum y-value</p></dd>
+
+
 <dt>L</dt>
 <dd><p>Extent</p></dd>
+
+
 <dt>lvec</dt>
 <dd><p>Scales to include in fd calculation see <code><a href="fd.html">fd()</a></code></p></dd>
+
+
+<dt>method</dt>
+<dd><p>method for the calculation of rugosity and fractal dimension. Can only be "hvar" or "area". Defaults to hvar.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments see <code><a href="fd.html">fd()</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a dataframe with the three complexity measures</p>
+    
+
+<p>a dataframe with the three complexity measures</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -106,7 +123,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

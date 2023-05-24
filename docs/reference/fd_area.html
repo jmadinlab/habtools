@@ -32,7 +32,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/intro.html">Introduction to habtools</a>
+      <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -61,22 +61,37 @@
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>dem of class "RasterLayer" or mesh class "mesh3d"</p></dd>
+
+
 <dt>lvec</dt>
 <dd><p>vector of scales to include in calculation</p></dd>
+
+
 <dt>x</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>Bottom-left of bounding box.</p></dd>
+
+
 <dt>L</dt>
 <dd><p>Bounding box extent (i.e., side length).</p></dd>
+
+
 <dt>keep_data</dt>
 <dd><p>Keep area data. Default = FALSE.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>Plot regression line and area data. Default = FALSE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Either a value or a list</p>
+    
+
+<p>Either a value or a list</p>
     </div>
 
     <div id="ref-examples">
@@ -84,7 +99,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.08</span>, <span class="fl">0.16</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.337697</span>
 <span class="r-in"><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">horseshoe</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.136508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.152884</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -100,7 +115,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

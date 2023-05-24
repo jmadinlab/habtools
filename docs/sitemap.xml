@@ -10,6 +10,9 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/DEM_intro.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -35,6 +38,12 @@
   </url>
   <url>
     <loc>/reference/covar_shape.html</loc>
+  </url>
+  <url>
+    <loc>/reference/crop_dem.html</loc>
+  </url>
+  <url>
+    <loc>/reference/csf.html</loc>
   </url>
   <url>
     <loc>/reference/cubes.html</loc>
@@ -125,6 +134,9 @@
   </url>
   <url>
     <loc>/reference/split_dem.html</loc>
+  </url>
+  <url>
+    <loc>/reference/surface_area.html</loc>
   </url>
   <url>
     <loc>/reference/svol_triangle.html</loc>
