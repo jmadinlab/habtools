@@ -14,6 +14,6 @@ convexity <- function(mesh){
   vol <- suppressWarnings(Rvcg::vcgVolume(mesh))
   pts <- mesh_to_points(mesh)
   cvol <- geometry::convhulln(pts, options = "FA")[[3]]
-  vol <- suppressWarnings(Rvcg::vcgVolume(mcap))
+  vol <- suppressWarnings(Rvcg::vcgVolume(mesh))
   vol/cvol
 }

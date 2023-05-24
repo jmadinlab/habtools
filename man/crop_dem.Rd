@@ -26,9 +26,9 @@ Crop DEM around Points
 \examples{
 # around one point
 dem_cropped <- crop_dem(horseshoe, -468, 1266, L = 2)
-raster::plot(dem_cropped[[1]])
+raster::plot(dem_cropped)
 
 # around multiple points
 points <- data.frame(x = c(-467, -465, -466), y = c(1270, 1265, 1268))
-dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = T)
+dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = TRUE)
 }

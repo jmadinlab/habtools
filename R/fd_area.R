@@ -16,7 +16,7 @@
 #' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
 #'
 fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
-    if (class(data) == "RasterLayer") {
+    if (is(data, "RasterLayer")) {
       if (missing(x)) x <- raster::xmin(data)
       if (missing(y)) y <- raster::ymin(data)
       if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
@@ -32,11 +32,11 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
       }
     a <- sapply(lvec, function(l){
       fac <- round(l/raster::res(data)[1])
-      r <- raster::aggregate(data, fac)
+      r <- raster::aggregate(data, fac, fun = "median")
       g <- as(r, 'SpatialGridDataFrame')
       sp::surfaceArea(g)
       })
-  } else if (class(data) == "mesh3d") {
+  } else if (is(data, "mesh3d")) {
     if(min(lvec) < Rvcg::vcgMeshres(data)[1]) {
       stop("Values in lvec need to be equal to or larger than the resolution of data")
     }

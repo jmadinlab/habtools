@@ -7,3 +7,4 @@ Pipeline.R
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+dev

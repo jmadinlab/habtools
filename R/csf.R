@@ -2,6 +2,7 @@
 #'
 #' @param mesh mesh object
 #' @param silent Print messages and warnings
+#' @param L0 scale
 #'
 #' @return A value indicating colony shape factor
 #' @export

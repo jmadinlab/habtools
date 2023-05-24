@@ -1,7 +1,7 @@
 #' Transform DEM to 3D pointcloud of raster corners.
 #'
 #' @param dem A digital elevation model in raster format
-#' @param bh border height from lowest point of mesh
+#' @param bh border height from lowest point
 #' @param parallel TRUE or FALSE to define use of parallel computation
 #'
 #' @return A 3D point cloud for raster cell corners

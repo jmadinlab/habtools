@@ -12,11 +12,11 @@
 #' @examples
 #' # around one point
 #' dem_cropped <- crop_dem(horseshoe, -468, 1266, L = 2)
-#' raster::plot(dem_cropped[[1]])
+#' raster::plot(dem_cropped)
 #'
 #' # around multiple points
 #' points <- data.frame(x = c(-467, -465, -466), y = c(1270, 1265, 1268))
-#' dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = T)
+#' dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = TRUE)
 
 crop_dem <- function(data, x0, y0, L, plot = FALSE) {
   if (!length(x0) == length(y0)) {
@@ -27,11 +27,11 @@ crop_dem <- function(data, x0, y0, L, plot = FALSE) {
     rect(x0 - (L/2), y0 - (L/2), x0 + (L/2), y0 + (L/2))
   }
   if (length(x0) == 1) {
-    out <- raster::crop(data, raster::extent(x0, y0, x0 + (L/2), y0 + (L/2)))
+    out <- raster::crop(data, raster::extent(x0 - (L/2),  x0 + (L/2), y0 - (L/2), y0 + (L/2)))
   } else if (length(x0) > 1) {
     out <-
       lapply(1:length(x0), function(i) {
-        raster::crop(data, raster::extent(x0[i], y0[i], x0[i] + (L/2), y0[i] + (L/2)))
+        raster::crop(data, raster::extent(x0[i] - (L/2), x0[i] + (L/2), y0[i] - (L/2), y0[i] + (L/2)))
       })
   }
 

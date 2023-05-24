@@ -19,10 +19,10 @@
 #'
 fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
 
-  if (class(data) == "RasterLayer") {
+  if (is(data, "RasterLayer")) {
     pts <- as.data.frame(data, xy = TRUE)
     res <- raster::res(data)[1]
-  } else if (class(data) == "mesh3d") {
+  } else if (is(data, "mesh3d")) {
     pts <- data.frame(t(data$vb)[,1:3])
     res <- max(Rvcg::vcgMeshres(data)[[2]])
   } else {

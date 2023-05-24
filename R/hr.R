@@ -22,7 +22,7 @@
 hr <- function(data, x, y, L) {
 
 
-  if (class(data) == "RasterLayer") {
+  if (is(data, "RasterLayer")) {
     data <- terra::as.data.frame(data, xy = T)
 
     if (missing(x)) x <- min(data$x)
@@ -35,7 +35,7 @@ hr <- function(data, x, y, L) {
     if (!all(is.na(sub[,3]))) {
       out <- max(sub[, 3], na.rm = TRUE) - min(sub[, 3], na.rm = TRUE)
     }
-  } else if (class(data) == "data.frame") {
+  } else if (is(data, "data.frame")) {
     if (missing(x)) x <- min(data$x)
     if (missing(y)) y <- min(data$y)
     if (missing(L)) L <- max(data$x) - min(data$x)
@@ -46,7 +46,7 @@ hr <- function(data, x, y, L) {
     if (!all(is.na(sub[,3]))) {
       out <- max(sub[, 3], na.rm = TRUE) - min(sub[, 3], na.rm = TRUE)
     }
-  } else if (class(data) == "mesh3d") {
+  } else if (is(data, "mesh3d")) {
     pts <- data.frame(t(data$vb)[,1:3])
     names(pts) <- c("x", "y", "z")
 

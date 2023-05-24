@@ -47,7 +47,7 @@ hr(dem1)
 
 ```{r}
 # Height variation method
-rg(dem1, L0 = 0.1, method = "hvar", parallel = TRUE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
+rg(dem1, L0 = 0.1, method = "hvar", parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
            
 # Area method
 rg(dem1, L0 = 0.1, method = "area")
@@ -57,7 +57,7 @@ rg(dem1, L0 = 0.1, method = "area")
 
 ```{r}
 # Height variation method
-fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar", parallel = TRUE)
+fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
 # Area method
 fd(dem1, lvec = c(0.05, 0.1, 0.25, 0.5), plot = T, method = "area")
 ```
@@ -65,7 +65,7 @@ fd(dem1, lvec = c(0.05, 0.1, 0.25, 0.5), plot = T, method = "area")
 ## Multiple metrics
 
 ```{r}
-rdh(dem1, lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), method = "hvar", parallel = TRUE)
+rdh(dem1, lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), method = "hvar")
 rdh(dem1, lvec =  c(0.05, 0.1, 0.25, 0.5), method = "area")
 ```
 
@@ -77,13 +77,9 @@ dem_list <- split_dem(dem, size = 2)
 sapply(dem_list, hr)
 
 # calculate multiple metrics
-data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), parallel = TRUE) %>%
+data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2)) %>%
   bind_rows()
 
-data_rdh2 <- lapply(dem_list, rdh,  method = "area", lvec =  c(0.05, 0.1, 0.25, 0.5), parallel = TRUE) %>%
-  bind_rows()
-
-plot(data_rdh$D, data_rdh2$D)
 ```
 
 ```{r}

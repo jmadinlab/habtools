@@ -29,7 +29,7 @@
 #'
 rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
                ncores = (parallel::detectCores() - 1)) {
-  if (class(data) == "RasterLayer") {
+  if (is(data, "RasterLayer")) {
     if (missing(x)) x <- raster::xmin(data)
     if (missing(y)) y <- raster::ymin(data)
     if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
@@ -41,9 +41,7 @@ rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
     }
 
     if (method == "hvar") {
-
-      dem_list <- split_dem(data, L0)
-
+      dem_list <- split_dem(data, L0, parallel = parallel, ncores = ncores)
       if (parallel){
         hs <- parallel::mclapply(dem_list, hr,
                                  mc.cores = ncores) %>% unlist()
@@ -53,14 +51,18 @@ rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
       rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1), na.rm = T)
 
     } else if (method =="area") {
-      fac <- round(L0/raster::res(data)[1])
-      a <- raster::aggregate(data, fac)
-      mat <- as.matrix(a)/L0
+      if (L0 > raster::res(data)[1]) {
+        fac <- round(L0/raster::res(data)[1])
+        a <- raster::aggregate(data, fac)
+        mat <- as.matrix(a)/L0
+      } else {
+        mat <- as.matrix(data)/L0
+      }
       rg <- sp::surfaceArea(mat)/(dim(mat)[1] * dim(mat)[2])
     } else {
       stop("method can only be 'hvar' or 'area'")
     }
-  } else if (class(data) == "mesh3d") {
+  } else if (is(data,  "mesh3d")) {
     res <- Rvcg::vcgMeshres(data)$res[[1]]
     if (missing(L0)){
       L0 <- res

@@ -32,19 +32,16 @@ Imports:
     raster (>= 3.5),
     rgl,
     methods,
-    dplyr,
-    ggplot2,
-    magrittr,
     MASS,
-    plyr,
-    purrr,
-    rgdal,
     Rvcg,
     sp,
-    tidyr,
     terra,
-    geometry
+    geometry,
+    magrittr,
+    purrr,
+    dplyr
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,                                                                                                                                                                                         
+    ggplot2
 VignetteBuilder: knitr

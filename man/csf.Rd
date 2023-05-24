@@ -9,6 +9,8 @@ csf(mesh, L0, silent = FALSE)
 \arguments{
 \item{mesh}{mesh object}
 
+\item{L0}{scale}
+
 \item{silent}{Print messages and warnings}
 }
 \value{

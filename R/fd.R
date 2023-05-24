@@ -28,7 +28,7 @@
 #'
 fd <- function(data,  method, x, y, L, lvec, ...) {
 
-  if (class(data) == "RasterLayer") {
+  if (is(data, "RasterLayer")) {
 
     # subset raster if needed
     if (missing(x)) x <- raster::xmin(data)
@@ -53,7 +53,7 @@ fd <- function(data,  method, x, y, L, lvec, ...) {
       stop("Please check appropriate method options.")
     }
 
-  } else if (class(data) == "mesh3d") {
+  } else if (is(data, "mesh3d")) {
     if (missing(method)) method <- "cubes"
     if (method == "cubes") {
       f <- fd_cubes(data, lvec = lvec, ...)

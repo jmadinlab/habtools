@@ -4,6 +4,7 @@
 .Rdata
 .httr-oauth
 notes.R
+dev
 
 *T4*
 inst/doc
