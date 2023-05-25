@@ -1,0 +1,78 @@
+---
+title: "Complexity metrics for 3D meshes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Complexity metrics for 3D meshes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(habtools)
+library(rgl)
+options(rgl.printRglwidget = TRUE)
+```
+
+*habtools* includes a wide range of complexity metrics applicable to 3D meshes. 
+
+
+```{r}
+plot3d(mcap)
+```
+
+
+The three main metrics for DEMs also work for meshes. 
+```{r}
+# fractal dimension
+fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
+
+# rugosity
+rg(mcap)
+
+# height range 
+hr(mcap)
+
+```
+
+There are a number of other metrics that tell you more about the shape of the object. 
+
+
+```{r}
+# convexity
+convexity(mcap)
+
+# packing
+packing(mcap)
+
+# sphericity
+sphericity(mcap)
+
+# second moment of area
+sma(mcap)
+
+# second moment of volume
+smv(mcap)
+```
+
+You can also transform a 3D mesh to a DEM. 
+
+```{r}
+dem <- mesh_to_dem(mcap, res = 0.015)
+raster::plot(dem)
+```
+
+
+
+
+
+
+
+
+

@@ -8,3 +8,5 @@ Pipeline.R
 ^docs$
 ^pkgdown$
 dev
+^doc$
+^Meta$
