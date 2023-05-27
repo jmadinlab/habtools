@@ -32,5 +32,6 @@ planar <- function(mesh, L0, silent = FALSE) {
   t <- which(n[3,]<0)
   m$it <- m$it[,-t]
   m$vb[3,] <- 0
+  m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
   Rvcg::vcgArea(m)
 }
