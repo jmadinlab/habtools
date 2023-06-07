@@ -2,7 +2,7 @@
 % Please edit documentation in R/rdh_theory.R
 \name{rdh_theory}
 \alias{rdh_theory}
-\title{Calculates rugosity, fractal dimension or height range based the other two variables}
+\title{Geometric plane equation}
 \usage{
 rdh_theory(r, d, h, L, L0)
 }
@@ -17,17 +17,18 @@ rdh_theory(r, d, h, L, L0)
 A value corresponding one of the three variables not given to the function.
 }
 \description{
-Calculates rugosity, fractal dimension or height range based the other two variables
+Calculates either rugosity, fractal dimension or height range based on the
+other two variables.
 }
 \details{
-This function uses a plane equation to calculate either rugosity,
-fractal dimension or height range based on two of these variables.
+This function uses the geometric plane equation from Torres-Pulliza et al. (2020) to calculate one of rugosity,
+fractal dimension or height range based on the other two variables.
 }
 \examples{
-rdh_theory(r=3, h=1, L=2, L0=0.01)
-rdh_theory(d=2.392472, h=1, L=2, L0=0.01)
-rdh_theory(d=2.392472, r=3, L=2, L0=0.01)
+rdh_theory(r=4, h=1, L=1, L0=0.01)
+rdh_theory(d=2.36928, h=1, L=1, L0=0.01)
+rdh_theory(d=2.36928, r=4, L=1, L0=0.01)
 }
 \references{
-Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat complexity and biodiversity. \emph{Nature Ecology & Evolution} 4:1495-1501. https://doi.org/10.1038/s41559-020-1281-8
+Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat complexity and biodiversity. \emph{Nature Ecology & Evolution} 4:1495-1501. \url{https://doi.org/10.1038/s41559-020-1281-8}
 }
