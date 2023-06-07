@@ -10,3 +10,4 @@ Pipeline.R
 dev
 ^doc$
 ^Meta$
+^manuscript$

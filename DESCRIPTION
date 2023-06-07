@@ -1,5 +1,5 @@
 Package: habtools
-Title: Useful 3D metrics for organisms and habitats
+Title: 3D metrics for habitats and objects
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Joshua",
@@ -42,6 +42,8 @@ Imports:
     dplyr
 Suggests: 
     knitr,
-    rmarkdown,                                                                                                                                                                                         
-    ggplot2
+    rmarkdown,
+    ggplot2,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
+Config/testthat/edition: 3
