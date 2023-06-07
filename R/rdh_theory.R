@@ -27,20 +27,21 @@ rdh_theory <- function(r, d, h, L, L0) {
       stop("you need to provide two variables")
     }
     v <- sqrt((exp(log(h) - log(L / L0) * (3 - d)) / (L0 * sqrt(2)))^2 + 1)
+    return(list(r=v))
   }
   if (missing(d)) { # D
     if (missing(r) | missing(h)) {
       stop("you need to provide two variables")
     }
     v <- 3 - (log(h) - log(sqrt(2) * L0 * sqrt(r^2 - 1))) / log(L / L0)
+    return(list(d=v))
   }
   if (missing(h)) { # H
     if (missing(r) | missing(d)) {
       stop("you need to provide two variables")
     }
     v <- exp(log(L / L0) * (3 - d) + log(sqrt(2) * L0 * sqrt(r^2 - 1)))
+    return(list(h=v))
   }
-
-  return(v)
 }
 

@@ -50,15 +50,15 @@ csf <- function(mesh, z_min, res) {
   sp::coordinates(pts) = ~x+z
   rast <- raster::raster(ext=raster::extent(pts), resolution=res)
   rast <- raster::rasterize(pts, rast, pts$y, fun=max)
-  values(rast)[!is.na(values(rast))] <- 1
+  raster::values(rast)[!is.na(raster::values(rast))] <- 1
+
+  moment <- function (i) {
+    y <- raster::yFromRow(rast, i)
+    (y - z_min) * sum(raster::values(rast)[raster::coordinates(rast)[,2] == y], na.rm=TRUE) * res^2
+  }
 
   mom <- sum(sapply(1:dim(rast)[1], moment))
   csf <- (16 / (dy^2 * dx * pi)) * mom
 
   return(list(csf=csf, dy=dy, dx=dx, mom=mom))
-}
-
-moment <- function (i) {
-  y <- yFromRow(rast, i)
-  (y - z_min) * sum(values(rast)[coordinates(rast)[,2] == y], na.rm=TRUE) * res^2
 }
