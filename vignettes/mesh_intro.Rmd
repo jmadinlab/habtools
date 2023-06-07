@@ -59,6 +59,10 @@ sma(mcap)
 
 # second moment of volume
 smv(mcap)
+
+# 
+csf(mcap, z_min=-3.65)
+
 ```
 
 You can also transform a 3D mesh to a DEM. 

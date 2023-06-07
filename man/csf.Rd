@@ -2,7 +2,7 @@
 % Please edit documentation in R/csf.R
 \name{csf}
 \alias{csf}
-\title{Calculates mechanical vulnerability of cantilever type structure to flow}
+\title{Calculates mechanical vulnerability of cantilever type structure}
 \usage{
 csf(mesh, z_min, res)
 }
@@ -14,10 +14,10 @@ csf(mesh, z_min, res)
 \item{res}{(optional) set the resolution}
 }
 \value{
-A list containing the colony shape factor, the parallel (d1) and perpendicular (d2) diameters of the attachment point, and the second moment of area relative to flow.
+A list containing the colony shape factor (csf), the parallel (d1) and perpendicular (d2) diameters of the attachment point, and the second moment of projected area (smpa) relative to flow.
 }
 \description{
-Calculates mechanical vulnerability of cantilever type structure to flow
+Calculates mechanical vulnerability of cantilever type structure
 }
 \details{
 This function calculates the mechanical vulnerability of a structural
@@ -26,11 +26,11 @@ called the Colony Shape Factor (CSF), the function is applicable to any attached
 rigid cantilever type structure. CSF is dimensionless and can be used to compare the
 vulnerability among structures. Mechanistically, if the CSF of a structure becomes greater
 than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
-material tensile strength and inversely related to fluid velocity and density.
+material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
 }
 \examples{
 csf(mcap, z_min=-3.65)
 }
 \references{
-Madin JS and Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
+Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
 }

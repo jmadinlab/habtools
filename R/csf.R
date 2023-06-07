@@ -12,7 +12,7 @@
 #' than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
 #' material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
 #'
-#' @return A list containing the colony shape factor, the parallel (d1) and perpendicular (d2) diameters of the attachment point, and the second moment of area relative to flow.
+#' @return A list containing the colony shape factor (csf), the parallel (d1) and perpendicular (d2) diameters of the attachment point, and the second moment of projected area (smpa) relative to flow.
 #' @export
 #'
 #' @references Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
@@ -47,13 +47,13 @@ csf <- function(mesh, z_min, res) {
   rast <- raster::rasterize(pts, rast, pts$y, fun=max)
   values(rast)[!is.na(values(rast))] <- 1
 
-  sma <- function (i) {
-    y <- yFromRow(rast, i)
-    (y - z_min) * sum(values(rast)[coordinates(rast)[,2] == y], na.rm=TRUE) * res^2
-  }
+  smpa <- sum(sapply(1:dim(rast)[1], smpa))
+  csf <- (16 / (d1^2 * d2 * pi)) * smpa
 
-  sma <- sum(sapply(1:dim(rast)[1], sma))
-  csf <- (16 / (d1^2 * d2 * pi)) * sma
+  return(list(csf=csf, d1=d1, d2=d2, smpa=smpa))
+}
 
-  return(list(csf=csf, d1=d1, d2=d2, sma=sma))
+smpa <- function (i) {
+  y <- yFromRow(rast, i)
+  (y - z_min) * sum(values(rast)[coordinates(rast)[,2] == y], na.rm=TRUE) * res^2
 }
