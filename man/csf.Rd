@@ -31,3 +31,6 @@ material tensile strength and inversely related to fluid velocity and density.
 \examples{
 csf(mcap, z_min=-3.65)
 }
+\references{
+Madin JS and Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
+}

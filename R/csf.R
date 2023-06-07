@@ -1,4 +1,4 @@
-#' Calculates mechanical vulnerability of cantilever type structure to flow
+#' Calculates mechanical vulnerability of cantilever type structure
 #'
 #' @param mesh mesh object
 #' @param z_min (optional) set the z plane about which csf should be calculated
@@ -10,23 +10,23 @@
 #' rigid cantilever type structure. CSF is dimensionless and can be used to compare the
 #' vulnerability among structures. Mechanistically, if the CSF of a structure becomes greater
 #' than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
-#' material tensile strength and inversely related to fluid velocity and density.
+#' material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
 #'
 #' @return A list containing the colony shape factor, the parallel (d1) and perpendicular (d2) diameters of the attachment point, and the second moment of area relative to flow.
 #' @export
 #'
-#' @citation Madin and Madin
+#' @references Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
 #'
 #' @examples
 #' csf(mcap, z_min=-3.65)
 
 csf <- function(mesh, z_min, res) {
-
   pts <- data.frame(t(mesh$vb)[,1:3])
   names(pts) <- c("x", "y", "z")
 
   if (missing(z_min)) {
     z_min <- min(pts$z)
+    warning(paste0("z_min set to ", z_min))
   }
   if (z_min < min(pts$z) | z_min > max(pts$z)) {
     stop("z_min outside the range of z values")
@@ -34,24 +34,18 @@ csf <- function(mesh, z_min, res) {
   if (missing(res)) {
     res <- Rvcg::vcgMeshres(mesh)$res
     res <- max(res)
+    warning(paste0("resolution set to ", res))
   }
 
-  base <- pts[pts$z >= (z_min - res) & pts$z <= (z_min + res),]
-  # plot(base$x, base$y, asp=1)
+  pts <- pts[pts$z >= z_min,]
+  base <- pts[pts$z <= (z_min + res),]
   d1 <- diff(range(base$y)) # Diameter parallel to flow
   d2 <- diff(range(base$x)) # Diameter perpendicular to flow
 
-  pts <- pts[pts$z >= z_min,]
-  # plot(pts$x, pts$z, asp=1)
-  # abline(h=z_min)
   sp::coordinates(pts) = ~x+z
-
   rast <- raster::raster(ext=raster::extent(pts), resolution=res)
   rast <- raster::rasterize(pts, rast, pts$y, fun=max)
   values(rast)[!is.na(values(rast))] <- 1
-  # plot(rast, asp=1)
-  # abline(h=z_min)
-  # abline(h=yFromRow(rast, 2))
 
   sma <- function (i) {
     y <- yFromRow(rast, i)
@@ -63,9 +57,3 @@ csf <- function(mesh, z_min, res) {
 
   return(list(csf=csf, d1=d1, d2=d2, sma=sma))
 }
-
-# amil <- Rvcg::vcgPlyRead("data/MTQ44CoAmilPROWtMfFabDATColony.ply")
-# plot3d(amil)
-#
-# csf(amil, z_min=-50)
-#
