@@ -2,23 +2,39 @@
 % Please edit documentation in R/csf.R
 \name{csf}
 \alias{csf}
-\title{Calculates colony shape factor of a mesh}
+\title{Colony Shape Factor}
 \usage{
-csf(mesh, L0, silent = FALSE)
+csf(mesh, z_min, res)
 }
 \arguments{
 \item{mesh}{mesh object}
 
-\item{L0}{scale}
+\item{z_min}{(optional) set the z plane about which csf should be calculated}
 
-\item{silent}{Print messages and warnings}
+\item{res}{(optional) set the resolution}
 }
 \value{
-A value indicating colony shape factor
+A list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
 }
 \description{
-Calculates colony shape factor of a mesh
+Calculates mechanical vulnerability of rigid, cantilever-type
+structural elements.
+}
+\details{
+This function calculates the mechanical vulnerability of a structural
+element, like a hard coral colony, to fluid flow. While developed for corals, and originally
+called the Colony Shape Factor (CSF), the function is applicable to any attached,
+rigid cantilever type structure. CSF is dimensionless and can be used to compare the
+vulnerability among structures. Mechanistically, if the CSF of a structure becomes greater
+than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
+material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
+}
+\note{
+The orientation of the 3D mesh is important for this function. The function assumes the fluid flow is parallel with the y-axis. The function also assumes the base of the cantilever over which the bending moment acts can be approximated as an ellipse with the diameter on the y-axis parallel with flow (dy). You can set a z_min if the base of your mesh is not flat at the base (i.e., shift the plane upon which the cantilever is attached upwards). The function output includes dy and dx for monitoring anticipated values.
 }
 \examples{
-csf(mcap)
+csf(mcap, z_min=-3.65)
+}
+\references{
+Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
 }
