@@ -1,5 +1,7 @@
 #' Height range
 #'
+#' @description Calculates the distance between the lowest and highest point in a 3D object.
+#'
 #' @param data A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.
 #' @param x Only used for RasterLayers. The lower-left x-coordinate of bounding box. Default is the minimum x coordinate.
 #' @param y The lower-left y-coordinate of bounding box. Default is the minimum y coordinate.
