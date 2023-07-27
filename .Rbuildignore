@@ -11,3 +11,4 @@ dev
 ^doc$
 ^Meta$
 ^manuscript$
+^\.github$

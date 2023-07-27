@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = TRUE}
 library(habtools)
 library(raster)
 library(dplyr)
