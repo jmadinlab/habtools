@@ -43,7 +43,6 @@ hr(mcap)
 
 There are a number of other metrics that tell you more about the shape of the object. 
 
-
 ```{r}
 # convexity
 convexity(mcap)
@@ -60,16 +59,22 @@ sma(mcap)
 # second moment of volume
 smv(mcap)
 
-# 
+# mechanical shape factor
 csf(mcap, z_min=-3.65)
 
 ```
 
-You can also transform a 3D mesh to a DEM. 
+You can also transform a 3D mesh to a DEM, and then apply DEM functions to the surface.
 
 ```{r}
 dem <- mesh_to_dem(mcap, res = 0.015)
-raster::plot(dem)
+raster::plot(dem, asp=1)
+
+dem1 <- crop_dem(dem, -1.255244, 0.938885, L = 0.37, plot = TRUE)
+raster::plot(dem1)
+
+rg(dem1, L0 = 0.1, method = "hvar", parallel = FALSE) 
+
 ```
 
 
