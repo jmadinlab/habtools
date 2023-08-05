@@ -22,18 +22,17 @@ library(ggplot2)
 ```
 
 In this vignette, we go over the basic steps to calculate standard complexity metrics for digital elevation models (DEMs).
-In this example, we use a DEM of 8x8m.
+In this example, we use a DEM of 8x8m with a resolution of 0.01m.
 
 ```{r}
 # Load a raster
 dem <- horseshoe
 res(dem)
 plot(dem)
-# The resolution is 0.002m
 ```
-Let's say we want complexity metrics for a certain square around xy-coordinates of size 2m.
+Let's say we want complexity metrics for a certain square  of size 2m around xy-coordinates.
 ```{r}
-dem1 <- crop_dem(horseshoe, -466, 1269, L = 2, plot = TRUE)
+dem1 <- crop_dem(horseshoe, x0 = -466, y0 = 1269, L = 2, plot = TRUE)
 plot(dem1)
 ```
 
@@ -55,6 +54,8 @@ rg(dem1, L0 = 0.1, method = "area")
 
 ## Fractal dimension
 
+### Height variation method
+
 ```{r}
 # Height variation method
 fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
@@ -62,22 +63,33 @@ fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
 fd(dem1, lvec = c(0.05, 0.1, 0.25, 0.5), plot = T, method = "area")
 ```
 
+### Area method
+
+```{r}
+# Height variation method
+fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
+# Area method
+fd(dem1, lvec = c(0.05, 0.1, 0.25, 0.5), plot = T, method = "area")
+```
+
+
 ## Multiple metrics
 
 ```{r}
-rdh(dem1, lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2), method = "hvar")
-rdh(dem1, lvec =  c(0.05, 0.1, 0.25, 0.5), method = "area")
+rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method = "hvar")
+rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25, 0.5), method = "area")
 ```
 
 ## Multiple squares
-The function `split_dem()` allows you to subdivide a DEM into equal parts. Let's divide the square into 2x2m squares. 
+The function `split_dem()` allows you to subdivide a DEM into equal parts. Let's divide the big raster into 2x2m squares. 
+Note that this function will only work well if you have a square DEM. You also want to choose the size so that the DEM can be divided into equal parts.
 ```{r}
 dem_list <- split_dem(dem, size = 2)
 # calculate one metric for all squares
 sapply(dem_list, hr)
 
 # calculate multiple metrics
-data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.0625, 0.125, 0.25, 0.5, 1, 2)) %>%
+data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2)) %>%
   bind_rows()
 
 ```
@@ -91,9 +103,9 @@ ggplot(data_rdh) +
 
 ## Rules of thumb
 
-- all res have to be same across dems
-- smallest lvec hvar method at least 10x res
-- extent (heighest of lvec) 1 or 2 orders of magnitudes compared to smallest lvec (TEST THIS!) (or scales of interest)
+- When analyzing and comparing multiple DEMs, make sure that each DEM has the same resolution. 
+- smallest lvec hvar method should be between two times and ten higher than resolution 
+- extent (heighest of lvec) 1 to 2 orders of magnitudes compared to smallest lvec (TEST THIS!) (or scales of interest)
 - lvec needs to be the same across all calculations to make comparisons
 
 
