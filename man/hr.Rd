@@ -19,7 +19,7 @@ hr(data, x, y, L)
 The difference between the lowest and highest point.
 }
 \description{
-Height range
+Calculates the distance between the lowest and highest point in a 3D object.
 }
 \examples{
 
