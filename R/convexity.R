@@ -2,7 +2,7 @@
 #'
 #' @param mesh mesh3d object
 #'
-#' @details The ratio of the volume of the object  and the volume of the convex hull around the object
+#' @details The ratio of the volume of the object and the volume of the convex hull around the object
 #'
 #' @return the convexity value
 #' @export

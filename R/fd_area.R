@@ -27,7 +27,7 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
         data <- raster::crop(data, b)
       }
 
-      if(min(lvec) < res(data)[1]) {
+      if(res(data)[1] - (min(lvec)) > 0.00001) {
         stop("Values in lvec need to be equal to or larger than the resolution of data")
       }
     a <- sapply(lvec, function(l){

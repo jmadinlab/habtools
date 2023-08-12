@@ -28,7 +28,7 @@ a dataframe with the three complexity measures
 Calculate rugosity, fractal dimension and height for a DEM
 }
 \details{
-uses hvar method for rugosity and fractal dimension calculations.
+uses hvar method for rugosity and fractal dimension calculations as default.
 }
 \examples{
 rdh(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))

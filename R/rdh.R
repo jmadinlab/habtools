@@ -12,7 +12,7 @@
 #' @seealso [rg()]
 #' @seealso [hr()]
 #'
-#' @details uses hvar method for rugosity and fractal dimension calculations.
+#' @details uses hvar method for rugosity and fractal dimension calculations as default.
 #' @return a dataframe with the three complexity measures
 #' @export
 #'
