@@ -44,7 +44,7 @@ hr(mcap)
 
 For fractal dimension, two methods are available: "cubes" and "area". 
 In the "cubes" method, fractal dimension is calculated as the slope of $log10(n) \sim log10(l)$, where n is the total number of cubes that contains any surface of the object and l is the size of the cubes (elements of lvec).
-In the "area" method, the mesh is remeshed at varying resolutions (lvec) 
+In the "area" method, the mesh is remeshed at varying resolutions (lvec).
 Further, you can calculate planar and total surface area of the object.
 ```{r}
 planar(mcap)
@@ -55,10 +55,10 @@ surface_area(mcap)
 There are a number of other metrics that tell you more about the shape of the object. See Zawada et al. (2019) for an example of an application of these metrics on corals.   
 - **Convexity:** the ratio of the volume of the object and the volume of the convex hull around the object.     
 - **Packing:** The ratio of the surface area of the object and the surface area of the convex hull around the object.    
-- **Sphericity:** The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object. 
-- **Second moment of area (sma):** A measure of top-heaviness using area. Calculated by multiplying the surface area of each triangle in the mesh by its vertical distance from the origin.
-- **Second moment of volume (smv):** A measure of top-heaviness using volume. For each triangle in the mesh, a tetrahedron between the triangle and the origin was calculated. The signed volume of each tetrahedron was multiplied by the vertical distance between the centroid of the tetrahedron and the centroid of the attachment plane.      
-- **Mechanical shape factor (csf):**  Mechanical vulnerability of a structural element (Madin & Connolly, 2006).
+- **Sphericity:** The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.             
+- **Second moment of area (sma):** A measure of top-heaviness using area. Calculated by multiplying the surface area of each triangle in the mesh by its vertical distance from the origin.             
+- **Second moment of volume (smv):** A measure of top-heaviness using volume. For each triangle in the mesh, a tetrahedron between the triangle and the origin was calculated. The signed volume of each tetrahedron was multiplied by the vertical distance between the centroid of the tetrahedron and the centroid of the attachment plane.       
+- **Mechanical shape factor (csf):**  Mechanical vulnerability of a structural element (Madin & Connolly, 2006).             
 ```{r}
 # convexity
 convexity(mcap)
@@ -80,14 +80,6 @@ csf(mcap, z_min = -3.65)
 
 ```
 
-You can also transform a 3D mesh to a DEM, and then apply DEM functions to the surface.
-
-```{r}
-dem <- mesh_to_dem(mcap, res = 0.015)
-raster::plot(dem, asp=1)
-rg(dem1, L0 = 0.015, method = "area", parallel = FALSE) 
-
-```
 
 
 ## References       
