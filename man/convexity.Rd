@@ -16,7 +16,7 @@ the convexity value
 Calculate convexity
 }
 \details{
-The ratio of the volume of the object  and the volume of the convex hull around the object
+The ratio of the volume of the object and the volume of the convex hull around the object
 }
 \examples{
 convexity(mcap)
