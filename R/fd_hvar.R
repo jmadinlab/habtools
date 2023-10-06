@@ -27,7 +27,7 @@
 #' fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
 #' fd_hvar(data, regmethod = "raw", plot = TRUE, keep_data = TRUE)
 #'
-fd_hvar <- function(data, regmethod = "median", keep_data = FALSE, plot = FALSE, ...) {
+fd_hvar <- function(data, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
   if (!is.data.frame(data)) {
     data <- hvar(data, ...)
   }

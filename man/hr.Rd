@@ -4,16 +4,10 @@
 \alias{hr}
 \title{Height range}
 \usage{
-hr(data, x, y, L)
+hr(data)
 }
 \arguments{
 \item{data}{A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.}
-
-\item{x}{Only used for RasterLayers. The lower-left x-coordinate of bounding box. Default is the minimum x coordinate.}
-
-\item{y}{The lower-left y-coordinate of bounding box. Default is the minimum y coordinate.}
-
-\item{L}{The bounding box size (i.e., side length). Default is the maximum.}
 }
 \value{
 The difference between the lowest and highest point.
@@ -26,7 +20,7 @@ Calculates the distance between the lowest and highest point in a 3D object.
 library(raster)
 plot(horseshoe)
 hr(horseshoe)
-hr(horseshoe, -470, 1266, 2)
+hr(horseshoe)
 
 # For a 3D mesh.
 hr(mcap)
