@@ -1,7 +1,7 @@
 #' Calculate fractal Dimension using the height variation method
 #'
 #' @param data Digital elevation model of class RasterLayer or dataframe (output of hvar function)
-#' @param regmethod One of `raw` (all data), `median` (default) or `ends` (minimum and maximum scale only)
+#' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
 #' @param plot Diagnostic plot
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
 #' @param ... Additional arguments of see [hvar()]
@@ -16,7 +16,7 @@
 #' However, large ranges also
 #' average-out fractal dimension of a surface that might have
 #' phase transitions, and therefore a thorough exploration of height ranges is suggested using the `plot`.
-#' `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points.
+#' `regmethod` specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.  `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points.
 #'
 #' @examples
 #' data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))

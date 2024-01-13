@@ -6,6 +6,7 @@
 #' @param L Extent
 #' @param lvec Scales to include in fd calculation see [fd()]
 #' @param method method for the calculation of rugosity and fractal dimension. Can only be "hvar" or "area". Defaults to hvar.
+#' @param regmethod Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See [fd_hvar()]
 #' @param ... Additional arguments see [fd()]
 #'
 #' @seealso [fd()]
@@ -18,7 +19,7 @@
 #'
 #' @examples
 #' rdh(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-rdh <- function(data, x, y, L, lvec, method = "hvar",  ...){
+rdh <- function(data, x, y, L, lvec, method = "hvar", regmethod = "mean", ...){
 
   if (missing(x)) x <- raster::xmin(data)
   if (missing(y)) y <- raster::ymin(data)
@@ -33,7 +34,7 @@ rdh <- function(data, x, y, L, lvec, method = "hvar",  ...){
     hv <- hvar(data, lvec = lvec, ...)
     hs <- hv[hv$l == min(hv$l, na.rm = T), "h"]
     rg <- mean(sqrt((hs^2) / (2 * min(hv$l, na.rm = T)^2) + 1), na.rm = T)
-    d <- fd_hvar(hv)
+    d <- fd_hvar(hv, regmethod = regmethod)
     h <- hr(data)
   } else if (method == "area") {
     h <- hr(data)
