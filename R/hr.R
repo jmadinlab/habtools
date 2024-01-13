@@ -22,6 +22,12 @@ hr <- function(data) {
 
   if (is(data, "RasterLayer")) {
 
+
+    if (sum(is.na(values(data))) > 0) {
+      message(paste0("data contains ", sum(is.na(values(test))), " NA values. Results may be biased."))
+    }
+
+
     out <- diff(range(values(data), na.rm = TRUE))
 
   } else if (is(data, "data.frame")) {

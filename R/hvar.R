@@ -23,6 +23,12 @@ hvar <- function(data, x, y, lvec, L,
                  parallel = FALSE,
                  ncores = (parallel::detectCores()-1)) {
 
+
+  if (sum(is.na(values(data))) > 0) {
+    message(paste0("data contains ", sum(is.na(values(test))), " NA values. Results may be biased."))
+  }
+
+
   if (missing(x)) x <- raster::xmin(data)
   if (missing(y)) y <- raster::ymin(data)
   if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
