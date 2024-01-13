@@ -33,5 +33,15 @@ planar <- function(mesh, L0, silent = FALSE) {
   m$it <- m$it[,-t]
   m$vb[3,] <- 0
   m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
-  Rvcg::vcgArea(m)
+  #m2 <- Rvcg::vcgUniformRemesh(m, voxelSize = L0/10)
+  x <- m$vb[1,]
+  y <- m$vb[2,]
+  dt <- data.frame(x =x, y = y)
+  poly <- concaveman::concaveman(as.matrix(dt), concavity = 1, length_threshold = L0)
+  # plot(poly)
+  # polygon(poly)
+  # Rvcg::vcgArea(m)
+  geometry::polyarea(poly[,1], poly[,2])
+
+
 }
