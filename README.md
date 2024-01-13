@@ -4,6 +4,8 @@
 # habtools
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `habtools` is to collate tools for 3D meshes and digital
@@ -39,27 +41,42 @@ developed in Torres-Pulliza et al. (2020).
 library(habtools)
 library(raster)
 #> Loading required package: sp
+#> 
+#> Attaching package: 'raster'
+#> The following object is masked from 'package:habtools':
+#> 
+#>     extent
 plot(horseshoe)
+
+# Let's take a subset DEM of size = 2
+dem2 <- crop_dem(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
 ```
 
 <img src="man/figures/README-example1-1.png" width="100%" />
 
 ``` r
-# height range
-hr(horseshoe, x = -470, y = 1266, L = 2)
-#> [1] 1.059676
-
-# rugosity; note that rugosity will decrease with grain (L0)
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.125)
-#> [1] 1.430732
-
-# fractal dimension
-fd(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.25, 0.5, 1, 2), plot = TRUE, method = "hvar")
+plot(dem2)
 ```
 
 <img src="man/figures/README-example1-2.png" width="100%" />
 
-    #> [1] 2.337396
+``` r
+
+# height range
+hr(dem2)
+#> [1] 1.368289
+
+# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01). 
+rg(dem2, L0 = 0.1)
+#> [1] 1.691571
+
+# fractal dimension
+fd(dem2, lvec = c(0.25, 0.5, 1, 2), plot = TRUE, method = "hvar")
+```
+
+<img src="man/figures/README-example1-3.png" width="100%" />
+
+    #> [1] 2.301808
 
 The next example calculates height range, rugosity and fractal dimension
 for a 3D mesh of a coral colony. Because meshes can have more than one
@@ -68,13 +85,14 @@ the cube counting fractal dimension method presented in Zawada et
 al. (2019).
 
 ``` r
+
 # height range
 hr(mcap)
 #> [1] 0.2185397
 
 # rugosity
 rg(mcap, L0 = 0.045)
-#> [1] 2.449289
+#> [1] 2.393919
 
 # fractal dimension
 fd(mcap, lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE, method = "cubes")

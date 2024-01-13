@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 # habtools
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `habtools` is to collate tools for 3D meshes and digital elevation models (DEM) targeted at biologists and ecologists. Tools calculate metrics like surface area, rugosity, fractal dimension, height range, convexity, sphericity, second moments of volume and more. The initial set of tools came from two research papers. Zawada et al. (2019) examined morphology of coral colony laser scans. Torres-Pulliza et al. (2020) examined  complexity of coral reef structure. It is hoped that the number of tools and contributors will grow through time.
@@ -42,14 +43,18 @@ library(habtools)
 library(raster)
 plot(horseshoe)
 
-# height range
-hr(horseshoe, x = -470, y = 1266, L = 2)
+# Let's take a subset DEM of size = 2
+dem2 <- crop_dem(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
+plot(dem2)
 
-# rugosity; note that rugosity will decrease with grain (L0)
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.125)
+# height range
+hr(dem2)
+
+# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01). 
+rg(dem2, L0 = 0.1)
 
 # fractal dimension
-fd(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.25, 0.5, 1, 2), plot = TRUE, method = "hvar")
+fd(dem2, lvec = c(0.25, 0.5, 1, 2), plot = TRUE, method = "hvar")
 
 ```
 
