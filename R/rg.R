@@ -30,6 +30,11 @@
 rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
                ncores = (parallel::detectCores() - 1)) {
   if (is(data, "RasterLayer")) {
+
+    if (sum(is.na(values(data))) > 0) {
+      message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
+    }
+
     if (missing(x)) x <- raster::xmin(data)
     if (missing(y)) y <- raster::ymin(data)
     if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))

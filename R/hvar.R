@@ -25,7 +25,7 @@ hvar <- function(data, x, y, lvec, L,
 
 
   if (sum(is.na(values(data))) > 0) {
-    message(paste0("data contains ", sum(is.na(values(test))), " NA values. Results may be biased."))
+    message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
   }
 
 
