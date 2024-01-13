@@ -9,7 +9,7 @@ fd_hvar(data, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...)
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or dataframe (output of hvar function)}
 
-\item{regmethod}{One of \code{raw} (all data), \code{median} (default) or \code{ends} (minimum and maximum scale only)}
+\item{regmethod}{Method to use for linear regression between scale (lvec) and height range. One of \code{raw} (all data), \code{mean} (default) \code{median} or \code{ends} (minimum and maximum scale only)}
 
 \item{keep_data}{Keep the data used for fd calculation? defaults to FALSE}
 
@@ -31,7 +31,8 @@ A rule of thumb is that \code{l} should range an order of magnitude.
 However, large ranges also
 average-out fractal dimension of a surface that might have
 phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{plot}.
-\code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points.
+\code{regmethod} specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.
+\code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 }
 \examples{
 data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))

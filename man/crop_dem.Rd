@@ -7,7 +7,7 @@
 crop_dem(data, x0, y0, L, plot = FALSE)
 }
 \arguments{
-\item{data}{a DEM in RasterLayer format}
+\item{data}{A DEM in RasterLayer format}
 
 \item{x0}{A value or vector of center x coordinate(s)}
 

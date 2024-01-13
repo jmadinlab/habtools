@@ -4,7 +4,7 @@
 \alias{rdh}
 \title{Calculate rugosity, fractal dimension and height for a DEM}
 \usage{
-rdh(data, x, y, L, lvec, method = "hvar", ...)
+rdh(data, x, y, L, lvec, method = "hvar", regmethod = "mean", ...)
 }
 \arguments{
 \item{data}{A dem of class RasterLayer}
@@ -18,6 +18,8 @@ rdh(data, x, y, L, lvec, method = "hvar", ...)
 \item{lvec}{Scales to include in fd calculation see \code{\link[=fd]{fd()}}}
 
 \item{method}{method for the calculation of rugosity and fractal dimension. Can only be "hvar" or "area". Defaults to hvar.}
+
+\item{regmethod}{Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See \code{\link[=fd_hvar]{fd_hvar()}}}
 
 \item{...}{Additional arguments see \code{\link[=fd]{fd()}}}
 }

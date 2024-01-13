@@ -20,7 +20,6 @@ Calculates the distance between the lowest and highest point in a 3D object.
 library(raster)
 plot(horseshoe)
 hr(horseshoe)
-hr(horseshoe)
 
 # For a 3D mesh.
 hr(mcap)

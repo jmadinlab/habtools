@@ -1,6 +1,6 @@
 #' Crop DEM around Points
 #'
-#' @param data a DEM in RasterLayer format
+#' @param data A DEM in RasterLayer format
 #' @param x0 A value or vector of center x coordinate(s)
 #' @param y0 A value or vector of center y coordinate(s)
 #' @param L Size of square to cut out of DEM

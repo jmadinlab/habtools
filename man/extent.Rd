@@ -2,7 +2,7 @@
 % Please edit documentation in R/extent.R
 \name{extent}
 \alias{extent}
-\title{Calculate fractal dimension using cube counting}
+\title{Calculate extent of a 3D object}
 \usage{
 extent(data)
 }
@@ -13,7 +13,7 @@ extent(data)
 A value, the extent of the mesh
 }
 \description{
-Calculate fractal dimension using cube counting
+Calculate extent of a 3D object
 }
 \details{
 This function calculates the extent or largest length of the bounding box of a mesh

@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' sample_dem(horseshoe, L = 4)
 sample_dem <- function(data, L) {
   size <- L
   mid <- mid_find(data)
