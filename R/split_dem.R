@@ -23,7 +23,7 @@ split_dem <- function(data,
                       ncores = (parallel::detectCores() - 1)) {
   L <- raster::res(data)[1] * nrow(data)
   if (!round(L / size, 5) == round(L / size)) {
-    warning("With the specified size, the RasterLayer is not divided across the full extent")
+    message("With the specified size, the RasterLayer is not divided across the full extent. Consider a value for L0 so that L/L0 is a whole number and L0 is either equal to the resolution or a multiplicative of the resolution. ")
   }
   t <- nrow(data) / (L / size)
   a <- raster::aggregate(data, t)

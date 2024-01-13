@@ -16,7 +16,8 @@
 #' However, large ranges also
 #' average-out fractal dimension of a surface that might have
 #' phase transitions, and therefore a thorough exploration of height ranges is suggested using the `plot`.
-#' `regmethod` specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.  `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points.
+#' `regmethod` specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.
+#' `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 #'
 #' @examples
 #' data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
