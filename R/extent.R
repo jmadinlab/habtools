@@ -1,4 +1,4 @@
-#' Calculate fractal dimension using cube counting
+#' Calculate extent of a 3D object
 #'
 #' @param data object of class mesh3d
 #'
