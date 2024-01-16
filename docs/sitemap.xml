@@ -61,6 +61,9 @@
     <loc>/reference/detect_drop.html</loc>
   </url>
   <url>
+    <loc>/reference/extent.html</loc>
+  </url>
+  <url>
     <loc>/reference/fd.html</loc>
   </url>
   <url>
@@ -94,6 +97,9 @@
     <loc>/reference/mesh_to_points.html</loc>
   </url>
   <url>
+    <loc>/reference/mid_find.html</loc>
+  </url>
+  <url>
     <loc>/reference/packing.html</loc>
   </url>
   <url>
@@ -116,6 +122,9 @@
   </url>
   <url>
     <loc>/reference/sa_triangle.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sample_dem.html</loc>
   </url>
   <url>
     <loc>/reference/scale_area.html</loc>

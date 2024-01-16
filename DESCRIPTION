@@ -37,6 +37,7 @@ Imports:
     sp,
     terra,
     geometry,
+    concaveman,
     magrittr,
     purrr,
     dplyr

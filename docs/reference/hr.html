@@ -57,25 +57,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hr</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hr</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.</p></dd>
-
-
-<dt>x</dt>
-<dd><p>Only used for RasterLayers. The lower-left x-coordinate of bounding box. Default is the minimum x coordinate.</p></dd>
-
-
-<dt>y</dt>
-<dd><p>The lower-left y-coordinate of bounding box. Default is the minimum y coordinate.</p></dd>
-
-
-<dt>L</dt>
-<dd><p>The bounding box size (i.e., side length). Default is the maximum.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -93,8 +81,6 @@
 <span class="r-plt img"><img src="hr-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.369283</span>
-<span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span>, <span class="op">-</span><span class="fl">470</span>, <span class="fl">1266</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.059676</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># For a 3D mesh.</span></span></span>
 <span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></span>

@@ -85,6 +85,11 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: sp</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'raster'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:habtools':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     extent</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -121,7 +126,7 @@ around xy-coordinates.</p>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">dem1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.9709332</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.9766939</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="rugosity">Rugosity<a class="anchor" aria-label="anchor" href="#rugosity"></a>
@@ -129,7 +134,7 @@ around xy-coordinates.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Height variation method</span></span>
 <span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, L0 <span class="op">=</span> <span class="fl">0.1</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. </span></span>
-<span><span class="co">#&gt; [1] 1.530437</span></span>
+<span><span class="co">#&gt; [1] 1.596596</span></span>
 <span>           </span>
 <span><span class="co"># Area method</span></span>
 <span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
@@ -161,7 +166,7 @@ doubling values for <code>lvec</code>. For example, if the resolution =
 <code class="sourceCode R"><span><span class="co"># Height variation method</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; [1] 2.240156</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 2.284862</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="area-method">Area method<a class="anchor" aria-label="anchor" href="#area-method"></a>
@@ -193,10 +198,10 @@ function.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          R        D         H</span></span>
-<span><span class="co">#&gt; 1 1.452406 2.240156 0.9709332</span></span>
+<span><span class="co">#&gt; 1 1.518349 2.284862 0.9766939</span></span>
 <span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          R        D         H</span></span>
-<span><span class="co">#&gt; 1 1.824223 2.246586 0.9709332</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 1.824223 2.246586 0.9766939</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="multiple-squares">Multiple squares<a class="anchor" aria-label="anchor" href="#multiple-squares"></a>
@@ -210,8 +215,8 @@ parts.</p>
 <code class="sourceCode R"><span><span class="va">dem_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/split_dem.html">split_dem</a></span><span class="op">(</span><span class="va">dem</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co"># calculate one metric for all squares</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">hr</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 0.5162930 0.6127143 0.8358884 0.8814073 0.6774140 0.9377822 0.9958876</span></span>
-<span><span class="co">#&gt;  [8] 0.9770845 1.1133886 1.0766171 1.1218033 1.0029795 0.9865971 1.1646364</span></span>
+<span><span class="co">#&gt;  [1] 0.5169915 0.6127143 0.8386080 0.8948447 0.6774140 0.9407243 0.9958876</span></span>
+<span><span class="co">#&gt;  [8] 0.9968966 1.1133886 1.0766171 1.1218033 1.0029795 0.9923673 1.1646364</span></span>
 <span><span class="co">#&gt; [15] 0.9986641 1.3692834</span></span>
 <span></span>
 <span><span class="co"># calculate multiple metrics</span></span>

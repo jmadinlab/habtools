@@ -38,10 +38,10 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
       }
     a <- sapply(lvec, function(l){
       fac <- round(l/raster::res(data)[1])
-      r <- raster::aggregate(data, fac, fun = "median")
+      r <- raster::aggregate(data, fac, fun = "mean")
       g <- as(r, 'SpatialGridDataFrame')
       sa <- sp::surfaceArea(g, byCell = TRUE)
-      sum(values(sa))/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
+      sum(raster::values(raster::raster(sa)))/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
       })
   } else if (is(data, "mesh3d")) {
     if(min(lvec) < Rvcg::vcgMeshres(data)[1]) {
