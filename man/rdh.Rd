@@ -17,7 +17,7 @@ rdh(data, x, y, L, lvec, method = "hvar", regmethod = "mean", ...)
 
 \item{lvec}{Scales to include in fd calculation see \code{\link[=fd]{fd()}}}
 
-\item{method}{method for the calculation of rugosity and fractal dimension. Can only be "hvar" or "area". Defaults to hvar.}
+\item{method}{method for the calculation of rugosity and fractal dimension. Can only be "hvar" , "sd", or "area". Defaults to hvar.}
 
 \item{regmethod}{Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See \code{\link[=fd_hvar]{fd_hvar()}}}
 

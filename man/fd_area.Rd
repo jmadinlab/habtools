@@ -4,7 +4,7 @@
 \alias{fd_area}
 \title{Calculate fractal dimension using the surface area method}
 \usage{
-fd_area(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE)
+fd_area(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale = FALSE)
 }
 \arguments{
 \item{data}{dem of class "RasterLayer" or mesh class "mesh3d"}
@@ -20,6 +20,8 @@ fd_area(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE)
 \item{keep_data}{Keep area data. Default = FALSE.}
 
 \item{plot}{Plot regression line and area data. Default = FALSE.}
+
+\item{scale}{rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)}
 }
 \value{
 Either a value or a list

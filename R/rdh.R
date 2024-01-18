@@ -5,7 +5,7 @@
 #' @param y minimum y-value
 #' @param L Extent
 #' @param lvec Scales to include in fd calculation see [fd()]
-#' @param method method for the calculation of rugosity and fractal dimension. Can only be "hvar" or "area". Defaults to hvar.
+#' @param method method for the calculation of rugosity and fractal dimension. Can only be "hvar" , "sd", or "area". Defaults to hvar.
 #' @param regmethod Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See [fd_hvar()]
 #' @param ... Additional arguments see [fd()]
 #'

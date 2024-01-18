@@ -1,13 +1,19 @@
-#' Calculate fractal Dimension using the standard deviation method method
+#' Calculate fractal Dimension using the standard deviation method
 #'
 #' @param data Digital elevation model of class RasterLayer
+#' @param x Bottom-left of bounding box
+#' @param y Bottom-left of bounding box
+#' @param L Bounding box extent (i.e., side length)
+#' @param lvec scales to use for calculation
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
 #' @param plot Diagnostic plot
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
-#' @param ... Additional arguments of see [hvar()]
 #'
 #' @return A value for fractal dimension, normally between 2 and 3.
 #' @export
+#'
+#' @importFrom stats sd
+
 #'
 #' @details Calculates fractal dimension using the standard deviation method,
 #' an analogue of the variation method, but using the standard deviation in height per grid cell instead of the full height range.

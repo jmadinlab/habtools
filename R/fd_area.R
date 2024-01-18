@@ -7,6 +7,7 @@
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
+#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)
 #'
 #' @return Either a value or a list
 #' @export
@@ -15,13 +16,12 @@
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 #' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
 #'
-fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
+fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale = FALSE) {
     if (is(data, "RasterLayer")) {
 
       if (sum(is.na(values(data))) > 0) {
         message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
       }
-
 
       if (missing(x)) x <- raster::xmin(data)
       if (missing(y)) y <- raster::ymin(data)
@@ -33,14 +33,20 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE) {
         data <- raster::crop(data, b)
       }
 
-      if(res(data)[1] - (min(lvec)) > 0.00001) {
+      if (res(data)[1] - (min(lvec)) > 0.00001) {
         stop("Values in lvec need to be equal to or larger than the resolution of data")
       }
+
+      if (scale) {
+        data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * L
+      }
+
     a <- sapply(lvec, function(l){
       fac <- round(l/raster::res(data)[1])
       r <- raster::aggregate(data, fac, fun = "mean")
       g <- as(r, 'SpatialGridDataFrame')
       sa <- sp::surfaceArea(g, byCell = TRUE)
+      # relative area to account for variations in planar area with varying scales when L/lvec are not whole numbers
       sum(raster::values(raster::raster(sa)))/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
       })
   } else if (is(data, "mesh3d")) {

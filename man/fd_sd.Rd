@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd_sd.R
 \name{fd_sd}
 \alias{fd_sd}
-\title{Calculate fractal Dimension using the standard deviation method method}
+\title{Calculate fractal Dimension using the standard deviation method}
 \usage{
 fd_sd(
   data,
@@ -20,19 +20,25 @@ fd_sd(
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer}
 
+\item{x}{Bottom-left of bounding box}
+
+\item{y}{Bottom-left of bounding box}
+
+\item{lvec}{scales to use for calculation}
+
+\item{L}{Bounding box extent (i.e., side length)}
+
 \item{regmethod}{Method to use for linear regression between scale (lvec) and height range. One of \code{raw} (all data), \code{mean} (default) \code{median} or \code{ends} (minimum and maximum scale only)}
 
 \item{keep_data}{Keep the data used for fd calculation? defaults to FALSE}
 
 \item{plot}{Diagnostic plot}
-
-\item{...}{Additional arguments of see \code{\link[=hvar]{hvar()}}}
 }
 \value{
 A value for fractal dimension, normally between 2 and 3.
 }
 \description{
-Calculate fractal Dimension using the standard deviation method method
+Calculate fractal Dimension using the standard deviation method
 }
 \details{
 Calculates fractal dimension using the standard deviation method,

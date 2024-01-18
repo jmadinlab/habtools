@@ -9,7 +9,7 @@ fd(data, method, x, y, L, lvec, ...)
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
 
-\item{method}{If data is a RasterLayer, possible methods are:"hvar", "area", and "cubes" (defaults to "hvar").
+\item{method}{If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").}
 
 \item{x}{Bottom-left of bounding box. Only considered if data is a RasterLayer.}
@@ -44,6 +44,8 @@ fd(mcap, method = "area", lvec = c(0.02, 0.04, 0.08, 0.16))
 \code{\link[=fd_hvar]{fd_hvar()}}
 
 \code{\link[=fd_area]{fd_area()}}
+
+\code{\link[=fd_sd]{fd_sd()}}
 
 \code{\link[=fd_cubes]{fd_cubes()}}
 }

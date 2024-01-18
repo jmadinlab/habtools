@@ -5,11 +5,12 @@
 #' @param y Bottom-left of bounding box. Only considered if data is a RasterLayer.
 #' @param L Bounding box extent (i.e., side length). Only considered if data is a RasterLayer.
 #' @param lvec scales to use for calculation
-#' @param method If data is a RasterLayer, possible methods are:"hvar", "area", and "cubes" (defaults to "hvar").
+#' @param method If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 #' If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").
 #' @param ... Arguments from other fd_ functions.
 #' @seealso [fd_hvar()]
 #' @seealso [fd_area()]
+#' @seealso [fd_sd()]
 #' @seealso [fd_cubes()]
 #' @return A value for fractal dimension, typically between 2 and 3.
 #' @export
