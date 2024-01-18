@@ -25,6 +25,6 @@ Warning: this function gets slow for n > 128.
 }
 \examples{
 library(raster)
-dem <- terrain(32, 0)
+dem <- habtools::terrain(32, 0)
 plot(dem)
 }
