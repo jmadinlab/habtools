@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' library(raster)
-#' dem <- habtools::terrain(32, 0)
+#' dem <- habtools::terrain(32, 0.5, z_extent=TRUE)
 #' plot(dem)
 
 terrain <- function(n, smoothness, z_extent=FALSE, dem=TRUE) {
