@@ -17,6 +17,7 @@
 #' dem <- habtools::terrain(32, 0)
 #' plot(dem)
 
+
 terrain <- function(n, smoothness, z_extent=FALSE, dem=TRUE) {
   n_ <- smallestPowerOfTwoAfter(n)
 
