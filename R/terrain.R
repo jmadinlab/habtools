@@ -188,10 +188,10 @@ squareHelper <- function(mat, depth, smoothness, a, b, c, d, t) {
 
 scaleC <- function(smoothness, depth) {
 
-  if (runif(1) > 0.5) {sign <- 1} else {sign <- -1}
+  if (stats::runif(1) > 0.5) {sign <- 1} else {sign <- -1}
   reduce <- 1
   for (i in 1:depth) {
     reduce <- reduce * 2^(-smoothness)
   }
-  return(sign * runif(1) * reduce)
+  return(sign * stats::runif(1) * reduce)
 }
