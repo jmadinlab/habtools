@@ -39,7 +39,7 @@ terrain <- function(n, smoothness, z_extent=FALSE, dem=TRUE) {
   if (z_extent) { mat <- mat * (n / diff(range(mat))) }
 
   if (dem) {
-    mat <- raster::raster(mat)
+    mat <- raster::raster(mat, xmn=0, xmx=n, ymn=0, ymx=n)
   }
   return(mat)
 }
