@@ -1,8 +1,8 @@
 ---
-title: "Complexity metrics for 3D meshes"
+title: "Metrics of fractal dimension"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Complexity metrics for 3D meshes}
+  %\VignetteIndexEntry{Metrics of fractal dimension}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,18 +16,22 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(habtools)
-library(rgl)
-options(rgl.printRglwidget = TRUE)
 ```
 
-*habtools* includes a wide range of complexity metrics applicable to 3D meshes. 
-
+This vignette highlights issues that may arise when using `habtools` for estimating fractal dimension by applying three methods (cube counting, height variation and area method) to a series of simulated and natural surfaces. Each of these methods should be used cautiously on natural surfaces, because each has their own biases. For example, some methods are sensitive to particular elements, like outliers or drop-offs, while others are invariant to them. Because most natural surfaces are not self-similar, then these considerations matter and require decisions based on the question being addressed. 
 
 ```{r}
-plot3d(mcap)
+reef <- crop(horseshoe, raster::extent(horseshoe, 1, 64, 1, 64))
+plot(reef)
+terr <- sim_terrain(64, 0.9)
+plot(terr)
+corr <- sim_xyz(64, 6, 0.1, 2, dem = TRUE)
+plot(corr)
+
+r, -471.8104, 64*0.01, 1263.625, 64*0.01
 ```
 
-
+2
 The three main metrics for DEMs also work for meshes. 
 ```{r}
 # fractal dimension
