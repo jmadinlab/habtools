@@ -40,9 +40,9 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
     warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
   }
 
-  x0 <- min(pts[,1]) - L0
-  y0 <- min(pts[,2]) - L0
-  z0 <- min(pts[,3]) - L0
+  x0 <- min(pts[,1]) - res/2
+  y0 <- min(pts[,2]) - res/2
+  z0 <- min(pts[,3]) - res/2
 
   cubes <- unique(round(Lmax/lvec))
   l <- unique(Lmax/cubes)

@@ -21,7 +21,7 @@ sim_xyz(n, mu, phisq, sigmasq, dem = FALSE)
 a xyz dataframe or raster (if dem = T)
 }
 \description{
-Simulates z-values based on a spatoal covariance distribution.
+Simulates z-values based on a spatial covariance distribution.
 Warning: this function can currently only handle a small number for n.
 }
 \examples{

@@ -1,6 +1,6 @@
 #' Simulate z values
 #'
-#' Simulates z-values based on a spatoal covariance distribution.
+#' Simulates z-values based on a spatial covariance distribution.
 #' Warning: this function can currently only handle a small number for n.
 #'
 #' @param n number of rows or cols
