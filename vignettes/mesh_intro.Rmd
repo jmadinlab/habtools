@@ -1,8 +1,8 @@
 ---
-title: "Metrics of fractal dimension"
+title: "Complexity metrics for DEMs"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Metrics of fractal dimension}
+  %\VignetteIndexEntry{Complexity metrics for DEMs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,83 +14,106 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = TRUE}
 library(habtools)
+library(raster)
+library(dplyr)
+library(ggplot2)
 ```
 
-This vignette highlights issues that may arise when using `habtools` for estimating fractal dimension by applying three methods (cube counting, height variation and area method) to a series of simulated and natural surfaces. Each of these methods should be used cautiously on natural surfaces, because each has their own biases. For example, some methods are sensitive to particular elements, like outliers or drop-offs, while others are invariant to them. Because most natural surfaces are not self-similar, then these considerations matter and require decisions based on the question being addressed. 
+In this vignette, we go over the basic steps to calculate standard complexity metrics for digital elevation models (DEMs).
+In this example, we use a DEM of 8x8m with a resolution of 0.01m.
 
 ```{r}
-reef <- crop(horseshoe, raster::extent(horseshoe, 1, 64, 1, 64))
-plot(reef)
-terr <- sim_terrain(64, 0.9)
-plot(terr)
-corr <- sim_xyz(64, 6, 0.1, 2, dem = TRUE)
-plot(corr)
-
-r, -471.8104, 64*0.01, 1263.625, 64*0.01
+# Load a raster
+dem <- horseshoe
+res(dem)
+plot(dem)
 ```
-
-2
-The three main metrics for DEMs also work for meshes. 
+Let's say we want complexity metrics for a certain square  of size 2m around xy-coordinates.
 ```{r}
-# fractal dimension
-fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
-fd(mcap, method = "area", lvec = c(0.01, 0.02, 0.04, 0.08), plot = TRUE)
-
-# rugosity
-rg(mcap)
-
-# height range 
-hr(mcap)
-
+dem1 <- crop_dem(horseshoe, x0 = -466, y0 = 1269, L = 2, plot = TRUE)
+plot(dem1)
 ```
 
-For fractal dimension, two methods are available: "cubes" and "area". 
-In the "cubes" method, fractal dimension is calculated as the slope of $log10(n) \sim log10(l)$, where n is the total number of cubes that contains any surface of the object and l is the size of the cubes (elements of lvec).
-In the "area" method, the mesh is remeshed at varying resolutions (lvec).
-Further, you can calculate planar and total surface area of the object.
+## Height range
+
 ```{r}
-planar(mcap)
-surface_area(mcap)
+hr(dem1)
 ```
 
-              
-There are a number of other metrics that tell you more about the shape of the object. See Zawada et al. (2019) for an example of an application of these metrics on corals.   
-- **Convexity:** the ratio of the volume of the object and the volume of the convex hull around the object.     
-- **Packing:** The ratio of the surface area of the object and the surface area of the convex hull around the object.    
-- **Sphericity:** The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.             
-- **Second moment of area (sma):** A measure of top-heaviness using area. Calculated by multiplying the surface area of each triangle in the mesh by its vertical distance from the origin.             
-- **Second moment of volume (smv):** A measure of top-heaviness using volume. For each triangle in the mesh, a tetrahedron between the triangle and the origin was calculated. The signed volume of each tetrahedron was multiplied by the vertical distance between the centroid of the tetrahedron and the centroid of the attachment plane.       
-- **Mechanical shape factor (csf):**  Mechanical vulnerability of a structural element (Madin & Connolly, 2006).             
+## Rugosity
+
 ```{r}
-# convexity
-convexity(mcap)
+# Height variation method
+rg(dem1, L0 = 0.1, method = "hvar", parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
+           
+# Area method
+rg(dem1, L0 = 0.05, method = "area")
+```
 
-# packing
-packing(mcap)
+## Fractal dimension
 
-# sphericity
-sphericity(mcap)
+### Height variation method
 
-# second moment of area
-sma(mcap)
-
-# second moment of volume
-smv(mcap)
-
-# mechanical shape factor
-csf(mcap, z_min = -3.65)
+The height variation method is based on the relationship between height range and scale. 
+Basically, the DEM is divided into small squares with sizes specified in `lvec`. Within each square, the height range is calculated and logged. This results in a data frame with many height ranges (depending on the scale). This data is then summarized by taking the mean or median. The fractal dimension is finally calculated as:
+$$D = 3- b,$$
+with b being the slope of the linear regression between height range (h) and scale (l) $log(h) \sim log(l)$.
+Because a range of values is needed to calculate a height range the smallest value of `lvec` should always be at least two times the resolution of the DEM, and up to 10 times bigger. The largest value should be the extent of the DEM square. We suggest to choose a vector of doubling values for `lvec`. For example, if the resolution = 0.01m and the extent = 2m, we could choose `lvec` = `c(0.125, 0.25, 0.5, 1, 2)`.
+```{r}
+# Height variation method
+fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
 
 ```
 
+### Area method
+The area method operates quite differently and is therefore not comparable to the height variation method described above. This method uses surface areas at varying scales and calculates the fractal dimension as: 
+$$D = 2 - b,$$
+where b is the slope of the linear regression between surface area (a) and scale (l): $log(a) \sim log(l)$.
+The surface area is calculated at each scale by aggregating the DEM to the resolution of that scale by taking the median. 
+Similar to the above method, we suggest a doubling vector for `lvec`. However, the smallest scale can be as small as the resolution of the DEM and the largest scale should not approach the extent DEM. 
+
+```{r}
+# Area method
+fd(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25, 0.5), plot = T, method = "area")
+```
 
 
-## References       
-Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral morphology. Coral Reefs, 38:1281–1292.          
-Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.                
+## Multiple metrics
+Note that the resolution (L0) for the rugosity will be set as the smallest value of `lvec` in the `rdh()` function.
+```{r}
+rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method = "hvar")
+rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25, 0.5), method = "area")
+```
+
+## Multiple squares
+The function `split_dem()` allows you to subdivide a DEM into equal parts. Let's divide the big raster into 2x2m squares. 
+Note that this function will only work well if you have a square DEM. You also want to choose the size so that the DEM can be divided into equal parts.
+```{r}
+dem_list <- split_dem(dem, size = 2)
+# calculate one metric for all squares
+sapply(dem_list, hr)
+
+# calculate multiple metrics
+data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2)) %>%
+  bind_rows()
+
+```
+
+```{r}
+ggplot(data_rdh) +
+  geom_point(aes(x = R, y = H, color = D, size = D)) +
+  theme_classic()
+```
 
 
+## Rules of thumb
+
+- When analyzing and comparing multiple DEMs, make sure that each DEM has the same resolution. 
+- When using the "hvar" method, the smallest value of `lvec`should be between two times and ten higher than the resolution 
+- When using the "hvar" method, the extent (highest value of `lvec`) should ideally be 1 to 2 orders of magnitudes higher compared to smallest value of `lvec` or `lvec` values should match scales of particular interest (e.g. matching body sizes of animals inhabiting the surface)
+- `lvec` and chosen method needs to be the same across all calculations to make comparisons
 
 
 

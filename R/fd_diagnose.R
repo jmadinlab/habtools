@@ -13,24 +13,25 @@
 fd_diagnose <- function(data, lvec, method, ...) {
 
   lvec <- sort(lvec)
-  d <- fd(data = data, lvec = lvec, method = method, keep_data = T, ...)
+  d <- fd(data = data, lvec = lvec, method = method, keep_data = TRUE, ...)
 
   dta <- d[["data"]]
   dval <- d[["fd"]]
 
-  f <- unname(sapply(1:(length(dta[,1]) - 1), function(i){
-    s <- coef(lm(log10(dta[,2][c(i,i+1)]) ~ log10(dta[,1][c(i,i+1)])))[2]
-    if (method == "area") {
-      2 - s
-    } else {
-      3 - s
-    }
-  }))
+  fdvec <- diff(log10(dta$h)) / diff(log10(dta$l))
+  if (method == "area") {
+    f <- 2 - f
+  }
+  if (method == "cubes") {
+    f <- -f
+  }
+  if (method == "hvar") {
+    f <- 3 - f
+  }
 
   df <- data.frame(l = dta[,1][1:length(dta[,1])-1], fd = f)
 
-  plot(log10(dta[,2]) ~ log10(dta[,1]), xlab = colnames(dta)[1], ylab = colnames(dta)[2])
-  lines(log10(dta[,2]) ~ log10(dta[,1]))
+  plot(dta[,2] ~ dta[,1], xlab = colnames(dta)[1], ylab = colnames(dta)[2], log="xy", type="o")
   pred <- predict(lm(log10(dta[,2]) ~ log10(dta[,1])))
   lines(log10(dta[,1]), pred, lty = 1, col = "red")
 
