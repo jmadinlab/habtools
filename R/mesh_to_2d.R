@@ -24,7 +24,7 @@ mesh_to_2d <- function(mesh, L0 = NULL, silent = T){
   t <- which(n[3,]<0)
   m$it <- m$it[,-t]
   m$vb[3,] <- 0
-  #m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
+  m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
   #m <- Rvcg::vcgUniformRemesh(m, voxelSize = L0)
   x <- m$vb[1,]
   y <- m$vb[2,]
