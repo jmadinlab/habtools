@@ -25,16 +25,23 @@ This vignette highlights issues that may arise when using `habtools` for estimat
 
 Low smoothness
 
-```{r}
+```{r fig.width=7, fig.height=7, echo=FALSE}
+par(mfrow=c(2, 2))
+
+smoothness <- 0
+z_extent <- FALSE
 lvec <- c(4, 8, 16, 32, 64)
-surf1 <- sim_terrain(64, 0, z_extent = FALSE)
-plot(surf1)
+surf1 <- sim_terrain(64, smoothness, z_extent)
+plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = FALSE"))
 
 fd_diagnose(surf1, lvec, "hvar")
 fd_diagnose(surf1, lvec, "area")
 fd_diagnose(surf1, lvec, "cubes")
 
-surf2 <- sim_terrain(64, 0, z_extent = TRUE)
+par(mfrow=c(2, 2))
+
+z_extent <- TRUE
+surf2 <- sim_terrain(64, smoothness, z_extent)
 plot(surf2)
 
 fd_diagnose(surf2, lvec, "hvar")
@@ -45,16 +52,23 @@ fd_diagnose(surf2, lvec, "cubes")
 
 High smoothness
 
-```{r}
+```{r fig.width=7, fig.height=7, echo=FALSE}
+par(mfrow=c(2, 2))
+
+smoothness <- 1
+z_extent <- FALSE
+surf1 <- sim_terrain(64, smoothness, z_extent)
 lvec <- c(4, 8, 16, 32, 64)
-surf1 <- sim_terrain(64, 1, z_extent = FALSE)
-plot(surf1)
+plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = FALSE"))
 
 fd_diagnose(surf1, lvec, "hvar")
 fd_diagnose(surf1, lvec, "area")
 fd_diagnose(surf1, lvec, "cubes")
 
-surf2 <- sim_terrain(64, 1, z_extent = TRUE)
+par(mfrow=c(2, 2))
+
+z_extent <- TRUE
+surf2 <- sim_terrain(64, smoothness, z_extent)
 plot(surf2)
 
 fd_diagnose(surf2, lvec, "hvar")
@@ -63,24 +77,35 @@ fd_diagnose(surf2, lvec, "cubes")
 
 ```
 
+Real reef
 
-```{r}
+```{r fig.width=7, fig.height=7, echo=FALSE}
+par(mfrow=c(2, 2))
 
-# 
-# surf <- sim_terrain(32, 0, z_extent = TRUE)
-# 
-# 
-# d <- fd_cubes(surf, lvec, keep_data = TRUE)
-# 
-# plot(corr)
-# hr(corr)
-# 
-# reef <- crop(horseshoe, raster::extent(horseshoe, 1, 32, 1, 32))
-# plot(reef)
+surf1 <- crop(horseshoe, raster::extent(horseshoe, 1, 128, 1, 128))
+res <- raster::res(surf1)
+values(surf1) <- values(surf1) - min(values(surf1))
+lvec <- c(4, 8, 16, 32, 64, 128) * res
+plot(surf1, asp=1, main=paste0("horseshoe\n", "z_extent = FALSE"))
 
+fd_diagnose(surf1, lvec, "hvar")
+fd_diagnose(surf1, lvec, "area")
+fd_diagnose(surf1, lvec, "cubes")
 
+par(mfrow=c(2, 2))
+
+surf2 <- surf1
+values(surf2) <- values(surf1) * (res*128) / max(values(surf1))
+range(values(surf2))
+
+plot(surf2, main=paste0("horseshoe\n", "z_extent = TRUE"))
+
+fd_diagnose(surf2, lvec, "hvar")
+fd_diagnose(surf2, lvec, "area")
+fd_diagnose(surf2, lvec, "cubes")
 
 ```
+
 
 
 
