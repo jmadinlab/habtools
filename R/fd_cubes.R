@@ -36,7 +36,7 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
   if (min(lvec) < res){
     warning("The smallest scale included in lvec is smaller than recommended.")
   }
-  if (max(lvec) < max(diff(apply(pts, 2, range))) + res){
+  if (max(lvec) < max(diff(apply(pts, 2, range)))){
     warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
   }
 
