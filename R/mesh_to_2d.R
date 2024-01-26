@@ -1,4 +1,39 @@
-mesh_to_2d <- function(mesh, L0 = NULL, silent = T){
+#' 3D Mesh to 2D points
+#'
+#' @description
+#' `mesh_to_d2` turns a 3D Mesh file into an xy data frame.
+#'
+#' @param mesh A mesh3d object.
+#' @param L0 (Optional) The desired DEM resolution in same units at the 3D mesh.
+#' @param plot logical. Plot the output?
+#' @param silent logical. Defaults to not showing warnings.
+#'
+#' @return A data frame.
+#' @export
+#'
+#' @details
+#' The function rasterizes uses the vertices of the mesh file.
+#' If resolution is not
+#' given, it is calculated by finding the maximum nearest neighbor
+#' of vertices projected
+#' on the `xy` plane. `fill` is used when irregular 3D meshes
+#' result in `NA` values in
+#' raster cells. The default is to fill these cells with the
+#' minimum, non-`NA` raster value.
+#'
+#' @examples
+#' library(raster)
+#' mcap_2d <- mesh_to_2d(mcap)
+#'
+#' geometry::polyarea(mcap_2d) # area
+#' planar(mcap)
+#'
+#' perimeter(mcap_2d) # perimeter
+#' circularity(mcap_2d) # circularity
+#' fd_boxes(mcap_2d, lvec) # fractal dimension
+#'
+
+mesh_to_2d <- function(mesh, L0 = NULL, plot=FALSE, silent = TRUE){
 
   res <- Rvcg::vcgMeshres(mesh)$res[[1]]
   if (missing(L0)){
@@ -13,7 +48,7 @@ mesh_to_2d <- function(mesh, L0 = NULL, silent = T){
     }
   }
 
-  if (L0 > res) {
+  if (L0 >= res) {
     mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = T)
   }
 
@@ -30,27 +65,9 @@ mesh_to_2d <- function(mesh, L0 = NULL, silent = T){
   y <- m$vb[2,]
   dt <- data.frame(x =x, y = y)
   poly <- concaveman::concaveman(as.matrix(dt), concavity = 1, length_threshold = L0)
-  plot(poly)
-  polygon(poly)
+  if (plot) {
+    plot(poly, asp=1)
+    polygon(poly)
+  }
   return(poly)
 }
-
-
-
-perimeter <- function(data){
-  sum(sapply(1:(nrow(data)-1), function(i){
-    dist(data[c(i, i+1),])
-  }))
-}
-
-circularity <- function(data){
-  4*pi*geometry::polyarea(data[,1], data[,2])/(perimeter(data)^2)
-}
-
-
-# planar(mcap)
-# mcap_2d <- mesh_to_2d(mcap)
-# perimeter(mcap_2d)
-# circularity(mcap_2d)
-
-

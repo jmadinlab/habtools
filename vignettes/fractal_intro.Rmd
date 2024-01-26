@@ -31,7 +31,7 @@ par(mfrow=c(2, 2))
 
 smoothness <- 0
 z_extent <- FALSE
-lvec <- c(4, 8, 16, 32, 64)
+lvec <- c(2, 4, 8)
 surf1 <- sim_terrain(64, smoothness, z_extent)
 plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent))
 
