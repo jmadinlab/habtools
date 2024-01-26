@@ -35,11 +35,11 @@ minimum, non-\code{NA} raster value.
 library(raster)
 mcap_2d <- mesh_to_2d(mcap)
 
-geometry::polyarea(mcap_2d) # area
+geometry::polyarea(mcap_2d$x, mcap_2d$y) # area
 planar(mcap)
 
 perimeter(mcap_2d) # perimeter
 circularity(mcap_2d) # circularity
-fd_boxes(mcap_2d, lvec) # fractal dimension
+fd_boxes(mcap_2d) # fractal dimension
 
 }

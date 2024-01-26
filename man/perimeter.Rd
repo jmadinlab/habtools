@@ -4,7 +4,7 @@
 \alias{perimeter}
 \title{The perimeter of a 2D shape}
 \usage{
-perimeter(data)
+perimeter(data, keep_data = FALSE)
 }
 \arguments{
 \item{data}{A data frame with the first two columns ordered x and y coordinates.}

@@ -25,10 +25,12 @@
 #' 2 * pi * r # Note xy resolution affects output
 #'
 
-perimeter <- function(data){
-  sum(sapply(1:(nrow(data)-1),
-    function(i) {
-      dist(data[c(i, i+1),])
-    }
-  ))
+perimeter <- function(data, keep_data=FALSE){
+  segs <- sapply(1:(nrow(data)-1), function(i) {dist(data[c(i, i+1),])})
+  p <- sum(segs)
+  if (keep_data) {
+    return(list(perimeter=p, segments=segs))
+  } else {
+    return(p)
+  }
 }

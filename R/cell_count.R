@@ -18,3 +18,10 @@ cell_count <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
                ceiling(rescale(pts$z, zmin, zmax, n)))
   sum(cnt > 0)
 }
+
+cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
+  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
+               ceiling(rescale(pts$y, ymin, ymax, n)))
+  sum(cnt > 0)
+}
+

@@ -25,12 +25,12 @@
 #' library(raster)
 #' mcap_2d <- mesh_to_2d(mcap)
 #'
-#' geometry::polyarea(mcap_2d) # area
+#' geometry::polyarea(mcap_2d$x, mcap_2d$y) # area
 #' planar(mcap)
 #'
 #' perimeter(mcap_2d) # perimeter
 #' circularity(mcap_2d) # circularity
-#' fd_boxes(mcap_2d, lvec) # fractal dimension
+#' fd_boxes(mcap_2d) # fractal dimension
 #'
 
 mesh_to_2d <- function(mesh, L0 = NULL, plot=FALSE, silent = TRUE){
@@ -48,7 +48,7 @@ mesh_to_2d <- function(mesh, L0 = NULL, plot=FALSE, silent = TRUE){
     }
   }
 
-  if (L0 >= res) {
+  if (L0 > res) {
     mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = T)
   }
 
@@ -63,8 +63,10 @@ mesh_to_2d <- function(mesh, L0 = NULL, plot=FALSE, silent = TRUE){
   #m <- Rvcg::vcgUniformRemesh(m, voxelSize = L0)
   x <- m$vb[1,]
   y <- m$vb[2,]
-  dt <- data.frame(x =x, y = y)
+  dt <- data.frame(x=x, y=y)
   poly <- concaveman::concaveman(as.matrix(dt), concavity = 1, length_threshold = L0)
+  poly <- data.frame(poly)
+  names(poly) <- c("x", "y")
   if (plot) {
     plot(poly, asp=1)
     polygon(poly)
