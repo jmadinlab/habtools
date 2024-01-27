@@ -39,7 +39,8 @@ sim_terrain <- function(n, smoothness, z_extent=FALSE, dem=TRUE) {
   if (z_extent) { mat <- mat * ((n-1) / diff(range(mat))) }
 
   if (dem) {
-    mat <- raster::raster(mat, xmn=0, xmx=n, ymn=0, ymx=n)
+    mat <- raster::raster(mat, xmn=0, xmx=n, ymn=0, ymx=n,
+                          crs = "+proj=tmerc +datum=WGS84 +units=m +no_defs")
   }
   return(mat)
 }
