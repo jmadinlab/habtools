@@ -22,11 +22,12 @@
 
 fd_boxes <- function(pts, lvec=NULL, plot = FALSE, keep_data = FALSE) {
 
+  res <- median(perimeter(pts, keep_data = TRUE)$segments)
 
   if (missing(lvec)) {
-    res <- median(perimeter(pts, keep_data = TRUE)$segments)
     Lmax <- max(diff(apply(pts, 2, range)))
-    lvec <- seq(res * 10, Lmax, length.out=25)
+    L0 <- res * 10
+    lvec <- seq(L0, Lmax, length.out=25)
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)

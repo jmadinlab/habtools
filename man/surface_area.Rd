@@ -7,7 +7,7 @@
 surface_area(data)
 }
 \arguments{
-\item{data}{DEM in RasterLayer format or mesh3d object}
+\item{data}{DEM in RasterLayer format, mesh3d object or data frame with xy coordinates}
 }
 \value{
 surface area
@@ -18,4 +18,6 @@ Calculates surface area
 \examples{
 surface_area(mcap)
 surface_area(horseshoe)
+surface_area(mesh_to_2d(mcap))
+
 }

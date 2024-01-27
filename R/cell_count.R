@@ -25,3 +25,7 @@ cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
   sum(cnt > 0)
 }
 
+cell_count_1d <- function(pts, xmin, xmax, n) {
+  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)))
+  sum(cnt > 0)
+}
