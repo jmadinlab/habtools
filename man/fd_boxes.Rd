@@ -4,16 +4,16 @@
 \alias{fd_boxes}
 \title{Calculate fractal dimension using box counting}
 \usage{
-fd_boxes(pts, lvec = NULL, plot = FALSE, keep_data = FALSE)
+fd_boxes(data, lvec = NULL, plot = FALSE, keep_data = FALSE)
 }
 \arguments{
+\item{data}{data frame of xy coordinates}
+
 \item{lvec}{scales to use for calculation (i.e. box sizes)}
 
 \item{plot}{Plot number of filled boxes at different scales. Default = FALSE.}
 
 \item{keep_data}{Keep calculation data. Default = FALSE.}
-
-\item{data}{data frame of xy coordinates}
 }
 \value{
 A \code{data.frame} of number of boxes (\code{n}) intersecting xy coordinates at different box sizes (\code{l}) and a fractal dimension value. Note that box size is the length of a side.

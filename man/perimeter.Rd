@@ -8,6 +8,8 @@ perimeter(data, keep_data = FALSE)
 }
 \arguments{
 \item{data}{A data frame with the first two columns ordered x and y coordinates.}
+
+\item{keep_data}{Keep lengths of all segments of the perimeter? Defaults to FALSE.}
 }
 \value{
 The perimeter.

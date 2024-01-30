@@ -7,7 +7,7 @@
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
-#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)
+#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
 #'
 #' @return Either a value or a list
 #' @export
@@ -42,12 +42,16 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale 
       }
 
     a <- sapply(lvec, function(l){
-      fac <- round(l/raster::res(data)[1])
-      r <- raster::aggregate(data, fac, fun = "mean")
+      bb <- raster::bbox(data)
+      temp <- raster::raster(xmn=bb[1,1], xmx=bb[1,2],
+                             ymn=bb[2,1], ymx=bb[2,2], resolution = l,
+                             crs = raster::crs(data))
+      r <- terra::project(terra::rast(data), terra::rast(temp))
+      r <- raster::raster(r)
       g <- as(r, 'SpatialGridDataFrame')
       sa <- sp::surfaceArea(g, byCell = TRUE)
       # relative area to account for variations in planar area with varying scales when L/lvec are not whole numbers
-      sum(raster::values(raster::raster(sa)))*L^2/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
+      sum((raster::values(raster::raster(sa)))*L^2)/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
       })
   } else if (is(data, "mesh3d")) {
     if(min(lvec) < Rvcg::vcgMeshres(data)[1]) {

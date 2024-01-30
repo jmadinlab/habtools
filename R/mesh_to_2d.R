@@ -21,6 +21,8 @@
 #' raster cells. The default is to fill these cells with the
 #' minimum, non-`NA` raster value.
 #'
+#' @importFrom graphics polygon
+#'
 #' @examples
 #' library(raster)
 #' mcap_2d <- mesh_to_2d(mcap)
