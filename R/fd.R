@@ -64,5 +64,9 @@ fd <- function(data,  method, x, y, L, lvec, ...) {
       stop("Please check appropriate method options.")
     }
   }
+
+  if (diagnose) {
+
+  }
   return(f)
 }

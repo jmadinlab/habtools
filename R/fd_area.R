@@ -4,9 +4,6 @@
 #' @param lvec vector of scales to include in calculation
 #' @param keep_data Keep area data. Default = FALSE.
 #' @param plot Plot regression line and area data. Default = FALSE.
-#' @param x Bottom-left of bounding box.
-#' @param y Bottom-left of bounding box.
-#' @param L Bounding box extent (i.e., side length).
 #' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
 #'
 #' @return Either a value or a list
@@ -23,15 +20,7 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale 
         message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
       }
 
-      if (missing(x)) x <- raster::xmin(data)
-      if (missing(y)) y <- raster::ymin(data)
       if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
-
-      if (L < min(dim(data)[1:2] * raster::res(data))) {
-        b <- as(raster::extent(x, x + L, y, y + L), 'SpatialPolygons')
-        raster::crs(b) <- raster::crs(data)
-        data <- raster::crop(data, b)
-      }
 
       if (res(data)[1] - (min(lvec)) > 0.00001) {
         stop("Values in lvec need to be equal to or larger than the resolution of data")

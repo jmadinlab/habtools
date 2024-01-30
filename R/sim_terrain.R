@@ -3,13 +3,13 @@
 #' Simulates z-values based on the Diamond-square algorithm.
 #' Warning: this function gets slow for n > 128.
 #'
-#' @param n the extent (matrix size)
-#' @param smoothness a value between 0.0 and 1.0 (lower values
+#' @param n The extent (matrix size)
+#' @param smoothness A value between 0.0 and 1.0 (lower values
 #' produce rougher terrain)
-#' @param z_extent logical. Should z be scaled to match extent, n?
-#' @param dem logical. Should the matrix be turned into a DEM?
+#' @param z_extent Logical. Should z be scaled to match extent, n?
+#' @param dem Logical. Should the matrix be turned into a DEM?
 #'
-#' @return a matrix or raster (if dem = TRUE)
+#' @return A matrix or raster (if dem = TRUE).
 #' @export
 #'
 #' @examples
@@ -17,7 +17,7 @@
 #' dem <- habtools::sim_terrain(32, 0.5, z_extent=TRUE)
 #' plot(dem)
 
-sim_terrain <- function(n, smoothness, z_extent=FALSE, dem=TRUE) {
+sim_terrain <- function(n, smoothness, z_extent = FALSE, dem = TRUE) {
   n_ <- smallestPowerOfTwoAfter(n)
 
   depth <-  1
