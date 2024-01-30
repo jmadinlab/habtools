@@ -1,10 +1,10 @@
 #' Calculate fractal dimension using cube counting
 #'
-#' @param data object of class RasterLayer or mesh3d
-#' @param lvec scales to use for calculation (i.e. cube sizes)
-#' @param keep_data Keep calculation data. Default = FALSE.
-#' @param plot Plot number of filled cubes at different scales. Default = FALSE.
-#' @param scale Rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
+#' @param data An object of class RasterLayer or mesh3d.
+#' @param lvec (optional) Scales to use for calculation (i.e. cube sizes).
+#' @param keep_data Logical. Keep calculation data? Default = TRUE.
+#' @param plot Planar representation of cubes superimposed on 3D mesh for diagnosing `lvec`. Default = FALSE.
+#' @param scale Logical. Rescale height values to the extent. Only relevant for RasterLayer objects. (Defaults to FALSE).
 #'
 #' @details This function calculates fractal dimension using the cube counting method.
 #' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
@@ -16,14 +16,17 @@
 #' @export
 #' @seealso [fd()]
 #' @examples
-#' fd_cubes(mcap, plot=TRUE, keep_data=TRUE)
+#' fd_cubes(mcap, keep_data=TRUE, plot=TRUE)
 #' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
 #'
 #' fd_cubes(horseshoe, plot=TRUE, keep_data=TRUE)
 #'
-fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE) {
+fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = FALSE) {
 
   if (is(data, "RasterLayer")) {
+    if (scale) {
+      data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * (extent(data)[2] - extent(data)[1])
+    }
     pts <- as.data.frame(data, xy = TRUE)
     res <- raster::res(data)[1]
   } else if (is(data, "mesh3d")) {
@@ -38,10 +41,15 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE)
   if (missing(lvec)) {
     Lmax <- max(diff(apply(pts, 2, range))) + res
     L0 <- res
-    lvec <- 2^seq(log2(L0), log2(Lmax), length.out=10)
+    cubes <- 2^(0:20)
+    lvec <- Lmax / cubes
+    cubes <- cubes[lvec > L0]
+    lvec <- lvec[lvec > L0]
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)
+    cubes <- unique(round(Lmax/lvec))
+    lvec <- unique(Lmax/cubes)
   }
 
   # some checks
@@ -52,21 +60,15 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE)
     warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
   }
 
-  if (scale) {
-    data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * L
-  }
-
   x0 <- min(pts[,1]) - res/2
   y0 <- min(pts[,2]) - res/2
   z0 <- min(pts[,3]) - res/2
 
-  cubes <- unique(round(Lmax/lvec))
-  l <- unique(Lmax/cubes)
 
   n <- sapply(cubes, function(n) cell_count(pts, x0, x0 + Lmax, y0, y0 + Lmax, z0, z0 + Lmax, n))
 
-  mod <- lm(log10(n) ~ log10(l))
-  f <- -as.numeric(coef(mod)[2])
+  mod <- lm(log10(n) ~ log10(lvec))
+  fd <- -as.numeric(coef(mod)[2])
 
   # plot
   if (plot) {
@@ -75,15 +77,15 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE)
     } else {
       plot(pts[,1:2], asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
     }
-    rect(x0, y0, x0 + l, y0 + l, border="red")
+    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
     axis(1)
     axis(2, las=2)
   }
   # output
   if (keep_data) {
-    return(list(fd = f, lvec=l, data = data.frame(l = l, n = n)))
+    return(list(fd = fd, lvec=lvec, data = data.frame(l = lvec, n = n)))
   } else {
-    return(f)
+    return(fd)
   }
 }
 
