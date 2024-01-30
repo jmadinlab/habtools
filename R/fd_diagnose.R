@@ -7,6 +7,8 @@
 #' @return A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
 #' @export
 #'
+#' @importFrom graphics axis points
+#'
 #' @examples
 #' fd_diagnose(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area")
 #'

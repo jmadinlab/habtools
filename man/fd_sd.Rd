@@ -33,6 +33,10 @@ fd_sd(
 \item{keep_data}{Keep the data used for fd calculation? defaults to FALSE}
 
 \item{plot}{Diagnostic plot}
+
+\item{parallel}{TRUE or FALSE. Use parallel processing? Note: parallel must be installed.}
+
+\item{ncores}{number of cores to use when parallel = TRUE.}
 }
 \value{
 A value for fractal dimension, normally between 2 and 3.

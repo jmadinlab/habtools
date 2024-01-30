@@ -4,6 +4,7 @@
 #' `mesh_to_d2` turns a 3D Mesh file into an xy data frame.
 #'
 #' @param data A data frame with the first two columns ordered x and y coordinates.
+#' @param keep_data Keep lengths of all segments of the perimeter? Defaults to FALSE.
 #'
 #' @return The perimeter.
 #' @export
