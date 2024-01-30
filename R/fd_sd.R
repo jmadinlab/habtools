@@ -1,10 +1,7 @@
 #' Calculate fractal Dimension using the standard deviation method
 #'
-#' @param data Digital elevation model of class RasterLayer
-#' @param x Bottom-left of bounding box
-#' @param y Bottom-left of bounding box
-#' @param L Bounding box extent (i.e., side length)
-#' @param lvec scales to use for calculation
+#' @param data Digital elevation model of class RasterLayer.
+#' @param lvec Scales to use for calculation
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
 #' @param plot Diagnostic plot
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
