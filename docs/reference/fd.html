@@ -35,7 +35,10 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
+      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+    </li>
+    <li>
+      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -67,7 +70,7 @@
 
 
 <dt>method</dt>
-<dd><p>If data is a RasterLayer, possible methods are:"hvar", "area", and "cubes" (defaults to "hvar").
+<dd><p>If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").</p></dd>
 
 
@@ -106,6 +109,7 @@ The <code>cubes</code> method is not recommended if the height range is much sma
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="fd_hvar.html">fd_hvar()</a></code></p>
 <p><code><a href="fd_area.html">fd_area()</a></code></p>
+<p><code><a href="fd_sd.html">fd_sd()</a></code></p>
 <p><code><a href="fd_cubes.html">fd_cubes()</a></code></p></div>
     </div>
 
@@ -115,10 +119,10 @@ The <code>cubes</code> method is not recommended if the height range is much sma
 <span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">horseshoe</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.184386</span>
 <span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">horseshoe</span>, method <span class="op">=</span> <span class="st">"area"</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.174148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.15194</span>
 <span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">mcap</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.045</span>, <span class="fl">0.09</span>, <span class="fl">0.18</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="fd-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.158836</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.154853</span>
 <span class="r-in"><span><span class="fu">fd</span><span class="op">(</span><span class="va">mcap</span>, method <span class="op">=</span> <span class="st">"area"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.08</span>, <span class="fl">0.16</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.433661</span>
 <span class="r-in"><span></span></span>

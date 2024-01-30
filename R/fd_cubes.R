@@ -15,9 +15,12 @@
 #' @export
 #' @seealso [fd()]
 #' @examples
-#' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5))
+#' fd_cubes(mcap, plot=TRUE, keep_data=TRUE)
+#' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
 #'
-fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
+#' fd_cubes(horseshoe, plot=TRUE, keep_data=TRUE)
+#'
+fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE) {
 
   if (is(data, "RasterLayer")) {
     pts <- as.data.frame(data, xy = TRUE)
@@ -28,15 +31,23 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
   } else {
     stop("data must be of class RasterLayer or mesh3d with triangular mesh")
   }
+
   names(pts) <- c("x", "y", "z")
-  L0 <- min(lvec)
-  Lmax <- max(lvec)
+
+  if (missing(lvec)) {
+    Lmax <- max(diff(apply(pts, 2, range))) + res
+    L0 <- res
+    lvec <- 2^seq(log2(L0), log2(Lmax), length.out=10)
+  } else {
+    L0 <- min(lvec)
+    Lmax <- max(lvec)
+  }
 
   # some checks
   if (min(lvec) < res){
     warning("The smallest scale included in lvec is smaller than recommended.")
   }
-  if (max(lvec) < max(diff(apply(pts, 2, range)))){
+  if (max(lvec) < Lmax){
     warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
   }
 
@@ -54,12 +65,18 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
 
   # plot
   if (plot) {
-    plot(log10(n) ~ log10(l))
-    abline(mod)
+    if (is(data, "RasterLayer")) {
+      plot(data, axes=FALSE)
+    } else {
+      plot(pts[,1:2], asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
+    }
+    rect(x0, y0, x0 + l, y0 + l, border="red")
+    axis(1)
+    axis(2, las=2)
   }
   # output
   if (keep_data) {
-    return(list(fd = f, data = data.frame(l = l, n = n)))
+    return(list(fd = f, lvec=l, data = data.frame(l = l, n = n)))
   } else {
     return(f)
   }

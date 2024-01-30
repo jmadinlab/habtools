@@ -53,7 +53,10 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
+      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+    </li>
+    <li>
+      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul>
 </li>
@@ -186,7 +189,7 @@ largest scale should not approach the extent DEM.</p>
 <code class="sourceCode R"><span><span class="co"># Area method</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; [1] 2.246586</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 2.222356</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -201,7 +204,7 @@ function.</p>
 <span><span class="co">#&gt; 1 1.518349 2.284862 0.9766939</span></span>
 <span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          R        D         H</span></span>
-<span><span class="co">#&gt; 1 1.824223 2.246586 0.9766939</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 1.824223 2.222356 0.9766939</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="multiple-squares">Multiple squares<a class="anchor" aria-label="anchor" href="#multiple-squares"></a>
