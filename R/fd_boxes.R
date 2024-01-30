@@ -1,9 +1,9 @@
 #' Calculate fractal dimension using box counting
 #'
-#' @param data data frame of xy coordinates
-#' @param lvec scales to use for calculation (i.e. box sizes)
-#' @param keep_data Keep calculation data. Default = FALSE.
-#' @param plot Plot number of filled boxes at different scales. Default = FALSE.
+#' @param data A data frame in which the first two colums and x and y coordinates, respectively.
+#' @param lvec (Optional). The scales to use for calculation (i.e. box sizes).
+#' @param keep_data Logical. Keep calculation data? Default = TRUE.
+#' @param plot Logical. Plot the shape with box sizes superimposed? Default = FALSE.
 #'
 #' @details This function calculates fractal dimension using the cube counting method.
 #' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
@@ -20,21 +20,28 @@
 #' mcap_2d <- mesh_to_2d(mcap)
 #'
 #' fd_boxes(mcap_2d, plot=TRUE, keep_data=TRUE)
-#' fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5))
+#' fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
 #'
 
-fd_boxes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE) {
+fd_boxes <- function(data, lvec=NULL, keep_data = TRUE, plot = FALSE) {
 
+  pts <- data
   res <- median(perimeter(pts, keep_data = TRUE)$segments)
-  res <- max(perimeter(pts, keep_data = TRUE)$segments)
+  # res <- max(perimeter(pts, keep_data = TRUE)$segments)
+  names(pts) <- c("x", "y")
 
   if (missing(lvec)) {
     Lmax <- max(diff(apply(pts, 2, range))) + res
     L0 <- res
-    lvec <- 2^seq(log2(L0), log2(Lmax), length.out=10)
+    boxes <- 2^(0:20)
+    lvec <- Lmax / boxes
+    boxes <- boxes[lvec > L0]
+    lvec <- lvec[lvec > L0]
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)
+    boxes <- unique(round(Lmax/lvec))
+    lvec <- unique(Lmax/boxes)
   }
 
   # some checks
@@ -48,26 +55,23 @@ fd_boxes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE) {
   x0 <- min(data[,1]) - res/2
   y0 <- min(data[,2]) - res/2
 
-  boxes <- unique(round(Lmax/lvec))
-  l <- unique(Lmax/boxes)
-
   n <- sapply(boxes, function(n) cell_count_2d(data, x0, x0 + Lmax, y0, y0 + Lmax, n))
 
-  mod <- lm(log10(n) ~ log10(l))
-  f <- -as.numeric(coef(mod)[2])
+  mod <- lm(log10(n) ~ log10(lvec))
+  fd <- -as.numeric(coef(mod)[2])
 
   # plot
   if (plot) {
-    plot(pts, asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
-    rect(x0, y0, x0 + l, y0 + l, border="red")
+    plot(data, asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
+    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
     axis(1)
     axis(2, las=2)
   }
   # output
   if (keep_data) {
-    return(list(fd = f, lvec=l, data = data.frame(l = l, n = n)))
+    return(list(fd = fd, lvec=lvec, data = data.frame(l = lvec, n = n)))
   } else {
-    return(f)
+    return(fd)
   }
 }
 
