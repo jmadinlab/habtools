@@ -20,6 +20,7 @@
 #' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
 #'
 #' fd_cubes(horseshoe, plot=TRUE, keep_data=TRUE)
+#' fd_cubes(horseshoe, plot=TRUE, keep_data=TRUE, scale=TRUE)
 #'
 fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = FALSE) {
 
