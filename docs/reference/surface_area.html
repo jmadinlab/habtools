@@ -35,7 +35,10 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
+      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+    </li>
+    <li>
+      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -63,7 +66,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>DEM in RasterLayer format or mesh3d object</p></dd>
+<dd><p>DEM in RasterLayer format, mesh3d object or data frame with xy coordinates</p></dd>
 
 </dl></div>
     <div id="value">
@@ -79,6 +82,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2698101</span>
 <span class="r-in"><span><span class="fu">surface_area</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 127.2096</span>
+<span class="r-in"><span><span class="fu">surface_area</span><span class="op">(</span><span class="fu"><a href="mesh_to_2d.html">mesh_to_2d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08292795</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

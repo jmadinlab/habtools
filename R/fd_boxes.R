@@ -19,17 +19,19 @@
 #' @examples
 #' mcap_2d <- mesh_to_2d(mcap)
 #'
+#' fd_boxes(mcap_2d, plot=TRUE, keep_data=TRUE)
 #' fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5))
 #'
 
 fd_boxes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE) {
 
-  res <- median(perimeter(data, keep_data = TRUE)$segments)
+  res <- median(perimeter(pts, keep_data = TRUE)$segments)
+  res <- max(perimeter(pts, keep_data = TRUE)$segments)
 
   if (missing(lvec)) {
-    Lmax <- max(diff(apply(data, 2, range)))
-    L0 <- res * 10
-    lvec <- seq(L0, Lmax, length.out=25)
+    Lmax <- max(diff(apply(pts, 2, range))) + res
+    L0 <- res
+    lvec <- 2^seq(log2(L0), log2(Lmax), length.out=10)
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)
@@ -56,8 +58,8 @@ fd_boxes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE) {
 
   # plot
   if (plot) {
-    plot(data, asp=1, type="l", axes=FALSE)
-    rect(x0, y0, x0 + l, y0 + l, lty=2)
+    plot(pts, asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
+    rect(x0, y0, x0 + l, y0 + l, border="red")
     axis(1)
     axis(2, las=2)
   }

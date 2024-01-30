@@ -61,7 +61,10 @@
       <a href="articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
+      <a href="articles/fractal_intro.html">Metrics of fractal dimension</a>
+    </li>
+    <li>
+      <a href="articles/mesh_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul>
 </li>
@@ -127,7 +130,7 @@
 <span><span class="co"># fractal dimension</span></span>
 <span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example1-3.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.301808</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#&gt; [1] 2.301808</span></span></code></pre></div>
 <p>The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one <code>z</code> coordinate for a given <code>xy</code> (i.e., they have overhangs), we advise the cube counting fractal dimension method presented in Zawada et al. (2019).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -142,7 +145,7 @@
 <span><span class="co"># fractal dimension</span></span>
 <span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.045</span>, <span class="fl">0.09</span>, <span class="fl">0.18</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example2-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.158836</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&gt; [1] 2.158836</span></span></code></pre></div>
 </div>
 </div>
   </div>

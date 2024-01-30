@@ -35,7 +35,10 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
+      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+    </li>
+    <li>
+      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -57,7 +60,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">data</span>, <span class="va">lvec</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, keep_data <span class="op">=</span> <span class="cn">FALSE</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">data</span>, <span class="va">lvec</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, keep_data <span class="op">=</span> <span class="cn">FALSE</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, scale <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,6 +92,10 @@
 <dt>plot</dt>
 <dd><p>Plot regression line and area data. Default = FALSE.</p></dd>
 
+
+<dt>scale</dt>
+<dd><p>rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -102,7 +109,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.08</span>, <span class="fl">0.16</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.337697</span>
 <span class="r-in"><span><span class="fu">fd_area</span><span class="op">(</span><span class="va">horseshoe</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.152884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.136508</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
