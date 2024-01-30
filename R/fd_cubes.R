@@ -4,6 +4,7 @@
 #' @param lvec scales to use for calculation (i.e. cube sizes)
 #' @param keep_data Keep calculation data. Default = FALSE.
 #' @param plot Plot number of filled cubes at different scales. Default = FALSE.
+#' @param scale Rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
 #'
 #' @details This function calculates fractal dimension using the cube counting method.
 #' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
@@ -17,7 +18,7 @@
 #' @examples
 #' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5))
 #'
-fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
+fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE) {
 
   if (is(data, "RasterLayer")) {
     pts <- as.data.frame(data, xy = TRUE)
@@ -38,6 +39,10 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE) {
   }
   if (max(lvec) < max(diff(apply(pts, 2, range)))){
     warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
+  }
+
+  if (scale) {
+    data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * L
   }
 
   x0 <- min(pts[,1]) - res/2

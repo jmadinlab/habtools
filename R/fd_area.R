@@ -7,7 +7,7 @@
 #' @param x Bottom-left of bounding box.
 #' @param y Bottom-left of bounding box.
 #' @param L Bounding box extent (i.e., side length).
-#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)
+#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
 #'
 #' @return Either a value or a list
 #' @export
