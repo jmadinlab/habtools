@@ -75,11 +75,11 @@ fd <- function(data,  method, lvec, keep_data = FALSE, diagnose = FALSE, ...) {
     }
 
     plot(dta[,2] ~ dta[,1], xlab = colnames(dta)[1], ylab = colnames(dta)[2], log="xy", type="l",
-         lty=2, col="grey", axes = FALSE, main = paste0('method: "', method, '"'))
+         lty=2, col="grey", axes = FALSE, main = paste0('Method: "', method, '"'))
     axis(1)
     axis(2, las=2)
     points(dta[,2] ~ dta[,1])
-    text(midv(dta[,1]), midv(dta[,2]), round(f, 2))
+    text(midv(dta[,1]), midv(dta[,2]), round(f, 2), cex=0.8)
     pred <- predict(lm(log10(dta[,2]) ~ log10(dta[,1])))
     lines(dta[,1], 10^pred, lty = 1, col = "red")
     if (method %in% c("hvar", "sd")) {

@@ -13,6 +13,8 @@
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 #' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
 #'
+#' fd_area(horseshoe)
+#'
 fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE) {
     if (is(data, "RasterLayer")) {
 
