@@ -13,11 +13,11 @@
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 #' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
 #'
+#' fd_area(mcap)
 #' fd_area(horseshoe)
 #'
 fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE) {
     if (is(data, "RasterLayer")) {
-
       if (sum(is.na(values(data))) > 0) {
         message(paste0("Data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
       }
@@ -67,14 +67,27 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
   f <- 2 - coef(lm(log10(a) ~ log10(lvec)))[2]
   df <- data.frame(l = lvec, area = a)
 
+  # if (plot) {
+  #   plot(log10(a) ~ log10(lvec))
+  #   pred <- predict(lm(log10(a) ~ log10(lvec)))
+  #   lines(log10(lvec), pred, lty = 1)
+  #
+  # }
+  # plot
   if (plot) {
-    plot(log10(a) ~ log10(lvec))
-    pred <- predict(lm(log10(a) ~ log10(lvec)))
-    lines(log10(lvec), pred, lty = 1)
+    if (is(data, "RasterLayer")) {
+      plot(data, axes=FALSE)
+    } else {
+      plot(mesh_to_2d(data), asp=1, type="l", axes=FALSE)
+    }
+    x0 <- extent(data)[1]
+    y0 <- extent(data)[3]
+    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+    axis(1)
+    axis(2, las=2)
   }
-
   if (keep_data) {
-    return(list(fd = unname(f), data = df))
+    return(list(fd = unname(f), lvec=lvec, data = df))
   } else {
     return(unname(f))
   }
