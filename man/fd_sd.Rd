@@ -48,6 +48,6 @@ phase transitions, and therefore a thorough exploration of height ranges is sugg
 \code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 }
 \examples{
-fd_sd(horseshoe, x=-470, y=1266, L=2, lvec = c(0.05, 0.1, 0.25, 0.5, 1, 2))
+fd_sd(horseshoe, lvec = c(0.05, 0.1, 0.25, 0.5, 1, 2))
 
 }
