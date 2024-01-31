@@ -4,16 +4,16 @@
 \alias{fd_boxes}
 \title{Calculate fractal dimension using box counting}
 \usage{
-fd_boxes(data, lvec = NULL, plot = FALSE, keep_data = FALSE)
+fd_boxes(data, lvec = NULL, keep_data = TRUE, plot = FALSE)
 }
 \arguments{
-\item{data}{data frame of xy coordinates}
+\item{data}{A data frame in which the first two colums and x and y coordinates, respectively.}
 
-\item{lvec}{scales to use for calculation (i.e. box sizes)}
+\item{lvec}{(Optional). The scales to use for calculation (i.e. box sizes).}
 
-\item{plot}{Plot number of filled boxes at different scales. Default = FALSE.}
+\item{keep_data}{Logical. Keep calculation data? Default = TRUE.}
 
-\item{keep_data}{Keep calculation data. Default = FALSE.}
+\item{plot}{Logical. Plot the shape with box sizes superimposed? Default = FALSE.}
 }
 \value{
 A \code{data.frame} of number of boxes (\code{n}) intersecting xy coordinates at different box sizes (\code{l}) and a fractal dimension value. Note that box size is the length of a side.
@@ -32,6 +32,6 @@ Most meshes are not perfectly fractal, and so use the \code{plot} parameter to l
 mcap_2d <- mesh_to_2d(mcap)
 
 fd_boxes(mcap_2d, plot=TRUE, keep_data=TRUE)
-fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5))
+fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
 
 }
