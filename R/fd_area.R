@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
-#' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
+#' fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5, 1))
 #'
 #' fd_area(mcap)
 #' fd_area(horseshoe)
@@ -33,7 +33,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
         lvec <- sort(lvec)
       }
 
-      if (res(data)[1] - (min(lvec)) > 0.00001) {
+      if (raster::res(data)[1] - (min(lvec)) > 0.00001) {
         stop("Values in lvec need to be equal to or larger than the resolution of data")
       }
 
@@ -80,8 +80,8 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
     } else {
       plot(mesh_to_2d(data), asp=1, type="l", axes=FALSE)
     }
-    x0 <- extent(data)[1]
-    y0 <- extent(data)[3]
+    x0 <- raster::extent(data)[1]
+    y0 <- raster::extent(data)[3]
     rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
     axis(1)
     axis(2, las=2)
