@@ -4,7 +4,7 @@
 \alias{fd}
 \title{Fractal dimension}
 \usage{
-fd(data, method, x, y, L, lvec, ...)
+fd(data, method, lvec, keep_data = FALSE, diagnose = FALSE, ...)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
@@ -12,13 +12,9 @@ fd(data, method, x, y, L, lvec, ...)
 \item{method}{If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").}
 
-\item{x}{Bottom-left of bounding box. Only considered if data is a RasterLayer.}
+\item{lvec}{scales to use for calculation.}
 
-\item{y}{Bottom-left of bounding box. Only considered if data is a RasterLayer.}
-
-\item{L}{Bounding box extent (i.e., side length). Only considered if data is a RasterLayer.}
-
-\item{lvec}{scales to use for calculation}
+\item{keep_data}{Logical. Keep data? Default is FALSE.}
 
 \item{...}{Arguments from other fd_ functions.}
 }
@@ -34,10 +30,12 @@ The \code{cubes} method is not recommended if the height range is much smaller t
 }
 \examples{
 library(habtools)
-fd(horseshoe, method = "hvar", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-fd(horseshoe, method = "area", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
-fd(mcap, method = "area", lvec = c(0.02, 0.04, 0.08, 0.16))
+dem <- crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
+fd(dem, method = "area", diagnose = TRUE)
+fd(dem, method = "sd")
+fd(mcap, method = "cubes",  plot = TRUE)
+fd(dem, method = "sd")
 
 }
 \seealso{

@@ -1,12 +1,12 @@
 #' Crop DEM around Points
 #'
-#' @param data A DEM in RasterLayer format
-#' @param x0 A value or vector of center x coordinate(s)
-#' @param y0 A value or vector of center y coordinate(s)
-#' @param L Size of square to cut out of DEM
-#' @param plot Plot the DEM and the cropped sections (TRUE or FALSE)
+#' @param data A DEM in RasterLayer format.
+#' @param x0 A value or vector of center x coordinate(s).
+#' @param y0 A value or vector of center y coordinate(s).
+#' @param L Size of square to cut out of DEM.
+#' @param plot Logical. Plot the DEM and the cropped sections?
 #'
-#' @return A cropped RasterLayer or a list of RasterLayers
+#' @return A cropped RasterLayer or a list of RasterLayers.
 #' @export
 #'
 #' @examples

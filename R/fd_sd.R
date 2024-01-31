@@ -1,12 +1,12 @@
 #' Calculate fractal Dimension using the standard deviation method
 #'
 #' @param data Digital elevation model of class RasterLayer.
-#' @param lvec Scales to use for calculation
+#' @param lvec Scales to use for calculation.
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
-#' @param plot Diagnostic plot
-#' @param keep_data Keep the data used for fd calculation? defaults to FALSE
-#' @param parallel TRUE or FALSE. Use parallel processing? Note: parallel must be installed.
-#' @param ncores number of cores to use when parallel = TRUE.
+#' @param plot Logical. Show plot?
+#' @param keep_data Logical. Keep the data used for fd calculation? Defaults to FALSE.
+#' @param parallel Logical. Use parallel processing? Note: parallel must be installed.
+#' @param ncores Number of cores to use when parallel = TRUE.
 #'
 #' @return A value for fractal dimension, normally between 2 and 3.
 #' @export
@@ -17,8 +17,7 @@
 #' @details Calculates fractal dimension using the standard deviation method,
 #' an analogue of the variation method, but using the standard deviation in height per grid cell instead of the full height range.
 #' A rule of thumb is that `l` should range at least an order of magnitude.
-#' However, large ranges also
-#' average-out fractal dimension of a surface that might have
+#' However, large ranges also average-out fractal dimension of a surface that might have
 #' phase transitions, and therefore a thorough exploration of height ranges is suggested using the `plot`.
 #' `regmethod` specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.
 #' `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
@@ -32,21 +31,17 @@ fd_sd <- function(data, x, y, lvec, L,
                   parallel = FALSE,
                   ncores = (parallel::detectCores()-1)) {
 
+  L0 <- min(raster::res(data))
+  L <- min(dim(data)[1:2] * L0)
 
-  if (sum(is.na(values(data))) > 0) {
-    message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
+  if (missing(lvec)) {
+    lvec <- 2/unique(round(2^seq(log2(L/L),log2(L/(L0*10)), length.out = 10)))
+    lvec <- sort(lvec)
+    print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+  } else {
+    lvec <- sort(lvec)
   }
 
-
-  if (missing(x)) x <- raster::xmin(data)
-  if (missing(y)) y <- raster::ymin(data)
-  if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
-
-  if (L < min(dim(data)[1:2] * raster::res(data))) {
-    b <- as(raster::extent(x, x + L, y, y + L), 'SpatialPolygons')
-    raster::crs(b) <- raster::crs(data)
-    data <- raster::crop(data, b)
-  }
   out <-
     lapply(lvec, function(l){
       list <- split_dem(data, l, parallel = parallel, ncores = ncores)
@@ -86,7 +81,7 @@ fd_sd <- function(data, x, y, lvec, L,
 
   # output
   if (keep_data) {
-    return(list(fd = unname(f), out = 10^dt))
+    return(list(fd = unname(f), data = 10^dt))
   } else {
     return(unname(f))
   }

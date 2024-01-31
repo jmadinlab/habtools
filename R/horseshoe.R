@@ -1,12 +1,12 @@
 #' Horseshoe reef
 #'
-#' A data set containing the prices and other attributes of almost 54,000
-#' diamonds.
+#' A DEM of a reef patch in the Great Barrier Reef.
 #'
-#' @format A 3999 by 3999 digital elevation model (raster file)
+#' @format A 800 by 800 digital elevation model (raster file)
 #' \describe{
-#'   \item{values}{water depth}
-#'   \item{resolution}{0.002 m}
+#'   \item{Values}{depth}
+#'   \item{Resolution}{0.01 m}
+#'   \item{Extent}{8 m}
 #'   ...
 #' }
 #' @examples

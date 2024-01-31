@@ -1,12 +1,10 @@
 #' Fractal dimension
 #'
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
-#' @param x Bottom-left of bounding box. Only considered if data is a RasterLayer.
-#' @param y Bottom-left of bounding box. Only considered if data is a RasterLayer.
-#' @param L Bounding box extent (i.e., side length). Only considered if data is a RasterLayer.
-#' @param lvec scales to use for calculation
+#' @param lvec scales to use for calculation.
 #' @param method If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 #' If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").
+#' @param keep_data Logical. Keep data? Default is FALSE.
 #' @param ... Arguments from other fd_ functions.
 #' @seealso [fd_hvar()]
 #' @seealso [fd_area()]
@@ -22,34 +20,32 @@
 #'
 #' @examples
 #' library(habtools)
-#' fd(horseshoe, method = "hvar", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-#' fd(horseshoe, method = "area", x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-#' fd(mcap, method = "cubes", lvec = c(0.045, 0.09, 0.18, 0.5), plot = TRUE)
-#' fd(mcap, method = "area", lvec = c(0.02, 0.04, 0.08, 0.16))
+#' dem <- crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+#' fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' fd(dem, method = "area", diagnose = TRUE)
+#' fd(dem, method = "sd")
+#' fd(mcap, method = "cubes",  plot = TRUE)
+#' fd(dem, method = "sd")
 #'
-fd <- function(data,  method, x, y, L, lvec, ...) {
+fd <- function(data,  method, lvec, keep_data = FALSE, diagnose = FALSE, ...) {
+
+  if (diagnose) {
+    keep_data <- TRUE
+  }
 
   if (is(data, "RasterLayer")) {
-
-    # subset raster if needed
-    if (missing(x)) x <- raster::xmin(data)
-    if (missing(y)) y <- raster::ymin(data)
-    if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
-    if (L < min(dim(data)[1:2] * raster::res(data))) {
-      b <- as(raster::extent(x, x + L, y, y + L), 'SpatialPolygons')
-      raster::crs(b) <- raster::crs(data)
-      data <- raster::crop(data, b)
-    }
 
     if (missing(method)) method <- "hvar"
 
     # calculate fd
     if (method == "hvar") {
-      f <- fd_hvar(data, lvec = lvec, ...)
+      f <- fd_hvar(data, lvec = lvec, keep_data = keep_data, ...)
+    } else if (method == "sd") {
+      f <- fd_sd(data, lvec = lvec, keep_data = keep_data, ...)
     } else if (method == "area") {
-      f <- fd_area(data, lvec = lvec, ...)
+      f <- fd_area(data, lvec = lvec, keep_data = keep_data, ...)
     } else if (method == "cubes") {
-      f <- fd_cubes(data, lvec = lvec, ...)
+      f <- fd_cubes(data, lvec = lvec, keep_data = keep_data, ...)
     } else {
       stop("Please check appropriate method options.")
     }
@@ -57,16 +53,45 @@ fd <- function(data,  method, x, y, L, lvec, ...) {
   } else if (is(data, "mesh3d")) {
     if (missing(method)) method <- "cubes"
     if (method == "cubes") {
-      f <- fd_cubes(data, lvec = lvec, ...)
+      f <- fd_cubes(data, lvec = lvec, keep_data = keep_data, ...)
     } else if (method == "area") {
-      f <- fd_area(data, lvec = lvec, ...)
+      f <- fd_area(data, lvec = lvec, keep_data = keep_data, ...)
     } else {
       stop("Please check appropriate method options.")
     }
   }
 
   if (diagnose) {
+    dta <- f[["data"]]
+    dval <- f[["fd"]]
 
+    f <- diff(log10(dta[,2])) / diff(log10(dta[,1]))
+    if (method == "area") {
+      f <- 2 - f
+    } else if (method == "cubes") {
+      f <- -f
+    } else {
+      f <- 3 - f
+    }
+
+    plot(dta[,2] ~ dta[,1], xlab = colnames(dta)[1], ylab = colnames(dta)[2], log="xy", type="l",
+         lty=2, col="grey", axes = FALSE, main = paste0('method: "', method, '"'))
+    axis(1)
+    axis(2, las=2)
+    points(dta[,2] ~ dta[,1])
+    text(midv(dta[,1]), midv(dta[,2]), round(f, 2))
+    pred <- predict(lm(log10(dta[,2]) ~ log10(dta[,1])))
+    lines(dta[,1], 10^pred, lty = 1, col = "red")
+    if (method %in% c("hvar", "sd")) {
+      legend("bottomright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
+    } else {
+      legend("topright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
+    }
+    return(list(D = unname(dval), data = dta, var = sd(f)))
+  } else {
+    return(f)
   }
-  return(f)
 }
+
+midv <- function(v) { v[-length(v)] + diff(v)/2 }
+

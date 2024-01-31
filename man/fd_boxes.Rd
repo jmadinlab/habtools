@@ -31,6 +31,7 @@ Most meshes are not perfectly fractal, and so use the \code{plot} parameter to l
 \examples{
 mcap_2d <- mesh_to_2d(mcap)
 
+fd_boxes(mcap_2d, plot=TRUE, keep_data=TRUE)
 fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5))
 
 }

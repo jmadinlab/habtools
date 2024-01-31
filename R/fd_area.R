@@ -1,26 +1,35 @@
 #' Calculate fractal dimension using the surface area method
 #'
-#' @param data dem of class "RasterLayer" or mesh class "mesh3d"
-#' @param lvec vector of scales to include in calculation
-#' @param keep_data Keep area data. Default = FALSE.
-#' @param plot Plot regression line and area data. Default = FALSE.
-#' @param scale rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)
+#' @param data DEM of class "RasterLayer" or mesh of class "mesh3d".
+#' @param lvec Vector of scales to include in calculation.
+#' @param keep_data Logical. Keep data? Default is FALSE.
+#' @param plot Logical. Plot regression line and area data?  Defaults to FALSE.
+#' @param scale Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.
 #'
-#' @return Either a value or a list
+#' @return Either a value or a list if keep_data = TRUE.
 #' @export
 #'
 #' @examples
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 #' fd_area(horseshoe, lvec = c(0.1, 0.2, 0.4, 0.8, 1.6))
 #'
-fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale = FALSE) {
+fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE) {
     if (is(data, "RasterLayer")) {
 
       if (sum(is.na(values(data))) > 0) {
-        message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
+        message(paste0("Data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
       }
 
-      if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
+      L0 <- min(raster::res(data))
+      L <- min(dim(data)[1:2] * L0)
+
+      if (missing(lvec)) {
+        lvec <- 2/unique(round(2^seq(log2(8),log2(L/(L0*2)), length.out = 10)))
+        lvec <- sort(lvec)
+        print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+      } else {
+        lvec <- sort(lvec)
+      }
 
       if (res(data)[1] - (min(lvec)) > 0.00001) {
         stop("Values in lvec need to be equal to or larger than the resolution of data")
@@ -39,7 +48,7 @@ fd_area <- function(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale 
       r <- raster::raster(r)
       g <- as(r, 'SpatialGridDataFrame')
       sa <- sp::surfaceArea(g, byCell = TRUE)
-      # relative area to account for variations in planar area with varying scales when L/lvec are not whole numbers
+      # relative area to account for variations in planar area with varying scales in case L/lvec are not whole numbers
       sum((raster::values(raster::raster(sa)))*L^2)/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
       })
   } else if (is(data, "mesh3d")) {

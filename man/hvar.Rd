@@ -4,30 +4,16 @@
 \alias{hvar}
 \title{Height Variation in cells at different scales}
 \usage{
-hvar(
-  data,
-  x,
-  y,
-  lvec,
-  L,
-  parallel = FALSE,
-  ncores = (parallel::detectCores() - 1)
-)
+hvar(data, lvec, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer.}
 
-\item{x}{Bottom-left of bounding box.}
+\item{lvec}{Scales to use for calculation.}
 
-\item{y}{Bottom-left of bounding box.}
+\item{parallel}{Logical. Use parallel processing? Note: parallel must be installed.}
 
-\item{lvec}{scales to use for calculation}
-
-\item{L}{Bounding box extent (i.e., side length).}
-
-\item{parallel}{TRUE or FALSE. Use parallel processing? Note: parallel must be installed.}
-
-\item{ncores}{number of cores to use when parallel = TRUE.}
+\item{ncores}{Number of cores to use when parallel = TRUE.}
 }
 \value{
 A \code{data.frame} containing height ranges of cells at different scales.
@@ -41,5 +27,5 @@ height variation method.
 }
 \examples{
 
-hvar(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1))
+hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1))
 }

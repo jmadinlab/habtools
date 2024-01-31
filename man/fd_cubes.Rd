@@ -4,7 +4,7 @@
 \alias{fd_cubes}
 \title{Calculate fractal dimension using cube counting}
 \usage{
-fd_cubes(data, lvec, plot = FALSE, keep_data = FALSE)
+fd_cubes(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE)
 }
 \arguments{
 \item{data}{object of class RasterLayer or mesh3d}
@@ -14,6 +14,8 @@ fd_cubes(data, lvec, plot = FALSE, keep_data = FALSE)
 \item{plot}{Plot number of filled cubes at different scales. Default = FALSE.}
 
 \item{keep_data}{Keep calculation data. Default = FALSE.}
+
+\item{scale}{Rescale height values to the extent. Only relevant for DEMs. (Defaults to FALSE)}
 }
 \value{
 A \code{data.frame} of number of cubes (\code{n}) intersecting mesh points at different cube sizes (\code{L}) and a fractal dimension value. Note that cube size is the length of a side.
@@ -29,7 +31,10 @@ The smallest scale included in \code{lvec} should not be smaller than the resolu
 Most meshes are not perfectly fractal, and so use the \code{plot} parameter to look for scale transitions.
 }
 \examples{
-fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5))
+fd_cubes(mcap, plot=TRUE, keep_data=TRUE)
+fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
+
+fd_cubes(horseshoe, plot=TRUE, keep_data=TRUE)
 
 }
 \seealso{

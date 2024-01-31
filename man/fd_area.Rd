@@ -4,27 +4,21 @@
 \alias{fd_area}
 \title{Calculate fractal dimension using the surface area method}
 \usage{
-fd_area(data, lvec, x, y, L, keep_data = FALSE, plot = FALSE, scale = FALSE)
+fd_area(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE)
 }
 \arguments{
-\item{data}{dem of class "RasterLayer" or mesh class "mesh3d"}
+\item{data}{DEM of class "RasterLayer" or mesh of class "mesh3d".}
 
-\item{lvec}{vector of scales to include in calculation}
+\item{lvec}{Vector of scales to include in calculation.}
 
-\item{x}{Bottom-left of bounding box.}
+\item{keep_data}{Logical. Keep data? Default is FALSE.}
 
-\item{y}{Bottom-left of bounding box.}
+\item{plot}{Logical. Plot regression line and area data?  Defaults to FALSE.}
 
-\item{L}{Bounding box extent (i.e., side length).}
-
-\item{keep_data}{Keep area data. Default = FALSE.}
-
-\item{plot}{Plot regression line and area data. Default = FALSE.}
-
-\item{scale}{rescale height values to the extent. Only relevant for DEMs. (Defaults to TRUE)}
+\item{scale}{Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.}
 }
 \value{
-Either a value or a list
+Either a value or a list if keep_data = TRUE.
 }
 \description{
 Calculate fractal dimension using the surface area method

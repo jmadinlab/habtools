@@ -7,18 +7,18 @@
 crop_dem(data, x0, y0, L, plot = FALSE)
 }
 \arguments{
-\item{data}{A DEM in RasterLayer format}
+\item{data}{A DEM in RasterLayer format.}
 
-\item{x0}{A value or vector of center x coordinate(s)}
+\item{x0}{A value or vector of center x coordinate(s).}
 
-\item{y0}{A value or vector of center y coordinate(s)}
+\item{y0}{A value or vector of center y coordinate(s).}
 
-\item{L}{Size of square to cut out of DEM}
+\item{L}{Size of square to cut out of DEM.}
 
-\item{plot}{Plot the DEM and the cropped sections (TRUE or FALSE)}
+\item{plot}{Logical. Plot the DEM and the cropped sections?}
 }
 \value{
-A cropped RasterLayer or a list of RasterLayers
+A cropped RasterLayer or a list of RasterLayers.
 }
 \description{
 Crop DEM around Points

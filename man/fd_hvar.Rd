@@ -4,10 +4,12 @@
 \alias{fd_hvar}
 \title{Calculate fractal Dimension using the height variation method}
 \usage{
-fd_hvar(data, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...)
+fd_hvar(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or dataframe (output of hvar function)}
+
+\item{lvec}{Scales to use for calculation.}
 
 \item{regmethod}{Method to use for linear regression between scale (lvec) and height range. One of \code{raw} (all data), \code{mean} (default) \code{median} or \code{ends} (minimum and maximum scale only)}
 
@@ -25,8 +27,8 @@ Calculate fractal Dimension using the height variation method
 }
 \details{
 Calculates fractal dimension using the height variation regression.
-\code{data} can be any \code{data.frame} with columns labeled \code{l} and \code{h} for
-grid cell length and height range of that cell, respectively.
+\code{data} can be a DEM or a \code{data.frame} with columns labeled \code{l} and \code{h} for
+grid cell length and height range of that cell, respectively (output of \code{\link[=hvar]{hvar()}}).
 A rule of thumb is that \code{l} should range an order of magnitude.
 However, large ranges also
 average-out fractal dimension of a surface that might have
@@ -35,12 +37,13 @@ phase transitions, and therefore a thorough exploration of height ranges is sugg
 \code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 }
 \examples{
-data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+dem <- habtools::crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+data <- hvar(dem, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd_hvar(data)
-fd_hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+fd_hvar(dem, lvec = c(0.125, 0.25, 0.5, 1, 2))
+fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
 fd_hvar(data, regmethod = "ends")
 fd_hvar(data, regmethod = "median", plot = TRUE, keep_data = TRUE)
-fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
-fd_hvar(data, regmethod = "raw", plot = TRUE, keep_data = TRUE)
+fd_hvar(dem)
 
 }

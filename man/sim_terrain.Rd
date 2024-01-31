@@ -7,17 +7,17 @@
 sim_terrain(n, smoothness, z_extent = FALSE, dem = TRUE)
 }
 \arguments{
-\item{n}{the extent (matrix size)}
+\item{n}{The extent (matrix size)}
 
-\item{smoothness}{a value between 0.0 and 1.0 (lower values
+\item{smoothness}{A value between 0.0 and 1.0 (lower values
 produce rougher terrain)}
 
-\item{z_extent}{logical. Should z be scaled to match extent, n?}
+\item{z_extent}{Logical. Should z be scaled to match extent, n?}
 
-\item{dem}{logical. Should the matrix be turned into a DEM?}
+\item{dem}{Logical. Should the matrix be turned into a DEM?}
 }
 \value{
-a matrix or raster (if dem = TRUE)
+A matrix or raster (if dem = TRUE).
 }
 \description{
 Simulates z-values based on the Diamond-square algorithm.

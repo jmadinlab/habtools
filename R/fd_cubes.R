@@ -38,7 +38,7 @@ fd_cubes <- function(data, lvec, plot = FALSE, keep_data = FALSE, scale = FALSE)
   if (missing(lvec)) {
     Lmax <- max(diff(apply(pts, 2, range))) + res
     L0 <- res
-    lvec <- 2^seq(log2(L0), log2(Lmax), length.out=10)
+    lvec <- 2^seq(log2(L0), log2(Lmax), length.out = 10)
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)

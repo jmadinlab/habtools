@@ -1,6 +1,7 @@
 #' Calculate fractal Dimension using the height variation method
 #'
 #' @param data Digital elevation model of class RasterLayer or dataframe (output of hvar function)
+#' @param lvec Scales to use for calculation.
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
 #' @param plot Diagnostic plot
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
@@ -10,8 +11,8 @@
 #' @export
 #'
 #' @details Calculates fractal dimension using the height variation regression.
-#' `data` can be any `data.frame` with columns labeled `l` and `h` for
-#' grid cell length and height range of that cell, respectively.
+#' `data` can be a DEM or a `data.frame` with columns labeled `l` and `h` for
+#' grid cell length and height range of that cell, respectively (output of [hvar()]).
 #' A rule of thumb is that `l` should range an order of magnitude.
 #' However, large ranges also
 #' average-out fractal dimension of a surface that might have
@@ -20,18 +21,31 @@
 #' `regmethod` "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 #'
 #' @examples
-#' data <- hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' dem <- habtools::crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+#' data <- hvar(dem, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
 #' fd_hvar(data)
-#' fd_hvar(horseshoe, x=-470, y=1266, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' fd_hvar(dem, lvec = c(0.125, 0.25, 0.5, 1, 2))
+#' fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
 #' fd_hvar(data, regmethod = "ends")
 #' fd_hvar(data, regmethod = "median", plot = TRUE, keep_data = TRUE)
-#' fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
-#' fd_hvar(data, regmethod = "raw", plot = TRUE, keep_data = TRUE)
+#' fd_hvar(dem)
 #'
-fd_hvar <- function(data, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
+fd_hvar <- function(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
+
   if (!is.data.frame(data)) {
-    data <- hvar(data, ...)
+    L0 <- min(raster::res(data))
+    L <- min(dim(data)[1:2] * L0)
+
+    if (missing(lvec)) {
+      lvec <- 2/unique(round(2^seq(log2(L/L),log2(L/(L0*10)), length.out = 10)))
+      lvec <- sort(lvec)
+      print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+    } else {
+      lvec <- sort(lvec)
+    }
+    data <- hvar(data, lvec = lvec, ...)
   }
+
   data <- log10(data)
   data <- data[is.finite(rowSums(data)),]
   data_mean <- aggregate(h ~ l, data, mean)
