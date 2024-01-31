@@ -24,7 +24,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       L <- min(dim(data)[1:2] * L0)
 
       if (missing(lvec)) {
-        lvec <- 2/unique(round(2^seq(log2(8),log2(L/(L0*2)), length.out = 10)))
+        lvec <- L/unique(round(2^seq(log2(8),log2(L/(L0*2)), length.out = 10)))
         lvec <- sort(lvec)
         print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
       } else {
