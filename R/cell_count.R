@@ -12,7 +12,8 @@
 #' @return Number of filled cells
 #' @export
 #'
-cell_count <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
+
+cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
   cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
                ceiling(rescale(pts$y, ymin, ymax, n)),
                ceiling(rescale(pts$z, zmin, zmax, n)))
@@ -28,4 +29,8 @@ cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
 cell_count_1d <- function(pts, xmin, xmax, n) {
   cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)))
   sum(cnt > 0)
+}
+
+rescale <- function(x, xmin, xmax, n) {
+  return((x - xmin) / (xmax - xmin) * n)
 }

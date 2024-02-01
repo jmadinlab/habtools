@@ -68,7 +68,7 @@ fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = F
   z0 <- min(pts[,3]) - res/2
 
 
-  n <- sapply(cubes, function(n) cell_count(pts, x0, x0 + Lmax, y0, y0 + Lmax, z0, z0 + Lmax, n))
+  n <- sapply(cubes, function(n) cell_count_3d(pts, x0, x0 + Lmax, y0, y0 + Lmax, z0, z0 + Lmax, n))
 
   mod <- lm(log10(n) ~ log10(lvec))
   fd <- -as.numeric(coef(mod)[2])

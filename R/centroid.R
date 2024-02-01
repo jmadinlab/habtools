@@ -10,6 +10,7 @@
 #' @examples
 #' data <- mesh_to_points(mcap)
 #' centroid(data)
+
 centroid <- function(XYZCoords) {
   xmean <- mean(XYZCoords[,1])
   ymean <- mean(XYZCoords[,2])
