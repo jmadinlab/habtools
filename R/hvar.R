@@ -15,11 +15,11 @@
 #' @examples
 #'
 #' hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1))
+#' hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1), parallel=TRUE)
 
-hvar <- function(data, lvec,
-                 parallel = FALSE,
+
+hvar <- function(data, lvec=NULL, parallel = FALSE,
                  ncores = (parallel::detectCores()-1)) {
-
 
   if (sum(is.na(values(data))) > 0) {
     message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))

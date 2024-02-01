@@ -30,7 +30,7 @@
 #' fd_hvar(data, regmethod = "median", plot = TRUE, keep_data = TRUE)
 #' fd_hvar(dem)
 #'
-fd_hvar <- function(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
+fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
 
   if (!is.data.frame(data)) {
     L0 <- min(raster::res(data))

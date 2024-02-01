@@ -12,7 +12,7 @@
 #' @examples
 #' fd_diagnose(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area")
 #'
-fd_diagnose <- function(data, lvec, method, ...) {
+fd_diagnose <- function(data, lvec=NULL, method, ...) {
 
   lvec <- sort(lvec)
   d <- fd(data = data, lvec = lvec, method = method, keep_data = TRUE, ...)
