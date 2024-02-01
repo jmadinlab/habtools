@@ -1,10 +1,14 @@
-#' Calculate convexity
+#' Convexity
 #'
-#' @param mesh mesh3d object
+#' @description
+#' Calculates the convexity of a 3D mesh.
 #'
-#' @details The ratio of the volume of the object and the volume of the convex hull around the object
+#' @param mesh A mesh3d object.
 #'
-#' @return the convexity value
+#' @details The ratio of the volume of the object and the volume of the convex
+#' hull around the object. Objects with fewer concavities will be closer to 1.
+#'
+#' @return The convexity value
 #' @export
 #'
 #' @examples
