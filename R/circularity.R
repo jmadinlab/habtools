@@ -25,7 +25,3 @@
 circularity <- function(data) {
   (2 * pi * sqrt(geometry::polyarea(data[,1], data[,2])/pi)) / perimeter(data)
 }
-
-circularity_2 <- function(data){ # This is the square of what I think it should be, but seems to be used widely.
-  4*pi*geometry::polyarea(data[,1], data[,2]) / (perimeter(data)^2)
-}

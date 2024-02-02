@@ -1,10 +1,12 @@
 #' DEM to 3D mesh
 #'
-#' @param dem A digital elevation model in raster format
+#' @description This function is very slow and needs work.
+#'
+#' @param dem A RasterLayer object
+#' @param ploy Logical. Plot the 3D mesh using rgl.
 #'
 #' @return A 3D points cloud for raster cell corners
 #' @export
-#' @description This function is very slow and needs work.
 #'
 #' @examples
 #' raster <- habtools::sim_xyz(10, 6, 0.1, 2, dem = TRUE)
@@ -13,9 +15,7 @@
 #' horse <- raster::aggregate(habtools::horseshoe, 100)
 #' mesh_horse <- habtools::dem_to_mesh(horse)
 
-
-
-dem_to_mesh <- function(dem){
+dem_to_mesh <- function(dem, plot=TRUE){
 
   # get points of all corners
   p1 <- dem_to_points(dem)
@@ -139,7 +139,9 @@ dem_to_mesh <- function(dem){
 
   mesh1 <- rgl::mesh3d(x = p1$x, y = p1$y, z = p1$z, quads = index)
 
-  rgl::plot3d(mesh1, alpha = 0.5)
+  if (plot) {
+    rgl::plot3d(mesh1, alpha = 0.5)
+  }
 
   return(mesh1)
 

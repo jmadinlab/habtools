@@ -1,4 +1,7 @@
-#' Crop DEM around Points
+#' Crop DEM around points
+#'
+#' @description
+#' A function for sampling a DEM by cropping squares based on xy cooridnates.
 #'
 #' @param data A DEM in RasterLayer format.
 #' @param x0 A value or vector of center x coordinate(s).
@@ -13,10 +16,14 @@
 #' # around one point
 #' dem_cropped <- crop_dem(horseshoe, -468, 1266, L = 2)
 #' raster::plot(dem_cropped)
+#' points(-468, 1266)
 #'
 #' # around multiple points
 #' points <- data.frame(x = c(-467, -465, -466), y = c(1270, 1265, 1268))
 #' dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = TRUE)
+#'
+#' # plot the first element
+#' raster::plot(dem_list[[1]])
 
 crop_dem <- function(data, x0, y0, L, plot = FALSE) {
   if (!length(x0) == length(y0)) {
@@ -34,7 +41,5 @@ crop_dem <- function(data, x0, y0, L, plot = FALSE) {
         raster::crop(data, raster::extent(x0[i] - (L/2), x0[i] + (L/2), y0[i] - (L/2), y0[i] + (L/2)))
       })
   }
-
   return(out)
-
 }

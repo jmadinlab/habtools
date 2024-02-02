@@ -1,7 +1,7 @@
 #' Detect a sudden drop, edge, or overhang in a DEM
 #'
-#' @param data DEM of class RasterLayer
-#' @param d threshold height difference to define a drop
+#' @param data DEM of class RasterLayer.
+#' @param d The threshold height difference to define a drop.
 #'
 #' @return A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells
 #' @export
@@ -28,4 +28,3 @@ detect_drop <- function(data, d = 0.1) {
   out@data@values[out@data@values<d] <- NA
   out
 }
-

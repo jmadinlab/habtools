@@ -3,7 +3,7 @@
 #' @description Calculates mechanical vulnerability of rigid, cantilever-type
 #' structural elements.
 #'
-#' @param mesh mesh object
+#' @param mesh A mesh3d object
 #' @param z_min (optional) set the z plane about which csf should be calculated
 #' @param res (optional) set the resolution
 #'
