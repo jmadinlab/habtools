@@ -4,7 +4,12 @@
 \alias{hvar}
 \title{Height Variation in cells at different scales}
 \usage{
-hvar(data, lvec, parallel = FALSE, ncores = (parallel::detectCores() - 1))
+hvar(
+  data,
+  lvec = NULL,
+  parallel = FALSE,
+  ncores = (parallel::detectCores() - 1)
+)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer.}
@@ -28,4 +33,5 @@ height variation method.
 \examples{
 
 hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1))
+hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1), parallel=TRUE)
 }

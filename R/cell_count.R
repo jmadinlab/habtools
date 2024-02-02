@@ -10,7 +10,9 @@
 #' @param n multiplier
 #'
 #' @return Number of filled cells
-#' @export
+#' @export cell_count_1d
+#' @export cell_count_2d
+#' @export cell_count_3d
 #'
 
 cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {

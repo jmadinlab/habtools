@@ -48,6 +48,7 @@ fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = F
     lvec <- Lmax / cubes
     cubes <- cubes[lvec > L0]
     lvec <- lvec[lvec > L0]
+    print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
   } else {
     L0 <- min(lvec)
     Lmax <- max(lvec)

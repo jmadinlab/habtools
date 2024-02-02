@@ -4,7 +4,7 @@
 \alias{fd_diagnose}
 \title{Investigates varying fractal dimensions across scale}
 \usage{
-fd_diagnose(data, lvec, method, ...)
+fd_diagnose(data, lvec = NULL, method, ...)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer}

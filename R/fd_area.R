@@ -53,12 +53,26 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       # relative area to account for variations in planar area with varying scales in case L/lvec are not whole numbers
       sum((raster::values(raster::raster(sa)))*L^2)/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
       })
+
   } else if (is(data, "mesh3d")) {
-    if(min(lvec) < Rvcg::vcgMeshres(data)[1]) {
-      stop("Values in lvec need to be equal to or larger than the resolution of data")
+
+    L <- extent(data)
+    L0 <- (Rvcg::vcgMeshres(data)[[1]])
+
+    if (missing(lvec)) {
+      lvec <- 2^seq(log2(L0),log2(L/20), length.out = 5)
+      print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+    }
+
+    if(min(lvec) < L0) {
+      stop("Values in lvec need to be equal to or larger than the largest resolution of data")
     }
     a <- sapply(lvec, function(l){
-      mesh <- Rvcg::vcgQEdecim(data, edgeLength = l, silent = T)
+      if (l == L0) {
+        mesh <- data
+      } else {
+        mesh <- Rvcg::vcgQEdecim(data, edgeLength = l, silent = T, scaleindi = F)
+      }
       Rvcg::vcgArea(mesh)
       })
   } else {
@@ -77,14 +91,20 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
   if (plot) {
     if (is(data, "RasterLayer")) {
       plot(data, axes=FALSE)
+      x0 <- raster::extent(data)[1]
+      y0 <- raster::extent(data)[3]
+      rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+      axis(1)
+      axis(2, las=2)
     } else {
       plot(mesh_to_2d(data), asp=1, type="l", axes=FALSE)
+      x0 <- min(data$vb[1,])
+      y0 <- min(data$vb[2,])
+      rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+      axis(1)
+      axis(2, las=2)
     }
-    x0 <- raster::extent(data)[1]
-    y0 <- raster::extent(data)[3]
-    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
-    axis(1)
-    axis(2, las=2)
+
   }
   if (keep_data) {
     return(list(fd = unname(f), lvec=lvec, data = df))
@@ -92,4 +112,5 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
     return(unname(f))
   }
 }
+
 

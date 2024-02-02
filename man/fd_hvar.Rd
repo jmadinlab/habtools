@@ -4,7 +4,14 @@
 \alias{fd_hvar}
 \title{Calculate fractal Dimension using the height variation method}
 \usage{
-fd_hvar(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...)
+fd_hvar(
+  data,
+  lvec = NULL,
+  regmethod = "mean",
+  keep_data = FALSE,
+  plot = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or dataframe (output of hvar function)}
