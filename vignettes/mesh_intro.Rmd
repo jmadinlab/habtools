@@ -48,11 +48,8 @@ The three main metrics for DEMs also work for meshes.
 ```{r}
 
 # fractal dimension
-fd(mcap_uniform, method = "cubes", plot = TRUE, diagnose = T, c(0.386, 0.193, 0.096, 0.048, 0.024, 0.012))
-fd(mcap_uniform, method = "cubes", lvec = c(0.412, 0.206, 0.103, 0.052, 0.026, 0.013), plot = TRUE, diagnose = T)
-fd(mcap_uniform, method = "cubes", lvec = c(0.01, 0.02, 0.04, 0.08, 0.16, 0.3), plot = TRUE, diagnose = T)
+fd(mcap_uniform, method = "cubes", diagnose = T)
 fd(mcap_uniform, method = "area", plot = TRUE, diagnose = TRUE)
-fd(mcap, method = "area", plot = TRUE, diagnose = TRUE)
 
 # rugosity
 rg(mcap)
@@ -96,7 +93,7 @@ sma(mcap)
 smv(mcap)
 
 # mechanical shape factor
-csf(mcap, z_min = -3.65)
+csf(mcap, z_min = -3.65)$csf
 
 ```
 
@@ -105,10 +102,17 @@ You can also transform a 3D mesh to a DEM, and then apply DEM functions to the s
 ```{r}
 dem <- mesh_to_dem(mcap, res = 0.015)
 raster::plot(dem, asp=1)
-rg(dem1, L0 = 0.015, method = "area", parallel = FALSE) 
+rg(dem, L0 = 0.015, method = "area", parallel = FALSE) 
 
 ```
 
+You can also transform a 3D mesh to a 2D drawing, and then apply 2D functions to the object
+
+```{r}
+pts <- mesh_to_2d(mcap)
+plot(pts, asp=1)
+fd_boxes(pts, plot = T, keep_data = F)
+```
 
 ## References       
 Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral morphology. Coral Reefs, 38:1281–1292.          
