@@ -14,7 +14,7 @@ usethis::use_data(horseshoe, overwrite = TRUE)
 # save a version of mcap with regularly spaced vertices
 resvec <- Rvcg::vcgMeshres(mcap)[[2]] # vector of resolutions
 mcap2 <- Rvcg::vcgUniformRemesh(mcap, silent = TRUE, multiSample = TRUE,
-                                       voxelSize = 0.002, mergeClost = TRUE)
-rgl::plot3d(mcap_uniform)
+                                       voxelSize = 0.005, mergeClost = TRUE)
+rgl::plot3d(mcap2)
 Rvcg::vcgMeshres(mcap2)[[1]]
 usethis::use_data(mcap2, overwrite = TRUE)

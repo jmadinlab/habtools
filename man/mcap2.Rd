@@ -11,7 +11,7 @@ mesh3d object.
 mcap2
 }
 \description{
-A remeshed version of mcap with resolution = 0.002.
+A remeshed version of mcap with resolution = 0.005.
 }
 \examples{
 library(rgl)

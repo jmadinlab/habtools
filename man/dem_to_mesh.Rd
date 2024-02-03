@@ -9,7 +9,7 @@ dem_to_mesh(dem, plot = TRUE)
 \arguments{
 \item{dem}{A RasterLayer object}
 
-\item{ploy}{Logical. Plot the 3D mesh using rgl.}
+\item{plot}{Logical. Plot the 3D mesh using rgl.}
 }
 \value{
 A 3D points cloud for raster cell corners

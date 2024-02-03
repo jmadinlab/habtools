@@ -2,12 +2,12 @@
 % Please edit documentation in R/fd_diagnose.R
 \name{fd_diagnose}
 \alias{fd_diagnose}
-\title{Investigates varying fractal dimensions across scale}
+\title{Investigate varying fractal dimensions across scale}
 \usage{
 fd_diagnose(data, keep_data = TRUE)
 }
 \arguments{
-\item{data}{Output of \link{fd(..., keep_data = TRUE)}.}
+\item{data}{Output of \code{\link[=fd]{fd()}} with option keep_data = TRUE.}
 
 \item{keep_data}{Logical. Keep diagnostics data?}
 }
@@ -15,10 +15,10 @@ fd_diagnose(data, keep_data = TRUE)
 A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
 }
 \description{
-Investigates varying fractal dimensions across scale
+Investigate varying fractal dimensions across scale
 }
 \examples{
-fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = T)
+fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = TRUE)
 fd_diagnose(fd_data)
 fd_diagnose(fd_data, keep_data = FALSE)
 

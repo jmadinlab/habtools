@@ -36,7 +36,6 @@ Imports:
     MASS,
     Rvcg,
     sp,
-    terra,
     geometry,
     concaveman,
     magrittr,

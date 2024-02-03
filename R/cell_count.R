@@ -10,9 +10,7 @@
 #' @param n multiplier
 #'
 #' @return Number of filled cells
-#' @export cell_count_1d
-#' @export cell_count_2d
-#' @export cell_count_3d
+#' @export
 #'
 
 cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
@@ -22,11 +20,35 @@ cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
   sum(cnt > 0)
 }
 
+#' Count filled cells in 2D
+#'
+#' @param pts data
+#' @param xmin minimum x-value
+#' @param xmax maximum x-value
+#' @param ymin minimum y-value
+#' @param ymax maximum y-value
+#' @param n multiplier
+#'
+#' @return Number of filled cells
+#' @export
+#'
+
 cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
   cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
                ceiling(rescale(pts$y, ymin, ymax, n)))
   sum(cnt > 0)
 }
+
+#' Count filled cells in 1D
+#'
+#' @param pts data
+#' @param xmin minimum x-value
+#' @param xmax maximum x-value
+#' @param n multiplier
+#'
+#' @return Number of filled cells
+#' @export
+#'
 
 cell_count_1d <- function(pts, xmin, xmax, n) {
   cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)))

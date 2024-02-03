@@ -25,7 +25,7 @@
 #' fd_sd(horseshoe, lvec = c(0.05, 0.1, 0.25, 0.5, 1, 2))
 #'
 
-fd_sd <- function(data, x, y, lvec, L,
+fd_sd <- function(data, lvec,
                   regmethod = "mean", keep_data = FALSE, plot = FALSE,
                   parallel = FALSE,
                   ncores = (parallel::detectCores()-1)) {

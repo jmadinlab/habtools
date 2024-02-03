@@ -6,9 +6,6 @@
 \usage{
 rg(
   data,
-  x,
-  y,
-  L,
   L0,
   method = "area",
   parallel = FALSE,

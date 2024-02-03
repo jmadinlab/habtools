@@ -16,6 +16,8 @@ If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes
 
 \item{keep_data}{Logical. Keep data? Default is FALSE.}
 
+\item{diagnose}{Logical. Show diagnostic plot and metrics?}
+
 \item{...}{Arguments from other fd_ functions.}
 }
 \value{
@@ -46,4 +48,6 @@ fd(mcap2, method = "area",  diagnose = TRUE)
 \code{\link[=fd_sd]{fd_sd()}}
 
 \code{\link[=fd_cubes]{fd_cubes()}}
+
+\code{\link[=fd_diagnose]{fd_diagnose()}}
 }

@@ -5,11 +5,13 @@
 #' @param method If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 #' If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").
 #' @param keep_data Logical. Keep data? Default is FALSE.
+#' @param diagnose Logical. Show diagnostic plot and metrics?
 #' @param ... Arguments from other fd_ functions.
 #' @seealso [fd_hvar()]
 #' @seealso [fd_area()]
 #' @seealso [fd_sd()]
 #' @seealso [fd_cubes()]
+#' @seealso [fd_diagnose()]
 #' @return A value for fractal dimension, typically between 2 and 3.
 #' @export
 #'

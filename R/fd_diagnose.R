@@ -1,6 +1,6 @@
-#' Investigates varying fractal dimensions across scale
+#' Investigate varying fractal dimensions across scale
 #'
-#' @param data Output of [fd(..., keep_data = TRUE)].
+#' @param data Output of [fd()] with option keep_data = TRUE.
 #' @param keep_data Logical. Keep diagnostics data?
 #' @return A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
 #' @export
@@ -8,7 +8,7 @@
 #' @importFrom graphics axis points
 #'
 #' @examples
-#' fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = T)
+#' fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = TRUE)
 #' fd_diagnose(fd_data)
 #' fd_diagnose(fd_data, keep_data = FALSE)
 #'

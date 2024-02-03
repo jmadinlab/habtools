@@ -3,7 +3,7 @@
 #' @description This function is very slow and needs work.
 #'
 #' @param dem A RasterLayer object
-#' @param ploy Logical. Plot the 3D mesh using rgl.
+#' @param plot Logical. Plot the 3D mesh using rgl.
 #'
 #' @return A 3D points cloud for raster cell corners
 #' @export
@@ -15,7 +15,7 @@
 #' horse <- raster::aggregate(habtools::horseshoe, 100)
 #' mesh_horse <- habtools::dem_to_mesh(horse)
 
-dem_to_mesh <- function(dem, plot=TRUE){
+dem_to_mesh <- function(dem, plot = TRUE){
 
   # get points of all corners
   p1 <- dem_to_points(dem)

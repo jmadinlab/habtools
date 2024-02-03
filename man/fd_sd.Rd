@@ -6,10 +6,7 @@
 \usage{
 fd_sd(
   data,
-  x,
-  y,
   lvec,
-  L,
   regmethod = "mean",
   keep_data = FALSE,
   plot = FALSE,

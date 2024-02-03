@@ -1,6 +1,6 @@
 #' Montipora capitata 2
 #'
-#' A remeshed version of mcap with resolution = 0.002.
+#' A remeshed version of mcap with resolution = 0.005.
 #'
 #' @format mesh3d object.
 #'
