@@ -2,21 +2,21 @@
 #'
 #' @description Calculates the distance between the lowest and highest point in a 3D object.
 #'
-#' @param data A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.
+#' @param data A RasterLayer or mesh3d object.
 #'
 #' @return The difference between the lowest and highest point.
 #'
 #' @export
 #'
 #' @examples
-#'
-#' library(raster)
-#' plot(horseshoe)
+#' # for a DEM
+#' plot(raster::horseshoe)
 #' hr(horseshoe)
 #'
-#' # For a 3D mesh.
+#' # for a 3D mesh
 #' hr(mcap)
 #'
+
 hr <- function(data) {
 
 

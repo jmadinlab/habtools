@@ -1,13 +1,13 @@
 #' Calculate extent of a 3D object
 #'
-#' @param data object of class mesh3d
+#' @param data An object of class mesh3d
 #'
 #' @details This function calculates the extent or largest length of the bounding box of a mesh
 #'
 #' @return A value, the extent of the mesh
 #' @export
 #' @examples
-#' extent(mcap)
+#' habtools::extent(mcap)
 #'
 extent <- function(data){
   dt <- t(data$vb)
