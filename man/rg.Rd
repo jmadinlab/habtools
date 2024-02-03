@@ -10,19 +10,13 @@ rg(
   y,
   L,
   L0,
-  method = "hvar",
+  method = "area",
   parallel = FALSE,
   ncores = (parallel::detectCores() - 1)
 )
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
-
-\item{x}{Bottom-left of bounding box.}
-
-\item{y}{Bottom-left of bounding box.}
-
-\item{L}{Bounding box extent (i.e., side length).}
 
 \item{L0}{Grain or resolution of calculation.}
 
@@ -47,8 +41,8 @@ The "area" method uses the \code{\link[sp:surfaceArea]{sp::surfaceArea()}} funct
 In that case the function uses \code{\link[Rvcg:vcgArea]{Rvcg::vcgArea()}} to calculate surface area of a triangular mesh of class mesh3d.
 }
 \examples{
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1)
-rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1, method = "area")
+rg(horseshoe, L0 = 0.1)
+rg(horseshoe, L0 = 0.1, method = "area")
 rg(mcap, L0 = 0.01)
 
 }

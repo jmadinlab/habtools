@@ -4,16 +4,12 @@
 \alias{fd_diagnose}
 \title{Investigates varying fractal dimensions across scale}
 \usage{
-fd_diagnose(data, lvec = NULL, method, ...)
+fd_diagnose(data, keep_data = TRUE)
 }
 \arguments{
-\item{data}{Digital elevation model of class RasterLayer}
+\item{data}{Output of \link{fd(..., keep_data = TRUE)}.}
 
-\item{lvec}{scales to use for calculation}
-
-\item{method}{Possible methods are:"hvar", "area", and "sd".}
-
-\item{...}{Additional arguments of see \code{\link[=fd]{fd()}}}
+\item{keep_data}{Logical. Keep diagnostics data?}
 }
 \value{
 A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
@@ -22,6 +18,8 @@ A list with fractal dimension across scales, mean fractal dimension, and sd of f
 Investigates varying fractal dimensions across scale
 }
 \examples{
-fd_diagnose(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area")
+fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = T)
+fd_diagnose(fd_data)
+fd_diagnose(fd_data, keep_data = FALSE)
 
 }

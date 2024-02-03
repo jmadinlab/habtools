@@ -7,9 +7,9 @@
 detect_drop(data, d = 0.1)
 }
 \arguments{
-\item{data}{DEM of class RasterLayer}
+\item{data}{DEM of class RasterLayer.}
 
-\item{d}{threshold height difference to define a drop}
+\item{d}{The threshold height difference to define a drop.}
 }
 \value{
 A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells

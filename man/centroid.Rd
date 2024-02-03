@@ -2,15 +2,15 @@
 % Please edit documentation in R/centroid.R
 \name{centroid}
 \alias{centroid}
-\title{Centroid}
+\title{Centroid of 3D data}
 \usage{
-centroid(XYZCoords)
+centroid(data)
 }
 \arguments{
-\item{XYZCoords}{A data frame with x, y, and z coordinates}
+\item{data}{A data frame with x, y, and z coordinates}
 }
 \value{
-the coordinates of the centroid
+The coordinates of the centroid
 }
 \description{
 Calculates the centroid for a given set of XYZ coordinates.

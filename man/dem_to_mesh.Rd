@@ -4,10 +4,12 @@
 \alias{dem_to_mesh}
 \title{DEM to 3D mesh}
 \usage{
-dem_to_mesh(dem)
+dem_to_mesh(dem, plot = TRUE)
 }
 \arguments{
-\item{dem}{A digital elevation model in raster format}
+\item{dem}{A RasterLayer object}
+
+\item{ploy}{Logical. Plot the 3D mesh using rgl.}
 }
 \value{
 A 3D points cloud for raster cell corners

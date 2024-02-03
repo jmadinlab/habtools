@@ -2,21 +2,22 @@
 % Please edit documentation in R/convexity.R
 \name{convexity}
 \alias{convexity}
-\title{Calculate convexity}
+\title{Convexity}
 \usage{
 convexity(mesh)
 }
 \arguments{
-\item{mesh}{mesh3d object}
+\item{mesh}{A mesh3d object.}
 }
 \value{
-the convexity value
+The convexity value
 }
 \description{
-Calculate convexity
+Calculates the convexity of a 3D mesh.
 }
 \details{
-The ratio of the volume of the object and the volume of the convex hull around the object
+The ratio of the volume of the object and the volume of the convex
+hull around the object. Objects with fewer concavities will be closer to 1.
 }
 \examples{
 convexity(mcap)

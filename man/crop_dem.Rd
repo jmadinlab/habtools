@@ -2,7 +2,7 @@
 % Please edit documentation in R/crop_dem.R
 \name{crop_dem}
 \alias{crop_dem}
-\title{Crop DEM around Points}
+\title{Crop DEM around points}
 \usage{
 crop_dem(data, x0, y0, L, plot = FALSE)
 }
@@ -21,14 +21,18 @@ crop_dem(data, x0, y0, L, plot = FALSE)
 A cropped RasterLayer or a list of RasterLayers.
 }
 \description{
-Crop DEM around Points
+A function for sampling a DEM by cropping squares based on xy cooridnates.
 }
 \examples{
 # around one point
 dem_cropped <- crop_dem(horseshoe, -468, 1266, L = 2)
 raster::plot(dem_cropped)
+points(-468, 1266)
 
 # around multiple points
 points <- data.frame(x = c(-467, -465, -466), y = c(1270, 1265, 1268))
 dem_list <- crop_dem(horseshoe, points$x, points$y, L = 1, plot = TRUE)
+
+# plot the first element
+raster::plot(dem_list[[1]])
 }

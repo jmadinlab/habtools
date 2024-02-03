@@ -5,19 +5,13 @@
 \alias{mcap}
 \title{Montipora capitata}
 \format{
-A 3999 by 3999 digital elevation model (raster file)
-\describe{
-\item{values}{water depth}
-\item{resolution}{0.002 m}
-...
-}
+mesh3d object with 5568 vertices, 10939 triangles.
 }
 \usage{
 mcap
 }
 \description{
-A data set containing the prices and other attributes of almost 54,000
-diamonds.
+A laser scan of a coral colony.
 }
 \examples{
 library(rgl)

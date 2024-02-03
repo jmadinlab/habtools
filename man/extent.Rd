@@ -7,7 +7,7 @@
 extent(data)
 }
 \arguments{
-\item{data}{object of class mesh3d}
+\item{data}{An object of class mesh3d}
 }
 \value{
 A value, the extent of the mesh
@@ -19,6 +19,7 @@ Calculate extent of a 3D object
 This function calculates the extent or largest length of the bounding box of a mesh
 }
 \examples{
-extent(mcap)
+habtools::extent(mcap)
+habtools::extent(horseshoe)
 
 }

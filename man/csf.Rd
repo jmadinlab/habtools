@@ -7,7 +7,7 @@
 csf(mesh, z_min, res)
 }
 \arguments{
-\item{mesh}{mesh object}
+\item{mesh}{A mesh3d object}
 
 \item{z_min}{(optional) set the z plane about which csf should be calculated}
 
