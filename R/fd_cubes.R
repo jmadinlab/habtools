@@ -79,7 +79,7 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
     if (is(data, "RasterLayer")) {
       plot(data, axes=FALSE)
     } else {
-      plot(pts[,1:2], asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
+      plot(mesh_to_2d(data), asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
     }
     rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
     axis(1)

@@ -35,7 +35,7 @@ fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd(dem, method = "area", diagnose = TRUE)
 fd(dem, method = "sd")
 fd(mcap2, method = "cubes",  plot = TRUE)
-fd(mcap, method = "area",  diagnose = TRUE)
+fd(mcap2, method = "area",  diagnose = TRUE)
 
 }
 \seealso{

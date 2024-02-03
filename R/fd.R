@@ -25,7 +25,7 @@
 #' fd(dem, method = "area", diagnose = TRUE)
 #' fd(dem, method = "sd")
 #' fd(mcap2, method = "cubes",  plot = TRUE)
-#' fd(mcap, method = "area",  diagnose = TRUE)
+#' fd(mcap2, method = "area",  diagnose = TRUE)
 #'
 fd <- function(data,  method, lvec, keep_data = FALSE, diagnose = FALSE, ...) {
 
