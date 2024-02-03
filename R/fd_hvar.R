@@ -78,7 +78,7 @@ fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot
 
   # output
   if (keep_data) {
-    return(list(fd = unname(f), data = 10^dt))
+    return(list(fd = unname(f), lvec = lvec, data = 10^dt, method = "hvar"))
   } else {
     return(unname(f))
   }

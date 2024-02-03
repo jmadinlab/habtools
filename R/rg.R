@@ -1,9 +1,6 @@
 #' Rugosity
 #'
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
-#' @param x Bottom-left of bounding box.
-#' @param y Bottom-left of bounding box.
-#' @param L Bounding box extent (i.e., side length).
 #' @param L0 Grain or resolution of calculation.
 #' @param method If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".
 #' @param parallel Use parallel processing (Defaults to FALSE)
@@ -23,26 +20,16 @@
 #' @export
 #'
 #' @examples
-#' rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1)
-#' rg(horseshoe, x = -470, y = 1266, L = 2, L0 = 0.1, method = "area")
+#' rg(horseshoe, L0 = 0.1)
+#' rg(horseshoe, L0 = 0.1, method = "area")
 #' rg(mcap, L0 = 0.01)
 #'
-rg <- function(data, x, y, L, L0, method = "hvar", parallel = FALSE,
+rg <- function(data, x, y, L, L0, method = "area", parallel = FALSE,
                ncores = (parallel::detectCores() - 1)) {
   if (is(data, "RasterLayer")) {
 
     if (sum(is.na(values(data))) > 0) {
       message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
-    }
-
-    if (missing(x)) x <- raster::xmin(data)
-    if (missing(y)) y <- raster::ymin(data)
-    if (missing(L)) L <- min(dim(data)[1:2] * raster::res(data))
-
-    if (L < min(dim(data)[1:2] * raster::res(data))) {
-      b <- as(raster::extent(x, x + L, y, y + L), 'SpatialPolygons')
-      raster::crs(b) <- raster::crs(data)
-      data <- raster::crop(data, b)
     }
 
     if (method == "hvar") {

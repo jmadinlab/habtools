@@ -23,11 +23,11 @@
 #' fd_cubes(dem, plot=TRUE, keep_data=TRUE)
 #' fd_cubes(dem, plot=TRUE, keep_data=TRUE, scale=TRUE)
 #'
-fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = FALSE) {
+fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale = FALSE) {
 
   if (is(data, "RasterLayer")) {
     if (scale) {
-      data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * (raster::extent(data)[2] - raster::extent(data)[1])
+      data[] <-((data[] - min(data[]))/(max(data[]) - min(data[])) ) * extent(data)
     }
     pts <- as.data.frame(data, xy = TRUE)
     res <- raster::res(data)[1]
@@ -87,7 +87,7 @@ fd_cubes <- function(data, lvec=NULL, plot = FALSE, keep_data = FALSE, scale = F
   }
   # output
   if (keep_data) {
-    return(list(fd = fd, lvec=lvec, data = data.frame(l = lvec, n = n)))
+    return(list(fd = fd, lvec = lvec, data = data.frame(l = lvec, n = n), method = "cubes"))
   } else {
     return(fd)
   }

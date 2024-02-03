@@ -23,7 +23,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       }
 
       L0 <- min(raster::res(data))
-      L <- min(dim(data)[1:2] * L0)
+      L <- extent(data)
 
       if (missing(lvec)) {
         lvec <- L/unique(round(2^seq(log2(8),log2(L/(L0*2)), length.out = 10)))
@@ -57,7 +57,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
   } else if (is(data, "mesh3d")) {
 
     L <- extent(data)
-    L0 <- (Rvcg::vcgMeshres(data)[[1]])
+    L0 <- median(Rvcg::vcgMeshres(data)[[2]])
 
     if (missing(lvec)) {
       lvec <- 2^seq(log2(L0),log2(L/20), length.out = 5)
@@ -65,7 +65,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
     }
 
     if(min(lvec) < L0) {
-      stop("Values in lvec need to be equal to or larger than the largest resolution of data")
+      stop("Values in lvec need to be equal to or larger than the resolution of the object")
     }
     a <- sapply(lvec, function(l){
       if (l == L0) {
@@ -107,7 +107,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
 
   }
   if (keep_data) {
-    return(list(fd = unname(f), lvec=lvec, data = df))
+    return(list(fd = unname(f), lvec = lvec, data = df, method = "area"))
   } else {
     return(unname(f))
   }
