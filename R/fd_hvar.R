@@ -22,12 +22,9 @@
 #'
 #' @examples
 #' dem <- habtools::crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
-#' data <- hvar(dem, L=2, lvec = c(0.125, 0.25, 0.5, 1, 2))
-#' fd_hvar(data)
 #' fd_hvar(dem, lvec = c(0.125, 0.25, 0.5, 1, 2))
-#' fd_hvar(data, regmethod = "mean", plot = TRUE, keep_data = TRUE)
-#' fd_hvar(data, regmethod = "ends")
-#' fd_hvar(data, regmethod = "median", plot = TRUE, keep_data = TRUE)
+#' fd_hvar(dem, regmethod = "mean", plot = TRUE, keep_data = TRUE)
+#' fd_hvar(dem, regmethod = "median", plot = TRUE, keep_data = TRUE)
 #' fd_hvar(dem)
 #'
 fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
