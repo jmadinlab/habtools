@@ -1,8 +1,8 @@
 #' Find midpoint of a DEM
 #'
-#' @param data a DEM in RasterLayer format
+#' @param data A DEM in RasterLayer format.
 #'
-#' @return A dataframe with x and y midpoints
+#' @return A data frame with x and y midpoints.
 #' @export
 #'
 #' @examples
