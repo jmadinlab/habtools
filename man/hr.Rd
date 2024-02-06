@@ -17,7 +17,7 @@ Calculates the distance between the lowest and highest point in a 3D object.
 }
 \examples{
 # for a DEM
-plot(raster::horseshoe)
+raster::plot(habtools::horseshoe)
 hr(horseshoe)
 
 # for a 3D mesh

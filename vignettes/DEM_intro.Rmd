@@ -30,7 +30,7 @@ dem <- horseshoe
 res(dem)
 plot(dem)
 ```
-Let's say we want complexity metrics for a certain square  of size 2m around xy-coordinates.
+Let's say we want complexity metrics for a certain square of size 2m around certain xy-coordinates.
 ```{r}
 dem1 <- crop_dem(horseshoe, x0 = -466, y0 = 1269, L = 2, plot = TRUE)
 plot(dem1)
@@ -46,10 +46,10 @@ hr(dem1)
 
 ```{r}
 # Height variation method
-rg(dem1, L0 = 0.1, method = "hvar", parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
+rg(dem1, L0 = 0.04, method = "hvar", parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
            
 # Area method
-rg(dem1, L0 = 0.05, method = "area")
+rg(dem1, method = "area")
 ```
 
 ## Fractal dimension

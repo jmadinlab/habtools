@@ -33,6 +33,15 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
     }
 
     if (method == "hvar") {
+
+      if (missing(L0)) {
+        L0 <- raster::res(data)[1] * 8
+        print(paste0("L0 is set to ", L0, "."))
+      }
+      if (L0 < 2*raster::res(data)[1]) {
+        warning("L0 is smaller than 2*DEM resolution. Consider increasing L0.")
+      }
+
       dem_list <- split_dem(data, L0, parallel = parallel, ncores = ncores)
       if (parallel){
         hs <- parallel::mclapply(dem_list, hr,
@@ -40,17 +49,31 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
       } else{
         hs <- sapply(dem_list, hr)
       }
-      rg <- mean(sqrt((hs^2) / (2 * L0^2) + 1), na.rm = T)
+      rg <- mean(sqrt(((hs^2) / (2 * L0^2)) + 1), na.rm = T)
 
     } else if (method =="area") {
-      if (L0 > raster::res(data)[1]) {
-        fac <- round(L0/raster::res(data)[1])
-        a <- raster::aggregate(data, fac)
-        mat <- as.matrix(a)/L0
-      } else {
-        mat <- as.matrix(data)/L0
+
+      if (missing(L0)) {
+        L0 <- raster::res(data)[1]
+        print(paste0("L0 is set to the resolution of the raster: ", L0, "."))
       }
-      rg <- sp::surfaceArea(mat)/(dim(mat)[1] * dim(mat)[2])
+      if (L0 < raster::res(data)[1]) {
+        warning("L0 is smaller than DEM resolution.")
+      }
+      if (L0 > raster::res(data)[1]) {
+        bb <- raster::bbox(data)
+        temp <- raster::raster(xmn=bb[1,1], xmx=bb[1,2],
+                               ymn=bb[2,1], ymx=bb[2,2], resolution = L0,
+                               crs = raster::crs(data))
+        r <- terra::project(terra::rast(data), terra::rast(temp))
+        r <- raster::raster(r)
+        g <- as(r, 'SpatialGridDataFrame')
+        sa <- sp::surfaceArea(g)
+      } else {
+        g <- as(data, 'SpatialGridDataFrame')
+        sa <- sp::surfaceArea(g)
+      }
+      rg <- sa/habtools::extent(data)^2
     } else {
       stop("method can only be 'hvar' or 'area'")
     }

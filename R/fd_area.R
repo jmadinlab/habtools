@@ -51,7 +51,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       g <- as(r, 'SpatialGridDataFrame')
       sa <- sp::surfaceArea(g, byCell = TRUE)
       # relative area to account for variations in planar area with varying scales in case L/lvec are not whole numbers
-      sum((raster::values(raster::raster(sa)))*L^2)/(raster::extent(sa)[2] - raster::extent(sa)[1])^2
+      sum((raster::values(raster::raster(sa)))*L^2)/(habtools::extent(r))^2
       })
 
   } else if (is(data, "mesh3d")) {

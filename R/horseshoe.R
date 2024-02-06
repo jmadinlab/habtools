@@ -10,5 +10,5 @@
 #'   ...
 #' }
 #' @examples
-#' plot(raster::horseshoe)
+#' raster::plot(habtools::horseshoe)
 "horseshoe"

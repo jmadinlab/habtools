@@ -20,6 +20,6 @@ horseshoe
 A DEM of a reef patch in the Great Barrier Reef.
 }
 \examples{
-plot(raster::horseshoe)
+raster::plot(habtools::horseshoe)
 }
 \keyword{datasets}

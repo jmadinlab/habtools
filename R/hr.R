@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' # for a DEM
-#' plot(raster::horseshoe)
+#' raster::plot(habtools::horseshoe)
 #' hr(horseshoe)
 #'
 #' # for a 3D mesh
