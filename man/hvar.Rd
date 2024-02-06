@@ -33,5 +33,4 @@ height variation method.
 \examples{
 
 hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1))
-hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1), parallel=TRUE)
 }
