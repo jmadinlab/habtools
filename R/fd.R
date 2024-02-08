@@ -61,6 +61,13 @@ fd <- function(data,  method, lvec, keep_data = FALSE, diagnose = FALSE, ...) {
     } else {
       stop("Please check appropriate method options.")
     }
+  } else if (is(data, "data.frame")) {
+    if (missing(method)) method <- "boxes"
+    if (method == "boxes") {
+      f <- fd_boxes(data, lvec = lvec, keep_data = keep_data, ...)
+    } else {
+      stop("Please check appropriate method options.")
+    }
   }
 
   if (diagnose) {

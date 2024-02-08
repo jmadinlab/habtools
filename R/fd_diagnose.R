@@ -12,6 +12,7 @@
 #' fd_diagnose(fd_data)
 #' fd_diagnose(fd_data, keep_data = FALSE)
 #'
+
 fd_diagnose <- function(data, keep_data = TRUE) {
 
   dta <- data[["data"]]
@@ -23,6 +24,8 @@ fd_diagnose <- function(data, keep_data = TRUE) {
   if (method == "area") {
     f <- 2 - f
   } else if (method == "cubes") {
+    f <- -f
+  } else if (method == "boxes") {
     f <- -f
   } else {
     f <- 3 - f

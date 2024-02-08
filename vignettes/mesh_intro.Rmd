@@ -72,10 +72,10 @@ surface_area(mcap)
 There are a number of other metrics that tell you more about the shape of the object. See Zawada et al. (2019) for an example of an application of these metrics on corals.   
 - **Convexity:** the ratio of the volume of the object and the volume of the convex hull around the object.     
 - **Packing:** The ratio of the surface area of the object and the surface area of the convex hull around the object.    
-- **Sphericity:** The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object. 
-- **Second moment of area (sma):** A measure of top-heaviness using area. Calculated by multiplying the surface area of each triangle in the mesh by its vertical distance from the origin.
+- **Sphericity:** The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.  
+- **Second moment of area (sma):** A measure of top-heaviness using area. Calculated by multiplying the surface area of each triangle in the mesh by its vertical distance from the origin.  
 - **Second moment of volume (smv):** A measure of top-heaviness using volume. For each triangle in the mesh, a tetrahedron between the triangle and the origin was calculated. The signed volume of each tetrahedron was multiplied by the vertical distance between the centroid of the tetrahedron and the centroid of the attachment plane.      
-- **Mechanical shape factor (csf):**  Mechanical vulnerability of a structural element (Madin & Connolly, 2006).
+- **Mechanical shape factor (csf):**  Mechanical vulnerability of a structural element (Madin & Connolly, 2006).  
 ```{r}
 # convexity
 convexity(mcap)
@@ -111,11 +111,23 @@ You can also transform a 3D mesh to a 2D drawing, and then apply 2D functions to
 ```{r}
 pts <- mesh_to_2d(mcap)
 plot(pts, asp=1)
-fd_boxes(pts, plot = T, keep_data = F)
+
+# perimeter
+perimeter(pts)
+
+# circularity
+circularity(pts)
+
+# fractal dimension
+fd(pts, method = "boxes", keep_data = F, plot = T, diagnose = TRUE)
+
 ```
 
+Note that fractal dimension ranges between 1 and 2 for 2D drawings, rather than 2 and 3 for 3D meshes. 
+
 ## References       
-Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral morphology. Coral Reefs, 38:1281–1292.          
-Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.                
+
+- Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral morphology. Coral Reefs, 38:1281–1292.  
+- Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.  
 
 

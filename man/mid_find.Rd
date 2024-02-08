@@ -7,10 +7,10 @@
 mid_find(data)
 }
 \arguments{
-\item{data}{a DEM in RasterLayer format}
+\item{data}{A DEM in RasterLayer format.}
 }
 \value{
-A dataframe with x and y midpoints
+A data frame with x and y midpoints.
 }
 \description{
 Find midpoint of a DEM
