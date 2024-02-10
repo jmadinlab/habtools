@@ -10,103 +10,255 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  results = "hide"
+  comment = "#>"
 )
 ```
 
 ```{r setup}
 library(habtools)
 library(raster)
+library(dplyr)
+library(ggplot2)
 ```
 
-This vignette highlights issues that may arise when using `habtools` for estimating fractal dimension by applying three methods (cube counting, height variation and area method) to a series of simulated and natural surfaces. Each of these methods should be used cautiously on natural surfaces, because each has their own biases. For example, some methods are sensitive to particular elements, like outliers or drop-offs, while others are invariant to them. Because most natural surfaces are not self-similar, then these considerations matter and require decisions based on the question being addressed. 
+In this vignette, we highlight several issues that may arise when using `habtools` for estimating fractal dimension. We apply three methods (cube counting, height variation and area method) to a series of simulated and natural surfaces. We highlight that each method has inherent biases and should be used cautiously. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, while others are invariant to them. We note that the cubes method is more appropriately applied to fully 3D meshes, rather than surfaces that tend to be greater in extent than in height and continuous rather than watertight objects. Nonetheless, the comparisons are still useful. 
 
-# Fractal terrain (diamond-sqaure algorithm)
+# Fractal terrain
 
-### Low smoothness
+The first simulated surface included with `habtools` utilizes the diamond-square algorithm.  Here is a relatively flat simulated terrain. 
 
-```{r fig.width=7, fig.height=7, echo=FALSE}
-par(mfrow=c(2, 2))
-
-smoothness <- 0
-z_extent <- FALSE
-lvec <- c(2, 4, 8)
-surf1 <- sim_terrain(64, smoothness, z_extent)
-plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent))
-
-fd(surf1, lvec, method = "hvar", diagnose = T)
-fd(surf1, method = "area", diagnose = T)
-fd(surf1, lvec, method = "cubes", diagnose = T)
-dev.off()
-
-par(mfrow=c(2, 2))
-
-z_extent <- TRUE
-surf2 <- sim_terrain(64, smoothness, z_extent)
-plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent))
-
-fd(surf2, method = "hvar", diagnose = T)
-fd(surf2, method = "area", diagnose = T)
-fd(surf2, method = "cubes", diagnose = T)
-
+```{r}
+# simulate 64 by 64 unit surface with smoothness of 1 (less fractal)
+surf1 <- sim_terrain(64, 1)
+plot(surf1)
 ```
 
-### High smoothness
+Here are estimates of fractal dimension for the three methods.
+```{r}
+# height variation
+fd(surf1, method = "hvar")
 
-```{r fig.width=7, fig.height=7, echo=FALSE}
-par(mfrow=c(2, 2))
+# area
+fd(surf1, method = "area")
 
-smoothness <- 1
-z_extent <- FALSE
-surf1 <- sim_terrain(64, smoothness, z_extent)
-lvec <- c(4, 8, 16, 32, 64)
-plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent))
-
-fd(surf1, method = "hvar", diagnose = T)
-fd(surf1, method = "area", diagnose = T)
-fd(surf1, method = "cubes", diagnose = T)
-
-par(mfrow=c(2, 2))
-
-z_extent <- TRUE
-surf2 <- sim_terrain(64, smoothness, z_extent)
-plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent))
-
-fd(surf2, method = "hvar", diagnose = T)
-fd(surf2, method = "area", diagnose = T)
-fd(surf2, method = "cubes", diagnose = T)
-
+# cube counting
+fd(surf1, method = "cubes")
 ```
 
-# Real reef
+The height variation method estimates that fractal dimension is high, whereas the other two method estimate that it is low. This is because the height range method is invariant to z-scaling. To demonstrate, height of `surf1` is scaled to equal to the extent. 
 
-```{r fig.width=7, fig.height=7, echo=FALSE}
-par(mfrow=c(2, 2))
+```{r}
+# standardize the surface height to match the extent (i.e., 63 midpoints)
+values(surf1) <- values(surf1) * ((64-1) / diff(range(values(surf1))))
+range(values(surf1))
+plot(surf1)
+```
+Here are estimates of fractal dimension for the three methods.
+```{r}
+# height variation
+fd(surf1, method = "hvar")
 
-surf1 <- crop(horseshoe, raster::extent(horseshoe, 1, 128, 1, 128))
-res <- raster::res(surf1)
-values(surf1) <- values(surf1) - min(values(surf1))
-lvec <- c(4, 8, 16, 32, 64, 128) * res
-plot(surf1, asp=1, main=paste0("horseshoe\n", "z_extent = FALSE"))
+# area
+fd(surf1, method = "area")
 
-fd(surf1, method = "hvar", diagnose = T)
-fd(surf1, method = "area", diagnose = T)
-fd(surf1, method = "cubes", diagnose = T)
+# cube counting
+fd(surf1, method = "cubes")
+```
+You can see that the height variation estimate remains unchanged, whereas the area and cubes estimates increase. We believe this dichotomy raises an underlying philosophical question about fractal surfaces: does the fractal dimension of an surface change if it is scaled along one dimension? 
 
-par(mfrow=c(2, 2))
+There are a variety of ways to explore this question. Let's start by simulating a rough terrain.
 
-surf2 <- surf1
-values(surf2) <- values(surf1) * (res*128) / max(values(surf1))
+```{r}
+# simulate 64 by 64 unit surface with smoothness of 0 (more fractal)
+surf2 <- sim_terrain(64, 0)
+plot(surf2)
+```
+
+Here are estimates of fractal dimension for the three methods.
+```{r}
+# height variation
+fd(surf2, method = "hvar")
+
+# area
+fd(surf2, method = "area")
+
+# cube counting
+fd(surf2, method = "cubes")
+```
+
+The height variation estimate for fractal dimension is high (closer to 3), the area estimate is the same as for the smooth terrain (close to 2), and the cubes estimate is somewhere in-between. This suggests that invariance to z-scaling is better at estimating surface roughness. Let's now scale the rough terrain.
+
+```{r}
+# standardize the surface height to match the extent (i.e., 63 midpoints)
+values(surf2) <- values(surf2) * ((64-1) / diff(range(values(surf2))))
 range(values(surf2))
-
-plot(surf2, main=paste0("horseshoe\n", "z_extent = TRUE"))
-
-fd(surf2, method = "hvar", diagnose = T)
-fd(surf2, method = "area", diagnose = T)
-fd(surf2, method = "cubes", diagnose = T)
-
+plot(surf2)
 ```
+Here are estimates of fractal dimension for the three methods.
+```{r}
+# height variation
+fd(surf2, method = "hvar")
+
+# area
+fd(surf2, method = "area")
+
+# cube counting
+fd(surf2, method = "cubes")
+```
+
+When the z-values are scaled, the area estimate approaches the height variation estimate; the latter of which is unchanged by the transformation. Let's simulate multiple surfaces 
+
+
+<!-- ```{r} -->
+<!-- i <- 50 -->
+<!-- # simluate i smooth terrains -->
+<!-- surf_smooth <- lapply(1:i, function(x) { sim_terrain(64, 1) }) -->
+
+<!-- # height variation -->
+<!-- hvar_smooth <- sapply(surf_smooth, fd,  method = "hvar", parallel=TRUE) -->
+
+<!-- # area -->
+<!-- area_smooth <- sapply(surf_smooth, fd,  method = "area") -->
+
+<!-- # cube counting -->
+<!-- cube_smooth <- sapply(surf_smooth, fd,  method = "cubes") -->
+
+<!-- dat <- data.frame(z_scale=rep("z_scale=FALSE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth, area_smooth, cube_smooth)) -->
+
+<!-- surf_smooth_z <- lapply(1:i, function(x) { sim_terrain(64, 1, z_extent = TRUE) }) -->
+
+<!-- # height variation -->
+<!-- hvar_smooth_z <- sapply(surf_smooth_z, fd,  method = "hvar", parallel=TRUE) -->
+
+<!-- # area -->
+<!-- area_smooth_z <- sapply(surf_smooth_z, fd,  method = "area") -->
+
+<!-- # cube counting -->
+<!-- cube_smooth_z <- sapply(surf_smooth_z, fd,  method = "cubes") -->
+
+<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=TRUE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth_z, area_smooth_z, cube_smooth_z))) -->
+
+
+<!-- ### 10 simulated rough terrains -->
+<!-- surf_rough <- lapply(1:i, function(x) { sim_terrain(64, 0) }) -->
+
+<!-- # height variation -->
+<!-- hvar_rough <- sapply(surf_rough, fd,  method = "hvar", parallel=TRUE) -->
+
+<!-- # area -->
+<!-- area_rough <- sapply(surf_rough, fd,  method = "area") -->
+
+<!-- # cube counting -->
+<!-- cube_rough <- sapply(surf_rough, fd,  method = "cubes") -->
+
+<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=FALSE", 3 * i), smoothness=rep("rough", 3 * i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_rough, area_rough, cube_rough))) -->
+
+<!-- surf_rough_z <- lapply(1:i, function(x) { sim_terrain(64, 0, z_extent = TRUE) }) -->
+
+
+<!-- # height variation -->
+<!-- hvar_rough_z <- sapply(surf_rough_z, fd,  method = "hvar", parallel=TRUE) -->
+
+<!-- # area -->
+<!-- area_rough_z <- sapply(surf_rough_z, fd,  method = "area") -->
+
+<!-- # cube counting -->
+<!-- cube_rough_z <- sapply(surf_rough_z, fd,  method = "cubes") -->
+
+<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=TRUE", 3 *i), smoothness=rep("rough", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_rough_z, area_rough_z, cube_rough_z))) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+
+<!-- ggplot(dat[dat$method != "cubes",], aes(x = method, y = fd)) +  -->
+<!--   geom_boxplot(outlier.shape = NA) + -->
+<!--   geom_jitter(colour = 4) + -->
+<!--   facet_grid(smoothness ~ z_scale) -->
+
+<!-- ``` -->
+
+
+
+
+<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- smoothness <- 0 -->
+<!-- z_extent <- FALSE -->
+<!-- lvec <- c(2, 4, 8) -->
+
+<!-- fd(surf1, lvec, method = "hvar", diagnose = T) -->
+<!-- fd(surf1, method = "area", diagnose = T) -->
+<!-- fd(surf1, lvec, method = "cubes", diagnose = T) -->
+<!-- dev.off() -->
+
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- z_extent <- TRUE -->
+<!-- surf2 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
+
+<!-- fd(surf2, method = "hvar", diagnose = T) -->
+<!-- fd(surf2, method = "area", diagnose = T) -->
+<!-- fd(surf2, method = "cubes", diagnose = T) -->
+
+<!-- ``` -->
+
+<!-- ### High smoothness -->
+
+<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- smoothness <- 1 -->
+<!-- z_extent <- FALSE -->
+<!-- surf1 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- lvec <- c(4, 8, 16, 32, 64) -->
+<!-- plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
+
+<!-- fd(surf1, method = "hvar", diagnose = T) -->
+<!-- fd(surf1, method = "area", diagnose = T) -->
+<!-- fd(surf1, method = "cubes", diagnose = T) -->
+
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- z_extent <- TRUE -->
+<!-- surf2 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
+
+<!-- fd(surf2, method = "hvar", diagnose = T) -->
+<!-- fd(surf2, method = "area", diagnose = T) -->
+<!-- fd(surf2, method = "cubes", diagnose = T) -->
+
+<!-- ``` -->
+
+<!-- # Real reef -->
+
+<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- surf1 <- crop(horseshoe, raster::extent(horseshoe, 1, 128, 1, 128)) -->
+<!-- res <- raster::res(surf1) -->
+<!-- values(surf1) <- values(surf1) - min(values(surf1)) -->
+<!-- lvec <- c(4, 8, 16, 32, 64, 128) * res -->
+<!-- plot(surf1, asp=1, main=paste0("horseshoe\n", "z_extent = FALSE")) -->
+
+<!-- fd(surf1, method = "hvar", diagnose = T) -->
+<!-- fd(surf1, method = "area", diagnose = T) -->
+<!-- fd(surf1, method = "cubes", diagnose = T) -->
+
+<!-- par(mfrow=c(2, 2)) -->
+
+<!-- surf2 <- surf1 -->
+<!-- values(surf2) <- values(surf1) * (res*128) / max(values(surf1)) -->
+<!-- range(values(surf2)) -->
+
+<!-- plot(surf2, main=paste0("horseshoe\n", "z_extent = TRUE")) -->
+
+<!-- fd(surf2, method = "hvar", diagnose = T) -->
+<!-- fd(surf2, method = "area", diagnose = T) -->
+<!-- fd(surf2, method = "cubes", diagnose = T) -->
+
+<!-- ``` -->
 
 
 
