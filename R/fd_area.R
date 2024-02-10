@@ -107,7 +107,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
 
   }
   if (keep_data) {
-    return(list(fd = unname(f), lvec = lvec, data = df, method = "area"))
+    return(list(D = unname(f), lvec = lvec, data = df, method = "area"))
   } else {
     return(unname(f))
   }

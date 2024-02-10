@@ -87,7 +87,7 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
   }
   # output
   if (keep_data) {
-    return(list(fd = fd, lvec = lvec, data = data.frame(l = lvec, n = n), method = "cubes"))
+    return(list(D = fd, lvec = lvec, data = data.frame(l = lvec, n = n), method = "cubes"))
   } else {
     return(fd)
   }

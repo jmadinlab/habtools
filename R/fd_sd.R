@@ -80,7 +80,7 @@ fd_sd <- function(data, lvec,
 
   # output
   if (keep_data) {
-    return(list(fd = unname(f), lvec = lvec, data = 10^dt, method = "sd"))
+    return(list(D = unname(f), lvec = lvec, data = 10^dt, method = "sd"))
   } else {
     return(unname(f))
   }

@@ -69,7 +69,7 @@ fd_boxes <- function(data, lvec=NULL, keep_data = TRUE, plot = FALSE) {
   }
   # output
   if (keep_data) {
-    return(list(fd = unname(fd), lvec = lvec, data = data.frame(l = lvec, n = n), method = "boxes"))
+    return(list(D = unname(fd), lvec = lvec, data = data.frame(l = lvec, n = n), method = "boxes"))
   } else {
     return(unname(fd))
   }
