@@ -34,8 +34,11 @@ fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot
     L <- min(dim(data)[1:2] * L0)
 
     if (missing(lvec)) {
-      lvec <- L/unique(round(2^seq(log2(L/L),log2(L/(L0*10)), length.out = 10)))
-      lvec <- sort(lvec)
+      lvec <- L / 2^(0:20)
+      lvec <- lvec[lvec > L0*5]
+
+      # lvec <- L/unique(round(2^seq(log2(L/L),log2(L/(L0*10)), length.out = 10)))
+      # lvec <- sort(lvec)
       print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
     } else {
       lvec <- sort(lvec)

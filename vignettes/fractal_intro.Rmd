@@ -21,7 +21,31 @@ library(dplyr)
 library(ggplot2)
 ```
 
-In this vignette, we highlight several issues that may arise when using `habtools` for estimating fractal dimension. We apply three methods (cube counting, height variation and area method) to a series of simulated and natural surfaces. We highlight that each method has inherent biases and should be used cautiously. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, while others are invariant to them. We note that the cubes method is more appropriately applied to fully 3D meshes, rather than surfaces that tend to be greater in extent than in height and continuous rather than watertight objects. Nonetheless, the comparisons are still useful. 
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. We highlight that each method has inherent biases and should be used cautiously. For example, some methods are sensitive to particular elements, like out-liers, z-scaling or drop-offs, while others are invariant to them.
+
+### The length vectors (`lvec`)
+
+Fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) at a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. Therefore, selecting a sensible sequence of length scales is of utmost importance. 
+
+All fractal dimension methods in `habtools` will automatically generate a vector of scales (`lvec`) based on rules of thumb, which differ among methods. 
+
+```{r}
+# simulate fractal terrain
+surf <- sim_terrain(n=64, smoothness=0.5)
+plot(surf)
+
+# fractal dimension using height variation method
+fd(surf, method="hvar", keep_data=TRUE)
+```
+
+
+
+
+# Length vectors (`lvec`)
+# Diagnostics
+# Simulated surfaces
+# Height invariance (`z-scale`)
+# Non-fractal surfaces
 
 # Fractal terrain
 
@@ -37,6 +61,9 @@ Here are estimates of fractal dimension for the three methods.
 ```{r}
 # height variation
 fd(surf1, method = "hvar")
+
+# standard deviation
+fd(surf1, method = "sd")
 
 # area
 fd(surf1, method = "area")
@@ -58,6 +85,9 @@ Here are estimates of fractal dimension for the three methods.
 # height variation
 fd(surf1, method = "hvar")
 
+# standard deviation
+fd(surf1, method = "sd")
+
 # area
 fd(surf1, method = "area")
 
@@ -78,6 +108,9 @@ Here are estimates of fractal dimension for the three methods.
 ```{r}
 # height variation
 fd(surf2, method = "hvar")
+
+# standard deviation
+fd(surf2, method = "sd")
 
 # area
 fd(surf2, method = "area")
