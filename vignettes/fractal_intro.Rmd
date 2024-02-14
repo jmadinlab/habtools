@@ -21,21 +21,39 @@ library(dplyr)
 library(ggplot2)
 ```
 
-In this vignette, we give a brief overview of fractal dimension methods in `habtools`. We highlight that each method has inherent biases and should be used cautiously. For example, some methods are sensitive to particular elements, like out-liers, z-scaling or drop-offs, while others are invariant to them.
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. We highlight that each method has inherent biases and should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, where others are invariant to them.
+
+### Methods
+
+There are currently five fractal dimension methods in `habtools`: `hvar`, `sd`, `area`, `cubes` and `boxes`. The first four can be applied to DEMs. `area` and `cubes` can be applied to meshes. `boxes` can only be applied to 2D outlines, such as generated using the `mesh_to_2D` function that generates the planar outline of a 3D mesh. There are detailed help files explain how they work and point to references. 
 
 ### The length vectors (`lvec`)
 
-Fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) at a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. Therefore, selecting a sensible sequence of length scales is of utmost importance. 
+In general, fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) at a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. Therefore, selecting a sensible sequence of scales is critical, and can differ among methods. If you don't enter an `lvec`, the function will estimate one for you based on some rules of thumb.
+
+```{r}
+# simulate fractal terrain
+surf <- sim_terrain(n=128, smoothness=0.5)
+plot(surf)
+
+# fractal dimension using height variation method
+fd(surf, method="hvar")
+```
+
+For example the height variation method will generate a log2 sequence of length between the resolution x 10 and the extent. So in this example, 
+
+
+The largest scale `L` is typically that of the object of surface. For example, for a section of terrain 1 x 1 m, L would be 1 if using the height range of . 
 
 All fractal dimension methods in `habtools` will automatically generate a vector of scales (`lvec`) based on rules of thumb, which differ among methods. 
 
 ```{r}
 # simulate fractal terrain
-surf <- sim_terrain(n=64, smoothness=0.5)
+surf <- sim_terrain(n=256, smoothness=0.5)
 plot(surf)
 
 # fractal dimension using height variation method
-fd(surf, method="hvar", keep_data=TRUE)
+fd(surf, method="hvar", diagnose = TRUE)
 ```
 
 

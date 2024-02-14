@@ -74,8 +74,12 @@ fd_sd <- function(data, lvec,
 
   # plot
   if (plot) {
-    plot(dt, xlab = "log10(l)", ylab = "log10(sd)")
-    abline(mod, lty = 1)
+    x0 <- raster::extent(data)[1]
+    y0 <- raster::extent(data)[3]
+    raster::plot(data, axes=FALSE)
+    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+    axis(1)
+    axis(2, las=2)
   }
 
   # output

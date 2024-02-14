@@ -27,7 +27,10 @@
 #' fd_hvar(dem, regmethod = "median", plot = TRUE, keep_data = TRUE)
 #' fd_hvar(dem)
 #'
-fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot = FALSE, ...) {
+
+fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot = FALSE,
+                    parallel = FALSE,
+                    ncores = (parallel::detectCores()-1)) {
 
   if (!is.data.frame(data)) {
     L0 <- min(raster::res(data))
@@ -37,24 +40,32 @@ fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot
       lvec <- L / 2^(0:20)
       lvec <- lvec[lvec > L0*5]
 
-      # lvec <- L/unique(round(2^seq(log2(L/L),log2(L/(L0*10)), length.out = 10)))
+      # lvec <- L/unique(round(2^seq(log2(L/L), log2(L/(L0*10)), length.out = 10)))
       # lvec <- sort(lvec)
       print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
     } else {
       lvec <- sort(lvec)
     }
-    data <- hvar(data, lvec = lvec, ...)
   }
 
-  data <- log10(data)
-  data <- data[is.finite(rowSums(data)),]
-  data_mean <- aggregate(h ~ l, data, mean)
-  data_median <- aggregate(h ~ l, data, median)
+  # out <- hvar(data, lvec = lvec, ...)
+
+  out <-
+    lapply(lvec, function(l){
+      list <- split_dem(data, l, parallel = parallel, ncores = ncores)
+      h <- sapply(list, function(x){ diff(range(x[], na.rm = T)) })
+      data.frame(l = l, h = h)
+    }) %>% dplyr::bind_rows()
+
+  out <- log10(out)
+  out <- out[is.finite(rowSums(out)),]
+  data_mean <- aggregate(h ~ l, out, mean)
+  data_median <- aggregate(h ~ l, out, median)
   data_ends <- data_mean[c(1, nrow(data_median)),]
 
   if (regmethod == "raw") {
-    mod <- lm(h ~ l, data)
-    dt <- data
+    mod <- lm(h ~ l, out)
+    dt <- out
     } else if (regmethod == "mean") {
       mod <- lm(h ~ l, data_mean)
       dt <- data_mean
@@ -72,8 +83,12 @@ fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot
 
   # plot
   if (plot) {
-    plot(dt, xlab = "log10(l)", ylab = "log10(h)")
-    abline(mod, lty = 1)
+    x0 <- raster::extent(data)[1]
+    y0 <- raster::extent(data)[3]
+    raster::plot(data, axes=FALSE)
+    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+    axis(1)
+    axis(2, las=2)
   }
 
   # output
