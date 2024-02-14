@@ -21,7 +21,6 @@
 #'
 #' @examples
 #' rg(horseshoe, L0 = 0.1)
-#' rg(horseshoe, L0 = 0.1, method = "area")
 #' rg(mcap, L0 = 0.01)
 #'
 rg <- function(data, L0, method = "area", parallel = FALSE,
