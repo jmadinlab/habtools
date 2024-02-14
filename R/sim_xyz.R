@@ -3,9 +3,9 @@
 #' Simulates z-values based on a spatial covariance distribution.
 #' Warning: this function can currently only handle a small number for n.
 #'
-#' @param n number of rows or cols
-#' @param mu average z
-#' @param phisq parameter
+#' @param n Number of rows and cols.
+#' @param mu Average z.
+#' @param phisq Parameter.
 #' @param sigmasq parameter: maximum covariance
 #' @param dem T or F
 #'

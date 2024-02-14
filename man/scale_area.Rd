@@ -7,7 +7,7 @@
 scale_area(mesh, target_area = 1)
 }
 \arguments{
-\item{mesh}{A 3D mesh object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
 \item{target_area}{The target area of the scaled 3D mesh. Defaults to 1.}
 }

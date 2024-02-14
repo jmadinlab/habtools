@@ -1,8 +1,8 @@
 #' Re-scale mesh based on a fixed volume of 1
 #'
-#' @param mesh A 3D mesh object
+#' @param mesh A triangular mesh of class mesh3d.
 #'
-#' @return A mesh with volume = 1
+#' @return A mesh with volume = 1.
 #' @export
 #'
 #' @examples

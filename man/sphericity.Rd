@@ -7,16 +7,16 @@
 sphericity(mesh)
 }
 \arguments{
-\item{mesh}{mesh 3d object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 }
 \value{
-value
+Sphericity value.
 }
 \description{
 Calculate sphericity
 }
 \details{
-The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object
+Calculates the ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.
 }
 \examples{
 sphericity(mcap)

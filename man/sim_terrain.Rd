@@ -7,10 +7,10 @@
 sim_terrain(n, smoothness, z_extent = FALSE, dem = TRUE)
 }
 \arguments{
-\item{n}{The extent (matrix size)}
+\item{n}{The extent (matrix size).}
 
 \item{smoothness}{A value between 0.0 and 1.0 (lower values
-produce rougher terrain)}
+produce rougher terrain).}
 
 \item{z_extent}{Logical. Should z be scaled to match extent, n?}
 

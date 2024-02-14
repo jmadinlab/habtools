@@ -7,16 +7,17 @@
 sample_dem(data, L)
 }
 \arguments{
-\item{data}{A DEM in RasterLayer format}
+\item{data}{Digital elevation model of class RasterLayer.}
 
-\item{L}{Size of square to cut out of DEM}
+\item{L}{Size of square to cut out of DEM.}
 }
 \value{
-A DEM in RasterLayer format
+Digital elevation model of class RasterLayer.
 }
 \description{
 Sample a random DEM with specified size from a larger DEM
 }
 \examples{
-sample_dem(horseshoe, L = 4)
+dem1 <- sample_dem(horseshoe, L = 4)
+raster::plot(dem1)
 }

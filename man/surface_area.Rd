@@ -7,13 +7,13 @@
 surface_area(data)
 }
 \arguments{
-\item{data}{DEM in RasterLayer format, mesh3d object or data frame with xy coordinates}
+\item{data}{DEM in RasterLayer format, mesh3d object or data frame with xy coordinates.}
 }
 \value{
-surface area
+Surface area value.
 }
 \description{
-Calculates surface area
+Calculates surface area of a 3D or 2D object.
 }
 \examples{
 surface_area(mcap)

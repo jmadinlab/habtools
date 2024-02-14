@@ -10,7 +10,7 @@ svol_triangle(XYZCoords)
 \item{XYZCoords}{A dataframe with XYZ coordinates of three points in following order: X1,X2,X3,Y1,Y2,Y3,Z1,Z2,Z3}
 }
 \value{
-the signed volume of the triangle
+Value for the signed volume of a triangle.
 }
 \description{
 Signed volume of triangle

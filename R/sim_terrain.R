@@ -3,9 +3,9 @@
 #' Simulates z-values based on the Diamond-square algorithm.
 #' Warning: this function gets slow for n > 128.
 #'
-#' @param n The extent (matrix size)
+#' @param n The extent (matrix size).
 #' @param smoothness A value between 0.0 and 1.0 (lower values
-#' produce rougher terrain)
+#' produce rougher terrain).
 #' @param z_extent Logical. Should z be scaled to match extent, n?
 #' @param dem Logical. Should the matrix be turned into a DEM?
 #'

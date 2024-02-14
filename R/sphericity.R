@@ -1,10 +1,10 @@
 #' Calculate sphericity
 #'
-#' @param mesh mesh 3d object
+#' @param mesh A triangular mesh of class mesh3d.
 #'
-#' @details The ratio of the surface area of a sphere with the same volume as the object and the surface area of the object
+#' @details Calculates the ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.
 #'
-#' @return value
+#' @return Sphericity value.
 #' @export
 #'
 #' @examples

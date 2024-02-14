@@ -2,25 +2,25 @@
 % Please edit documentation in R/sma.R
 \name{sma}
 \alias{sma}
-\title{Second moment area}
+\title{Calculate second moment of area}
 \usage{
 sma(mesh, axis = "z", scale = TRUE, origin = TRUE)
 }
 \arguments{
-\item{mesh}{A mesh object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
-\item{axis}{the axis along which to calculate the second moment of area. z is the default.}
+\item{axis}{The axis along which to calculate the second moment of area. z is the default.}
 
-\item{scale}{scale object so that total area = 1}
+\item{scale}{Logical. Scale the object to have an area = 1? Default = TRUE.}
 
-\item{origin}{set the origin to the bottom left corner of bounding box}
+\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.}
 }
 \value{
-value
+SMA value.
 }
 \description{
 Calculates the 2nd moment of surface area about the origin by multiplying the surface area of
-each triangle in the mesh by it's distance from the origin (should be set to
+each triangle in the mesh by its distance from the origin (should be set to
 the attachment point of the mesh). The sum of these values is the 2nd moment
 of area.
 }

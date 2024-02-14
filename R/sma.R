@@ -1,15 +1,15 @@
-#' Second moment area
+#' Calculate second moment of area
 #'
 #' Calculates the 2nd moment of surface area about the origin by multiplying the surface area of
-#' each triangle in the mesh by it's distance from the origin (should be set to
+#' each triangle in the mesh by its distance from the origin (should be set to
 #' the attachment point of the mesh). The sum of these values is the 2nd moment
 #' of area.
 #'
-#' @param mesh A mesh object
-#' @param axis the axis along which to calculate the second moment of area. z is the default.
-#' @param origin set the origin to the bottom left corner of bounding box
-#' @param scale scale object so that total area = 1
-#' @return value
+#' @param mesh A triangular mesh of class mesh3d.
+#' @param axis The axis along which to calculate the second moment of area. z is the default.
+#' @param origin Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.
+#' @param scale Logical. Scale the object to have an area = 1? Default = TRUE.
+#' @return SMA value.
 #' @export
 #'
 #' @examples

@@ -2,27 +2,27 @@
 % Please edit documentation in R/smv.R
 \name{smv}
 \alias{smv}
-\title{Second moment volume}
+\title{Calculate second moment of volume}
 \usage{
 smv(mesh, axis = "z", scale = TRUE, origin = TRUE)
 }
 \arguments{
-\item{mesh}{A 3D mesh object.}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
-\item{axis}{default = z.}
+\item{axis}{The axis along which to calculate the second moment of volume z is the default.}
 
-\item{scale}{To scale the object to have a volume = 1.}
+\item{scale}{Logical. Scale the object to have a volume = 1? Default = TRUE.}
 
-\item{origin}{set the origin to the bottom left corner of bounding box}
+\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.}
 }
 \value{
-second moment of volume
+SMV value.
 }
 \description{
-Calculates the 2nd moment of volume by multiplying the volume of each
+Calculates the 2nd moment of volume (SMV) by multiplying the volume of each
 triangle in the mesh by its centroids' distance from the origin (should be set to the attachment point
 of the mesh). The sum of these values is the 2nd moment of volume.
-To compare moments in terms of shape only, set scale = TRUE.
+To compare moments in terms of shape only, set scale = TRUE (default).
 Axis is z by default, meaning it will calculate the vertical second moment, but this can be changed if needed.
 }
 \examples{

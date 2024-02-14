@@ -6,7 +6,7 @@
 #' of the triangle is facing towards or away from the origin. When all positive and negative volumes
 #' are integrated across the entire mesh, these values cancel out so that the final volume is an approximation
 #' of the total volume of the mesh.
-#' @return the signed volume of the triangle
+#' @return Value for the signed volume of a triangle.
 #' @export
 #'
 #' @examples

@@ -7,26 +7,25 @@
 split_dem(data, size, parallel = FALSE, ncores = (parallel::detectCores() - 1))
 }
 \arguments{
-\item{data}{RasterLayer}
+\item{data}{Digital elevation model of class RasterLayer.}
 
-\item{size}{size of tiles, relative to the unit of the RasterLayer}
+\item{size}{Size of tiles, in the same unit as the RasterLayer.}
 
-\item{parallel}{TRUE or FALSE. Use parallel processing? Note: parallel must be installed.}
+\item{parallel}{Logical. Use parallel processing? Note: parallel must be installed.}
 
-\item{ncores}{number of cores to use when parallel = TRUE.}
+\item{ncores}{Number of cores to use when parallel = TRUE.}
 }
 \value{
-List of RasterLayers
+List of RasterLayers.
 }
 \description{
 Split DEM into smaller tiles
 }
 \examples{
-L <- raster::res(horseshoe)[1] * nrow(horseshoe) # size of horseshoe = 8m
+L <- habtools::extent(horseshoe) # size of horseshoe = 8m
 size <- 2 # size of target tiles
 (L / size)^2 # number of target tiles = 16
 dem_list <- split_dem(horseshoe, 2)
 length(dem_list)
-sapply(dem_list, hr) # apply height range calculation on each tile
 
 }

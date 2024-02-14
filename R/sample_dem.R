@@ -1,13 +1,14 @@
 #' Sample a random DEM with specified size from a larger DEM
 #'
-#' @param data A DEM in RasterLayer format
-#' @param L Size of square to cut out of DEM
+#' @param data Digital elevation model of class RasterLayer.
+#' @param L Size of square to cut out of DEM.
 #'
-#' @return A DEM in RasterLayer format
+#' @return Digital elevation model of class RasterLayer.
 #' @export
 #'
 #' @examples
-#' sample_dem(horseshoe, L = 4)
+#' dem1 <- sample_dem(horseshoe, L = 4)
+#' raster::plot(dem1)
 sample_dem <- function(data, L) {
   size <- L
   mid <- mid_find(data)

@@ -1,10 +1,10 @@
 #' Surface area
 #'
-#' Calculates surface area
+#' Calculates surface area of a 3D or 2D object.
 #'
-#' @param data DEM in RasterLayer format, mesh3d object or data frame with xy coordinates
+#' @param data DEM in RasterLayer format, mesh3d object or data frame with xy coordinates.
 #'
-#' @return surface area
+#' @return Surface area value.
 #' @export
 #'
 #' @examples

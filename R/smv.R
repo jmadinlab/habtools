@@ -1,17 +1,17 @@
-#' Second moment volume
+#' Calculate second moment of volume
 #'
-#' Calculates the 2nd moment of volume by multiplying the volume of each
+#' Calculates the 2nd moment of volume (SMV) by multiplying the volume of each
 #' triangle in the mesh by its centroids' distance from the origin (should be set to the attachment point
 #' of the mesh). The sum of these values is the 2nd moment of volume.
-#' To compare moments in terms of shape only, set scale = TRUE.
+#' To compare moments in terms of shape only, set scale = TRUE (default).
 #' Axis is z by default, meaning it will calculate the vertical second moment, but this can be changed if needed.
 #'
-#' @param mesh A 3D mesh object.
-#' @param axis default = z.
-#' @param scale To scale the object to have a volume = 1.
-#' @param origin set the origin to the bottom left corner of bounding box
+#' @param mesh A triangular mesh of class mesh3d.
+#' @param axis The axis along which to calculate the second moment of volume z is the default.
+#' @param scale Logical. Scale the object to have a volume = 1? Default = TRUE.
+#' @param origin Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.
 #'
-#' @return second moment of volume
+#' @return SMV value.
 #' @export
 #'
 #' @examples

@@ -7,11 +7,11 @@
 sim_xyz(n, mu, phisq, sigmasq, dem = FALSE)
 }
 \arguments{
-\item{n}{number of rows or cols}
+\item{n}{Number of rows and cols.}
 
-\item{mu}{average z}
+\item{mu}{Average z.}
 
-\item{phisq}{parameter}
+\item{phisq}{Parameter.}
 
 \item{sigmasq}{parameter: maximum covariance}
 

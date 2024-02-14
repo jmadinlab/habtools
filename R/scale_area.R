@@ -1,6 +1,6 @@
 #' Re-scale mesh based on a fixed area
 #'
-#' @param mesh A 3D mesh object
+#' @param mesh A triangular mesh of class mesh3d.
 #' @param target_area The target area of the scaled 3D mesh. Defaults to 1.
 #'
 #' @return A mesh with area = target_area (1 as default).

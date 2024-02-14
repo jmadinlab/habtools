@@ -34,6 +34,7 @@
 # }
 #
 # test <- sim(n = 100, L = 100,  H = 1, R = 3, f = 3, sigma = 0.5)
+# projection(test) <- "+proj=tmerc +datum=WGS84"
 # # test2 <- sim(n = 100, L = 100,  H = 2, R = 3, f = 3, sigma = 0.5, pause = 0.1)
 # # test3 <- sim(n = 100, L = 100,  H = 3, R = 3, f = 11, sigma = 1, pause = 0.1, noise = T, noise_prop = 0.5)
 # #
