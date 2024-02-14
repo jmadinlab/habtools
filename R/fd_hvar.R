@@ -45,8 +45,6 @@ fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot
     }
   }
 
-  # out <- hvar(data, lvec = lvec, ...)
-
   out <-
     lapply(lvec, function(l){
       list <- split_dem(data, l, parallel = parallel, ncores = ncores)

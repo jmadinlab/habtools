@@ -81,12 +81,6 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
   f <- 2 - coef(lm(log10(a) ~ log10(lvec)))[2]
   df <- data.frame(l = lvec, area = a)
 
-  # if (plot) {
-  #   plot(log10(a) ~ log10(lvec))
-  #   pred <- predict(lm(log10(a) ~ log10(lvec)))
-  #   lines(log10(lvec), pred, lty = 1)
-  #
-  # }
   # plot
   if (plot) {
     if (is(data, "RasterLayer")) {

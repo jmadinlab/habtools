@@ -27,7 +27,6 @@ fd_boxes <- function(data, lvec=NULL, keep_data = TRUE, plot = FALSE) {
 
   pts <- data
   res <- median(perimeter(pts, keep_data = TRUE)$segments)
-  # res <- max(perimeter(pts, keep_data = TRUE)$segments)
   names(pts) <- c("x", "y")
 
   if (missing(lvec)) {
