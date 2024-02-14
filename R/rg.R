@@ -3,8 +3,8 @@
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
 #' @param L0 Grain or resolution of calculation.
 #' @param method If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".
-#' @param parallel Use parallel processing (Defaults to FALSE)
-#' @param ncores number of cores to use if parallel = T.
+#' @param parallel Logical. Use parallel processing? Defaults to FALSE.
+#' @param ncores Number of cores to use if parallel = TRUE.
 #' (Defaults to umber of available cores - 1)
 #' @details
 #' Rugosity is defined as the surface area divided by the planar area. For digital elevation models, we include two methods: "hvar" and "area". \cr
@@ -34,7 +34,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
     if (method == "hvar") {
 
       if (missing(L0)) {
-        L0 <- raster::res(data)[1] * 8
+        L0 <- raster::res(data)[1] * 5
         print(paste0("L0 is set to ", L0, "."))
       }
       if (L0 < 2*raster::res(data)[1]) {

@@ -10,7 +10,8 @@ fd_hvar(
   regmethod = "mean",
   keep_data = FALSE,
   plot = FALSE,
-  ...
+  parallel = FALSE,
+  ncores = (parallel::detectCores() - 1)
 )
 }
 \arguments{

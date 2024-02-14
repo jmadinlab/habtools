@@ -19,6 +19,7 @@ fd_diagnose <- function(data, keep_data = TRUE) {
   dta <- dta[order(dta$l),]
   dval <- data[["D"]]
   method <- data[["method"]]
+  lvec <- data[["lvec"]]
 
   f <- diff(log10(dta[,2])) / diff(log10(dta[,1]))
   if (method == "area") {
@@ -44,7 +45,7 @@ fd_diagnose <- function(data, keep_data = TRUE) {
     legend("topright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
   }
   if (keep_data) {
-    return(list(D = unname(dval), data = dta, D_vec = f, var = sd(f), method = method))
+    return(list(D = unname(dval), data = dta, lvec = lvec, D_vec = f, var = sd(f), method = method))
   }
 }
 

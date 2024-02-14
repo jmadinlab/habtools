@@ -4,36 +4,37 @@
 \alias{rdh}
 \title{Calculate rugosity, fractal dimension and height for a DEM}
 \usage{
-rdh(data, x, y, L, lvec, method = "hvar", regmethod = "mean", ...)
+rdh(data, lvec, method_fd = "hvar", method_rg = "area", ...)
 }
 \arguments{
-\item{data}{A dem of class RasterLayer}
+\item{data}{A dem of class RasterLayer.}
 
-\item{x}{minimum x-value}
+\item{lvec}{Scales to use for calculation.}
 
-\item{y}{minimum y-value}
+\item{method_fd}{method for the calculation of rugosity and fractal dimension.
+Can be "hvar", "sd", "cubes", or "area". Defaults to "hvar".}
 
-\item{L}{Extent}
+\item{method_rg}{Method to be used for the rugosity calculation. Defaults to "area".}
 
-\item{lvec}{Scales to include in fd calculation see \code{\link[=fd]{fd()}}}
+\item{...}{Additional arguments see \code{\link[=fd]{fd()}}.}
 
-\item{method}{method for the calculation of rugosity and fractal dimension. Can only be "hvar" , "sd", or "area". Defaults to hvar.}
+\item{parallel}{Logical. Use parallel processing? Defaults to FALSE.}
 
-\item{regmethod}{Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See \code{\link[=fd_hvar]{fd_hvar()}}}
-
-\item{...}{Additional arguments see \code{\link[=fd]{fd()}}}
+\item{ncores}{Number of cores to use if parallel = TRUE.}
 }
 \value{
-a dataframe with the three complexity measures
+A dataframe with the three complexity measures.
 }
 \description{
 Calculate rugosity, fractal dimension and height for a DEM
 }
 \details{
-uses hvar method for rugosity and fractal dimension calculations as default.
+Uses area method for rugosity and hvar method for fractal dimension calculations as default.
 }
 \examples{
-rdh(horseshoe, x = -470, y = 1266, L = 2, lvec = c(0.125, 0.25, 0.5, 1, 2))
+
+dem <- sample_dem(horseshoe, L = 1)
+rdh(dem, lvec = c(0.125, 0.25, 0.5, 1))
 }
 \seealso{
 \code{\link[=fd]{fd()}}

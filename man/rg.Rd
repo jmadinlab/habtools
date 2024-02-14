@@ -19,9 +19,9 @@ rg(
 
 \item{method}{If data is a RasterLayer methods "hvar" or "area" are allowed. Defaults to "hvar".}
 
-\item{parallel}{Use parallel processing (Defaults to FALSE)}
+\item{parallel}{Logical. Use parallel processing? Defaults to FALSE.}
 
-\item{ncores}{number of cores to use if parallel = T.
+\item{ncores}{Number of cores to use if parallel = TRUE.
 (Defaults to umber of available cores - 1)}
 }
 \value{
@@ -39,7 +39,6 @@ In that case the function uses \code{\link[Rvcg:vcgArea]{Rvcg::vcgArea()}} to ca
 }
 \examples{
 rg(horseshoe, L0 = 0.1)
-rg(horseshoe, L0 = 0.1, method = "area")
 rg(mcap, L0 = 0.01)
 
 }
