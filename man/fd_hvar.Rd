@@ -25,7 +25,9 @@ fd_hvar(
 
 \item{plot}{Diagnostic plot}
 
-\item{...}{Additional arguments of see \code{\link[=hvar]{hvar()}}}
+\item{parallel}{Logical. Use parallel processing? Note: parallel must be installed.}
+
+\item{ncores}{Number of cores to use when parallel = TRUE.}
 }
 \value{
 A value for fractal dimension, normally between 2 and 3.

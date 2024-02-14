@@ -21,24 +21,26 @@
 #'
 #' dem <- sample_dem(horseshoe, L = 1)
 #' rdh(dem, lvec = c(0.125, 0.25, 0.5, 1))
-rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area", ...){
+rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
+                parallel = FALSE, ncores = (parallel::detectCores()-1),  ...){
 
   print(paste0("fd calculation using ", method_fd, " method."))
 
-  ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE, ...)
+  ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE,
+              parallel = parallel, ncores = ncores, ...)
   d <- ddata$D
 
   print(paste0("rg calculation using ", method_rg, " method."))
 
 
   if (method_rg == "area") {
-    r <- rg(data)
+    r <- rg(data, method = "area")
   } else if (method_rg == "hvar") {
     if (method_fd == "area") {
-      r <- rg(data, method = "hvar")
+      r <- rg(data, method = "hvar", parallel = parallel, ncores = ncores)
     } else {
       print(paste0("L0 is set to ", min(ddata$lvec), "."))
-      r <- rg(data, method = "hvar", L0 = min(ddata$lvec))
+      r <- rg(data, method = "hvar", L0 = min(ddata$lvec), parallel = parallel, ncores = ncores)
     }
   } else {
     stop("Invalid method_rg specification.")

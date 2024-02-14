@@ -5,7 +5,8 @@
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
 #' @param plot Diagnostic plot
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
-#' @param ... Additional arguments of see [hvar()]
+#' @param parallel Logical. Use parallel processing? Note: parallel must be installed.
+#' @param ncores Number of cores to use when parallel = TRUE.
 #'
 #' @return A value for fractal dimension, normally between 2 and 3.
 #' @export

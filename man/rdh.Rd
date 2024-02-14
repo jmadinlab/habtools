@@ -4,7 +4,15 @@
 \alias{rdh}
 \title{Calculate rugosity, fractal dimension and height for a DEM}
 \usage{
-rdh(data, lvec, method_fd = "hvar", method_rg = "area", ...)
+rdh(
+  data,
+  lvec,
+  method_fd = "hvar",
+  method_rg = "area",
+  parallel = FALSE,
+  ncores = (parallel::detectCores() - 1),
+  ...
+)
 }
 \arguments{
 \item{data}{A dem of class RasterLayer.}
@@ -16,11 +24,11 @@ Can be "hvar", "sd", "cubes", or "area". Defaults to "hvar".}
 
 \item{method_rg}{Method to be used for the rugosity calculation. Defaults to "area".}
 
-\item{...}{Additional arguments see \code{\link[=fd]{fd()}}.}
-
 \item{parallel}{Logical. Use parallel processing? Defaults to FALSE.}
 
 \item{ncores}{Number of cores to use if parallel = TRUE.}
+
+\item{...}{Additional arguments see \code{\link[=fd]{fd()}}.}
 }
 \value{
 A dataframe with the three complexity measures.
