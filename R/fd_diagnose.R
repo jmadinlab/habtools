@@ -17,7 +17,7 @@ fd_diagnose <- function(data, keep_data = TRUE) {
 
   dta <- data[["data"]]
   dta <- dta[order(dta$l),]
-  dval <- data[["fd"]]
+  dval <- data[["D"]]
   method <- data[["method"]]
 
   f <- diff(log10(dta[,2])) / diff(log10(dta[,1]))

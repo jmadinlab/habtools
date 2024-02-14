@@ -26,8 +26,8 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       L <- extent(data)
 
       if (missing(lvec)) {
-        lvec <- L/unique(round(2^seq(log2(8),log2(L/(L0*2)), length.out = 10)))
-        lvec <- sort(lvec)
+        lvec <- L / 2^(0:20)
+        lvec <- sort(lvec[lvec >= L0*2 & lvec <= L/4])
         print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
       } else {
         lvec <- sort(lvec)
