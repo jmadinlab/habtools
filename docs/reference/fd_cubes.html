@@ -70,11 +70,11 @@
 
 
 <dt>lvec</dt>
-<dd><p>(optional) Scales to use for calculation (i.e. cube sizes).</p></dd>
+<dd><p>Vector of scales to use for calculation (i.e. cube sizes).</p></dd>
 
 
 <dt>plot</dt>
-<dd><p>Planar representation of cubes superimposed on 3D mesh for diagnosing <code>lvec</code>. Default = FALSE.</p></dd>
+<dd><p>Planar representation of cubes superimposed on 3D mesh or DEM for visualizing <code>lvec</code>. Default = FALSE.</p></dd>
 
 
 <dt>keep_data</dt>
@@ -82,22 +82,22 @@
 
 
 <dt>scale</dt>
-<dd><p>Logical. Rescale height values to the extent. Only relevant for RasterLayer objects. (Defaults to FALSE).</p></dd>
+<dd><p>Logical. Rescale height values to the extent? Only relevant for RasterLayer objects. (Defaults to FALSE).</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A <code>data.frame</code> of number of cubes (<code>n</code>) intersecting mesh points at different cube sizes (<code>L</code>) and a fractal dimension value. Note that cube size is the length of a side.</p>
+<p>A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>This function calculates fractal dimension using the cube counting method.
+If <code>lvec</code> is not specified, a default based on resolution and extent will be used.
 Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
-It is recommended that to specify the maximum value of <code>lvec</code> so that the largest box encapsulates the entire object.
-The smallest scale included in <code>lvec</code> should not be smaller than the resolution of your object.
-Most meshes are not perfectly fractal, and so use the <code>plot</code> parameter to look for scale transitions.</p>
+It is recommended to specify the maximum value of <code>lvec</code> so that the largest box encapsulates the entire object.
+The smallest scale included in <code>lvec</code> should not be smaller than the resolution of your object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -106,66 +106,74 @@ Most meshes are not perfectly fractal, and so use the <code>plot</code> paramete
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">mcap</span>, keep_data<span class="op">=</span><span class="cn">TRUE</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.423).</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">mcap</span>, keep_data <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.053, 0.106, 0.212, 0.423).</span>
 <span class="r-plt img"><img src="fd_cubes-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.315246</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lvec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4232963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.42329634 0.21164817 0.10582408 0.05291204</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           l n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.4232963 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            l   n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.42329634   1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.21164817   8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.10582408  31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.05291204 134</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $method</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cubes"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="fd_cubes-2.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.200376</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="crop_dem.html">crop_dem</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">469</span>, y0 <span class="op">=</span> <span class="fl">1267</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="fd_cubes-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">dem</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, keep_data<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.063, 0.125, 0.25, 0.5, 1, 2).</span>
+<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">dem</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, keep_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.016, 0.031, 0.063, 0.125, 0.25, 0.5, 1, 2).</span>
 <span class="r-plt img"><img src="fd_cubes-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.224495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.06335</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lvec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.0000 1.0000 0.5000 0.2500 0.1250 0.0625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.000000 1.000000 0.500000 0.250000 0.125000 0.062500 0.031250 0.015625</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        l    n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.0000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.0000    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.5000   33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.2500  157</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.1250  626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0625 2405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          l     n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.000000     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.000000     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.500000    33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.250000   157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.125000   626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.062500  2405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.031250  8254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.015625 23742</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $method</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cubes"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">dem</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, keep_data<span class="op">=</span><span class="cn">TRUE</span>, scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.063, 0.126, 0.251, 0.502, 1.005, 2.01).</span>
+<span class="r-in"><span><span class="fu">fd_cubes</span><span class="op">(</span><span class="va">dem</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, keep_data <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> lvec is set to c(0.016, 0.031, 0.063, 0.126, 0.251, 0.502, 1.005, 2.01).</span>
 <span class="r-plt img"><img src="fd_cubes-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $D</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.336297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.099471</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lvec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.0100000 1.0050000 0.5025000 0.2512500 0.1256250 0.0628125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.01000000 1.00500000 0.50250000 0.25125000 0.12562500 0.06281250 0.03140625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8] 0.01570312</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           l    n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.0100000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.0050000    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.5025000   47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.2512500  218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.1256250  940</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0628125 3530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            l     n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.01000000     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.00500000     8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.50250000    47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.25125000   218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.12562500   940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.06281250  3530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.03140625 11244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.01570312 27610</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $method</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cubes"</span>
