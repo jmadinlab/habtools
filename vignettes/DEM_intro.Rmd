@@ -111,8 +111,9 @@ ggplot(data_rdh) +
 ## Rules of thumb
 
 - When analyzing and comparing multiple DEMs, make sure that each DEM has the same resolution. 
-- When using the "hvar" method, the smallest value of `lvec`should be between two times and ten higher than the resolution 
+- When using the "hvar" method, the smallest value of `lvec` should be between two times and ten higher than the resolution 
 - When using the "hvar" method, the extent (highest value of `lvec`) should ideally be 1 to 2 orders of magnitudes higher compared to smallest value of `lvec` or `lvec` values should match scales of particular interest (e.g. matching body sizes of animals inhabiting the surface)
+- When using the "area" method, the `lvec` can range from the resolution to around 1/8 of the extent. Higher scales will increase bias of the method. 
 - `lvec` and chosen method needs to be the same across all calculations to make comparisons
 
 
