@@ -8,11 +8,15 @@
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of `habtools` is to collate tools for 3D meshes and digital
-elevation models (DEM) targeted at biologists and ecologists. Tools
-calculate metrics like surface area, rugosity, fractal dimension, height
-range, convexity, sphericity, second moments of volume and more.
-
+This package is a collection of tools for 3D 
+  meshes and digital elevation models (DEM) targetted at biologists
+  and ecologists. Tools calculate metrics like surface area, rugosity, 
+  fractal dimension, heigh range, convexity, sphericity, second moments
+  of volume and more. The initial set of tools came from two research papers.
+  Zawada et al. (2019) examined morphology of coral colony laser scans. 
+  Torres-Pulliza et al. (2020) examined  complexity of coral reef structure. 
+  It is hoped that the corpus of tools and number of project contributors 
+  will grow through time. 
 ## Installation
 
 You can install the development version from
