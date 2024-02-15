@@ -11,7 +11,7 @@ planar(mesh, L0, silent = FALSE)
 
 \item{L0}{Resolution of the planar area. Is set to the resolution of the mesh when left empty.}
 
-\item{silent}{Print messages and warnings}
+\item{silent}{message messages and warnings}
 }
 \value{
 A value indicating planar area

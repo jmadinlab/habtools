@@ -35,7 +35,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
 
       if (missing(L0)) {
         L0 <- raster::res(data)[1] * 5
-        print(paste0("L0 is set to ", L0, "."))
+        message(paste0("L0 is set to ", L0, "."))
       }
       if (L0 < 2*raster::res(data)[1]) {
         warning("L0 is smaller than 2*DEM resolution. Consider increasing L0.")
@@ -54,7 +54,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
 
       if (missing(L0)) {
         L0 <- raster::res(data)[1]
-        print(paste0("L0 is set to the resolution of the raster: ", L0, "."))
+        message(paste0("L0 is set to the resolution of the raster: ", L0, "."))
       }
       if (L0 < raster::res(data)[1]) {
         warning("L0 is smaller than DEM resolution.")

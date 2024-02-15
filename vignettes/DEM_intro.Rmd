@@ -96,7 +96,7 @@ dem_list <- split_dem(dem, size = 2)
 sapply(dem_list, hr)
 
 # calculate multiple metrics
-data_rdh <- lapply(dem_list, rdh, method_fd = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2)) %>%
+data_rdh <- suppressMessages(lapply(dem_list, rdh, method_fd = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))) %>%
   bind_rows()
 
 ```

@@ -28,7 +28,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       if (missing(lvec)) {
         lvec <- L / 2^(0:20)
         lvec <- sort(lvec[lvec >= L0*2 & lvec <= L/4])
-        print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+        message(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
       } else {
         lvec <- sort(lvec)
       }
@@ -61,7 +61,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
 
     if (missing(lvec)) {
       lvec <- 2^seq(log2(L0),log2(L/20), length.out = 5)
-      print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+      message(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
     }
 
     if(min(lvec) < L0) {

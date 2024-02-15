@@ -37,7 +37,7 @@ fd_sd <- function(data, lvec,
   if (missing(lvec)) {
     lvec <- L / 2^(0:20)
     lvec <- sort(lvec[lvec > L0*5])
-    print(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
+    message(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
   } else {
     lvec <- sort(lvec)
   }

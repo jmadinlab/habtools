@@ -31,7 +31,7 @@ hvar <- function(data, lvec=NULL, parallel = FALSE,
   if (missing(lvec)) {
     lvec <- 2^(seq(log2(L), log2(L0*10)))
     lvec <- sort(lvec)
-    print(paste0("lvec is set to c(", toString(lvec), ")."))
+    message(paste0("lvec is set to c(", toString(lvec), ")."))
   } else {
     lvec <- sort(lvec)
   }

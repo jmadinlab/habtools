@@ -49,7 +49,7 @@ All fractal dimension methods in `habtools` will automatically generate a vector
 
 ```{r}
 # simulate fractal terrain
-surf <- sim_terrain(n=256, smoothness=0.5)
+surf <- sim_terrain(n = 256, smoothness = 0.5)
 plot(surf)
 
 # fractal dimension using height variation method

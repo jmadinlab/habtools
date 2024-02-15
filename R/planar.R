@@ -2,7 +2,7 @@
 #'
 #' @param mesh mesh object
 #' @param L0 Resolution of the planar area. Is set to the resolution of the mesh when left empty.
-#' @param silent Print messages and warnings
+#' @param silent message messages and warnings
 #'
 #' @return A value indicating planar area
 #' @export

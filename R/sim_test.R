@@ -22,7 +22,7 @@
 #     r@data@values <- r@data@values * H/hr(r)
 #     r@data@values <- r@data@values - min(r@data@values)
 #     ru <- rg(r, L0 = 10/L, method = "hvar", parallel = T)
-#     print(ru)
+#     message(ru)
 #     if (R == round(ru, 1)) {
 #       break
 #     }

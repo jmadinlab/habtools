@@ -24,7 +24,7 @@
 rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
                 parallel = FALSE, ncores = (parallel::detectCores()-1),  ...){
 
-  print(paste0("fd calculation using ", method_fd, " method."))
+  message(paste0("fd calculation using ", method_fd, " method."))
 
   if (method_fd %in% c("sd", "hvar")) {
     ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE,
@@ -40,7 +40,7 @@ rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
 
 
 
-  print(paste0("rg calculation using ", method_rg, " method."))
+  message(paste0("rg calculation using ", method_rg, " method."))
 
 
   if (method_rg == "area") {
@@ -49,7 +49,7 @@ rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
     if (method_fd == "area") {
       r <- rg(data, method = "hvar", parallel = parallel, ncores = ncores)
     } else {
-      print(paste0("L0 is set to ", min(ddata$lvec), "."))
+      message(paste0("L0 is set to ", min(ddata$lvec), "."))
       r <- rg(data, method = "hvar", L0 = min(ddata$lvec), parallel = parallel, ncores = ncores)
     }
   } else {
