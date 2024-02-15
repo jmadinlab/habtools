@@ -6,7 +6,7 @@
 \usage{
 fd_hvar(
   data,
-  lvec = NULL,
+  lvec,
   regmethod = "mean",
   keep_data = FALSE,
   plot = FALSE,

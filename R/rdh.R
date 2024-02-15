@@ -26,9 +26,19 @@ rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
 
   print(paste0("fd calculation using ", method_fd, " method."))
 
-  ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE,
-              parallel = parallel, ncores = ncores, ...)
-  d <- ddata$D
+  if (method_fd %in% c("sd", "hvar")) {
+    ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE,
+                parallel = parallel, ncores = ncores, ...)
+    d <- ddata$D
+  } else if (method_fd %in% c("cubes", "area")) {
+    ddata <- fd(data, method = method_fd, lvec = lvec, keep_data = TRUE,
+                 ...)
+    d <- ddata$D
+  } else {
+    stop("Invalid method_fd specification.")
+  }
+
+
 
   print(paste0("rg calculation using ", method_rg, " method."))
 

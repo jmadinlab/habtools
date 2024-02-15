@@ -46,10 +46,10 @@ hr(dem1)
 
 ```{r}
 # Height variation method
-rg(dem1, L0 = 0.04, method = "hvar", parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
+rg(dem1, method = "hvar", L0 = 0.05, parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. 
            
 # Area method
-rg(dem1, method = "area")
+rg(dem1, method = "area", L0 = 0.05)
 ```
 
 ## Fractal dimension
@@ -76,15 +76,15 @@ Similar to the above method, we suggest a doubling vector for `lvec`. However, t
 
 ```{r}
 # Area method
-fd(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25, 0.5), plot = T, method = "area")
+fd(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), plot = T, method = "area")
 ```
 
 
 ## Multiple metrics
-Note that the resolution (L0) for the rugosity will be set as the smallest value of `lvec` in the `rdh()` function.
+Note that the resolution (L0) for the rugosity calculation will be set as the smallest value of `lvec` in the `rdh()` function if method_fd is "hvar", "cubes", or "sd".
 ```{r}
-rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method = "hvar")
-rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25, 0.5), method = "area")
+rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method_fd = "hvar")
+rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), method_fd = "area")
 ```
 
 ## Multiple squares
@@ -96,7 +96,7 @@ dem_list <- split_dem(dem, size = 2)
 sapply(dem_list, hr)
 
 # calculate multiple metrics
-data_rdh <- lapply(dem_list, rdh,  method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2)) %>%
+data_rdh <- lapply(dem_list, rdh, method_fd = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2)) %>%
   bind_rows()
 
 ```

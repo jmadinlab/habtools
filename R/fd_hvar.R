@@ -29,7 +29,7 @@
 #' fd_hvar(dem)
 #'
 
-fd_hvar <- function(data, lvec=NULL, regmethod = "mean", keep_data = FALSE, plot = FALSE,
+fd_hvar <- function(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FALSE,
                     parallel = FALSE,
                     ncores = (parallel::detectCores()-1)) {
 
