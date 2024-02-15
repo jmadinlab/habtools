@@ -1,11 +1,11 @@
-#' Colony Shape Factor
+#' Calculate colony shape factor
 #'
 #' @description Calculates mechanical vulnerability of rigid, cantilever-type
 #' structural elements.
 #'
-#' @param mesh A mesh3d object
-#' @param z_min (optional) set the z plane about which csf should be calculated
-#' @param res (optional) set the resolution
+#' @param mesh A triangular mesh of class mesh3d.
+#' @param z_min The z plane about which csf should be calculated. Defaults to min(z).
+#' @param res The resolution to be used for the calculation. Defaults to the resolution of the mesh.
 #'
 #' @details This function calculates the mechanical vulnerability of a structural
 #' element, like a hard coral colony, to fluid flow. While developed for corals, and originally
@@ -17,7 +17,7 @@
 #'
 #' @note The orientation of the 3D mesh is important for this function. The function assumes the fluid flow is parallel with the y-axis. The function also assumes the base of the cantilever over which the bending moment acts can be approximated as an ellipse with the diameter on the y-axis parallel with flow (dy). You can set a z_min if the base of your mesh is not flat at the base (i.e., shift the plane upon which the cantilever is attached upwards). The function output includes dy and dx for monitoring anticipated values.
 #'
-#' @return A list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
+#' @return A value for csf or if keep_data = TRUE, a list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
 #' @export
 #'
 #' @references Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
@@ -25,13 +25,13 @@
 #' @examples
 #' csf(mcap, z_min=-3.65)
 
-csf <- function(mesh, z_min, res) {
+csf <- function(mesh, z_min, res, keep_data = FALSE) {
   pts <- data.frame(t(mesh$vb)[,1:3])
   names(pts) <- c("x", "y", "z")
 
   if (missing(z_min)) {
     z_min <- min(pts$z)
-    warning(paste0("z_min set to ", z_min))
+    message(paste0("z_min set to ", z_min))
   }
   if (z_min < min(pts$z) | z_min > max(pts$z)) {
     stop("z_min outside the range of z values")
@@ -39,7 +39,7 @@ csf <- function(mesh, z_min, res) {
   if (missing(res)) {
     res <- Rvcg::vcgMeshres(mesh)$res
     res <- max(res)
-    warning(paste0("resolution set to ", res))
+    message(paste0("resolution set to ", res))
   }
 
   pts <- pts[pts$z >= z_min,]
@@ -60,5 +60,9 @@ csf <- function(mesh, z_min, res) {
   mom <- sum(sapply(1:dim(rast)[1], moment))
   csf <- (16 / (dy^2 * dx * pi)) * mom
 
-  return(list(csf=csf, dy=dy, dx=dx, mom=mom))
+  if (keep_data) {
+    return(list(csf=csf, dy=dy, dx=dx, mom=mom))
+  } else {
+    return(csf)
+  }
 }
