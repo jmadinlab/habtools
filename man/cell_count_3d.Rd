@@ -7,21 +7,21 @@
 cell_count_3d(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 }
 \arguments{
-\item{pts}{data}
+\item{pts}{Data frame with x, y, and z coordinates}
 
-\item{xmin}{minimum x-value}
+\item{xmin}{Minimum x-value}
 
-\item{xmax}{maximum x-value}
+\item{xmax}{Maximum x-value}
 
-\item{ymin}{minimum y-value}
+\item{ymin}{Minimum y-value}
 
-\item{ymax}{maximum y-value}
+\item{ymax}{Maximum y-value}
 
-\item{zmin}{minimum z-value}
+\item{zmin}{Minimum z-value}
 
-\item{zmax}{maximum z-value}
+\item{zmax}{Maximum z-value}
 
-\item{n}{multiplier}
+\item{n}{Multiplier}
 }
 \value{
 Number of filled cells

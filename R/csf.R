@@ -23,7 +23,8 @@
 #' @references Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.
 #'
 #' @examples
-#' csf(mcap, z_min=-3.65)
+#' csf(mcap, z_min = -3.65)
+#' csf(mcap, z_min = -3.65, keep_data = TRUE)
 
 csf <- function(mesh, z_min, res, keep_data = FALSE) {
   pts <- data.frame(t(mesh$vb)[,1:3])

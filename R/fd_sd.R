@@ -1,20 +1,21 @@
 #' Calculate fractal Dimension using the standard deviation method
 #'
 #' @param data Digital elevation model of class RasterLayer.
-#' @param lvec Scales to use for calculation.
+#' @param lvec Vector of scales to use for calculation.
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
-#' @param plot Logical. Show plot?
+#' @param plot Logical. Show plot of scales relative to data?
 #' @param keep_data Logical. Keep the data used for fd calculation? Defaults to FALSE.
 #' @param parallel Logical. Use parallel processing? Note: parallel must be installed.
 #' @param ncores Number of cores to use when parallel = TRUE.
 #'
-#' @return A value for fractal dimension, normally between 2 and 3.
+#' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 #' @export
 #'
 #' @importFrom stats sd
 #'
 #' @details Calculates fractal dimension using the standard deviation method,
 #' an analogue of the variation method, but using the standard deviation in height per grid cell instead of the full height range.
+#' If `lvec` is not specified, a default based on resolution and extent will be used.
 #' A rule of thumb is that `l` should range at least an order of magnitude.
 #' However, large ranges also average-out fractal dimension of a surface that might have
 #' phase transitions, and therefore a thorough exploration of height ranges is suggested using the `plot`.

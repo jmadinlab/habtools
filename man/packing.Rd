@@ -7,10 +7,10 @@
 packing(mesh)
 }
 \arguments{
-\item{mesh}{A mesh3D object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 }
 \value{
-value
+Value of packing.
 }
 \description{
 Calculate packing

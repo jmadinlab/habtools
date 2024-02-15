@@ -38,7 +38,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -60,52 +60,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rdh</span><span class="op">(</span><span class="va">data</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">L</span>, <span class="va">lvec</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, regmethod <span class="op">=</span> <span class="st">"mean"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rdh</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">lvec</span>,</span>
+<span>  method_fd <span class="op">=</span> <span class="st">"hvar"</span>,</span>
+<span>  method_rg <span class="op">=</span> <span class="st">"area"</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncores <span class="op">=</span> <span class="op">(</span><span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>A dem of class RasterLayer</p></dd>
-
-
-<dt>x</dt>
-<dd><p>minimum x-value</p></dd>
-
-
-<dt>y</dt>
-<dd><p>minimum y-value</p></dd>
-
-
-<dt>L</dt>
-<dd><p>Extent</p></dd>
+<dd><p>A dem of class RasterLayer.</p></dd>
 
 
 <dt>lvec</dt>
-<dd><p>Scales to include in fd calculation see <code><a href="fd.html">fd()</a></code></p></dd>
+<dd><p>Scales to use for calculation.</p></dd>
 
 
-<dt>method</dt>
-<dd><p>method for the calculation of rugosity and fractal dimension. Can only be "hvar" , "sd", or "area". Defaults to hvar.</p></dd>
+<dt>method_fd</dt>
+<dd><p>method for the calculation of rugosity and fractal dimension.
+Can be "hvar", "sd", "cubes", or "area". Defaults to "hvar".</p></dd>
 
 
-<dt>regmethod</dt>
-<dd><p>Regression method to use for fractal dimension calculation. Only relevant for when "hvar" method is used. See <code><a href="fd_hvar.html">fd_hvar()</a></code></p></dd>
+<dt>method_rg</dt>
+<dd><p>Method to be used for the rugosity calculation. Defaults to "area".</p></dd>
+
+
+<dt>parallel</dt>
+<dd><p>Logical. Use parallel processing? Defaults to FALSE.</p></dd>
+
+
+<dt>ncores</dt>
+<dd><p>Number of cores to use if parallel = TRUE.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Additional arguments see <code><a href="fd.html">fd()</a></code></p></dd>
+<dd><p>Additional arguments see <code><a href="fd.html">fd()</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>a dataframe with the three complexity measures</p>
+<p>A dataframe with the three complexity measures.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>uses hvar method for rugosity and fractal dimension calculations as default.</p>
+    <p>Uses area method for rugosity and hvar method for fractal dimension calculations as default.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -116,9 +121,14 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rdh</span><span class="op">(</span><span class="va">horseshoe</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">470</span>, y <span class="op">=</span> <span class="fl">1266</span>, L <span class="op">=</span> <span class="fl">2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          R        D        H</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.490443 2.184386 1.059676</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_dem.html">sample_dem</a></span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rdh</span><span class="op">(</span><span class="va">dem</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> fd calculation using hvar method.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> rg calculation using area method.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> L0 is set to the resolution of the raster: 0.01.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          R        D         H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.891681 2.368624 0.4747772</span>
 </code></pre></div>
     </div>
   </div>

@@ -64,7 +64,7 @@
       <a href="articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul>
 </li>
@@ -86,7 +86,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>habtools</code> is to collate tools for 3D meshes and digital elevation models (DEM) targeted at biologists and ecologists. Tools calculate metrics like surface area, rugosity, fractal dimension, height range, convexity, sphericity, second moments of volume and more. The initial set of tools came from two research papers. Zawada et al. (2019) examined morphology of coral colony laser scans. Torres-Pulliza et al. (2020) examined complexity of coral reef structure. It is hoped that the number of tools and contributors will grow through time.</p>
+<p>The goal of <code>habtools</code> is to collate tools for 3D meshes and digital elevation models (DEM) targeted at biologists and ecologists. Tools calculate metrics like surface area, rugosity, fractal dimension, height range, convexity, sphericity, second moments of volume and more.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -98,7 +98,7 @@
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>There are currently two data set accompanying this package. <code>horseshoe</code> is a digital elevation model of a reef, and <code>mcap</code> is a 3D mesh of a coral growing on a reef.</p>
+<p>There are currently two data set accompanying this package. <code>horseshoe</code> is a digital elevation model of a reef in RasterLayer format, and <code>mcap</code> is a 3D mesh of a coral growing on a reef in mesh3d format.</p>
 <p>The following example calculates height range, rugosity and fractal dimension of a 2 x 2 m plot of reef using the height range method developed in Torres-Pulliza et al. (2020).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
@@ -125,27 +125,64 @@
 <span></span>
 <span><span class="co"># rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01). </span></span>
 <span><span class="fu"><a href="reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem2</span>, L0 <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.691571</span></span>
+<span><span class="co">#&gt; [1] 1.595773</span></span>
 <span></span>
 <span><span class="co"># fractal dimension</span></span>
-<span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, keep_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example1-3.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#&gt; [1] 2.301808</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $D</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.301808</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $data</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      l         h</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.25 0.3139470</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.50 0.5822422</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 1.00 0.8890120</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2.00 1.3682885</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $D_vec</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.108902 2.389417 2.377902</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $var</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.158736</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $method</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "hvar"</span></span></code></pre></div>
 <p>The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one <code>z</code> coordinate for a given <code>xy</code> (i.e., they have overhangs), we advise the cube counting fractal dimension method presented in Zawada et al. (2019).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmurdoch/rgl" class="external-link">rgl</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># height range</span></span>
 <span><span class="fu"><a href="reference/hr.html">hr</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.2185397</span></span>
 <span></span>
 <span><span class="co"># rugosity</span></span>
 <span><span class="fu"><a href="reference/rg.html">rg</a></span><span class="op">(</span><span class="va">mcap</span>, L0 <span class="op">=</span> <span class="fl">0.045</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2.393919</span></span>
+<span><span class="co">#&gt; [1] 2.882813</span></span>
 <span></span>
 <span><span class="co"># fractal dimension</span></span>
-<span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.045</span>, <span class="fl">0.09</span>, <span class="fl">0.18</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, keep_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "lvec is set to c(0.423, 0.212, 0.106, 0.053)."</span></span></code></pre></div>
 <p><img src="reference/figures/README-example2-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&gt; [1] 2.158836</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $D</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.315246</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $data</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            l   n</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0.05291204 134</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 0.10582408  31</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0.21164817   8</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.42329634   1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $D_vec</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.111893 1.954196 3.000000</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $var</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.5638126</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $method</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "cubes"</span></span></code></pre></div>
 </div>
 </div>
   </div>

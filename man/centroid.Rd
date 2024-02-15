@@ -2,7 +2,7 @@
 % Please edit documentation in R/centroid.R
 \name{centroid}
 \alias{centroid}
-\title{Centroid of 3D data}
+\title{Calculate centroid of 3D points}
 \usage{
 centroid(data)
 }

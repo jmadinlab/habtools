@@ -2,16 +2,16 @@
 % Please edit documentation in R/mesh_to_points.R
 \name{mesh_to_points}
 \alias{mesh_to_points}
-\title{Transform DEM to 3D pointcloud of raster corners}
+\title{Transform mesh to 3D pointcloud}
 \usage{
 mesh_to_points(mesh)
 }
 \arguments{
-\item{mesh}{A digital elevation model in raster format}
+\item{mesh}{A triangular mesh of class mesh3d.}
 }
 \value{
-A 3D point cloud
+A data frame with XYZ coordinates.
 }
 \description{
-Transform DEM to 3D pointcloud of raster corners
+Transform mesh to 3D pointcloud
 }

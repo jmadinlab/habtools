@@ -38,7 +38,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -66,7 +66,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>object of class mesh3d</p></dd>
+<dd><p>An object of class mesh3d</p></dd>
 
 </dl></div>
     <div id="value">
@@ -82,8 +82,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (classes, fdef, mtable) {    methods &lt;- .findInheritedMethods(classes, fdef, mtable)    if (length(methods) == 1L)         return(methods[[1L]])    else if (length(methods) == 0L) {        cnames &lt;- paste0("\"", vapply(classes, as.character,             ""), "\"", collapse = ", ")        stop(gettextf("unable to find an inherited method for function %s for signature %s",             sQuote(fdef@generic), sQuote(cnames)), domain = NA)    }    else stop("Internal error in finding inherited methods; didn't return a unique method",         domain = NA)})(list("mesh3d"), new("standardGeneric", .Data = function (x,     ...) standardGeneric("extent"), generic = structure("extent", package = "raster"),     package = "raster", group = list(), valueClass = character(0),     signature = "x", default = NULL, skeleton = (function (x,         ...)     stop(gettextf("invalid call in method dispatch to '%s' (no default method)",         "extent"), domain = NA))(x, ...)), &lt;environment&gt;):</span> unable to find an inherited method for function ‘extent’ for signature ‘"mesh3d"’</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">habtools</span><span class="fu">::</span><span class="fu">extent</span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3793157</span>
+<span class="r-in"><span><span class="fu">habtools</span><span class="fu">::</span><span class="fu">extent</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

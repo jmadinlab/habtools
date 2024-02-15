@@ -7,7 +7,7 @@
 set_origin(mesh, reference = NULL)
 }
 \arguments{
-\item{mesh}{mesh3d object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
 \item{reference}{Vector containing coordinates of the reference vertex.
 If left empty, this will default to the minimum of x, y, and z.}
@@ -16,9 +16,11 @@ If left empty, this will default to the minimum of x, y, and z.}
 mesh3d object
 }
 \description{
-Shift the values of a set of XYZ coordinates so that the
-origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates)
-Title
+Transforms XYZ coordinates relative to a chosen origin
+}
+\details{
+Transforms coordinates so that the
+origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates).
 }
 \examples{
 mesh <- set_origin(mcap)

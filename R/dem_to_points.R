@@ -1,11 +1,17 @@
 #' Transform DEM to 3D pointcloud of raster corners.
 #'
-#' @param dem A digital elevation model in raster format
-#' @param bh border height from lowest point
-#' @param parallel TRUE or FALSE to define use of parallel computation
+#' @param dem Digital elevation model of class RasterLayer.
+#' @param bh Border height from lowest point.
+#' @param parallel Logical. Use parallel computation?
 #'
-#' @return A 3D point cloud for raster cell corners
+#' @return A 3D point cloud for raster cell corners.
 #' @export
+#'
+#' @examples
+#' dem <- sim_terrain(20, 0.5)
+#' plot(dem)
+#' pts <- dem_to_points(dem)
+#' rgl::plot3d(pts)
 #'
 dem_to_points <-function(dem, bh = NULL, parallel = F){
 

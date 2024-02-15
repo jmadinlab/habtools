@@ -1,14 +1,14 @@
-#' 3D Mesh to DEM
+#' Transform 3D Mesh to DEM
 #'
 #' @description
-#' `mesh_to_dem` turns a 3D Mesh file into a Digital Elevation Model (DEM) in raster
+#' Turns a 3D Mesh file into a Digital Elevation Model (DEM) of class RasterLayer
 #' format.
 #'
 #' @param mesh A mesh3d object.
 #' @param res (Optional) The desired DEM resolution in same units at the 3D mesh.
-#' @param fill Fill `NA` values in raster with minimum value.
+#' @param fill Logical. Fill `NA` values in raster with minimum value?
 #'
-#' @return A raster file.
+#' @return A dem of class RasterLayer.
 #' @export
 #'
 #' @details
@@ -26,11 +26,11 @@
 #' dem <- mesh_to_dem(mcap)
 #' plot(dem)
 #'
-#' dem <- mesh_to_dem(mcap, res=0.05)
+#' dem <- mesh_to_dem(mcap, res = 0.05)
 #' plot(dem)
 #'
 #' # Don't fill empty raster cells
-#' dem <- mesh_to_dem(mcap, res=0.05, fill=FALSE)
+#' dem <- mesh_to_dem(mcap, res = 0.02, fill = FALSE)
 #' plot(dem)
 #'
 mesh_to_dem <- function(mesh, res, fill = TRUE) {

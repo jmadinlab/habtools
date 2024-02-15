@@ -1,8 +1,8 @@
-#' Transform DEM to 3D pointcloud of raster corners
+#' Transform mesh to 3D pointcloud
 #'
-#' @param mesh A digital elevation model in raster format
+#' @param mesh A triangular mesh of class mesh3d.
 #'
-#' @return A 3D point cloud
+#' @return A data frame with XYZ coordinates.
 #' @export
 #'
 #'

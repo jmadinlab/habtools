@@ -1,11 +1,11 @@
-#' Geometric plane equation
+#' Calculate metric based on geometric plane equation
 #'
 #' @description Calculates either rugosity, fractal dimension or height range based on the
 #' other two variables.
 #'
 #' @param r,d,h two of the three variables to calculate the third.
-#' @param L extent.
-#' @param L0 resolution.
+#' @param L Extent.
+#' @param L0 Resolution.
 #'
 #' @details This function uses the geometric plane equation from Torres-Pulliza et al. (2020) to calculate one of rugosity,
 #' fractal dimension or height range based on the other two variables.

@@ -1,17 +1,18 @@
 #' Calculate fractal Dimension using the height variation method
 #'
 #' @param data Digital elevation model of class RasterLayer or dataframe (output of hvar function)
-#' @param lvec Scales to use for calculation.
+#' @param lvec Vector of scales to use for calculation.
 #' @param regmethod Method to use for linear regression between scale (lvec) and height range. One of `raw` (all data), `mean` (default) `median` or `ends` (minimum and maximum scale only)
-#' @param plot Diagnostic plot
+#' @param plot Logical. Show plot of scales relative to data?
 #' @param keep_data Keep the data used for fd calculation? defaults to FALSE
 #' @param parallel Logical. Use parallel processing? Note: parallel must be installed.
 #' @param ncores Number of cores to use when parallel = TRUE.
 #'
-#' @return A value for fractal dimension, normally between 2 and 3.
+#' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 #' @export
 #'
 #' @details Calculates fractal dimension using the height variation regression.
+#' If `lvec` is not specified, a default based on resolution and extent will be used.
 #' `data` can be a DEM or a `data.frame` with columns labeled `l` and `h` for
 #' grid cell length and height range of that cell, respectively (output of [hvar()]).
 #' A rule of thumb is that `l` should range an order of magnitude.

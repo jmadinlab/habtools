@@ -1,4 +1,4 @@
-#' Calculate rugosity, fractal dimension and height for a DEM
+#' Calculate rugosity, fractal dimension, and height for a DEM
 #'
 #' @param data A dem of class RasterLayer.
 #' @param lvec Scales to use for calculation.
@@ -14,7 +14,7 @@
 #' @seealso [hr()]
 #'
 #' @details Uses area method for rugosity and hvar method for fractal dimension calculations as default.
-#' @return A dataframe with the three complexity measures.
+#' @return A dataframe with the three complexity metrics.
 #' @export
 #'
 #' @examples
@@ -38,10 +38,7 @@ rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
     stop("Invalid method_fd specification.")
   }
 
-
-
   message(paste0("rg calculation using ", method_rg, " method."))
-
 
   if (method_rg == "area") {
     r <- rg(data, method = "area")

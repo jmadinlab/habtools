@@ -1,4 +1,4 @@
-#' Centroid of 3D data
+#' Calculate centroid of 3D points
 #'
 #' @description
 #' Calculates the centroid for a given set of XYZ coordinates.

@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Complexity metrics for DEMs • habtools</title>
+<title>Complexity metrics for 3D meshes • habtools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Complexity metrics for DEMs">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Complexity metrics for 3D meshes">
 <meta property="og:description" content="habtools">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,7 +56,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul>
 </li>
@@ -74,7 +74,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Complexity metrics for DEMs</h1>
+      <h1 data-toc-skip>Complexity metrics for 3D meshes</h1>
             
       
       
@@ -86,168 +86,238 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: sp</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'raster'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:habtools':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     extent</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:raster':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, select, union</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-<p>In this vignette, we go over the basic steps to calculate standard
-complexity metrics for digital elevation models (DEMs). In this example,
-we use a DEM of 8x8m with a resolution of 0.01m.</p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmurdoch/rgl" class="external-link">rgl</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; This build of rgl does not include OpenGL functions.  Use</span></span>
+<span><span class="co">#&gt;  rglwidget() to display results, e.g. via options(rgl.printRglwidget = TRUE).</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rgl.messageRglwidget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><em>habtools</em> includes a wide range of complexity metrics
+applicable to 3D meshes.</p>
+<p>Before, calculating any metrics, visualize your mesh and make sure
+that the z orientation is correct, as this may affect some of the
+calculations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load a raster</span></span>
-<span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="va">horseshoe</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">res</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.01 0.01</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mesh_intro_files/figure-html/unnamed-chunk-2-1.png" width="700">
-Let’s say we want complexity metrics for a certain square of size 2m
-around xy-coordinates.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></code></pre></div>
+<p>Depending on how the mesh was generated (e.g. with the use of a laser
+scanner), the resolutions (distance between vertices inside the mesh)
+can vary a lot. This may affect calculations such as fractal dimension.
+Check the distribution of resolution of your object and if needed,
+remesh to make the resolution more uniform.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crop_dem.html">crop_dem</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">resvec</span> <span class="op">&lt;-</span> <span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgMeshres.html" class="external-link">vcgMeshres</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="co"># vector of resolutions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">resvec</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mesh_intro_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mesh_intro_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
-<div class="section level2">
-<h2 id="height-range">Height range<a class="anchor" aria-label="anchor" href="#height-range"></a>
-</h2>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">resvec</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. </span></span>
+<span><span class="co">#&gt; 0.001307 0.005265 0.007003 0.007831 0.009410 0.043981</span></span></code></pre></div>
+<p>In our example, the ‘mcap’ object has very variable distances between
+vertices. We can solve this issue by remeshing the object with the Rvcg
+function <code>vgcUniformRemesh()</code>. Here we set the resolution
+(voxelSize) to the minimum distance between points in the original mesh
+to ensure we don’t loose details. This choice may be made on a
+case-to-case basis. Setting multisample to TRUE improves the accuracy of
+distance field computation, but slows down the calculation so this
+choice may be defined by computing power and the size of your object.
+The remeshed object now has a mean resolution of approximately the
+minimum of ‘resvec’. While there will still be some variation in the
+obtained distances between vertices, the variation will be much smaller.
+An alternative option would be to remesh using an external 3D software
+such as blender.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">dem1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.9766939</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="rugosity">Rugosity<a class="anchor" aria-label="anchor" href="#rugosity"></a>
-</h2>
+<code class="sourceCode R"><span><span class="va">mcap_uniform</span> <span class="op">&lt;-</span> <span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgUniformRemesh.html" class="external-link">vcgUniformRemesh</a></span><span class="op">(</span><span class="va">mcap</span>, silent <span class="op">=</span> <span class="cn">TRUE</span>, multiSample <span class="op">=</span> <span class="cn">TRUE</span>, voxelSize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">resvec</span><span class="op">)</span>, mergeClost <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
+<span><span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgMeshres.html" class="external-link">vcgMeshres</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 0.001328214</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgMeshres.html" class="external-link">vcgMeshres</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. </span></span>
+<span><span class="co">#&gt; 0.0003464 0.0010450 0.0013561 0.0013282 0.0016327 0.0026663</span></span></code></pre></div>
+<p>The three main metrics for DEMs also work for meshes.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Height variation method</span></span>
-<span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, L0 <span class="op">=</span> <span class="fl">0.1</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. </span></span>
-<span><span class="co">#&gt; [1] 1.596596</span></span>
-<span>           </span>
-<span><span class="co"># Area method</span></span>
-<span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.696857</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="fractal-dimension">Fractal dimension<a class="anchor" aria-label="anchor" href="#fractal-dimension"></a>
-</h2>
-<div class="section level3">
-<h3 id="height-variation-method">Height variation method<a class="anchor" aria-label="anchor" href="#height-variation-method"></a>
-</h3>
-<p>The height variation method is based on the relationship between
-height range and scale. Basically, the DEM is divided into small squares
-with sizes specified in <code>lvec</code>. Within each square, the
-height range is calculated and logged. This results in a data frame with
-many height ranges (depending on the scale). This data is then
-summarized by taking the mean or median. The fractal dimension is
-finally calculated as: <span class="math display">\[D = 3- b,\]</span>
-with b being the slope of the linear regression between height range (h)
-and scale (l) <span class="math inline">\(log(h) \sim log(l)\)</span>.
-Because a range of values is needed to calculate a height range the
-smallest value of <code>lvec</code> should always be at least two times
-the resolution of the DEM, and up to 10 times bigger. The largest value
-should be the extent of the DEM square. We suggest to choose a vector of
-doubling values for <code>lvec</code>. For example, if the resolution =
-0.01m and the extent = 2m, we could choose <code>lvec</code> =
-<code>c(0.125, 0.25, 0.5, 1, 2)</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Height variation method</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mesh_intro_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; [1] 2.284862</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="area-method">Area method<a class="anchor" aria-label="anchor" href="#area-method"></a>
-</h3>
-<p>The area method operates quite differently and is therefore not
-comparable to the height variation method described above. This method
-uses surface areas at varying scales and calculates the fractal
-dimension as: <span class="math display">\[D = 2 - b,\]</span> where b
-is the slope of the linear regression between surface area (a) and scale
-(l): <span class="math inline">\(log(a) \sim log(l)\)</span>. The
-surface area is calculated at each scale by aggregating the DEM to the
-resolution of that scale by taking the median. Similar to the above
-method, we suggest a doubling vector for <code>lvec</code>. However, the
-smallest scale can be as small as the resolution of the DEM and the
-largest scale should not approach the extent DEM.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Area method</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mesh_intro_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; [1] 2.222356</span></span></code></pre>
-</div>
-</div>
-<div class="section level2">
-<h2 id="multiple-metrics">Multiple metrics<a class="anchor" aria-label="anchor" href="#multiple-metrics"></a>
-</h2>
-<p>Note that the resolution (L0) for the rugosity will be set as the
-smallest value of <code>lvec</code> in the <code><a href="../reference/rdh.html">rdh()</a></code>
-function.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          R        D         H</span></span>
-<span><span class="co">#&gt; 1 1.518349 2.284862 0.9766939</span></span>
-<span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          R        D         H</span></span>
-<span><span class="co">#&gt; 1 1.824223 2.222356 0.9766939</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="multiple-squares">Multiple squares<a class="anchor" aria-label="anchor" href="#multiple-squares"></a>
-</h2>
-<p>The function <code><a href="../reference/split_dem.html">split_dem()</a></code> allows you to subdivide a DEM
-into equal parts. Let’s divide the big raster into 2x2m squares. Note
-that this function will only work well if you have a square DEM. You
-also want to choose the size so that the DEM can be divided into equal
-parts.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dem_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/split_dem.html">split_dem</a></span><span class="op">(</span><span class="va">dem</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co"># calculate one metric for all squares</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">hr</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 0.5169915 0.6127143 0.8386080 0.8948447 0.6774140 0.9407243 0.9958876</span></span>
-<span><span class="co">#&gt;  [8] 0.9968966 1.1133886 1.0766171 1.1218033 1.0029795 0.9923673 1.1646364</span></span>
-<span><span class="co">#&gt; [15] 0.9986641 1.3692834</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># fractal dimension</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, diagnose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(0.024, 0.048, 0.096, 0.193, 0.386).</span></span></code></pre></div>
+<p><img src="mesh_intro_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.310726</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;            l   n</span></span>
+<span><span class="co">#&gt; 5 0.02411913 668</span></span>
+<span><span class="co">#&gt; 4 0.04823826 162</span></span>
+<span><span class="co">#&gt; 3 0.09647653  34</span></span>
+<span><span class="co">#&gt; 2 0.19295306   8</span></span>
+<span><span class="co">#&gt; 1 0.38590612   1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.38590612 0.19295306 0.09647653 0.04823826 0.02411913</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 2.043854 2.252387 2.087463 3.000000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.4452014</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "cubes"</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, method <span class="op">=</span> <span class="st">"area"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(0.001, 0.003, 0.005, 0.01, 0.019).</span></span></code></pre>
+<p><img src="mesh_intro_files/figure-html/unnamed-chunk-5-2.png" width="700"><img src="mesh_intro_files/figure-html/unnamed-chunk-5-3.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.027527</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;             l      area</span></span>
+<span><span class="co">#&gt; 1 0.001356093 0.2734164</span></span>
+<span><span class="co">#&gt; 2 0.002629222 0.2698176</span></span>
+<span><span class="co">#&gt; 3 0.005097591 0.2644592</span></span>
+<span><span class="co">#&gt; 4 0.009883320 0.2605702</span></span>
+<span><span class="co">#&gt; 5 0.019161993 0.2539932</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.001356093 0.002629222 0.005097591 0.009883320 0.019161993</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 2.020013 2.030297 2.022376 2.038613</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.00843044</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "area"</span></span>
 <span></span>
-<span><span class="co"># calculate multiple metrics</span></span>
-<span><span class="va">data_rdh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">rdh</span>,  method <span class="op">=</span> <span class="st">"hvar"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># rugosity</span></span>
+<span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; L0 is set to mesh resolution (0.00783124724167033)</span></span>
+<span><span class="co">#&gt; [1] 3.249487</span></span>
+<span></span>
+<span><span class="co"># height range </span></span>
+<span><span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2185397</span></span></code></pre>
+<p>For fractal dimension, two methods are available: “cubes” and “area”.
+In the “cubes” method, fractal dimension is calculated as the slope of
+<span class="math inline">\(log10(n) \sim log10(l)\)</span>, where n is
+the total number of cubes that contains any surface of the object and l
+is the size of the cubes (elements of lvec). In the “area” method, the
+mesh is remeshed at varying resolutions (lvec) Further, you can
+calculate planar and total surface area of the object.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/planar.html">planar</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; L0 is set to mesh resolution (0.00783124724167033)</span></span>
+<span><span class="co">#&gt; [1] 0.08303158</span></span>
+<span><span class="fu"><a href="../reference/surface_area.html">surface_area</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2698101</span></span></code></pre></div>
+<p>There are a number of other metrics that tell you more about the
+shape of the object. See Zawada et al. (2019) for an example of an
+application of these metrics on corals.<br>
+- <strong>Convexity:</strong> the ratio of the volume of the object and
+the volume of the convex hull around the object.<br>
+- <strong>Packing:</strong> The ratio of the surface area of the object
+and the surface area of the convex hull around the object.<br>
+- <strong>Sphericity:</strong> The ratio of the surface area of a sphere
+with the same volume as the object and the surface area of the
+object.<br>
+- <strong>Second moment of area (sma):</strong> A measure of
+top-heaviness using area. Calculated by multiplying the surface area of
+each triangle in the mesh by its vertical distance from the
+origin.<br>
+- <strong>Second moment of volume (smv):</strong> A measure of
+top-heaviness using volume. For each triangle in the mesh, a tetrahedron
+between the triangle and the origin was calculated. The signed volume of
+each tetrahedron was multiplied by the vertical distance between the
+centroid of the tetrahedron and the centroid of the attachment
+plane.<br>
+- <strong>Mechanical shape factor (csf):</strong> Mechanical
+vulnerability of a structural element (Madin &amp; Connolly, 2006).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># convexity</span></span>
+<span><span class="fu"><a href="../reference/convexity.html">convexity</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4484716</span></span>
+<span></span>
+<span><span class="co"># packing</span></span>
+<span><span class="fu"><a href="../reference/packing.html">packing</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.8642852</span></span>
+<span></span>
+<span><span class="co"># sphericity</span></span>
+<span><span class="fu"><a href="../reference/sphericity.html">sphericity</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6056971</span></span>
+<span></span>
+<span><span class="co"># second moment of area</span></span>
+<span><span class="fu"><a href="../reference/sma.html">sma</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2350703</span></span>
+<span></span>
+<span><span class="co"># second moment of volume</span></span>
+<span><span class="fu"><a href="../reference/smv.html">smv</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2988261</span></span>
+<span></span>
+<span><span class="co"># mechanical shape factor</span></span>
+<span><span class="fu"><a href="../reference/csf.html">csf</a></span><span class="op">(</span><span class="va">mcap</span>, z_min <span class="op">=</span> <span class="op">-</span><span class="fl">3.65</span><span class="op">)</span><span class="op">$</span><span class="va">csf</span></span>
+<span><span class="co">#&gt; Warning in csf(mcap, z_min = -3.65): resolution set to 0.00783124724167033</span></span>
+<span><span class="co">#&gt; [1] 0.2059624</span></span></code></pre></div>
+<p>You can also transform a 3D mesh to a DEM, and then apply DEM
+functions to the surface.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mesh_to_dem.html">mesh_to_dem</a></span><span class="op">(</span><span class="va">mcap</span>, res <span class="op">=</span> <span class="fl">0.015</span><span class="op">)</span></span>
+<span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mesh_intro_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem</span>, L0 <span class="op">=</span> <span class="fl">0.015</span>, method <span class="op">=</span> <span class="st">"area"</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] 2.185223</span></span></code></pre></div>
+<p>You can also transform a 3D mesh to a 2D drawing, and then apply 2D
+functions to the object</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data_rdh</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">R</span>, y <span class="op">=</span> <span class="va">H</span>, color <span class="op">=</span> <span class="va">D</span>, size <span class="op">=</span> <span class="va">D</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="mesh_intro_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-</div>
+<code class="sourceCode R"><span><span class="va">pts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mesh_to_2d.html">mesh_to_2d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pts</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mesh_intro_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># perimeter</span></span>
+<span><span class="fu"><a href="../reference/perimeter.html">perimeter</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1.678564</span></span>
+<span></span>
+<span><span class="co"># circularity</span></span>
+<span><span class="fu"><a href="../reference/circularity.html">circularity</a></span><span class="op">(</span><span class="va">pts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6085393</span></span>
+<span></span>
+<span><span class="co"># fractal dimension</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">pts</span>, method <span class="op">=</span> <span class="st">"boxes"</span>, keep_data <span class="op">=</span> <span class="cn">F</span>, plot <span class="op">=</span> <span class="cn">T</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mesh_intro_files/figure-html/unnamed-chunk-9-2.png" width="700"><img src="mesh_intro_files/figure-html/unnamed-chunk-9-3.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 1.318112</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;             l   n</span></span>
+<span><span class="co">#&gt; 7 0.006005139 261</span></span>
+<span><span class="co">#&gt; 6 0.012010279 141</span></span>
+<span><span class="co">#&gt; 5 0.024020557  70</span></span>
+<span><span class="co">#&gt; 4 0.048041115  31</span></span>
+<span><span class="co">#&gt; 3 0.096082229  12</span></span>
+<span><span class="co">#&gt; 2 0.192164458   4</span></span>
+<span><span class="co">#&gt; 1 0.384328916   1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.384328916 0.192164458 0.096082229 0.048041115 0.024020557 0.012010279</span></span>
+<span><span class="co">#&gt; [7] 0.006005139</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 0.8883546 1.0102683 1.1750867 1.3692338 1.5849625 2.0000000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.408984</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "boxes"</span></span></code></pre>
+<p>Note that fractal dimension ranges between 1 and 2 for 2D drawings,
+rather than 2 and 3 for 3D meshes.</p>
 <div class="section level2">
-<h2 id="rules-of-thumb">Rules of thumb<a class="anchor" aria-label="anchor" href="#rules-of-thumb"></a>
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li>When analyzing and comparing multiple DEMs, make sure that each DEM
-has the same resolution.</li>
-<li>When using the “hvar” method, the smallest value of
-<code>lvec</code>should be between two times and ten higher than the
-resolution</li>
-<li>When using the “hvar” method, the extent (highest value of
-<code>lvec</code>) should ideally be 1 to 2 orders of magnitudes higher
-compared to smallest value of <code>lvec</code> or <code>lvec</code>
-values should match scales of particular interest (e.g. matching body
-sizes of animals inhabiting the surface)</li>
-<li>
-<code>lvec</code> and chosen method needs to be the same across all
-calculations to make comparisons</li>
+<li>Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral
+morphology. Coral Reefs, 38:1281–1292.<br>
+</li>
+<li>Madin JS &amp; Connolly SR (2006) Ecological consequences of major
+hydrodynamic disturbances on coral reefs. Nature. 444:477-480.</li>
 </ul>
 </div>
   </div>

@@ -13,7 +13,7 @@ circularity(data)
 A value between 0 (infinitely irregular) and 1 (a perfect circle).
 }
 \description{
-Calculated the \code{circularity} of a 2D shape.
+Calculates the circularity of a 2D shape.
 }
 \details{
 The perimeter of the 2D shape is divided by the perimeter of a circle with

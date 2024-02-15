@@ -17,26 +17,27 @@ fd_hvar(
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer or dataframe (output of hvar function)}
 
-\item{lvec}{Scales to use for calculation.}
+\item{lvec}{Vector of scales to use for calculation.}
 
 \item{regmethod}{Method to use for linear regression between scale (lvec) and height range. One of \code{raw} (all data), \code{mean} (default) \code{median} or \code{ends} (minimum and maximum scale only)}
 
 \item{keep_data}{Keep the data used for fd calculation? defaults to FALSE}
 
-\item{plot}{Diagnostic plot}
+\item{plot}{Logical. Show plot of scales relative to data?}
 
 \item{parallel}{Logical. Use parallel processing? Note: parallel must be installed.}
 
 \item{ncores}{Number of cores to use when parallel = TRUE.}
 }
 \value{
-A value for fractal dimension, normally between 2 and 3.
+A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 }
 \description{
 Calculate fractal Dimension using the height variation method
 }
 \details{
 Calculates fractal dimension using the height variation regression.
+If \code{lvec} is not specified, a default based on resolution and extent will be used.
 \code{data} can be a DEM or a \code{data.frame} with columns labeled \code{l} and \code{h} for
 grid cell length and height range of that cell, respectively (output of \code{\link[=hvar]{hvar()}}).
 A rule of thumb is that \code{l} should range an order of magnitude.

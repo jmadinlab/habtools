@@ -4,13 +4,12 @@
 #'
 #' @param data A RasterLayer or mesh3d object.
 #'
-#' @return The difference between the lowest and highest point.
+#' @return Value of height range.
 #'
 #' @export
 #'
 #' @examples
 #' # for a DEM
-#' raster::plot(habtools::horseshoe)
 #' hr(horseshoe)
 #'
 #' # for a 3D mesh
@@ -19,14 +18,11 @@
 
 hr <- function(data) {
 
-
   if (is(data, "RasterLayer")) {
-
 
     if (sum(is.na(values(data))) > 0) {
       message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
     }
-
 
     out <- diff(range(values(data), na.rm = TRUE))
 
@@ -35,12 +31,15 @@ hr <- function(data) {
     out <- max(data[, 3], na.rm = TRUE) - min(data[, 3], na.rm = TRUE)
 
   } else if (is(data, "mesh3d")) {
+
     pts <- data.frame(t(data$vb)[,1:3])
     names(pts) <- c("x", "y", "z")
-
     out <- diff(range(pts$z, na.rm = TRUE))
+
   } else {
+
     stop("data must be either an object of class RasterLayer, data.frame, or mesh3d")
+
   }
   return(out)
 }

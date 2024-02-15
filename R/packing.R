@@ -1,9 +1,9 @@
 #' Calculate packing
 #'
-#' @param mesh A mesh3D object
+#' @param mesh A triangular mesh of class mesh3d.
 #'
 #' @details The ratio of the surface area of the object and the surface area of the convex hull around the object.
-#' @return value
+#' @return Value of packing.
 #' @export
 #'
 #' @examples

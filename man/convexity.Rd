@@ -7,10 +7,10 @@
 convexity(mesh)
 }
 \arguments{
-\item{mesh}{A mesh3d object.}
+\item{mesh}{A triangular mesh of class mesh3d.}
 }
 \value{
-The convexity value
+The convexity value.
 }
 \description{
 Calculates the convexity of a 3D mesh.

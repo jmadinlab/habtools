@@ -7,14 +7,14 @@
 planar(mesh, L0, silent = FALSE)
 }
 \arguments{
-\item{mesh}{mesh object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
 \item{L0}{Resolution of the planar area. Is set to the resolution of the mesh when left empty.}
 
-\item{silent}{message messages and warnings}
+\item{silent}{Logical. Suppress messages and warnings?}
 }
 \value{
-A value indicating planar area
+A value for planar area.
 }
 \description{
 Calculates planar area of a mesh

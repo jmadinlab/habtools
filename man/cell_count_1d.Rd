@@ -7,17 +7,23 @@
 cell_count_1d(pts, xmin, xmax, n)
 }
 \arguments{
-\item{pts}{data}
+\item{pts}{Data frame with x coordinates}
 
-\item{xmin}{minimum x-value}
+\item{xmin}{Minimum x-value}
 
-\item{xmax}{maximum x-value}
+\item{xmax}{Maximum x-value}
 
-\item{n}{multiplier}
+\item{n}{Multiplier}
 }
 \value{
 Number of filled cells
 }
 \description{
 Count filled cells in 1D
+}
+\examples{
+pts <- data.frame(x = rnorm(100, 0, 5))
+cell_count_1d(pts, xmin = min(pts$x), xmax = max(pts$x), n = 5)
+
+
 }

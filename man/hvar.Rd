@@ -2,7 +2,7 @@
 % Please edit documentation in R/hvar.R
 \name{hvar}
 \alias{hvar}
-\title{Height Variation in cells at different scales}
+\title{Height variation in cells at different scales}
 \usage{
 hvar(
   data,
@@ -24,7 +24,7 @@ hvar(
 A \code{data.frame} containing height ranges of cells at different scales.
 }
 \description{
-Height Variation in cells at different scales
+Height variation in cells at different scales
 }
 \details{
 This function is used for calculating fractal dimension using the
@@ -32,5 +32,5 @@ height variation method.
 }
 \examples{
 
-hvar(horseshoe, lvec = c(0.125, 0.25, 0.5, 1))
+hvar(horseshoe, lvec = c(1, 2, 4, 8))
 }

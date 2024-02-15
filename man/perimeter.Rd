@@ -9,16 +9,13 @@ perimeter(data, keep_data = FALSE)
 \arguments{
 \item{data}{A data frame with the first two columns ordered x and y coordinates.}
 
-\item{keep_data}{Keep lengths of all segments of the perimeter? Defaults to FALSE.}
+\item{keep_data}{Logical. Keep lengths of all segments of the perimeter? Defaults to FALSE.}
 }
 \value{
 The perimeter.
 }
 \description{
-\code{mesh_to_d2} turns a 3D Mesh file into an xy data frame.
-}
-\details{
-The function rasterizes uses the vertices of the mesh file.
+Calculates the perimeter of a 2D shape.
 }
 \examples{
 mcap_2d <- mesh_to_2d(mcap)

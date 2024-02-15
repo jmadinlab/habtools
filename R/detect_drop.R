@@ -3,7 +3,7 @@
 #' @param data DEM of class RasterLayer.
 #' @param d The threshold height difference to define a drop.
 #'
-#' @return A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells
+#' @return A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells.
 #' @export
 #'
 #' @examples

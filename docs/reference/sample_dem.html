@@ -38,7 +38,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -66,32 +66,25 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>A DEM in RasterLayer format</p></dd>
+<dd><p>Digital elevation model of class RasterLayer.</p></dd>
 
 
 <dt>L</dt>
-<dd><p>Size of square to cut out of DEM</p></dd>
+<dd><p>Size of square to cut out of DEM.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A DEM in RasterLayer format</p>
+<p>Digital elevation model of class RasterLayer.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sample_dem</span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterLayer </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 399, 399, 159201  (nrow, ncol, ncell)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 0.01, 0.01  (x, y)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -470.1704, -466.1804, 1267.455, 1271.445  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=tmerc +lat_0=-14.6989736557007 +lon_0=145.448257446289 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names      : horseshoe </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> values     : -3.691113, -2.632814  (min, max)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu">sample_dem</span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem1</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="sample_dem-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

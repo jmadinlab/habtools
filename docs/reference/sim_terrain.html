@@ -39,7 +39,7 @@ Warning: this function gets slow for n &amp;gt; 128."><!-- mathjax --><script sr
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -68,36 +68,35 @@ Warning: this function gets slow for n &gt; 128.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
-<dd><p>the extent (matrix size)</p></dd>
+<dd><p>The extent (matrix size).</p></dd>
 
 
 <dt>smoothness</dt>
-<dd><p>a value between 0.0 and 1.0 (lower values
-produce rougher terrain)</p></dd>
+<dd><p>A value between 0.0 and 1.0 (lower values
+produce rougher terrain).</p></dd>
 
 
 <dt>z_extent</dt>
-<dd><p>logical. Should z be scaled to match extent, n?</p></dd>
+<dd><p>Logical. Should z be scaled to match extent, n?</p></dd>
 
 
 <dt>dem</dt>
-<dd><p>logical. Should the matrix be turned into a DEM?</p></dd>
+<dd><p>Logical. Should the matrix be turned into a DEM?</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>a matrix or raster (if dem = TRUE)</p>
+<p>A matrix or raster (if dem = TRUE).</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/terrain.html" class="external-link">terrain</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">0.5</span>, z_extent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'terrain' is not an exported object from 'namespace:habtools'</span>
+<span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu">sim_terrain</span><span class="op">(</span><span class="fl">32</span>, <span class="fl">0.5</span>, z_extent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'dem' not found</span>
+<span class="r-plt img"><img src="sim_terrain-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

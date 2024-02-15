@@ -2,16 +2,16 @@
 % Please edit documentation in R/rdh_theory.R
 \name{rdh_theory}
 \alias{rdh_theory}
-\title{Geometric plane equation}
+\title{Calculate metric based on geometric plane equation}
 \usage{
 rdh_theory(r, d, h, L, L0)
 }
 \arguments{
 \item{r, d, h}{two of the three variables to calculate the third.}
 
-\item{L}{extent.}
+\item{L}{Extent.}
 
-\item{L0}{resolution.}
+\item{L0}{Resolution.}
 }
 \value{
 A value corresponding one of the three variables not given to the function.

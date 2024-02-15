@@ -1,17 +1,31 @@
 #' Calculate fractal dimension using the surface area method
 #'
 #' @param data DEM of class "RasterLayer" or mesh of class "mesh3d".
-#' @param lvec Vector of scales to include in calculation.
+#' @param lvec Vector of scales to use for calculation.
 #' @param keep_data Logical. Keep data? Default is FALSE.
 #' @param plot Logical. Plot regression line and area data?  Defaults to FALSE.
 #' @param scale Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.
 #'
-#' @return Either a value or a list if keep_data = TRUE.
+#' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 #' @export
+#'
+#' @details This function calculates fractal dimension using the area method.
+#' Based on values in `lvec`, the DEM or mesh is reprojected to varying scales.
+#' Fractal dimension is defined as `2 - s` with s being the slope of the regression between the log-transformed surface areas across scales and the log-transformed scales.
+#' Considerate bias is introduced if scales approach the extent of the object due to an edge effect.
+#' Therefore, this approach is only appropriate when the object is large relative to the scales of interest to be used as `lvec`.
+#' Diagnostic plots may help visualize whether bias is present for the scales chosen (i.e. points do not fall on a straight line).
 #'
 #' @examples
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
-#' fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5, 1))
+#' fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5))
+#'
+#' # Look at diagnostic plot
+#' fdata <- fd_area(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), keep_data = TRUE)
+#' fd_diagnose(fdata) # points fall on straight line
+#'
+#' fdata <- fd_area(horseshoe, lvec = c(0.5, 1, 2, 4), keep_data = TRUE)
+#' fd_diagnose(fdata) # points fall on hollow curve, indicating that lvec includes values that are too high.
 #'
 #' fd_area(mcap)
 #' fd_area(horseshoe)
@@ -27,7 +41,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
 
       if (missing(lvec)) {
         lvec <- L / 2^(0:20)
-        lvec <- sort(lvec[lvec >= L0*2 & lvec <= L/4])
+        lvec <- sort(lvec[lvec >= L0*2 & lvec <= L/8])
         message(paste0("lvec is set to c(", toString(round(lvec, 3)), ")."))
       } else {
         lvec <- sort(lvec)

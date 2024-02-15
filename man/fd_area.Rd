@@ -9,7 +9,7 @@ fd_area(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE)
 \arguments{
 \item{data}{DEM of class "RasterLayer" or mesh of class "mesh3d".}
 
-\item{lvec}{Vector of scales to include in calculation.}
+\item{lvec}{Vector of scales to use for calculation.}
 
 \item{keep_data}{Logical. Keep data? Default is FALSE.}
 
@@ -18,14 +18,29 @@ fd_area(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE)
 \item{scale}{Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.}
 }
 \value{
-Either a value or a list if keep_data = TRUE.
+A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 }
 \description{
 Calculate fractal dimension using the surface area method
 }
+\details{
+This function calculates fractal dimension using the area method.
+Based on values in \code{lvec}, the DEM or mesh is reprojected to varying scales.
+Fractal dimension is defined as \code{2 - s} with s being the slope of the regression between the log-transformed surface areas across scales and the log-transformed scales.
+Considerate bias is introduced if scales approach the extent of the object due to an edge effect.
+Therefore, this approach is only appropriate when the object is large relative to the scales of interest to be used as \code{lvec}.
+Diagnostic plots may help visualize whether bias is present for the scales chosen (i.e. points do not fall on a straight line).
+}
 \examples{
 fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
-fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5, 1))
+fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5))
+
+# Look at diagnostic plot
+fdata <- fd_area(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), keep_data = TRUE)
+fd_diagnose(fdata) # points fall on straight line
+
+fdata <- fd_area(horseshoe, lvec = c(0.5, 1, 2, 4), keep_data = TRUE)
+fd_diagnose(fdata) # points fall on hollow curve, indicating that lvec includes values that are too high.
 
 fd_area(mcap)
 fd_area(horseshoe)

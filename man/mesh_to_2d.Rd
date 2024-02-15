@@ -2,7 +2,7 @@
 % Please edit documentation in R/mesh_to_2d.R
 \name{mesh_to_2d}
 \alias{mesh_to_2d}
-\title{3D Mesh to 2D points}
+\title{Transform 3D Mesh to 2D outline}
 \usage{
 mesh_to_2d(mesh, L0 = NULL, plot = FALSE, silent = TRUE)
 }
@@ -19,21 +19,14 @@ mesh_to_2d(mesh, L0 = NULL, plot = FALSE, silent = TRUE)
 A data frame.
 }
 \description{
-\code{mesh_to_d2} turns a 3D Mesh file into an xy data frame.
+Turns a 3D Mesh file into an xy data frame.
 }
 \details{
-The function rasterizes uses the vertices of the mesh file.
-If resolution is not
-given, it is calculated by finding the maximum nearest neighbor
-of vertices projected
-on the \code{xy} plane. \code{fill} is used when irregular 3D meshes
-result in \code{NA} values in
-raster cells. The default is to fill these cells with the
-minimum, non-\code{NA} raster value.
+The function uses the vertices of the mesh object and projects them on the XY plane.
+Then, only points that define the perimeter of the shape are maintained.
 }
 \examples{
-library(raster)
-mcap_2d <- mesh_to_2d(mcap)
+mcap_2d <- mesh_to_2d(mcap, plot = TRUE)
 
 geometry::polyarea(mcap_2d$x, mcap_2d$y) # area
 planar(mcap)

@@ -38,7 +38,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -66,7 +66,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
-<dd><p>A digital elevation model (DEM) in a "RasterLayer" class or a "mesh3d" object.</p></dd>
+<dd><p>A RasterLayer or mesh3d object.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -78,14 +78,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># for a DEM</span></span></span>
+<span class="r-in"><span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">habtools</span><span class="fu">::</span><span class="va"><a href="horseshoe.html">horseshoe</a></span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hr-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">horseshoe</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.369283</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># For a 3D mesh.</span></span></span>
+<span class="r-in"><span><span class="co"># for a 3D mesh</span></span></span>
 <span class="r-in"><span><span class="fu">hr</span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2185397</span>
 <span class="r-in"><span></span></span>

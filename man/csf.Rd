@@ -2,19 +2,19 @@
 % Please edit documentation in R/csf.R
 \name{csf}
 \alias{csf}
-\title{Colony Shape Factor}
+\title{Calculate colony shape factor}
 \usage{
-csf(mesh, z_min, res)
+csf(mesh, z_min, res, keep_data = FALSE)
 }
 \arguments{
-\item{mesh}{A mesh3d object}
+\item{mesh}{A triangular mesh of class mesh3d.}
 
-\item{z_min}{(optional) set the z plane about which csf should be calculated}
+\item{z_min}{The z plane about which csf should be calculated. Defaults to min(z).}
 
-\item{res}{(optional) set the resolution}
+\item{res}{The resolution to be used for the calculation. Defaults to the resolution of the mesh.}
 }
 \value{
-A list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
+A value for csf or if keep_data = TRUE, a list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
 }
 \description{
 Calculates mechanical vulnerability of rigid, cantilever-type
@@ -33,7 +33,8 @@ material tensile strength and inversely related to fluid velocity and density (M
 The orientation of the 3D mesh is important for this function. The function assumes the fluid flow is parallel with the y-axis. The function also assumes the base of the cantilever over which the bending moment acts can be approximated as an ellipse with the diameter on the y-axis parallel with flow (dy). You can set a z_min if the base of your mesh is not flat at the base (i.e., shift the plane upon which the cantilever is attached upwards). The function output includes dy and dx for monitoring anticipated values.
 }
 \examples{
-csf(mcap, z_min=-3.65)
+csf(mcap, z_min = -3.65)
+csf(mcap, z_min = -3.65, keep_data = TRUE)
 }
 \references{
 Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.

@@ -34,6 +34,15 @@
     <loc>/reference/cell_count.html</loc>
   </url>
   <url>
+    <loc>/reference/cell_count_1d.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cell_count_2d.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cell_count_3d.html</loc>
+  </url>
+  <url>
     <loc>/reference/centroid.html</loc>
   </url>
   <url>
@@ -104,6 +113,9 @@
   </url>
   <url>
     <loc>/reference/mcap.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mcap2.html</loc>
   </url>
   <url>
     <loc>/reference/mesh_to_2d.html</loc>

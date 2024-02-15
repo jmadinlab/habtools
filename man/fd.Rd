@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd.R
 \name{fd}
 \alias{fd}
-\title{Fractal dimension}
+\title{Calculate fractal dimension}
 \usage{
 fd(data, method, lvec, keep_data = FALSE, diagnose = FALSE, ...)
 }
@@ -12,23 +12,27 @@ fd(data, method, lvec, keep_data = FALSE, diagnose = FALSE, ...)
 \item{method}{If data is a RasterLayer, possible methods are:"hvar", "area", "sd", and "cubes" (defaults to "hvar").
 If data is a mesh3d, possible methods are "cubes" and "area" (defaults to "cubes").}
 
-\item{lvec}{scales to use for calculation.}
+\item{lvec}{Vector of scales to use for calculation.}
 
 \item{keep_data}{Logical. Keep data? Default is FALSE.}
 
 \item{diagnose}{Logical. Show diagnostic plot and metrics?}
 
-\item{...}{Arguments from other fd_ functions.}
+\item{...}{Arguments from method-specific fd_ functions.}
 }
 \value{
-A value for fractal dimension, typically between 2 and 3.
+A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 }
 \description{
-Fractal dimension
+Calculate fractal dimension
 }
 \details{
-Calculates fractal dimension using the specified method. Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.
+Calculates fractal dimension using the specified method.
+Note that methods are distinctly different and should not be mixed when comparing values for multiple objects.
+See \code{\link[=fd_hvar]{fd_hvar()}}, \code{\link[=fd_area]{fd_area()}}, \code{\link[=fd_cubes]{fd_cubes()}}, \code{\link[=fd_sd]{fd_sd()}} for details about each method.
+If \code{lvec} is not specified, a default based on resolution, extent, and method will be used.
 The \code{cubes} method is not recommended if the height range is much smaller than the extent of a 3d object or DEM, which is typically the case for DEMs.
+Most objects and surfaces are not perfectly fractal. It is recommended to investigate scale transitions by setting diagnose to TRUE.
 }
 \examples{
 library(habtools)

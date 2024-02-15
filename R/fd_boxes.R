@@ -1,17 +1,17 @@
 #' Calculate fractal dimension using the box counting method
 #'
 #' @param data A data frame in which the first two columns are x and y coordinates, respectively.
-#' @param lvec (Optional). The scales to use for calculation (i.e. box sizes).
+#' @param lvec The scales to use for calculation (i.e. box sizes).
 #' @param keep_data Logical. Keep calculation data? Default = TRUE.
 #' @param plot Logical. Plot the shape with box sizes superimposed? Defaults to FALSE.
 #'
-#' @details This function calculates fractal dimension using the cube counting method.
-#' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
-#' It is recommended that to specify the maximum value of `lvec` so that the largest box encapsulates the entire object.
+#' @details This function calculates fractal dimension using the box counting method.
+#' If `lvec` is not specified, a default based on resolution and extent will be used.
+#' Based on lvec, boxes of different sizes are defined and the function counts points that fall within each box.
+#' It is recommended to specify the maximum value of `lvec` so that the largest box encapsulates the entire object.
 #' The smallest scale included in `lvec` should not be smaller than the resolution of your object.
-#' Most meshes are not perfectly fractal, and so use the `plot` parameter to look for scale transitions.
 #'
-#' @return A `data.frame` of number of boxes (`n`) intersecting xy coordinates at different box sizes (`l`) and a fractal dimension value. Note that box size is the length of a side.
+#' @return A value for fractal dimension, typically between 1 and 2 or a list if keep_data = TRUE.
 #' @export
 #'
 #' @importFrom graphics axis

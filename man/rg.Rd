@@ -2,7 +2,7 @@
 % Please edit documentation in R/rg.R
 \name{rg}
 \alias{rg}
-\title{Rugosity}
+\title{Calculate rugosity}
 \usage{
 rg(
   data,
@@ -28,7 +28,7 @@ rg(
 Rugosity value
 }
 \description{
-Rugosity
+Calculate rugosity
 }
 \details{
 Rugosity is defined as the surface area divided by the planar area. For digital elevation models, we include two methods: "hvar" and "area". \cr

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rdh.R
 \name{rdh}
 \alias{rdh}
-\title{Calculate rugosity, fractal dimension and height for a DEM}
+\title{Calculate rugosity, fractal dimension, and height for a DEM}
 \usage{
 rdh(
   data,
@@ -31,10 +31,10 @@ Can be "hvar", "sd", "cubes", or "area". Defaults to "hvar".}
 \item{...}{Additional arguments see \code{\link[=fd]{fd()}}.}
 }
 \value{
-A dataframe with the three complexity measures.
+A dataframe with the three complexity metrics.
 }
 \description{
-Calculate rugosity, fractal dimension and height for a DEM
+Calculate rugosity, fractal dimension, and height for a DEM
 }
 \details{
 Uses area method for rugosity and hvar method for fractal dimension calculations as default.

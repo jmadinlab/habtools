@@ -12,7 +12,7 @@ detect_drop(data, d = 0.1)
 \item{d}{The threshold height difference to define a drop.}
 }
 \value{
-A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells
+A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells.
 }
 \description{
 Detect a sudden drop, edge, or overhang in a DEM

@@ -1,27 +1,27 @@
 #' Calculate fractal dimension using cube counting
 #'
 #' @param data An object of class RasterLayer or mesh3d.
-#' @param lvec (optional) Scales to use for calculation (i.e. cube sizes).
+#' @param lvec Vector of scales to use for calculation (i.e. cube sizes).
 #' @param keep_data Logical. Keep calculation data? Default = TRUE.
-#' @param plot Planar representation of cubes superimposed on 3D mesh for diagnosing `lvec`. Default = FALSE.
-#' @param scale Logical. Rescale height values to the extent. Only relevant for RasterLayer objects. (Defaults to FALSE).
+#' @param plot Planar representation of cubes superimposed on 3D mesh or DEM for visualizing `lvec`. Default = FALSE.
+#' @param scale Logical. Rescale height values to the extent? Only relevant for RasterLayer objects. (Defaults to FALSE).
 #'
 #' @details This function calculates fractal dimension using the cube counting method.
+#' If `lvec` is not specified, a default based on resolution and extent will be used.
 #' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
-#' It is recommended that to specify the maximum value of `lvec` so that the largest box encapsulates the entire object.
+#' It is recommended to specify the maximum value of `lvec` so that the largest box encapsulates the entire object.
 #' The smallest scale included in `lvec` should not be smaller than the resolution of your object.
-#' Most meshes are not perfectly fractal, and so use the `plot` parameter to look for scale transitions.
 #'
-#' @return A `data.frame` of number of cubes (`n`) intersecting mesh points at different cube sizes (`L`) and a fractal dimension value. Note that cube size is the length of a side.
+#' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 #' @export
 #' @seealso [fd()]
 #' @examples
-#' fd_cubes(mcap, keep_data=TRUE, plot=TRUE)
-#' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
+#' fd_cubes(mcap, keep_data = TRUE, plot = TRUE)
+#' fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot = TRUE)
 #'
 #' dem <- crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
-#' fd_cubes(dem, plot=TRUE, keep_data=TRUE)
-#' fd_cubes(dem, plot=TRUE, keep_data=TRUE, scale=TRUE)
+#' fd_cubes(dem, plot = TRUE, keep_data = TRUE)
+#' fd_cubes(dem, plot = TRUE, keep_data = TRUE, scale = TRUE)
 #'
 fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale = FALSE) {
 
@@ -46,8 +46,8 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
 
     cubes <- 2^(0:20)
     lvec <- Lmax / cubes
-    cubes <- cubes[lvec > L0 * 5]
-    lvec <- lvec[lvec > L0 * 5]
+    cubes <- cubes[lvec > L0]
+    lvec <- lvec[lvec > L0]
     message(paste0("lvec is set to c(", toString(sort(round(lvec, 3))), ")."))
   } else {
     L0 <- min(lvec)

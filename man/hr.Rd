@@ -10,14 +10,13 @@ hr(data)
 \item{data}{A RasterLayer or mesh3d object.}
 }
 \value{
-The difference between the lowest and highest point.
+Value of height range.
 }
 \description{
 Calculates the distance between the lowest and highest point in a 3D object.
 }
 \examples{
 # for a DEM
-raster::plot(habtools::horseshoe)
 hr(horseshoe)
 
 # for a 3D mesh

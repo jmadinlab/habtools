@@ -1,10 +1,10 @@
 #' Calculates planar area of a mesh
 #'
-#' @param mesh mesh object
+#' @param mesh A triangular mesh of class mesh3d.
 #' @param L0 Resolution of the planar area. Is set to the resolution of the mesh when left empty.
-#' @param silent message messages and warnings
+#' @param silent Logical. Suppress messages and warnings?
 #'
-#' @return A value indicating planar area
+#' @return A value for planar area.
 #' @export
 #'
 #' @examples
@@ -33,13 +33,10 @@ planar <- function(mesh, L0, silent = FALSE) {
   m$it <- m$it[,-t]
   m$vb[3,] <- 0
   m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
-  #m2 <- Rvcg::vcgUniformRemesh(m, voxelSize = L0/10)
   x <- m$vb[1,]
   y <- m$vb[2,]
   dt <- data.frame(x =x, y = y)
   poly <- concaveman::concaveman(as.matrix(dt), concavity = 1, length_threshold = L0)
-  # plot(poly)
-  # polygon(poly)
-  # Rvcg::vcgArea(m)
+
   geometry::polyarea(poly[,1], poly[,2])
 }

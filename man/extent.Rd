@@ -7,16 +7,16 @@
 extent(data)
 }
 \arguments{
-\item{data}{An object of class mesh3d}
+\item{data}{Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.}
 }
 \value{
-A value, the extent of the mesh
+A value, the extent of the mesh or DEM.
 }
 \description{
 Calculate extent of a 3D object
 }
 \details{
-This function calculates the extent or largest length of the bounding box of a mesh
+This function calculates the extent or largest length of the bounding box of a mesh or a DEM.
 }
 \examples{
 habtools::extent(mcap)

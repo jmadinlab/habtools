@@ -38,7 +38,7 @@
       <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
     </li>
     <li>
-      <a href="../articles/mesh_intro.html">Complexity metrics for DEMs</a>
+      <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -60,13 +60,17 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dem_to_mesh</span><span class="op">(</span><span class="va">dem</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dem</dt>
-<dd><p>A digital elevation model in raster format</p></dd>
+<dd><p>A RasterLayer object</p></dd>
+
+
+<dt>plot</dt>
+<dd><p>Logical. Plot the 3D mesh using rgl.</p></dd>
 
 </dl></div>
     <div id="value">

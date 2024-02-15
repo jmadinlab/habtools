@@ -1,4 +1,4 @@
-#' Rugosity
+#' Calculate rugosity
 #'
 #' @param data Digital elevation model of class RasterLayer or a triangular mesh of class mesh3d.
 #' @param L0 Grain or resolution of calculation.

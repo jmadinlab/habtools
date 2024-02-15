@@ -1,13 +1,13 @@
 #' Count filled cells
 #'
-#' @param pts data
-#' @param xmin minimum x-value
-#' @param xmax maximum x-value
-#' @param ymin minimum y-value
-#' @param ymax maximum y-value
-#' @param zmin minimum z-value
-#' @param zmax maximum z-value
-#' @param n multiplier
+#' @param pts Data frame with x, y, and z coordinates
+#' @param xmin Minimum x-value
+#' @param xmax Maximum x-value
+#' @param ymin Minimum y-value
+#' @param ymax Maximum y-value
+#' @param zmin Minimum z-value
+#' @param zmax Maximum z-value
+#' @param n Multiplier
 #'
 #' @return Number of filled cells
 #' @export
@@ -22,12 +22,12 @@ cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
 
 #' Count filled cells in 2D
 #'
-#' @param pts data
-#' @param xmin minimum x-value
-#' @param xmax maximum x-value
-#' @param ymin minimum y-value
-#' @param ymax maximum y-value
-#' @param n multiplier
+#' @param pts Data frame with x and y coordinates
+#' @param xmin Minimum x-value
+#' @param xmax Maximum x-value
+#' @param ymin Minimum y-value
+#' @param ymax Maximum y-value
+#' @param n Multiplier
 #'
 #' @return Number of filled cells
 #' @export
@@ -41,13 +41,18 @@ cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
 
 #' Count filled cells in 1D
 #'
-#' @param pts data
-#' @param xmin minimum x-value
-#' @param xmax maximum x-value
-#' @param n multiplier
+#' @param pts Data frame with x coordinates
+#' @param xmin Minimum x-value
+#' @param xmax Maximum x-value
+#' @param n Multiplier
 #'
 #' @return Number of filled cells
 #' @export
+#'
+#' @examples
+#' pts <- data.frame(x = rnorm(100, 0, 5))
+#' cell_count_1d(pts, xmin = min(pts$x), xmax = max(pts$x), n = 5)
+#'
 #'
 
 cell_count_1d <- function(pts, xmin, xmax, n) {

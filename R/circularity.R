@@ -1,7 +1,7 @@
 #' Circularity of 2D shape
 #'
 #' @description
-#' Calculated the `circularity` of a 2D shape.
+#' Calculates the circularity of a 2D shape.
 #'
 #' @param data A data frame with the first two columns x and y coordinates, respectively.
 #'

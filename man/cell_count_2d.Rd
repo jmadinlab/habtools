@@ -7,17 +7,17 @@
 cell_count_2d(pts, xmin, xmax, ymin, ymax, n)
 }
 \arguments{
-\item{pts}{data}
+\item{pts}{Data frame with x and y coordinates}
 
-\item{xmin}{minimum x-value}
+\item{xmin}{Minimum x-value}
 
-\item{xmax}{maximum x-value}
+\item{xmax}{Maximum x-value}
 
-\item{ymin}{minimum y-value}
+\item{ymin}{Minimum y-value}
 
-\item{ymax}{maximum y-value}
+\item{ymax}{Maximum y-value}
 
-\item{n}{multiplier}
+\item{n}{Multiplier}
 }
 \value{
 Number of filled cells
