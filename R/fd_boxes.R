@@ -1,9 +1,9 @@
-#' Calculate fractal dimension using box counting
+#' Calculate fractal dimension using the box counting method
 #'
-#' @param data A data frame in which the first two colums and x and y coordinates, respectively.
+#' @param data A data frame in which the first two columns are x and y coordinates, respectively.
 #' @param lvec (Optional). The scales to use for calculation (i.e. box sizes).
 #' @param keep_data Logical. Keep calculation data? Default = TRUE.
-#' @param plot Logical. Plot the shape with box sizes superimposed? Default = FALSE.
+#' @param plot Logical. Plot the shape with box sizes superimposed? Defaults to FALSE.
 #'
 #' @details This function calculates fractal dimension using the cube counting method.
 #' Based on lvec, cubes of different sizes are defined and the function counts mesh points that fall within each cube.
@@ -19,14 +19,14 @@
 #' @examples
 #' mcap_2d <- mesh_to_2d(mcap)
 #'
-#' fd_boxes(mcap_2d, plot=TRUE, keep_data=TRUE)
-#' fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.25, 0.5), plot=TRUE)
+#' fd_boxes(mcap_2d, plot = TRUE, keep_data = TRUE)
+#' fd_boxes(mcap_2d, lvec = c(0.05, 0.1, 0.2, 0.4), plot = TRUE)
 #'
 
-fd_boxes <- function(data, lvec=NULL, keep_data = TRUE, plot = FALSE) {
+fd_boxes <- function(data, lvec, keep_data = FALSE, plot = FALSE) {
 
   pts <- data
-  res <- median(perimeter(pts, keep_data = TRUE)$segments)
+  res <- max(perimeter(pts, keep_data = TRUE)$segments)
   names(pts) <- c("x", "y")
 
   if (missing(lvec)) {
@@ -61,8 +61,9 @@ fd_boxes <- function(data, lvec=NULL, keep_data = TRUE, plot = FALSE) {
 
   # plot
   if (plot) {
-    plot(data, asp=1, type="l", axes=FALSE, xlim=c(x0, x0 + Lmax), ylim=c(y0, y0 + Lmax))
-    rect(x0, y0, x0 + lvec, y0 + lvec, border="red")
+    plot(data, asp = 1, type = "l", axes = FALSE,
+         xlim = c(x0, x0 + Lmax), ylim = c(y0, y0 + Lmax))
+    rect(x0, y0, x0 + lvec, y0 + lvec, border = "red")
     axis(1)
     axis(2, las=2)
   }
