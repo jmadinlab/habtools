@@ -2,7 +2,7 @@
 % Please edit documentation in R/surface_area.R
 \name{surface_area}
 \alias{surface_area}
-\title{Surface area}
+\title{Calculate surface area}
 \usage{
 surface_area(data)
 }

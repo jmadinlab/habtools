@@ -2,7 +2,7 @@
 % Please edit documentation in R/svol_triangle.R
 \name{svol_triangle}
 \alias{svol_triangle}
-\title{Signed volume of triangle}
+\title{Calculate signed volume of triangle}
 \usage{
 svol_triangle(XYZCoords)
 }
@@ -13,9 +13,6 @@ svol_triangle(XYZCoords)
 Value for the signed volume of a triangle.
 }
 \description{
-Signed volume of triangle
-}
-\details{
 Calculates the signed volume of a triangle based on a set of XYZCoords.
 Signed volume means that volumes can take on a negative value depending on whether the surface normal
 of the triangle is facing towards or away from the origin. When all positive and negative volumes
