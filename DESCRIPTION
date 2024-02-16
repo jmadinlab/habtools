@@ -31,7 +31,6 @@ Depends:
 Imports: 
     raster (>= 3.5),
     terra,
-    rgl,
     methods,
     MASS,
     Rvcg,
@@ -44,6 +43,7 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    rgl,
     parallel,
     ggplot2,
     testthat (>= 3.0.0)

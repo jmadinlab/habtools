@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-<img src="man/figures/habtools_hex.png" width = 120 alt="fishflux logo"/>
+<img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 The goal of `habtools` is to collate tools for 3D meshes and digital
 elevation models (DEM) targeted at biologists and ecologists. Tools

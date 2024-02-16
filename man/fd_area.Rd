@@ -37,10 +37,13 @@ fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5))
 
 # Look at diagnostic plot
 fdata <- fd_area(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), keep_data = TRUE)
-fd_diagnose(fdata) # points fall on straight line
+fd_diagnose(fdata)
+# points fall on straight line
 
 fdata <- fd_area(horseshoe, lvec = c(0.5, 1, 2, 4), keep_data = TRUE)
-fd_diagnose(fdata) # points fall on hollow curve, indicating that lvec includes values that are too high.
+fd_diagnose(fdata)
+# points fall on hollow curve, indicating that lvec includes values that
+# are too high.
 
 fd_area(mcap)
 fd_area(horseshoe)
