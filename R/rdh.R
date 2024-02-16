@@ -19,7 +19,7 @@
 #'
 #' @examples
 #'
-#' dem <- sample_dem(horseshoe, L = 1)
+#' dem <- dem_sample(horseshoe, L = 1)
 #' rdh(dem, lvec = c(0.125, 0.25, 0.5, 1))
 rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
                 parallel = FALSE, ncores = (parallel::detectCores()-1),  ...){
@@ -57,4 +57,3 @@ rdh <- function(data, lvec, method_fd = "hvar", method_rg = "area",
 
   data.frame(R = r, D = d, H = h)
 }
-
