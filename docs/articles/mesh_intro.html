@@ -86,17 +86,17 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmurdoch/rgl" class="external-link">rgl</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgl/" class="external-link">rgl</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; This build of rgl does not include OpenGL functions.  Use</span></span>
 <span><span class="co">#&gt;  rglwidget() to display results, e.g. via options(rgl.printRglwidget = TRUE).</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rgl.messageRglwidget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rgl.printRglwidget <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><em>habtools</em> includes a wide range of complexity metrics
 applicable to 3D meshes.</p>
 <p>Before, calculating any metrics, visualize your mesh and make sure
 that the z orientation is correct, as this may affect some of the
 calculations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/rgl/man/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span></code></pre></div>
 <p>Depending on how the mesh was generated (e.g. with the use of a laser
 scanner), the resolutions (distance between vertices inside the mesh)
 can vary a lot. This may affect calculations such as fractal dimension.
@@ -125,7 +125,7 @@ An alternative option would be to remesh using an external 3D software
 such as blender.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mcap_uniform</span> <span class="op">&lt;-</span> <span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgUniformRemesh.html" class="external-link">vcgUniformRemesh</a></span><span class="op">(</span><span class="va">mcap</span>, silent <span class="op">=</span> <span class="cn">TRUE</span>, multiSample <span class="op">=</span> <span class="cn">TRUE</span>, voxelSize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">resvec</span><span class="op">)</span>, mergeClost <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://dmurdoch.github.io/rgl/dev/reference/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/rgl/man/plot3d.html" class="external-link">plot3d</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
 <span><span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgMeshres.html" class="external-link">vcgMeshres</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [1] 0.001328214</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">Rvcg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rvcg/man/vcgMeshres.html" class="external-link">vcgMeshres</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
@@ -136,27 +136,31 @@ such as blender.</p>
 <code class="sourceCode R"><span></span>
 <span><span class="co"># fractal dimension</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, diagnose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.024, 0.048, 0.096, 0.193, 0.386).</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(0.003, 0.006, 0.012, 0.024, 0.048, 0.096, 0.193, 0.386).</span></span></code></pre></div>
 <p><img src="mesh_intro_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.310726</span></span>
+<span><span class="co">#&gt; [1] 2.133279</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;            l   n</span></span>
-<span><span class="co">#&gt; 5 0.02411913 668</span></span>
-<span><span class="co">#&gt; 4 0.04823826 162</span></span>
-<span><span class="co">#&gt; 3 0.09647653  34</span></span>
-<span><span class="co">#&gt; 2 0.19295306   8</span></span>
-<span><span class="co">#&gt; 1 0.38590612   1</span></span>
+<span><span class="co">#&gt;             l     n</span></span>
+<span><span class="co">#&gt; 8 0.003014892 37982</span></span>
+<span><span class="co">#&gt; 7 0.006029783 10405</span></span>
+<span><span class="co">#&gt; 6 0.012059566  2701</span></span>
+<span><span class="co">#&gt; 5 0.024119132   668</span></span>
+<span><span class="co">#&gt; 4 0.048238265   162</span></span>
+<span><span class="co">#&gt; 3 0.096476530    34</span></span>
+<span><span class="co">#&gt; 2 0.192953059     8</span></span>
+<span><span class="co">#&gt; 1 0.385906118     1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.38590612 0.19295306 0.09647653 0.04823826 0.02411913</span></span>
+<span><span class="co">#&gt; [1] 0.385906118 0.192953059 0.096476530 0.048238265 0.024119132 0.012059566</span></span>
+<span><span class="co">#&gt; [7] 0.006029783 0.003014892</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.043854 2.252387 2.087463 3.000000</span></span>
+<span><span class="co">#&gt; [1] 1.868039 1.945711 2.015574 2.043854 2.252387 2.087463 3.000000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.4452014</span></span>
+<span><span class="co">#&gt; [1] 0.3837687</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "cubes"</span></span>
@@ -251,8 +255,8 @@ vulnerability of a structural element (Madin &amp; Connolly, 2006).</p>
 <span><span class="co">#&gt; [1] 0.2988261</span></span>
 <span></span>
 <span><span class="co"># mechanical shape factor</span></span>
-<span><span class="fu"><a href="../reference/csf.html">csf</a></span><span class="op">(</span><span class="va">mcap</span>, z_min <span class="op">=</span> <span class="op">-</span><span class="fl">3.65</span><span class="op">)</span><span class="op">$</span><span class="va">csf</span></span>
-<span><span class="co">#&gt; Warning in csf(mcap, z_min = -3.65): resolution set to 0.00783124724167033</span></span>
+<span><span class="fu"><a href="../reference/csf.html">csf</a></span><span class="op">(</span><span class="va">mcap</span>, z_min <span class="op">=</span> <span class="op">-</span><span class="fl">3.65</span><span class="op">)</span></span>
+<span><span class="co">#&gt; resolution set to 0.00783124724167033</span></span>
 <span><span class="co">#&gt; [1] 0.2059624</span></span></code></pre></div>
 <p>You can also transform a 3D mesh to a DEM, and then apply DEM
 functions to the surface.</p>
@@ -283,27 +287,25 @@ functions to the object</p>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">pts</span>, method <span class="op">=</span> <span class="st">"boxes"</span>, keep_data <span class="op">=</span> <span class="cn">F</span>, plot <span class="op">=</span> <span class="cn">T</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mesh_intro_files/figure-html/unnamed-chunk-9-2.png" width="700"><img src="mesh_intro_files/figure-html/unnamed-chunk-9-3.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 1.318112</span></span>
+<span><span class="co">#&gt; [1] 1.39879</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;             l   n</span></span>
-<span><span class="co">#&gt; 7 0.006005139 261</span></span>
-<span><span class="co">#&gt; 6 0.012010279 141</span></span>
-<span><span class="co">#&gt; 5 0.024020557  70</span></span>
-<span><span class="co">#&gt; 4 0.048041115  31</span></span>
-<span><span class="co">#&gt; 3 0.096082229  12</span></span>
-<span><span class="co">#&gt; 2 0.192164458   4</span></span>
-<span><span class="co">#&gt; 1 0.384328916   1</span></span>
+<span><span class="co">#&gt;            l   n</span></span>
+<span><span class="co">#&gt; 6 0.01219243 138</span></span>
+<span><span class="co">#&gt; 5 0.02438486  65</span></span>
+<span><span class="co">#&gt; 4 0.04876971  28</span></span>
+<span><span class="co">#&gt; 3 0.09753943  11</span></span>
+<span><span class="co">#&gt; 2 0.19507886   4</span></span>
+<span><span class="co">#&gt; 1 0.39015772   1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.384328916 0.192164458 0.096082229 0.048041115 0.024020557 0.012010279</span></span>
-<span><span class="co">#&gt; [7] 0.006005139</span></span>
+<span><span class="co">#&gt; [1] 0.39015772 0.19507886 0.09753943 0.04876971 0.02438486 0.01219243</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 0.8883546 1.0102683 1.1750867 1.3692338 1.5849625 2.0000000</span></span>
+<span><span class="co">#&gt; [1] 1.086157 1.215013 1.347923 1.459432 2.000000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.408984</span></span>
+<span><span class="co">#&gt; [1] 0.3523516</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "boxes"</span></span></code></pre>

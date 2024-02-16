@@ -6,6 +6,8 @@
 #' @param mesh A triangular mesh of class mesh3d.
 #' @param z_min The z plane about which csf should be calculated. Defaults to min(z).
 #' @param res The resolution to be used for the calculation. Defaults to the resolution of the mesh.
+#' @param keep_data Logical. Return list with supplemental info? Defaults to FALSE.
+#'
 #'
 #' @details This function calculates the mechanical vulnerability of a structural
 #' element, like a hard coral colony, to fluid flow. While developed for corals, and originally

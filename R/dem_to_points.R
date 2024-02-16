@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' dem <- sim_terrain(20, 0.5)
-#' plot(dem)
+#' raster::plot(dem)
 #' pts <- dem_to_points(dem)
 #' rgl::plot3d(pts)
 #'

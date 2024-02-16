@@ -12,6 +12,8 @@ csf(mesh, z_min, res, keep_data = FALSE)
 \item{z_min}{The z plane about which csf should be calculated. Defaults to min(z).}
 
 \item{res}{The resolution to be used for the calculation. Defaults to the resolution of the mesh.}
+
+\item{keep_data}{Logical. Return list with supplemental info? Defaults to FALSE.}
 }
 \value{
 A value for csf or if keep_data = TRUE, a list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
