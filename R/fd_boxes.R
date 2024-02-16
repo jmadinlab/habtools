@@ -7,9 +7,10 @@
 #'
 #' @details This function calculates fractal dimension using the box counting method.
 #' If `lvec` is not specified, a default based on resolution and extent will be used.
-#' Based on lvec, boxes of different sizes are defined and the function counts points that fall within each box.
-#' It is recommended to specify the maximum value of `lvec` so that the largest box encapsulates the entire object.
-#' The smallest scale included in `lvec` should not be smaller than the resolution of your object.
+#' Based on lvec, boxes of different sizes are defined and the function counts boxes that capture the outline of the shape.
+#' It is recommended to specify the maximum value of `lvec` so that the largest
+#' box encapsulates the entire object. The smallest scale included in `lvec`
+#' should not be smaller than the resolution of your object.
 #'
 #' @return A value for fractal dimension, typically between 1 and 2 or a list if keep_data = TRUE.
 #' @export

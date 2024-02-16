@@ -30,7 +30,7 @@ dem_crop <- function(data, x0, y0, L, plot = FALSE) {
     stop("x0 and y0 need to have the same length")
   }
   if (plot) {
-    raster::plot(data)
+    raster::plot(data, asp=1)
     rect(x0 - (L/2), y0 - (L/2), x0 + (L/2), y0 + (L/2))
   }
   if (length(x0) == 1) {

@@ -24,9 +24,10 @@ Calculate fractal dimension using the box counting method
 \details{
 This function calculates fractal dimension using the box counting method.
 If \code{lvec} is not specified, a default based on resolution and extent will be used.
-Based on lvec, boxes of different sizes are defined and the function counts points that fall within each box.
-It is recommended to specify the maximum value of \code{lvec} so that the largest box encapsulates the entire object.
-The smallest scale included in \code{lvec} should not be smaller than the resolution of your object.
+Based on lvec, boxes of different sizes are defined and the function counts boxes that capture the outline of the shape.
+It is recommended to specify the maximum value of \code{lvec} so that the largest
+box encapsulates the entire object. The smallest scale included in \code{lvec}
+should not be smaller than the resolution of your object.
 }
 \examples{
 mcap_2d <- mesh_to_2d(mcap)

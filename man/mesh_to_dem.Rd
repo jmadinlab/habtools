@@ -2,7 +2,7 @@
 % Please edit documentation in R/mesh_to_dem.R
 \name{mesh_to_dem}
 \alias{mesh_to_dem}
-\title{Transform 3D Mesh to DEM}
+\title{Transform 3D mesh to DEM}
 \usage{
 mesh_to_dem(mesh, res, fill = TRUE)
 }
@@ -17,7 +17,7 @@ mesh_to_dem(mesh, res, fill = TRUE)
 A dem of class RasterLayer.
 }
 \description{
-Turns a 3D Mesh file into a Digital Elevation Model (DEM) of class RasterLayer
+Turns a 3D mesh file into a Digital Elevation Model (DEM) of class RasterLayer
 format.
 }
 \details{
@@ -31,15 +31,14 @@ raster cells. The default is to fill these cells with the
 minimum, non-\code{NA} raster value.
 }
 \examples{
-library(raster)
 dem <- mesh_to_dem(mcap)
-plot(dem)
+raster::plot(dem)
 
 dem <- mesh_to_dem(mcap, res = 0.05)
-plot(dem)
+raster::plot(dem)
 
 # Don't fill empty raster cells
 dem <- mesh_to_dem(mcap, res = 0.02, fill = FALSE)
-plot(dem)
+raster::plot(dem)
 
 }

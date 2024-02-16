@@ -4,14 +4,14 @@
 #' @param d The threshold height difference to define a drop.
 #'
 #' @return A RasterLayer marking edges. Values indicate maximum height difference of surrounding cells.
+#'
 #' @export
 #'
 #' @examples
-#' library(raster)
-#' library(habtools)
-#' dem <- detect_drop(horseshoe, d = 0.2)
-#' plot(horseshoe)
-#' plot(dem)
+#' edges <- detect_drop(horseshoe, d = 0.2)
+#'
+#' raster::plot(horseshoe)
+#' raster::plot(edges)
 #'
 
 detect_drop <- function(data, d = 0.1) {

@@ -28,12 +28,9 @@ rg(
 Rugosity value
 }
 \description{
-Calculate rugosity
-}
-\details{
-Rugosity is defined as the surface area divided by the planar area. For digital elevation models, we include two methods: "hvar" and "area". \cr
-The "hvar" method for calculating rugosity is described in Torres-Pulliza et al. (2004) and is based on height variations. \cr
-The "area" method uses the \code{\link[sp:surfaceArea]{sp::surfaceArea()}} function and is detailed in Jenness (2004). \cr
+Rugosity is defined as the surface area divided by the planar area. For digital elevation models, there are two methods: "hvar" and "area".
+The "hvar" method for calculating rugosity is described in Torres-Pulliza et al. (2004) and is based on height variations.
+The "area" method uses the \code{\link[sp:surfaceArea]{sp::surfaceArea()}} function and is detailed in Jenness (2004).
 \code{method} is ignored if \code{data} is a mesh3D object.
 In that case the function uses \code{\link[Rvcg:vcgArea]{Rvcg::vcgArea()}} to calculate surface area of a triangular mesh of class mesh3d.
 }
@@ -43,6 +40,7 @@ rg(mcap, L0 = 0.01)
 
 }
 \references{
-Calculating Landscape Surface Area from Digital Elevation Models, Jeff S. Jenness Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n \cr
+Calculating Landscape Surface Area from Digital Elevation Models, Jeff S. Jenness Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n
+\cr\cr
 Torres-Pulliza, D., Dornelas, M.A., Pizarro, O. et al. A geometric basis for surface habitat complexity and biodiversity. Nat Ecol Evol 4, 1495–1501 (2020). https://doi.org/10.1038/s41559-020-1281-8
 }

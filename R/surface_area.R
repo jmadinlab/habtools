@@ -1,5 +1,6 @@
-#' Surface area
+#' Calculate surface area
 #'
+#' @description
 #' Calculates surface area of a 3D or 2D object.
 #'
 #' @param data DEM in RasterLayer format, mesh3d object or data frame with xy coordinates.

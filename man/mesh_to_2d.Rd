@@ -2,7 +2,7 @@
 % Please edit documentation in R/mesh_to_2d.R
 \name{mesh_to_2d}
 \alias{mesh_to_2d}
-\title{Transform 3D Mesh to 2D outline}
+\title{Transform 3D mesh into 2D outline}
 \usage{
 mesh_to_2d(mesh, L0 = NULL, plot = FALSE, silent = TRUE)
 }

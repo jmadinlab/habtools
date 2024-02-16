@@ -12,6 +12,7 @@
 #' @seealso [fd_sd()]
 #' @seealso [fd_cubes()]
 #' @seealso [fd_diagnose()]
+#'
 #' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 #' @export
 #'
@@ -25,7 +26,6 @@
 #' @importFrom methods as
 #'
 #' @examples
-#' library(habtools)
 #' dem <- dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 #' fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
 #' fd(dem, method = "area", diagnose = TRUE)

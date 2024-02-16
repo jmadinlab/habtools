@@ -13,7 +13,7 @@ fd_area(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = FALSE)
 
 \item{keep_data}{Logical. Keep data? Default is FALSE.}
 
-\item{plot}{Logical. Plot regression line and area data?  Defaults to FALSE.}
+\item{plot}{Logical. Plot surface with area resolutions superimposed? Defaults to FALSE.}
 
 \item{scale}{Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.}
 }
@@ -34,6 +34,7 @@ Diagnostic plots may help visualize whether bias is present for the scales chose
 \examples{
 fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5))
+fd_area(mcap, plot=TRUE)
 
 # Look at diagnostic plot
 fdata <- fd_area(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), keep_data = TRUE)

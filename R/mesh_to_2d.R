@@ -1,4 +1,4 @@
-#' Transform 3D Mesh to 2D outline
+#' Transform 3D mesh into 2D outline
 #'
 #' @description
 #' Turns a 3D Mesh file into an xy data frame.

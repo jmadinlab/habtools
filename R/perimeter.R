@@ -1,5 +1,6 @@
-#' The perimeter of a 2D shape
+#' Calculate perimeter of a 2D shape
 #'
+#' @description
 #' Calculates the perimeter of a 2D shape.
 #'
 #' @param data A data frame with the first two columns ordered x and y coordinates.

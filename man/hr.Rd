@@ -2,7 +2,7 @@
 % Please edit documentation in R/hr.R
 \name{hr}
 \alias{hr}
-\title{Height range}
+\title{Calculate height range}
 \usage{
 hr(data)
 }

@@ -112,7 +112,7 @@
     <p>Calculates fractal dimension using the standard deviation method,
 an analogue of the variation method, but using the standard deviation in height per grid cell instead of the full height range.
 If <code>lvec</code> is not specified, a default based on resolution and extent will be used.
-A rule of thumb is that <code>l</code> should range at least an order of magnitude.
+A rule of thumb is that <code>lvec</code> should range at least an order of magnitude.
 However, large ranges also average-out fractal dimension of a surface that might have
 phase transitions, and therefore a thorough exploration of height ranges is suggested using the <code>plot</code>.
 <code>regmethod</code> specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.
@@ -121,7 +121,7 @@ phase transitions, and therefore a thorough exploration of height ranges is sugg
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu">habtools</span><span class="fu">::</span><span class="fu"><a href="dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">469</span>, y0 <span class="op">=</span> <span class="fl">1267</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">469</span>, y0 <span class="op">=</span> <span class="fl">1267</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="fd_sd-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">fd_sd</span><span class="op">(</span><span class="va">dem</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.166749</span>

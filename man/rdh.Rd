@@ -41,7 +41,7 @@ Uses area method for rugosity and hvar method for fractal dimension calculations
 }
 \examples{
 
-dem <- sample_dem(horseshoe, L = 1)
+dem <- dem_sample(horseshoe, L = 1)
 rdh(dem, lvec = c(0.125, 0.25, 0.5, 1))
 }
 \seealso{

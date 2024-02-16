@@ -122,13 +122,13 @@ Can be "hvar", "sd", "cubes", or "area". Defaults to "hvar".</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_dem.html">sample_dem</a></span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="dem_sample.html">dem_sample</a></span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">rdh</span><span class="op">(</span><span class="va">dem</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> fd calculation using hvar method.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> rg calculation using area method.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> L0 is set to the resolution of the raster: 0.01.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          R        D         H</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.904949 2.091118 0.7530439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          R        D        H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.249087 2.129256 1.021016</span>
 </code></pre></div>
     </div>
   </div>

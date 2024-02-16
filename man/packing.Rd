@@ -2,7 +2,7 @@
 % Please edit documentation in R/packing.R
 \name{packing}
 \alias{packing}
-\title{Calculate packing}
+\title{Calculate packing of 3D object}
 \usage{
 packing(mesh)
 }
@@ -13,9 +13,6 @@ packing(mesh)
 Value of packing.
 }
 \description{
-Calculate packing
-}
-\details{
 The ratio of the surface area of the object and the surface area of the convex hull around the object.
 }
 \examples{

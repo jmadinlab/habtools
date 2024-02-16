@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd_cubes.R
 \name{fd_cubes}
 \alias{fd_cubes}
-\title{Calculate fractal dimension using cube counting}
+\title{Calculate fractal dimension using the cube counting method}
 \usage{
 fd_cubes(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale = FALSE)
 }
@@ -21,7 +21,7 @@ fd_cubes(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale = FALSE)
 A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
 }
 \description{
-Calculate fractal dimension using cube counting
+Calculate fractal dimension using the cube counting method
 }
 \details{
 This function calculates fractal dimension using the cube counting method.

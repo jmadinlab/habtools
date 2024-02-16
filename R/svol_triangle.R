@@ -1,11 +1,14 @@
-#' Signed volume of triangle
+#' Calculate signed volume of triangle
 #'
-#' @param XYZCoords A dataframe with XYZ coordinates of three points in following order: X1,X2,X3,Y1,Y2,Y3,Z1,Z2,Z3
-#' @details Calculates the signed volume of a triangle based on a set of XYZCoords.
+#' @description
+#' Calculates the signed volume of a triangle based on a set of XYZCoords.
 #' Signed volume means that volumes can take on a negative value depending on whether the surface normal
 #' of the triangle is facing towards or away from the origin. When all positive and negative volumes
 #' are integrated across the entire mesh, these values cancel out so that the final volume is an approximation
 #' of the total volume of the mesh.
+#'
+#' @param XYZCoords A dataframe with XYZ coordinates of three points in following order: X1,X2,X3,Y1,Y2,Y3,Z1,Z2,Z3
+#'
 #' @return Value for the signed volume of a triangle.
 #' @export
 #'

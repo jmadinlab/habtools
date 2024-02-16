@@ -2,7 +2,7 @@
 % Please edit documentation in R/sphericity.R
 \name{sphericity}
 \alias{sphericity}
-\title{Calculate sphericity}
+\title{Calculate sphericity of a 3D object}
 \usage{
 sphericity(mesh)
 }
@@ -13,11 +13,11 @@ sphericity(mesh)
 Sphericity value.
 }
 \description{
-Calculate sphericity
-}
-\details{
 Calculates the ratio of the surface area of a sphere with the same volume as the object and the surface area of the object.
 }
 \examples{
 sphericity(mcap)
+}
+\seealso{
+\code{\link[=circularity]{circularity()}}
 }

@@ -1,5 +1,6 @@
 #' Calculate second moment of volume
 #'
+#' @description
 #' Calculates the 2nd moment of volume (SMV) by multiplying the volume of each
 #' triangle in the mesh by its centroids' distance from the origin (should be set to the attachment point
 #' of the mesh). The sum of these values is the 2nd moment of volume.
