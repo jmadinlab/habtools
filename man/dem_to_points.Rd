@@ -20,7 +20,7 @@ A 3D point cloud for raster cell corners.
 Transform DEM to 3D pointcloud of raster corners.
 }
 \examples{
-dem <- sim_terrain(20, 0.5)
+dem <- sim_dem(20, 0.5)
 raster::plot(dem)
 pts <- dem_to_points(dem)
 rgl::plot3d(pts)

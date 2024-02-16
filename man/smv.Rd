@@ -4,7 +4,7 @@
 \alias{smv}
 \title{Calculate second moment of volume}
 \usage{
-smv(mesh, axis = "z", scale = TRUE, origin = TRUE)
+smv(mesh, axis = "z", scale = FALSE, origin = TRUE)
 }
 \arguments{
 \item{mesh}{A triangular mesh of class mesh3d.}
@@ -13,7 +13,7 @@ smv(mesh, axis = "z", scale = TRUE, origin = TRUE)
 
 \item{scale}{Logical. Scale the object to have a volume = 1? Default = TRUE.}
 
-\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.}
+\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = FALSE}
 }
 \value{
 SMV value.
@@ -22,8 +22,8 @@ SMV value.
 Calculates the 2nd moment of volume (SMV) by multiplying the volume of each
 triangle in the mesh by its centroids' distance from the origin (should be set to the attachment point
 of the mesh). The sum of these values is the 2nd moment of volume.
-To compare moments in terms of shape only, set scale = TRUE (default).
 Axis is z by default, meaning it will calculate the vertical second moment, but this can be changed if needed.
+This metric is size-dependent so to compare moments in terms of shape only, set scale = TRUE.
 }
 \examples{
 smv(mcap)

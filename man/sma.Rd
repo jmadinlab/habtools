@@ -4,14 +4,14 @@
 \alias{sma}
 \title{Calculate second moment of area}
 \usage{
-sma(mesh, axis = "z", scale = TRUE, origin = TRUE)
+sma(mesh, axis = "z", scale = FALSE, origin = TRUE)
 }
 \arguments{
 \item{mesh}{A triangular mesh of class mesh3d.}
 
 \item{axis}{The axis along which to calculate the second moment of area. z is the default.}
 
-\item{scale}{Logical. Scale the object to have an area = 1? Default = TRUE.}
+\item{scale}{Logical. Scale the object to have a volume = 1? Default = FALSE}
 
 \item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE.}
 }
@@ -22,7 +22,7 @@ SMA value.
 Calculates the 2nd moment of surface area about the origin by multiplying the surface area of
 each triangle in the mesh by its distance from the origin (should be set to
 the attachment point of the mesh). The sum of these values is the 2nd moment
-of area.
+of area.#' This metric is size-dependent so to compare moments in terms of shape only, set scale = TRUE.
 }
 \examples{
 sma(mcap)

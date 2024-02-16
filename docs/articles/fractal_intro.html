@@ -136,7 +136,7 @@ is critical, and can differ among methods. If you don’t enter an
 rules of thumb.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate fractal terrain</span></span>
-<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_terrain.html">sim_terrain</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">128</span>, smoothness<span class="op">=</span><span class="fl">0.5</span>, z_extent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">128</span>, smoothness<span class="op">=</span><span class="fl">0.5</span>, z_extent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -156,7 +156,7 @@ automatically generate a vector of scales (<code>lvec</code>) based on
 rules of thumb, which differ among methods.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate fractal terrain</span></span>
-<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_terrain.html">sim_terrain</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">256</span>, smoothness<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">256</span>, smoothness<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -217,7 +217,7 @@ utilizes the diamond-square algorithm. Here is a relatively flat
 simulated terrain.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate 64 by 64 unit surface with smoothness of 1 (less fractal)</span></span>
-<span><span class="va">surf1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_terrain.html">sim_terrain</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">surf1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>Here are estimates of fractal dimension for the three methods.</p>
@@ -282,7 +282,7 @@ dimension?</p>
 simulating a rough terrain.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate 64 by 64 unit surface with smoothness of 0 (more fractal)</span></span>
-<span><span class="va">surf2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_terrain.html">sim_terrain</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">surf2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Here are estimates of fractal dimension for the three methods.</p>
@@ -340,7 +340,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- ```{r} -->
 <!-- i <- 50 -->
 <!-- # simluate i smooth terrains -->
-<!-- surf_smooth <- lapply(1:i, function(x) { sim_terrain(64, 1) }) -->
+<!-- surf_smooth <- lapply(1:i, function(x) { sim_dem(64, 1) }) -->
 <!-- # height variation -->
 <!-- hvar_smooth <- sapply(surf_smooth, fd,  method = "hvar", parallel=TRUE) -->
 <!-- # area -->
@@ -348,7 +348,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- # cube counting -->
 <!-- cube_smooth <- sapply(surf_smooth, fd,  method = "cubes") -->
 <!-- dat <- data.frame(z_scale=rep("z_scale=FALSE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth, area_smooth, cube_smooth)) -->
-<!-- surf_smooth_z <- lapply(1:i, function(x) { sim_terrain(64, 1, z_extent = TRUE) }) -->
+<!-- surf_smooth_z <- lapply(1:i, function(x) { sim_dem(64, 1, z_extent = TRUE) }) -->
 <!-- # height variation -->
 <!-- hvar_smooth_z <- sapply(surf_smooth_z, fd,  method = "hvar", parallel=TRUE) -->
 <!-- # area -->
@@ -357,7 +357,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- cube_smooth_z <- sapply(surf_smooth_z, fd,  method = "cubes") -->
 <!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=TRUE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth_z, area_smooth_z, cube_smooth_z))) -->
 <!-- ### 10 simulated rough terrains -->
-<!-- surf_rough <- lapply(1:i, function(x) { sim_terrain(64, 0) }) -->
+<!-- surf_rough <- lapply(1:i, function(x) { sim_dem(64, 0) }) -->
 <!-- # height variation -->
 <!-- hvar_rough <- sapply(surf_rough, fd,  method = "hvar", parallel=TRUE) -->
 <!-- # area -->
@@ -365,7 +365,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- # cube counting -->
 <!-- cube_rough <- sapply(surf_rough, fd,  method = "cubes") -->
 <!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=FALSE", 3 * i), smoothness=rep("rough", 3 * i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_rough, area_rough, cube_rough))) -->
-<!-- surf_rough_z <- lapply(1:i, function(x) { sim_terrain(64, 0, z_extent = TRUE) }) -->
+<!-- surf_rough_z <- lapply(1:i, function(x) { sim_dem(64, 0, z_extent = TRUE) }) -->
 <!-- # height variation -->
 <!-- hvar_rough_z <- sapply(surf_rough_z, fd,  method = "hvar", parallel=TRUE) -->
 <!-- # area -->
@@ -391,7 +391,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- dev.off() -->
 <!-- par(mfrow=c(2, 2)) -->
 <!-- z_extent <- TRUE -->
-<!-- surf2 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- surf2 <- sim_dem(64, smoothness, z_extent) -->
 <!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
 <!-- fd(surf2, method = "hvar", diagnose = T) -->
 <!-- fd(surf2, method = "area", diagnose = T) -->
@@ -402,7 +402,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- par(mfrow=c(2, 2)) -->
 <!-- smoothness <- 1 -->
 <!-- z_extent <- FALSE -->
-<!-- surf1 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- surf1 <- sim_dem(64, smoothness, z_extent) -->
 <!-- lvec <- c(4, 8, 16, 32, 64) -->
 <!-- plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
 <!-- fd(surf1, method = "hvar", diagnose = T) -->
@@ -410,7 +410,7 @@ transformation. Let’s simulate multiple surfaces</p>
 <!-- fd(surf1, method = "cubes", diagnose = T) -->
 <!-- par(mfrow=c(2, 2)) -->
 <!-- z_extent <- TRUE -->
-<!-- surf2 <- sim_terrain(64, smoothness, z_extent) -->
+<!-- surf2 <- sim_dem(64, smoothness, z_extent) -->
 <!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
 <!-- fd(surf2, method = "hvar", diagnose = T) -->
 <!-- fd(surf2, method = "area", diagnose = T) -->
