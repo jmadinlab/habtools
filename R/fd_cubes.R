@@ -1,4 +1,4 @@
-#' Calculate fractal dimension using cube counting
+#' Calculate fractal dimension using the cube counting method
 #'
 #' @param data An object of class RasterLayer or mesh3d.
 #' @param lvec Vector of scales to use for calculation (i.e. cube sizes).

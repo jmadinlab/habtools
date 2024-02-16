@@ -25,4 +25,5 @@ raster::plot(dem)
 pts <- dem_to_points(dem)
 rgl::plot3d(pts)
 
+
 }

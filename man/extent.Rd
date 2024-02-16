@@ -13,10 +13,12 @@ extent(data)
 A value, the extent of the mesh or DEM.
 }
 \description{
-Calculate extent of a 3D object
-}
-\details{
 This function calculates the extent or largest length of the bounding box of a mesh or a DEM.
+}
+\note{
+There are several extent function is other packages, including
+the raster package. Therefore it is recommended to use the package
+namespace, see examples below.
 }
 \examples{
 habtools::extent(mcap)

@@ -1,4 +1,4 @@
-#' Height range
+#' Calculate height range
 #'
 #' @description Calculates the distance between the lowest and highest point in a 3D object.
 #'

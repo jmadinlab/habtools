@@ -3,7 +3,7 @@
 #' @param data DEM of class "RasterLayer" or mesh of class "mesh3d".
 #' @param lvec Vector of scales to use for calculation.
 #' @param keep_data Logical. Keep data? Default is FALSE.
-#' @param plot Logical. Plot regression line and area data?  Defaults to FALSE.
+#' @param plot Logical. Plot surface with area resolutions superimposed? Defaults to FALSE.
 #' @param scale Logical. Rescale height values to fit the extent? Only relevant for DEMs. Defaults to FALSE.
 #'
 #' @return A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.
@@ -19,6 +19,7 @@
 #' @examples
 #' fd_area(mcap, lvec = c(0.01, 0.02, 0.04, 0.08, 0.16))
 #' fd_area(horseshoe, lvec = c(0.06125, 0.125, 0.25, 0.5))
+#' fd_area(mcap, plot=TRUE)
 #'
 #' # Look at diagnostic plot
 #' fdata <- fd_area(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), keep_data = TRUE)

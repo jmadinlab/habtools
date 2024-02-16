@@ -1,4 +1,8 @@
-#' Height variation in cells at different scales
+#' Calculate height variation in cells at different scales
+#'
+#' @description
+#' This is a helper function used for calculating fractal dimension using the
+#' height variation and standard deviation methods.
 #'
 #' @param data Digital elevation model of class RasterLayer.
 #' @param lvec Scales to use for calculation.
@@ -7,10 +11,6 @@
 #'
 #' @return A `data.frame` containing height ranges of cells at different scales.
 #' @export
-#'
-#' @details
-#' This function is used for calculating fractal dimension using the
-#' height variation method.
 #'
 #' @examples
 #'

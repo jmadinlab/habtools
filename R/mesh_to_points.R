@@ -1,4 +1,4 @@
-#' Transform mesh to 3D pointcloud
+#' Transform mesh to 3D point cloud
 #'
 #' @param mesh A triangular mesh of class mesh3d.
 #'

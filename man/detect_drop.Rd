@@ -18,10 +18,9 @@ A RasterLayer marking edges. Values indicate maximum height difference of surrou
 Detect a sudden drop, edge, or overhang in a DEM
 }
 \examples{
-library(raster)
-library(habtools)
-dem <- detect_drop(horseshoe, d = 0.2)
-plot(horseshoe)
-plot(dem)
+edges <- detect_drop(horseshoe, d = 0.2)
+
+raster::plot(horseshoe)
+raster::plot(edges)
 
 }

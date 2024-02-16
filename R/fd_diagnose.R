@@ -1,4 +1,6 @@
-#' Investigate varying fractal dimensions across scale
+#' Diagnose fractal dimension
+#'
+#' @description Diagnoses fractal dimension variation across neighboring scales.
 #'
 #' @param data Output of [fd()] with option keep_data = TRUE.
 #' @param keep_data Logical. Keep diagnostics data?
