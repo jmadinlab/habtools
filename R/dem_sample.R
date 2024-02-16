@@ -9,7 +9,7 @@
 #' @examples
 #' dem1 <- sample_dem(horseshoe, L = 4)
 #' raster::plot(dem1)
-sample_dem <- function(data, L) {
+dem_sample <- function(data, L) {
   size <- L
   mid <- mid_find(data)
   sub <- dem_crop(data,

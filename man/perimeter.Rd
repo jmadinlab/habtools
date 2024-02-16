@@ -2,7 +2,7 @@
 % Please edit documentation in R/perimeter.R
 \name{perimeter}
 \alias{perimeter}
-\title{The perimeter of a 2D shape}
+\title{Calculate perimeter of a 2D shape}
 \usage{
 perimeter(data, keep_data = FALSE)
 }

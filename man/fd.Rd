@@ -35,7 +35,6 @@ The \code{cubes} method is not recommended if the height range is much smaller t
 Most objects and surfaces are not perfectly fractal. It is recommended to investigate scale transitions by setting diagnose to TRUE.
 }
 \examples{
-library(habtools)
 dem <- dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd(dem, method = "area", diagnose = TRUE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fd_diagnose.R
 \name{fd_diagnose}
 \alias{fd_diagnose}
-\title{Diagnose fractal dimension variation across scales}
+\title{Diagnose fractal dimension}
 \usage{
 fd_diagnose(data, keep_data = TRUE)
 }
@@ -15,7 +15,7 @@ fd_diagnose(data, keep_data = TRUE)
 A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
 }
 \description{
-Diagnose fractal dimension variation across scales
+Diagnoses fractal dimension variation across neighboring scales.
 }
 \examples{
 fd_data <- fd(horseshoe, lvec = c(0.05, 0.1, 0.2, 0.4), method = "area", keep_data = TRUE)

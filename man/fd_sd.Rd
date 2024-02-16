@@ -39,14 +39,14 @@ Calculate fractal Dimension using the standard deviation method
 Calculates fractal dimension using the standard deviation method,
 an analogue of the variation method, but using the standard deviation in height per grid cell instead of the full height range.
 If \code{lvec} is not specified, a default based on resolution and extent will be used.
-A rule of thumb is that \code{l} should range at least an order of magnitude.
+A rule of thumb is that \code{lvec} should range at least an order of magnitude.
 However, large ranges also average-out fractal dimension of a surface that might have
 phase transitions, and therefore a thorough exploration of height ranges is suggested using the \code{plot}.
 \code{regmethod} specifies whether data is summarized by taking the mean or median of height ranges across scales or all data is used.
 \code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 }
 \examples{
-dem <- habtools::dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+dem <- dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 fd_sd(dem, lvec = c(0.125, 0.25, 0.5, 1, 2))
 
 }
