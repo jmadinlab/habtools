@@ -144,7 +144,7 @@ rules of thumb.</p>
 <span><span class="co"># fractal dimension using height variation method</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.487394</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.448761</span></span></code></pre></div>
 <p>For example the height variation method will generate a log2 sequence
 of length between the resolution x 10 and the extent. So in this
 example,</p>
@@ -166,25 +166,25 @@ rules of thumb, which differ among methods.</p>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128, 256).</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.523926</span></span>
+<span><span class="co">#&gt; [1] 2.49223</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;     l         h</span></span>
-<span><span class="co">#&gt; 1   8 0.2788028</span></span>
-<span><span class="co">#&gt; 2  16 0.4317595</span></span>
-<span><span class="co">#&gt; 3  32 0.6174781</span></span>
-<span><span class="co">#&gt; 4  64 0.8370791</span></span>
-<span><span class="co">#&gt; 5 128 1.0647181</span></span>
-<span><span class="co">#&gt; 6 256 1.5376634</span></span>
+<span><span class="co">#&gt; 1   8 0.2870652</span></span>
+<span><span class="co">#&gt; 2  16 0.4456432</span></span>
+<span><span class="co">#&gt; 3  32 0.6589091</span></span>
+<span><span class="co">#&gt; 4  64 0.9603087</span></span>
+<span><span class="co">#&gt; 5 128 1.3002576</span></span>
+<span><span class="co">#&gt; 6 256 1.6451935</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
 <span><span class="co">#&gt; [1]   8  16  32  64 128 256</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.369017 2.483840 2.561024 2.652964 2.469732</span></span>
+<span><span class="co">#&gt; [1] 2.365489 2.435810 2.456581 2.562773 2.660540</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.1062876</span></span>
+<span><span class="co">#&gt; [1] 0.1159111</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
@@ -225,21 +225,21 @@ simulated terrain.</p>
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.326891</span></span>
+<span><span class="co">#&gt; [1] 2.352829</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.39469</span></span>
+<span><span class="co">#&gt; [1] 2.423261</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.000063</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.000085</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
 <span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 <p>The height variation method estimates that fractal dimension is high,
 whereas the other two method estimate that it is low. This is because
@@ -257,22 +257,22 @@ Here are estimates of fractal dimension for the three methods.</p>
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.326891</span></span>
+<span><span class="co">#&gt; [1] 2.352829</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.39469</span></span>
+<span><span class="co">#&gt; [1] 2.423261</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.216242</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.213935</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.531071</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.240278</span></span></code></pre></div>
 <p>You can see that the height variation estimate remains unchanged,
 whereas the area and cubes estimates increase. We believe this dichotomy
 raises an underlying philosophical question about fractal surfaces: does
@@ -290,22 +290,22 @@ simulating a rough terrain.</p>
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.721656</span></span>
+<span><span class="co">#&gt; [1] 2.666313</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.894103</span></span>
+<span><span class="co">#&gt; [1] 2.849171</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.017233</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.024327</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.159135</span></span></code></pre></div>
 <p>The height variation estimate for fractal dimension is high (closer
 to 3), the area estimate is the same as for the smooth terrain (close to
 2), and the cubes estimate is somewhere in-between. This suggests that
@@ -323,17 +323,17 @@ Here are estimates of fractal dimension for the three methods.</p>
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.721656</span></span>
+<span><span class="co">#&gt; [1] 2.666313</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.538922</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.587676</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.831853</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.411346</span></span></code></pre></div>
 <p>When the z-values are scaled, the area estimate approaches the height
 variation estimate; the latter of which is unchanged by the
 transformation. Let’s simulate multiple surfaces</p>

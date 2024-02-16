@@ -8,15 +8,13 @@
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This package is a collection of tools for 3D 
-  meshes and digital elevation models (DEM) targetted at biologists
-  and ecologists. Tools calculate metrics like surface area, rugosity, 
-  fractal dimension, heigh range, convexity, sphericity, second moments
-  of volume and more. The initial set of tools came from two research papers.
-  Zawada et al. (2019) examined morphology of coral colony laser scans. 
-  Torres-Pulliza et al. (2020) examined  complexity of coral reef structure. 
-  It is hoped that the corpus of tools and number of project contributors 
-  will grow through time. 
+<img src="man/figures/habtools_hex.png" width = 120 alt="fishflux logo"/>
+
+The goal of `habtools` is to collate tools for 3D meshes and digital
+elevation models (DEM) targeted at biologists and ecologists. Tools
+calculate metrics like surface area, rugosity, fractal dimension, height
+range, convexity, sphericity, second moments of volume and more.
+
 ## Installation
 
 You can install the development version from
@@ -86,6 +84,9 @@ fd(dem2, lvec = c(0.25, 0.5, 1, 2), diagnose = TRUE, method = "hvar", keep_data 
     #> 3 1.00 0.8890120
     #> 4 2.00 1.3682885
     #> 
+    #> $lvec
+    #> [1] 0.25 0.50 1.00 2.00
+    #> 
     #> $D_vec
     #> [1] 2.108902 2.389417 2.377902
     #> 
@@ -115,7 +116,7 @@ rg(mcap, L0 = 0.045)
 
 # fractal dimension
 fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
-#> [1] "lvec is set to c(0.423, 0.212, 0.106, 0.053)."
+#> lvec is set to c(0.053, 0.106, 0.212, 0.423).
 ```
 
 <img src="man/figures/README-example2-1.png" width="100%" />
@@ -130,6 +131,9 @@ fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
     #> 2 0.21164817   8
     #> 1 0.42329634   1
     #> 
+    #> $lvec
+    #> [1] 0.42329634 0.21164817 0.10582408 0.05291204
+    #> 
     #> $D_vec
     #> [1] 2.111893 1.954196 3.000000
     #> 
@@ -138,3 +142,5 @@ fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
     #> 
     #> $method
     #> [1] "cubes"
+
+../../../../../../tmp/Rtmpwsawew/file1324136965cde.png

@@ -78,7 +78,7 @@
 
 
 <dt>lvec</dt>
-<dd><p>Scales to use for calculation.</p></dd>
+<dd><p>Vector of scales to use for calculation.</p></dd>
 
 
 <dt>regmethod</dt>
@@ -90,7 +90,7 @@
 
 
 <dt>plot</dt>
-<dd><p>Diagnostic plot</p></dd>
+<dd><p>Logical. Show plot of scales relative to data?</p></dd>
 
 
 <dt>parallel</dt>
@@ -105,11 +105,12 @@
     <h2>Value</h2>
     
 
-<p>A value for fractal dimension, normally between 2 and 3.</p>
+<p>A value for fractal dimension, typically between 2 and 3 or a list if keep_data = TRUE.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>Calculates fractal dimension using the height variation regression.
+If <code>lvec</code> is not specified, a default based on resolution and extent will be used.
 <code>data</code> can be a DEM or a <code>data.frame</code> with columns labeled <code>l</code> and <code>h</code> for
 grid cell length and height range of that cell, respectively (output of <code><a href="hvar.html">hvar()</a></code>).
 A rule of thumb is that <code>l</code> should range an order of magnitude.
