@@ -49,7 +49,7 @@ fd_hvar <- function(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FA
 
   out <-
     lapply(lvec, function(l){
-      list <- split_dem(data, l, parallel = parallel, ncores = ncores)
+      list <- dem_split(data, l, parallel = parallel, ncores = ncores)
       h <- sapply(list, function(x){ diff(range(x[], na.rm = T)) })
       data.frame(l = l, h = h)
     }) %>% dplyr::bind_rows()

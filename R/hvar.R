@@ -38,7 +38,7 @@ hvar <- function(data, lvec=NULL, parallel = FALSE,
 
   hvar <-
     lapply(lvec, function(l){
-      list <- split_dem(data, l, parallel = parallel, ncores = ncores)
+      list <- dem_split(data, l, parallel = parallel, ncores = ncores)
       h <- sapply(list, hr)
       data.frame(l = l, h = h)
     }) %>% dplyr::bind_rows()

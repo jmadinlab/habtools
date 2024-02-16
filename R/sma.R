@@ -1,5 +1,6 @@
 #' Calculate second moment of area
 #'
+#' @description
 #' Calculates the 2nd moment of surface area about the origin by multiplying the surface area of
 #' each triangle in the mesh by its distance from the origin (should be set to
 #' the attachment point of the mesh). The sum of these values is the 2nd moment

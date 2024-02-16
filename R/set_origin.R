@@ -1,9 +1,9 @@
 #' Set the origin of a mesh
 #'
-#' Transforms XYZ coordinates relative to a chosen origin
+#' @description Transforms XYZ coordinates relative to a chosen origin
 #'
-#' Transforms coordinates so that the
-#' origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates).
+#' Transforms coordinates so that the origin lies at the reference
+#' vertex (defaults to the minimum of x, y, and z coordinates).
 #'
 #' @param mesh A triangular mesh of class mesh3d.
 #' @param reference Vector containing coordinates of the reference vertex.

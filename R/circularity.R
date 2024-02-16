@@ -11,6 +11,8 @@
 #' @return A value between 0 (infinitely irregular) and 1 (a perfect circle).
 #' @export
 #'
+#' @seealso [sphericity()]
+#'
 #' @examples
 #' mcap_2d <- mesh_to_2d(mcap)
 #' plot(mcap_2d, asp=1)

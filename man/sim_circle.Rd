@@ -17,9 +17,6 @@ sim_circle(r = 1, n = 100, mid = c(0, 0))
 A data frame of n xy-coordinates.
 }
 \description{
-Simulates xy coordinates for a circle of given radius.
-}
-\details{
 Simulates xy coordinates for a circle of given radius. Created for package
 testing purposes, but might be useful for others.
 }

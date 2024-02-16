@@ -13,10 +13,10 @@
 #' L <- habtools::extent(horseshoe) # size of horseshoe = 8m
 #' size <- 2 # size of target tiles
 #' (L / size)^2 # number of target tiles = 16
-#' dem_list <- split_dem(horseshoe, 2)
+#' dem_list <- dem_split(horseshoe, 2)
 #' length(dem_list)
 #'
-split_dem <- function(data,
+dem_split <- function(data,
                       size,
                       parallel = FALSE,
                       ncores = (parallel::detectCores() - 1)) {

@@ -17,10 +17,9 @@ mesh3d object
 }
 \description{
 Transforms XYZ coordinates relative to a chosen origin
-}
-\details{
-Transforms coordinates so that the
-origin lies at the reference vertex (defaults to the minimum of x, y, and z coordinates).
+
+Transforms coordinates so that the origin lies at the reference
+vertex (defaults to the minimum of x, y, and z coordinates).
 }
 \examples{
 mesh <- set_origin(mcap)

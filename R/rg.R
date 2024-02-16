@@ -44,7 +44,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
         warning("L0 is smaller than 2*DEM resolution. Consider increasing L0.")
       }
 
-      dem_list <- split_dem(data, L0, parallel = parallel, ncores = ncores)
+      dem_list <- dem_split(data, L0, parallel = parallel, ncores = ncores)
       if (parallel){
         hs <- parallel::mclapply(dem_list, hr,
                                  mc.cores = ncores) %>% unlist()
@@ -99,4 +99,3 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
   }
   return(rg)
 }
-

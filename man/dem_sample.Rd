@@ -18,6 +18,6 @@ Digital elevation model of class RasterLayer.
 Sample a random DEM with specified size from a larger DEM
 }
 \examples{
-dem1 <- sample_dem(horseshoe, L = 4)
-raster::plot(dem1)
+dem <- dem_sample(horseshoe, L = 4)
+raster::plot(dem)
 }

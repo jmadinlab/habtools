@@ -28,3 +28,6 @@ plot(circ, asp=1)
 circularity(circ)
 
 }
+\seealso{
+\code{\link[=sphericity]{sphericity()}}
+}
