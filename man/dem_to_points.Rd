@@ -2,7 +2,7 @@
 % Please edit documentation in R/dem_to_points.R
 \name{dem_to_points}
 \alias{dem_to_points}
-\title{Transform DEM to 3D pointcloud of raster corners.}
+\title{Transform DEM to 3D pointcloud of raster corners}
 \usage{
 dem_to_points(dem, bh = NULL, parallel = F)
 }
@@ -17,7 +17,7 @@ dem_to_points(dem, bh = NULL, parallel = F)
 A 3D point cloud for raster cell corners.
 }
 \description{
-Transform DEM to 3D pointcloud of raster corners.
+Transform DEM to 3D pointcloud of raster corners
 }
 \examples{
 dem <- sim_terrain(20, 0.5)
