@@ -33,11 +33,22 @@ In general, fractal dimension is estimated by measuring values (e.g., counts of 
 
 ```{r}
 # simulate fractal terrain
-surf <- sim_terrain(n=128, smoothness=0.5)
+surf <- sim_terrain(n=128, smoothness=0.5, z_extent = TRUE)
 plot(surf)
 
 # fractal dimension using height variation method
-fd(surf, method="hvar")
+dat <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, keep_data = TRUE)
+plot(dat$data)
+
+par(mfrow=c(1, 2))
+fish <- data.frame(l=c(1, 2, 4, 8, 16, 32, 64, 128), n=c(433, 2654, 11111, 2540, 498, 101, 16, 2))
+# plot(fish, log="xy")
+barplot(log2(fish$n), names.arg=fish$l, las=2, ylab="Count, log2", xlab="Body length class, cm", ylim=c(0, 14), main="Site A")
+
+fish <- data.frame(l=c(1, 2, 4, 8, 16, 32, 64, 128), n=c(33, 254, 1111, 340, 100, 40, 10, 3))
+barplot(log2(fish$n), names.arg=fish$l, las=2, ylab="Count, log2", xlab="Body length class, cm", ylim=c(0, 14), main="Site B")
+
+
 ```
 
 For example the height variation method will generate a log2 sequence of length between the resolution x 10 and the extent. So in this example, 
