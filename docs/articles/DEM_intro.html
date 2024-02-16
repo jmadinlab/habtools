@@ -215,13 +215,13 @@ function if method_fd is “hvar”, “cubes”, or “sd”.</p>
 <div class="section level2">
 <h2 id="multiple-squares">Multiple squares<a class="anchor" aria-label="anchor" href="#multiple-squares"></a>
 </h2>
-<p>The function <code><a href="../reference/split_dem.html">split_dem()</a></code> allows you to subdivide a DEM
+<p>The function <code><a href="../reference/dem_split.html">dem_split()</a></code> allows you to subdivide a DEM
 into equal parts. Let’s divide the big raster into 2x2m squares. Note
 that this function will only work well if you have a square DEM. You
 also want to choose the size so that the DEM can be divided into equal
 parts.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dem_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/split_dem.html">split_dem</a></span><span class="op">(</span><span class="va">dem</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dem_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_split.html">dem_split</a></span><span class="op">(</span><span class="va">dem</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co"># calculate one metric for all squares</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">hr</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] 0.5169916 0.6127143 0.8386080 0.8948445 0.6774139 0.9407241 0.9958875</span></span>
