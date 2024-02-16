@@ -2,7 +2,7 @@
 % Please edit documentation in R/csf.R
 \name{csf}
 \alias{csf}
-\title{Calculate colony shape factor}
+\title{Calculate mechanical shape factor}
 \usage{
 csf(mesh, z_min, res, keep_data = FALSE)
 }
@@ -16,23 +16,35 @@ csf(mesh, z_min, res, keep_data = FALSE)
 \item{keep_data}{Logical. Return list with supplemental info? Defaults to FALSE.}
 }
 \value{
-A value for csf or if keep_data = TRUE, a list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
+A value for csf or if keep_data = TRUE, a list containing the
+colony shape factor (csf), the parallel to flow (dy) and perpendicular
+(dx) diameters of the cantilever base, and the bending moment (mom).
 }
 \description{
 Calculates mechanical vulnerability of rigid, cantilever-type
 structural elements.
 }
 \details{
-This function calculates the mechanical vulnerability of a structural
-element, like a hard coral colony, to fluid flow. While developed for corals, and originally
-called the Colony Shape Factor (CSF), the function is applicable to any attached,
-rigid cantilever type structure. CSF is dimensionless and can be used to compare the
-vulnerability among structures. Mechanistically, if the CSF of a structure becomes greater
-than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
-material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
+This function calculates the mechanical vulnerability of a
+structural element, like a hard coral colony, to fluid flow. While
+developed for corals, and originally called the Colony Shape Factor
+(CSF), the function is applicable to any attached, rigid cantilever
+type structure. CSF is dimensionless and can be used to compare the
+vulnerability among structures. Mechanistically, if the CSF of a
+structure becomes greater than the dislodgement mechanical threshold,
+breakage occurs. This threshold is a function of material tensile
+strength and inversely related to fluid velocity and density
+(Madin & Connolly 2006).
 }
 \note{
-The orientation of the 3D mesh is important for this function. The function assumes the fluid flow is parallel with the y-axis. The function also assumes the base of the cantilever over which the bending moment acts can be approximated as an ellipse with the diameter on the y-axis parallel with flow (dy). You can set a z_min if the base of your mesh is not flat at the base (i.e., shift the plane upon which the cantilever is attached upwards). The function output includes dy and dx for monitoring anticipated values.
+The orientation of the 3D mesh is important for this function.
+The function assumes the fluid flow is parallel with the y-axis.
+The function also assumes the base of the cantilever over which the
+bending moment acts can be approximated as an ellipse with the diameter
+on the y-axis parallel with flow (dy). You can set a z_min if the base
+of your mesh is not flat at the base (i.e., shift the plane upon which
+the cantilever is attached upwards). The function output includes dy
+and dx for monitoring anticipated values.
 }
 \examples{
 csf(mcap, z_min = -3.65)

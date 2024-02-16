@@ -48,7 +48,7 @@ phase transitions, and therefore a thorough exploration of height ranges is sugg
 \code{regmethod} "raw" is not recommended because the regression will give much more weight to the lower scales that include more points and likely underestimate D.
 }
 \examples{
-dem <- habtools::crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+dem <- habtools::dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 fd_hvar(dem, lvec = c(0.125, 0.25, 0.5, 1, 2))
 fd_hvar(dem, regmethod = "mean", plot = TRUE, keep_data = TRUE)
 fd_hvar(dem, regmethod = "median", plot = TRUE, keep_data = TRUE)

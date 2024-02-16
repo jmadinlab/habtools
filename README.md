@@ -47,7 +47,7 @@ library(raster)
 plot(horseshoe)
 
 # Let's take a subset DEM of size = 2
-dem2 <- crop_dem(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
+dem2 <- dem_crop(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
 ```
 
 <img src="man/figures/README-example1-1.png" width="100%" />
@@ -64,7 +64,7 @@ plot(dem2)
 hr(dem2)
 #> [1] 1.368289
 
-# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01). 
+# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01).
 rg(dem2, L0 = 0.1)
 #> [1] 1.595773
 
@@ -106,6 +106,8 @@ al. (2019).
 library(rgl)
 plot3d(mcap)
 ```
+
+../../../../../private/var/folders/01/691qkw3s1fb10n3tk3h656sh0000gn/T/RtmpU4F7f2/file107d1414cd40.png
 
 ``` r
 # height range

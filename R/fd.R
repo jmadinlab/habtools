@@ -26,7 +26,7 @@
 #'
 #' @examples
 #' library(habtools)
-#' dem <- crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+#' dem <- dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 #' fd(dem, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))
 #' fd(dem, method = "area", diagnose = TRUE)
 #' fd(dem, method = "sd")
@@ -82,4 +82,3 @@ fd <- function(data,  method, lvec, keep_data = FALSE, diagnose = FALSE, ...) {
 }
 
 midv <- function(v) { v[-length(v)] + diff(v)/2 }
-

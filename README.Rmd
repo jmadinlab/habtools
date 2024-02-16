@@ -1,6 +1,6 @@
 ---
 output: github_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -28,7 +28,7 @@ knit_hooks$set(webgl = hook_webgl)
 <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 
-The goal of `habtools` is to collate tools for 3D meshes and digital elevation models (DEM) targeted at biologists and ecologists. Tools calculate metrics like surface area, rugosity, fractal dimension, height range, convexity, sphericity, second moments of volume and more. 
+The goal of `habtools` is to collate tools for 3D meshes and digital elevation models (DEM) targeted at biologists and ecologists. Tools calculate metrics like surface area, rugosity, fractal dimension, height range, convexity, sphericity, second moments of volume and more.
 
 ## Installation
 
@@ -41,7 +41,7 @@ devtools::install_github("jmadinlab/habtools")
 
 ## Examples
 
-There are currently two data set accompanying this package. `horseshoe` is a digital elevation model of a reef in RasterLayer format, and `mcap` is a 3D mesh of a coral growing on a reef in mesh3d format. 
+There are currently two data set accompanying this package. `horseshoe` is a digital elevation model of a reef in RasterLayer format, and `mcap` is a 3D mesh of a coral growing on a reef in mesh3d format.
 
 The following example calculates height range, rugosity and fractal dimension of a 2 x 2 m plot of reef using the height range method developed in Torres-Pulliza et al. (2020).
 
@@ -51,13 +51,13 @@ library(raster)
 plot(horseshoe)
 
 # Let's take a subset DEM of size = 2
-dem2 <- crop_dem(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
+dem2 <- dem_crop(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
 plot(dem2)
 
 # height range
 hr(dem2)
 
-# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01). 
+# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01).
 rg(dem2, L0 = 0.1)
 
 # fractal dimension
@@ -71,7 +71,7 @@ The next example calculates height range, rugosity and fractal dimension for a 3
 library(rgl)
 plot3d(mcap)
 ```
-   
+
 ```{r example2.2}
 # height range
 hr(mcap)
@@ -83,6 +83,3 @@ rg(mcap, L0 = 0.045)
 fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
 
 ```
-
-
-

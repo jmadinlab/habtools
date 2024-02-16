@@ -1,6 +1,7 @@
-#' Calculate colony shape factor
+#' Calculate mechanical shape factor
 #'
-#' @description Calculates mechanical vulnerability of rigid, cantilever-type
+#' @description
+#' Calculates mechanical vulnerability of rigid, cantilever-type
 #' structural elements.
 #'
 #' @param mesh A triangular mesh of class mesh3d.
@@ -9,17 +10,32 @@
 #' @param keep_data Logical. Return list with supplemental info? Defaults to FALSE.
 #'
 #'
-#' @details This function calculates the mechanical vulnerability of a structural
-#' element, like a hard coral colony, to fluid flow. While developed for corals, and originally
-#' called the Colony Shape Factor (CSF), the function is applicable to any attached,
-#' rigid cantilever type structure. CSF is dimensionless and can be used to compare the
-#' vulnerability among structures. Mechanistically, if the CSF of a structure becomes greater
-#' than the dislodgement mechanical threshold, breakage occurs. This threshold is a function of
-#' material tensile strength and inversely related to fluid velocity and density (Madin & Connolly 2006).
+#' @details
+#' This function calculates the mechanical vulnerability of a
+#' structural element, like a hard coral colony, to fluid flow. While
+#' developed for corals, and originally called the Colony Shape Factor
+#' (CSF), the function is applicable to any attached, rigid cantilever
+#' type structure. CSF is dimensionless and can be used to compare the
+#' vulnerability among structures. Mechanistically, if the CSF of a
+#' structure becomes greater than the dislodgement mechanical threshold,
+#' breakage occurs. This threshold is a function of material tensile
+#' strength and inversely related to fluid velocity and density
+#' (Madin & Connolly 2006).
 #'
-#' @note The orientation of the 3D mesh is important for this function. The function assumes the fluid flow is parallel with the y-axis. The function also assumes the base of the cantilever over which the bending moment acts can be approximated as an ellipse with the diameter on the y-axis parallel with flow (dy). You can set a z_min if the base of your mesh is not flat at the base (i.e., shift the plane upon which the cantilever is attached upwards). The function output includes dy and dx for monitoring anticipated values.
+#' @note
+#' The orientation of the 3D mesh is important for this function.
+#' The function assumes the fluid flow is parallel with the y-axis.
+#' The function also assumes the base of the cantilever over which the
+#' bending moment acts can be approximated as an ellipse with the diameter
+#' on the y-axis parallel with flow (dy). You can set a z_min if the base
+#' of your mesh is not flat at the base (i.e., shift the plane upon which
+#' the cantilever is attached upwards). The function output includes dy
+#' and dx for monitoring anticipated values.
 #'
-#' @return A value for csf or if keep_data = TRUE, a list containing the colony shape factor (csf), the parallel to flow (dy) and perpendicular (dx) diameters of the cantilever base, and the bending moment (mom).
+#' @return A value for csf or if keep_data = TRUE, a list containing the
+#' colony shape factor (csf), the parallel to flow (dy) and perpendicular
+#' (dx) diameters of the cantilever base, and the bending moment (mom).
+#'
 #' @export
 #'
 #' @references Madin JS & Connolly SR (2006) Ecological consequences of major hydrodynamic disturbances on coral reefs. Nature. 444:477-480.

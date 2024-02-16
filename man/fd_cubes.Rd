@@ -34,7 +34,7 @@ The smallest scale included in \code{lvec} should not be smaller than the resolu
 fd_cubes(mcap, keep_data = TRUE, plot = TRUE)
 fd_cubes(mcap, lvec = c(0.05, 0.1, 0.25, 0.5), plot = TRUE)
 
-dem <- crop_dem(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
+dem <- dem_crop(horseshoe, x0 = -469, y0 = 1267, L = 2, plot = TRUE)
 fd_cubes(dem, plot = TRUE, keep_data = TRUE)
 fd_cubes(dem, plot = TRUE, keep_data = TRUE, scale = TRUE)
 
