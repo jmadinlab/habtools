@@ -104,12 +104,8 @@ al. (2019).
 
 ``` r
 library(rgl)
-#> This build of rgl does not include OpenGL functions.  Use
-#>  rglwidget() to display results, e.g. via options(rgl.printRglwidget = TRUE).
 plot3d(mcap)
 ```
-
-<img src="man/figures/README-example2-1.png" width="100%" />
 
 ``` r
 # height range

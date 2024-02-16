@@ -93,7 +93,7 @@ sma(mcap)
 smv(mcap)
 
 # mechanical shape factor
-csf(mcap, z_min = -3.65)$csf
+csf(mcap, z_min = -3.65)
 
 ```
 
