@@ -1,24 +1,23 @@
-#' Circularity of 2D shape
+#' Calculate circularity of a 2D shape
 #'
 #' @description
-#' Calculates the circularity of a 2D shape.
+#' The perimeter of the 2D shape is divided by the perimeter of a circle with
+#' the same area as the shape. The more irregular the shape is, the closer the
+#' output value is to zero. The closer the shape is to a circle, the closer
+#' the output value is to 1.
 #'
 #' @param data A data frame with the first two columns x and y coordinates, respectively.
 #'
 #' @return A value between 0 (infinitely irregular) and 1 (a perfect circle).
 #' @export
 #'
-#' @details
-#' The perimeter of the 2D shape is divided by the perimeter of a circle with
-#' the same area as the shape. The more irregular the shape is, the closer the
-#' output value is to zero. The closer the shape is to a circle, the closer
-#' the output value is to 1.
-#'
 #' @examples
 #' mcap_2d <- mesh_to_2d(mcap)
+#' plot(mcap_2d, asp=1)
 #' circularity(mcap_2d)
 #'
 #' circ <- sim_circle() # simulate xy coordinates for a circle
+#' plot(circ, asp=1)
 #' circularity(circ)
 #'
 

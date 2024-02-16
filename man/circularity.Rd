@@ -2,7 +2,7 @@
 % Please edit documentation in R/circularity.R
 \name{circularity}
 \alias{circularity}
-\title{Circularity of 2D shape}
+\title{Calculate circularity of a 2D shape}
 \usage{
 circularity(data)
 }
@@ -13,9 +13,6 @@ circularity(data)
 A value between 0 (infinitely irregular) and 1 (a perfect circle).
 }
 \description{
-Calculates the circularity of a 2D shape.
-}
-\details{
 The perimeter of the 2D shape is divided by the perimeter of a circle with
 the same area as the shape. The more irregular the shape is, the closer the
 output value is to zero. The closer the shape is to a circle, the closer
@@ -23,9 +20,11 @@ the output value is to 1.
 }
 \examples{
 mcap_2d <- mesh_to_2d(mcap)
+plot(mcap_2d, asp=1)
 circularity(mcap_2d)
 
 circ <- sim_circle() # simulate xy coordinates for a circle
+plot(circ, asp=1)
 circularity(circ)
 
 }

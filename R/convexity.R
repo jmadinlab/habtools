@@ -1,13 +1,11 @@
-#' Convexity
+#' Calculate convexity of a 3D mesh
 #'
 #' @description
-#' Calculates the convexity of a 3D mesh.
-#'
-#' @param mesh A triangular mesh of class mesh3d.
-#'
-#' @details The ratio of the volume of the object and the volume of the convex
+#' The ratio of the volume of the object and the volume of the convex
 #' hull around the object. Objects with fewer concavities will be closer to 1.
 #'
+#' @param mesh A triangular mesh of class mesh3d.
+#'#'
 #' @return The convexity value.
 #' @export
 #'
