@@ -14,9 +14,13 @@
 #'
 
 cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
-  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
-               ceiling(rescale(pts$y, ymin, ymax, n)),
-               ceiling(rescale(pts$z, zmin, zmax, n)))
+  x <- rescale(pts$x, xmin, xmax, n)
+  x[x==0] <- 1
+  y <- rescale(pts$y, ymin, ymax, n)
+  y[y==0] <- 1
+  z <- rescale(pts$z, zmin, zmax, n)
+  z[z==0] <- 1
+  cnt <- table(ceiling(x), ceiling(y), ceiling(z))
   sum(cnt > 0)
 }
 
@@ -34,8 +38,11 @@ cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
 #'
 
 cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
-  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)),
-               ceiling(rescale(pts$y, ymin, ymax, n)))
+  x <- rescale(pts$x, xmin, xmax, n)
+  x[x==0] <- 1
+  y <- rescale(pts$y, ymin, ymax, n)
+  y[y==0] <- 1
+  cnt <- table(ceiling(x), ceiling(y))
   sum(cnt > 0)
 }
 
@@ -50,13 +57,15 @@ cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
 #' @export
 #'
 #' @examples
-#' pts <- data.frame(x = rnorm(100, 0, 5))
+#' pts <- data.frame(x = rnorm(200, 0, 5))
 #' cell_count_1d(pts, xmin = min(pts$x), xmax = max(pts$x), n = 5)
 #'
 #'
 
 cell_count_1d <- function(pts, xmin, xmax, n) {
-  cnt <- table(ceiling(rescale(pts$x, xmin, xmax, n)))
+  x <- ceiling(rescale(pts$x, xmin, xmax, n))
+  x[x==0] <- 1
+  cnt <- table(x)
   sum(cnt > 0)
 }
 
