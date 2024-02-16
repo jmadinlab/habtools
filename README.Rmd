@@ -13,9 +13,9 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-library(rgl)
-knitr::knit_hooks$set(webgl = hook_webgl)
+rgl::setupKnitr(autoprint = TRUE) 
 ```
+
 
 # habtools
 
@@ -65,10 +65,12 @@ fd(dem2, lvec = c(0.25, 0.5, 1, 2), diagnose = TRUE, method = "hvar", keep_data 
 
 The next example calculates height range, rugosity and fractal dimension for a 3D mesh of a coral colony. Because meshes can have more than one `z` coordinate for a given `xy` (i.e., they have overhangs), we advise the cube counting fractal dimension method presented in Zawada et al. (2019).
 
-```{r example2, webgl=TRUE}
+```{r example2}
 library(rgl)
 plot3d(mcap)
+```
 
+```{r example2.2}
 # height range
 hr(mcap)
 

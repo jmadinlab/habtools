@@ -104,8 +104,14 @@ al. (2019).
 
 ``` r
 library(rgl)
+#> This build of rgl does not include OpenGL functions.  Use
+#>  rglwidget() to display results, e.g. via options(rgl.printRglwidget = TRUE).
 plot3d(mcap)
+```
 
+<img src="man/figures/README-example2-1.png" width="100%" />
+
+``` r
 # height range
 hr(mcap)
 #> [1] 0.2185397
@@ -119,7 +125,7 @@ fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
 #> lvec is set to c(0.053, 0.106, 0.212, 0.423).
 ```
 
-<img src="man/figures/README-example2-1.png" width="100%" />
+<img src="man/figures/README-example2.2-1.png" width="100%" />
 
     #> $D
     #> [1] 2.315246
@@ -142,5 +148,3 @@ fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
     #> 
     #> $method
     #> [1] "cubes"
-
-../../../../../../tmp/Rtmpwsawew/file1324136965cde.png
