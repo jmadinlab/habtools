@@ -3,22 +3,110 @@
 #' Simulates z-values based on the Diamond-square algorithm.
 #' Warning: this function gets slow for n > 128.
 #'
-#' @param n The extent (matrix size).
+#' @param L The extent.
 #' @param smoothness A value between 0.0 and 1.0 (lower values
-#' produce rougher terrain).
-#' @param z_extent Logical. Should z be scaled to match extent, n?
-#' @param dem Logical. Should the matrix be turned into a DEM?
+#' produce rougher DEM).
+#' @param H Desired height range (optional).
+#' @param R Desired rugosity value (optional).
+#' @param method The method to be used for rugosity calculation in case R is given. Can be "hvar" or "area"
+#' @param parallel Logical. Use parallel processing? Defaults to FALSE. Only relevant if method = "hvar".
+#' @param n Number of iterations to try and reach desired R. Recommended to adapt R and H instead of increasing n if simulation fails.
 #'
-#' @return A matrix or raster (if dem = TRUE).
+#' @return  Digital elevation model of class RasterLayer.
 #' @export
 #'
 #' @examples
 #' library(raster)
-#' dem <- habtools::sim_terrain(32, 0.5, z_extent=TRUE)
+#' dem <- sim_dem(L = 32, smoothness = 0.5)
 #' plot(dem)
 
-sim_terrain <- function(n, smoothness, z_extent = FALSE, dem = TRUE) {
-  n_ <- smallestPowerOfTwoAfter(n)
+sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
+                    n = 100, method = "area", parallel = FALSE) {
+
+  if(!missing(R) & !missing(H)) {
+    d <- round(rdh_theory(R = R, H = H, L0 = 1, L = L)[[1]], 1)
+    if(d < 2.91) {d <- d + 0.1}
+    smoothness <- 3 - d
+    if (!missing(smoothness)) {message("smoothness is ignored when R and H are given.")}
+
+    for(i in 1:10) {
+      r <- sim_diamond(L = L, smoothness = s)
+      r@data@values <- r@data@values * H/hr(r)
+      r@data@values <- r@data@values - min(r@data@values)
+
+      # check rugosity
+      if (method == "area") {
+        ru <- rg(r, L0 = 1, method = "area")
+        message(ru)
+      } else if (method == "hvar") {
+        ru <- rg(r, L0 = 5, method = "hvar", parallel = parallel)
+        message(ru)
+      }
+      if (R < round(ru, 1)) {
+        break
+      }
+    }
+
+    if (R > round(ru, 1)) {
+      stop("Run for more iterations or change parameters")
+    }
+
+    if (plot) {
+      plot(r, legend=FALSE, asp=NA)
+    }
+
+    for (i in 1:n) {
+      if (R == round(ru, 1)) {
+        break
+      }
+
+      K <- sample(seq(2,(L-1)), size = L*sqrt(prop))
+      J <- sample(seq(2,L-1), size = L*sqrt(prop))
+      for (m in 1:length(K)) {
+        k <- K[m]
+        j <- J[m]
+        r[k,j] <- suppressWarnings(
+          mean(r[c(k-1, k, k+1), c((j-1), j, j+1)], na.rm = T)
+        )
+      }
+      if (plot) {
+        plot(r, legend=FALSE, asp=NA, main=i)
+      }
+      dev.flush()
+      r@data@values[is.na(r@data@values)] <- mean(r@data@values, na.rm = T)
+      r@data@values <- r@data@values * H/hr(r)
+      r@data@values <- r@data@values - min(r@data@values)
+
+      if (method == "area") {
+        ru <- rg(r, L0 = 1, method = "area")
+        message(ru)
+      } else if (method == "hvar") {
+        ru <- rg(r, L0 = 5, method = "hvar", parallel = T)
+        message(ru)
+      }
+
+    }
+    if(!R == round(ru, 1)) {
+      stop("Run for more iterations or change parameters")
+    }
+  } else if (!missing(smoothness)) {
+    r <- sim_diamond(L = L, smoothness = smoothness)
+    if (!missing(H)) {r <- r * (H / diff(range(r))) }
+  } else {
+    stop("Either smoothness or R and H have to be provided.")
+  }
+
+  return(r)
+
+}
+
+
+
+sim_diamond <- function(L, smoothness, dem = TRUE) {
+
+
+
+  n_ <- smallestPowerOfTwoAfter(L)
 
   depth <-  1
   mat <- matrix(0, n_ + 1, n_ + 1)
@@ -34,14 +122,16 @@ sim_terrain <- function(n, smoothness, z_extent = FALSE, dem = TRUE) {
     depth <- depth + 1
   }
 
-  mat <- mat[1:n, 1:n]
+  mat <- mat[1:L, 1:L]
   mat <- mat - min(mat)
-  if (z_extent) { mat <- mat * ((n-1) / diff(range(mat))) }
 
   if (dem) {
-    mat <- raster::raster(mat, xmn=0, xmx=n, ymn=0, ymx=n,
+    mat <- raster::raster(mat, xmn=0, xmx=L, ymn=0, ymx=L,
                           crs = "+proj=tmerc +datum=WGS84 +units=m +no_defs")
+
+
   }
+
   return(mat)
 }
 
