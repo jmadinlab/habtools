@@ -119,7 +119,7 @@ we use a DEM of 8x8m with a resolution of 0.01m.</p>
 Let’s say we want complexity metrics for a certain square of size 2m
 around certain xy-coordinates.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crop_dem.html">crop_dem</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem1</span><span class="op">)</span></span></code></pre></div>
@@ -136,9 +136,9 @@ around certain xy-coordinates.</p>
 </h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Height variation method</span></span>
-<span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores. </span></span>
+<span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, L0 <span class="op">=</span> <span class="fl">0.05</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores.</span></span>
 <span><span class="co">#&gt; [1] 1.6123</span></span>
-<span>           </span>
+<span></span>
 <span><span class="co"># Area method</span></span>
 <span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, method <span class="op">=</span> <span class="st">"area"</span>, L0 <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1.619947</span></span></code></pre></div>

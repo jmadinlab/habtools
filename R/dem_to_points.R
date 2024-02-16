@@ -5,7 +5,6 @@
 #' @param parallel Logical. Use parallel computation?
 #'
 #' @return A 3D point cloud for raster cell corners.
-#' @export
 #'
 #' @examples
 #' dem <- sim_terrain(20, 0.5)
@@ -13,6 +12,8 @@
 #' pts <- dem_to_points(dem)
 #' rgl::plot3d(pts)
 #'
+#'
+
 dem_to_points <-function(dem, bh = NULL, parallel = F){
 
   res <- res(dem)
