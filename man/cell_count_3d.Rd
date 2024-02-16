@@ -2,7 +2,7 @@
 % Please edit documentation in R/cell_count.R
 \name{cell_count_3d}
 \alias{cell_count_3d}
-\title{Count filled cells}
+\title{Count filled cells 3D}
 \usage{
 cell_count_3d(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 }
@@ -27,5 +27,7 @@ cell_count_3d(pts, xmin, xmax, ymin, ymax, zmin, zmax, n)
 Number of filled cells
 }
 \description{
-Count filled cells
+A helper function for segment, box and cube counting fractal methods.
+The function divide the array into \code{n} pieces and counts how many are
+occupied.
 }

@@ -23,5 +23,7 @@ cell_count_2d(pts, xmin, xmax, ymin, ymax, n)
 Number of filled cells
 }
 \description{
-Count filled cells in 2D
+A helper function for segment, box and cube counting fractal methods.
+The function divide the array into \code{n} pieces and counts how many are
+occupied.
 }

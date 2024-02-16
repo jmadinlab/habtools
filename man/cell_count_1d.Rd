@@ -19,10 +19,12 @@ cell_count_1d(pts, xmin, xmax, n)
 Number of filled cells
 }
 \description{
-Count filled cells in 1D
+A helper function for segment, box and cube counting fractal methods.
+The function divide the array into \code{n} pieces and counts how many are
+occupied.
 }
 \examples{
-pts <- data.frame(x = rnorm(100, 0, 5))
+pts <- data.frame(x = rnorm(200, 0, 5))
 cell_count_1d(pts, xmin = min(pts$x), xmax = max(pts$x), n = 5)
 
 

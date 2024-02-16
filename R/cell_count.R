@@ -1,4 +1,9 @@
-#' Count filled cells
+#' Count filled cells 3D
+#'
+#' @description
+#' A helper function for segment, box and cube counting fractal methods.
+#' The function divide the array into `n` pieces and counts how many are
+#' occupied.
 #'
 #' @param pts Data frame with x, y, and z coordinates
 #' @param xmin Minimum x-value
@@ -26,6 +31,11 @@ cell_count_3d <- function(pts, xmin, xmax, ymin, ymax, zmin, zmax, n) {
 
 #' Count filled cells in 2D
 #'
+#' @description
+#' A helper function for segment, box and cube counting fractal methods.
+#' The function divide the array into `n` pieces and counts how many are
+#' occupied.
+#'
 #' @param pts Data frame with x and y coordinates
 #' @param xmin Minimum x-value
 #' @param xmax Maximum x-value
@@ -47,6 +57,11 @@ cell_count_2d <- function(pts, xmin, xmax, ymin, ymax, n) {
 }
 
 #' Count filled cells in 1D
+#'
+#' @description
+#' A helper function for segment, box and cube counting fractal methods.
+#' The function divide the array into `n` pieces and counts how many are
+#' occupied.
 #'
 #' @param pts Data frame with x coordinates
 #' @param xmin Minimum x-value

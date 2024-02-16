@@ -34,11 +34,11 @@ In general, fractal dimension is estimated by measuring values (e.g., counts of 
 ```{r}
 # simulate fractal terrain
 surf <- sim_terrain(n=128, smoothness=0.5, z_extent = TRUE)
-plot(surf)
+raster::plot(surf)
 
 # fractal dimension using height variation method
-dat <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, keep_data = TRUE)
-plot(dat$data)
+d1 <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, )
+d2 <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, )
 
 
 ```
