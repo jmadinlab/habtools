@@ -1,10 +1,11 @@
-#' Transform DEM to 3D pointcloud of raster corners.
+#' Transform DEM to 3D pointcloud of raster corners
 #'
 #' @param dem Digital elevation model of class RasterLayer.
 #' @param bh Border height from lowest point.
 #' @param parallel Logical. Use parallel computation?
 #'
 #' @return A 3D point cloud for raster cell corners.
+#' @export
 #'
 #' @examples
 #' dem <- sim_dem(20, 0.5)
