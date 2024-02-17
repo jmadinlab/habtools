@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_dem.R
 \name{sim_dem}
 \alias{sim_dem}
-\title{Simulates a fractal surface (terrain)}
+\title{Simulates a fractal DEM}
 \usage{
 sim_dem(
   L,
@@ -41,13 +41,14 @@ Digital elevation model of class RasterLayer.
 }
 \description{
 Simulates z-values based on the Diamond-square algorithm.
-Warning: this function gets slow for n > 128.
 }
 \details{
+Warning: this function gets slow for n > 128.
 If H is provided, the simulated DEM is rescaled based on the value for H.
 If R is provided, a DEM is simulated using the same algorithm based on R, H, and the predicted D based on \code{\link[=rdh_theory]{rdh_theory()}}, while smoothness is ignored.
 From that first simulated DEM, R is calculated and the DEM undergoes smoothing at each iteration until the rugosity approximates the inputted R.
 Argument prop defined the proportion of random cells of the DEM that are smoothed by averaging the z values of cell and neighboring cells at each iteration.
+Caution: When R is provided, the DEM may become increasingly less fractal as it is modified at each iteration.
 }
 \examples{
 library(raster)
