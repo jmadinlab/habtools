@@ -88,20 +88,6 @@ Natural surfaces often have anomalies such as outlying peaks, troughs and edges 
 
 
 
-# simulate fractal terrain
-surf <- sim_dem(L=128, smoothness=0.5)
-
-# fractal dimension using height variation method
-fd(surf, method="hvar", plot=TRUE, diagnose=TRUE)
-
-
-
-# Length vectors (`lvec`)
-# Diagnostics
-# Simulated surfaces
-# Height invariance (`z-scale`)
-# Non-fractal surfaces
-
 <!-- # Fractal terrain -->
 
 <!-- The first simulated surface included with `habtools` utilizes the diamond-square algorithm.  Here is a relatively flat simulated terrain.  -->
