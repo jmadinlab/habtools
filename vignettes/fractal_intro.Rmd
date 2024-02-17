@@ -61,7 +61,7 @@ fd(surf, method = "cubes")
 
 ```{r fig.width=5, fig.height=5}
 surf_z <- surf
-values(surf_z) <- values(surf_z) * ((64-1) / diff(range(values(surf_z))))
+values(surf_z) <- values(surf_z) * ((128-1) / diff(range(values(surf_z))))
 range(values(surf_z))
 raster::plot(surf_z)
 
