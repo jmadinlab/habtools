@@ -21,25 +21,21 @@ library(dplyr)
 library(ggplot2)
 ```
 
-In this vignette, we give a brief overview of fractal dimension methods in `habtools`. We highlight that each method has inherent biases and should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, where others are invariant to them.
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. 
 
-### Methods
+There are currently five fractal dimension methods in `habtools`: `hvar`, `sd`, `area`, `cubes` and `boxes`. The first four can be applied to DEMs. `area` and `cubes` can be applied to meshes. `boxes` can only be applied to 2D outlines. 
 
-There are currently five fractal dimension methods in `habtools`: `hvar`, `sd`, `area`, `cubes` and `boxes`. The first four can be applied to DEMs. `area` and `cubes` can be applied to meshes. `boxes` can only be applied to 2D outlines, such as generated using the `mesh_to_2D` function that generates the planar outline of a 3D mesh. There are detailed help files explain how they work and point to references. 
+Each method has inherent biases and should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, where others are invariant to them. 
 
-### The length vectors (`lvec`)
+Generally, fractal dimensions are estimated by measuring values (e.g., counts of cubes, heights, areas) across a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. Therefore, selecting a sensible sequence of scales (i.e., the length vector `lvec`) is critical, and can differ among methods. If you don't enter an `lvec`, the function will estimate one for you based on some rules of thumb.
 
-In general, fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) at a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. Therefore, selecting a sensible sequence of scales is critical, and can differ among methods. If you don't enter an `lvec`, the function will estimate one for you based on some rules of thumb.
-
+For example, 
 ```{r}
 # simulate fractal terrain
-surf <- sim_dem(n=128, smoothness=0.5, z_extent = TRUE)
-raster::plot(surf)
+surf <- sim_dem(n=128, smoothness=0.5)
 
 # fractal dimension using height variation method
-d1 <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, )
-d2 <- fd(surf, method="cubes", lvec=c(4, 8, 16, 32, 64, 128), diagnose=TRUE, )
-
+fd(surf, method="hvar", plot=TRUE, diagnose=TRUE)
 
 ```
 
