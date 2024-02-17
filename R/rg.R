@@ -70,12 +70,16 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
         r <- terra::project(terra::rast(data), terra::rast(temp))
         r <- raster::raster(r)
         g <- as(r, 'SpatialGridDataFrame')
-        sa <- sp::surfaceArea(g)
+        sa <- sp::surfaceArea(g, byCell = TRUE)
+        sa <- sum(sa$layer, na.rm = TRUE)
+        rg <- sa/(sum(!is.na(r[]))*L0*L0)
+
       } else {
         g <- as(data, 'SpatialGridDataFrame')
-        sa <- sp::surfaceArea(g)
+        sa <- sp::surfaceArea(g, byCell = TRUE)
+        sa <- sum(sa$layer, na.rm = TRUE)
+        rg <- sa/(sum(!is.na(data[]))*L0*L0)
       }
-      rg <- sa/habtools::extent(data)^2
     } else {
       stop("method can only be 'hvar' or 'area'")
     }

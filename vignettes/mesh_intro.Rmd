@@ -14,15 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(habtools)
 library(rgl)
 options(rgl.printRglwidget = TRUE)
 ```
 
-*habtools* includes a wide range of complexity metrics applicable to 3D meshes. 
+## Checking your mesh  
 
-Before, calculating any metrics, visualize your mesh and make sure that the z orientation is correct, as this may affect some of the calculations.
+`habtools` includes a wide range of 3D metrics applicable to meshes. 
+
+Before calculating any metrics, visualize your mesh and make sure that the z orientation is correct, as this may affect some of the calculations.
 ```{r}
 plot3d(mcap)
 ```
@@ -34,7 +36,7 @@ resvec <- Rvcg::vcgMeshres(mcap)[[2]] # vector of resolutions
 hist(resvec)
 summary(resvec)
 ```
-In our example, the 'mcap' object has very variable distances between vertices. We can solve this issue by remeshing the object with the Rvcg function `vgcUniformRemesh()`. Here we set the resolution (voxelSize) to the minimum distance between points in the original mesh to ensure we don't loose details. This choice may be made on a case-to-case basis. Setting multisample to TRUE improves the accuracy of distance field computation, but slows down the calculation so this choice may be defined by computing power and the size of your object. The remeshed object now has a mean resolution of approximately the minimum of 'resvec'. While there will still be some variation in the obtained distances between vertices, the variation will be much smaller. An alternative option would be to remesh using an external 3D software such as blender. 
+In our example, the `mcap` object has very variable distances between vertices. We can solve this issue by remeshing the object with the Rvcg function `vgcUniformRemesh()`. Here we set the resolution (voxelSize) to the minimum distance between points in the original mesh to ensure we don't loose details. This choice may be made on a case-to-case basis. Setting multisample to TRUE improves the accuracy of distance field computation, but slows down the calculation so this choice may be defined by computing power and the size of your object. The remeshed object now has a mean resolution of approximately the minimum of 'resvec'. While there will still be some variation in the obtained distances between vertices, the variation will be much smaller. An alternative option would be to remesh using an external 3D software such as blender. 
 
 ```{r}
 mcap_uniform <- Rvcg::vcgUniformRemesh(mcap, silent = TRUE, multiSample = TRUE, voxelSize = min(resvec), mergeClost = TRUE)
@@ -43,19 +45,21 @@ Rvcg::vcgMeshres(mcap_uniform)[[1]]
 summary(Rvcg::vcgMeshres(mcap_uniform)[[2]])
 ```
 
+## Complexity metrics: R, D, and H   
 
-The three main metrics for DEMs also work for meshes. 
+The three main metrics for DEMs also work for meshes. The recommended method for fractal dimension is "cubes".
 ```{r}
-
 # fractal dimension
-fd(mcap_uniform, method = "cubes", diagnose = T)
-fd(mcap_uniform, method = "area", plot = TRUE, diagnose = TRUE)
+fd(mcap_uniform, method = "cubes", plot = TRUE, diagnose = TRUE)
+```
 
+### Rugosity
+```{r}
 # rugosity
-rg(mcap)
+rg(mcap_uniform)
 
 # height range 
-hr(mcap)
+hr(mcap_uniform)
 
 ```
 
@@ -69,6 +73,7 @@ surface_area(mcap)
 ```
 
               
+## Shape Metrics    
 There are a number of other metrics that tell you more about the shape of the object. See Zawada et al. (2019) for an example of an application of these metrics on corals.   
 - **Convexity:** the ratio of the volume of the object and the volume of the convex hull around the object.     
 - **Packing:** The ratio of the surface area of the object and the surface area of the convex hull around the object.    
@@ -93,23 +98,25 @@ sma(mcap)
 smv(mcap)
 
 # mechanical shape factor
-csf(mcap, z_min = -3.65)
+csf(mcap)
 
 ```
+
+## Transform mesh into a DEM or 2D shape    
 
 You can also transform a 3D mesh to a DEM, and then apply DEM functions to the surface.
 
-```{r}
-dem <- mesh_to_dem(mcap, res = 0.015)
-raster::plot(dem, asp=1)
-rg(dem, L0 = 0.015, method = "area", parallel = FALSE) 
-
+```{r, message=FALSE}
+dem <- mesh_to_dem(mcap_uniform, res = 0.002, fill = FALSE)
+raster::plot(dem)
+rg(dem, method = "area") 
 ```
 
-You can also transform a 3D mesh to a 2D drawing, and then apply 2D functions to the object
+You can also transform a 3D mesh to a 2D drawing, and then apply 2D functions to the object.
+Note that fractal dimension ranges between 1 and 2 for 2D drawings, rather than 2 and 3 for 3D meshes. 
 
 ```{r}
-pts <- mesh_to_2d(mcap)
+pts <- mesh_to_2d(mcap_uniform)
 plot(pts, asp=1)
 
 # perimeter
@@ -119,11 +126,10 @@ perimeter(pts)
 circularity(pts)
 
 # fractal dimension
-fd(pts, method = "boxes", keep_data = F, plot = T, diagnose = TRUE)
+fd(pts, method = "boxes", keep_data = F, plot = T)
 
 ```
 
-Note that fractal dimension ranges between 1 and 2 for 2D drawings, rather than 2 and 3 for 3D meshes. 
 
 ## References       
 
