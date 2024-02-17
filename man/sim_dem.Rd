@@ -26,6 +26,10 @@ produce rougher DEM).}
 
 \item{R}{Desired rugosity value (optional).}
 
+\item{plot}{Logical. Plot the simulated DEM during simulation? Only relevant if R is provided.}
+
+\item{prop}{Proportion of cells that undergo smoothing at each iteration when R is provided.}
+
 \item{n}{Number of iterations to try and reach desired R. Recommended to adapt R and H instead of increasing n if simulation fails.}
 
 \item{method}{The method to be used for rugosity calculation in case R is given. Can be "hvar" or "area"}
@@ -38,6 +42,12 @@ Digital elevation model of class RasterLayer.
 \description{
 Simulates z-values based on the Diamond-square algorithm.
 Warning: this function gets slow for n > 128.
+}
+\details{
+If H is provided, the simulated DEM is rescaled based on the value for H.
+If R is provided, a DEM is simulated using the same algorithm based on R, H, and the predicted D based on \code{\link[=rdh_theory]{rdh_theory()}}, while smoothness is ignored.
+From that first simulated DEM, R is calculated and the DEM undergoes smoothing at each iteration until the rugosity approximates the inputted R.
+Argument prop defined the proportion of random cells of the DEM that are smoothed by averaging the z values of cell and neighboring cells at each iteration.
 }
 \examples{
 library(raster)

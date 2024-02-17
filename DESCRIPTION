@@ -32,7 +32,6 @@ Imports:
     raster (>= 3.5),
     terra,
     methods,
-    MASS,
     Rvcg,
     sp,
     geometry,
