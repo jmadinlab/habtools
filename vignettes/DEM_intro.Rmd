@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = TRUE}
+```{r setup, echo = TRUE, message = FALSE}
 library(habtools)
 library(raster)
 library(dplyr)
@@ -30,7 +30,7 @@ dem <- horseshoe
 res(dem)
 plot(dem)
 ```
-Let's say we want complexity metrics for a certain square of size 2m around certain xy-coordinates.
+Let's say we want complexity metrics for a certain square of size 2m around certain xy-coordinates. We can start by using the `dem_crop()` function.
 ```{r}
 dem1 <- dem_crop(horseshoe, x0 = -466, y0 = 1269, L = 2, plot = TRUE)
 plot(dem1)
@@ -53,6 +53,7 @@ rg(dem1, method = "area", L0 = 0.05)
 ```
 
 ## Fractal dimension
+The fractal dimension metric provides information about how a surface fills a volume and indicates how space varies over various scales. `habtools` provides different methods to estimate fractal dimension and the result may change depending on the method chosen. See the vignette on fractal dimension for more examples of how the results of different methods vary. There are four methods possible: "hvar", "area", "sd", and "cubes". Below we exemplify the use of two methods: "hvar" and "area". 
 
 ### Height variation method
 
@@ -64,32 +65,39 @@ Because a range of values is needed to calculate a height range the smallest val
 ```{r}
 # Height variation method
 fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), plot = T, method = "hvar")
-
 ```
+We can visualize the calculation and model fit by setting diagnose equal to TRUE. 
+This also allows us to investigate any scale transitions in fractal dimension and provides a list of information including the estimated fractal dimnsion (D), the data used for the regression, the lvec, the D_vec (vector of fractal dimensions across scales), the variance of the fractal dimensions across scales, and the method used.  
+
+```{r}
+fd(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), diagnose = T, method = "hvar")
+```
+
 
 ### Area method
 The area method operates quite differently and is therefore not comparable to the height variation method described above. This method uses surface areas at varying scales and calculates the fractal dimension as:
 $$D = 2 - b,$$
 where b is the slope of the linear regression between surface area (a) and scale (l): $log(a) \sim log(l)$.
-The surface area is calculated at each scale by aggregating the DEM to the resolution of that scale by taking the median.
-Similar to the above method, we suggest a doubling vector for `lvec`. However, the smallest scale can be as small as the resolution of the DEM and the largest scale should not approach the extent DEM.
+The surface area is calculated at each scale by projecting the DEM to the resolution of that scale.
+Similar to the above method, we suggest a doubling vector for `lvec`. However, the smallest scale can be as small as the resolution of the DEM and the largest scale should not approach the extent DEM (ideally it stays 4 to 8 times smaller than the extent).
 
 ```{r}
 # Area method
-fd(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), plot = T, method = "area")
+fd(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), diagnose = T, method = "area")
 ```
 
 
 ## Multiple metrics
-Note that the resolution (L0) for the rugosity calculation will be set as the smallest value of `lvec` in the `rdh()` function if method_fd is "hvar", "cubes", or "sd".
+It is possible to calculate these three metrics by using the `rdh()` function. Note that the resolution (L0) for the rugosity calculation will be set as the smallest value of `lvec` if method_rg is set to "hvar". This can decrease the estimate of R. 
 ```{r}
+rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method_fd = "hvar", method_rg = "hvar")
 rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method_fd = "hvar")
 rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), method_fd = "area")
 ```
 
 ## Multiple squares
 The function `dem_split()` allows you to subdivide a DEM into equal parts. Let's divide the big raster into 2x2m squares.
-Note that this function will only work well if you have a square DEM. You also want to choose the size so that the DEM can be divided into equal parts.
+Note that this function will only work well if you have a square DEM. You also want to choose the size so that the DEM can be divided into equal parts. You can then calculate metrics for the list of DEMs. 
 ```{r}
 dem_list <- dem_split(dem, size = 2)
 # calculate one metric for all squares
@@ -107,11 +115,20 @@ ggplot(data_rdh) +
   theme_classic()
 ```
 
+## Sample a random square
+`habtools` also provides a way to crop a random square out of a DEM. 
+```{r}
+dem <- dem_sample(horseshoe, 2)
+plot(dem)
+```
+
+
 
 ## Rules of thumb
 
-- When analyzing and comparing multiple DEMs, make sure that each DEM has the same resolution.
-- When using the "hvar" method, the smallest value of `lvec` should be between two times and ten higher than the resolution
-- When using the "hvar" method, the extent (highest value of `lvec`) should ideally be 1 to 2 orders of magnitudes higher compared to smallest value of `lvec` or `lvec` values should match scales of particular interest (e.g. matching body sizes of animals inhabiting the surface)
+- When analyzing and comparing multiple DEMs, make sure that each DEM has the same resolution and extent.
+- When using the "hvar" method, the smallest value of `lvec` should be between two times and ten higher than the resolution.
+- When using the "hvar" method, the extent (highest value of `lvec`) should ideally be 1 to 2 orders of magnitudes higher compared to smallest value of `lvec`.
+- `lvec` values should match scales of particular interest (e.g. matching body sizes of animals inhabiting the surface).
 - When using the "area" method, the `lvec` can range from the resolution to around 1/8 of the extent. Higher scales will increase bias of the method.
-- `lvec` and chosen method needs to be the same across all calculations to make comparisons
+- `lvec` and chosen method needs to be the same across all calculations to make comparisons between DEMs.

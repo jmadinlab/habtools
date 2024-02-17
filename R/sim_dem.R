@@ -116,8 +116,6 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
 
 sim_diamond <- function(L, smoothness, dem = TRUE) {
 
-
-
   n_ <- smallestPowerOfTwoAfter(L)
 
   depth <-  1
