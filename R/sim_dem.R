@@ -13,7 +13,7 @@
 #' @param prop Proportion of cells that undergo smoothing at each iteration when R is provided.
 #' @param plot Logical. Plot the simulated DEM during simulation? Only relevant if R is provided.
 #'
-#' @ImportFrom grDevices dev.flush
+#' @importFrom grDevices dev.flush
 #'
 #' @return  Digital elevation model of class RasterLayer.
 #'
