@@ -21,13 +21,21 @@ library(dplyr)
 library(ggplot2)
 ```
 
-In this vignette, we give a brief overview of fractal dimension methods in `habtools`. There are currently five fractal dimension methods in `habtools`: `hvar`, `sd`, `area`, `cubes` and `boxes`. The first four can be applied to DEMs. `area` and `cubes` can be applied to 3D meshes. `boxes` can only be applied to 2D outlines.
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. There are currently five fractal dimension methods in `habtools`:
 
-Each method has inherent biases and should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, z-scaling or drop-offs, where others are invariant to them. 
+1. `hvar`  
+2. `sd`  
+3. `area`  
+4. `cubes`  
+5. `boxes`  
 
-Generally, fractal dimensions are estimated by measuring values (e.g., counts of cubes, heights, areas) across a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. 
+The first four can be applied to DEMs. `area` and `cubes` can be applied to 3D meshes. `boxes` can only be applied to 2D outlines.
 
-Therefore, selecting a sensible sequence of scales (i.e., the length vector `lvec`) is critical, and can differ among methods. If you don't enter an `lvec`, the function will estimate one for you based on some rules of thumb.
+Each method has inherent biases and should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, axis-scaling or drop-offs, where others are invariant to them. 
+
+Generally, fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) across a sequence of different resolutions or length scales, and then finding the slope between these scales and the measured values. 
+
+Selecting a sensible sequence of scales (i.e., the length vector `lvec`) is therefore critical, and differs among methods. If you do not enter an `lvec`, the function will estimate one for you based on some rules of thumb for that particular method. For example, `hvar`, `sd`, `cubes`
 
 Below a fractal 128 x 128 terrain is simulated and fractal dimension is estimated with the height variation method. Because no `lvec` was provided, one was generated `c(8, 16, 32, 64, 128)`, which is log2-scale sequence from 5-times the resolution (res=1) to the extext (i.e., 128). 
 

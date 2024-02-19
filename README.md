@@ -10,106 +10,94 @@
 
 <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
-The goal of `habtools` is to collate tools for 3D meshes and digital
-elevation models (DEM) targeted at biologists and ecologists. Tools
-calculate metrics like surface area, rugosity, fractal dimension, height
-range, convexity, sphericity, second moments of volume and more.
+`habtools` is a collection of tools for working with 3D surfaces and
+meshes for biologists and ecologists. There are helper tools for
+sampling and simulating surfaces, as well as tools for estimating
+metrics like surface area, rugosity, fractal dimension, convexity,
+sphericity, second moments of volume, circularity and more.
 
-## Installation
+### Installation
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+A CRAN version of `habtools` is forthcoming. You can also install the
+development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("jmadinlab/habtools")
 ```
 
-## Examples
+### Examples
 
-There are currently two data set accompanying this package. `horseshoe`
-is a digital elevation model of a reef in RasterLayer format, and `mcap`
-is a 3D mesh of a coral growing on a reef in mesh3d format.
+There are vignettes demonstrating the use of `habtools` for digital
+elevation models (DEMs) and 3D meshes, as well as a vignette covering
+fractal dimension methods.
+
+There are currently two data sets accompanying this package. `horseshoe`
+is a DEM of a coral reef in RasterLayer format, and `mcap` is a 3D mesh
+of a coral growing on a reef in mesh3d format.
 
 The following example calculates height range, rugosity and fractal
-dimension of a 2 x 2 m plot of reef using the height range method
-developed in Torres-Pulliza et al. (2020).
+dimension of a 2 x 2 m plot of `horseshoe`.
 
 ``` r
 library(habtools)
 library(raster)
-#> Loading required package: sp
-#> 
-#> Attaching package: 'raster'
-#> The following object is masked from 'package:habtools':
-#> 
-#>     extent
-plot(horseshoe)
 
 # Let's take a subset DEM of size = 2
-dem2 <- dem_crop(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
+dem <- dem_crop(horseshoe, x0 = -465, y0 = 1265, L = 2, plot = TRUE)
 ```
 
 <img src="man/figures/README-example1-1.png" width="100%" />
 
 ``` r
-plot(dem2)
-```
-
-<img src="man/figures/README-example1-2.png" width="100%" />
-
-``` r
 
 # height range
-hr(dem2)
+hr(dem)
 #> [1] 1.368289
 
-# rugosity; note that rugosity will decrease with grain (L0). L0 should always be equal to or greater than the resolution (in this example, the resolution = 0.01).
-rg(dem2, L0 = 0.1)
-#> [1] 1.595773
+# rugosity
+rg(dem, L0 = 0.0625)
+#> [1] 1.75829
 
 # fractal dimension
-fd(dem2, lvec = c(0.25, 0.5, 1, 2), diagnose = TRUE, method = "hvar", keep_data = TRUE)
+fd(dem, method = "hvar", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
 ```
 
-<img src="man/figures/README-example1-3.png" width="100%" />
+<img src="man/figures/README-example1-2.png" width="100%" /><img src="man/figures/README-example1-3.png" width="100%" />
 
     #> $D
-    #> [1] 2.301808
+    #> [1] 2.159332
     #> 
     #> $data
-    #>      l         h
-    #> 1 0.25 0.3139470
-    #> 2 0.50 0.5822422
-    #> 3 1.00 0.8890120
-    #> 4 2.00 1.3682885
+    #>        l          h
+    #> 1 0.0625 0.07207143
+    #> 2 0.1250 0.16465515
+    #> 3 0.2500 0.31394699
+    #> 4 0.5000 0.58224221
+    #> 5 1.0000 0.88901201
+    #> 6 2.0000 1.36828852
     #> 
     #> $lvec
-    #> [1] 0.25 0.50 1.00 2.00
+    #> [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000
     #> 
     #> $D_vec
-    #> [1] 2.108902 2.389417 2.377902
+    #> [1] 1.808052 2.068927 2.108902 2.389417 2.377902
     #> 
     #> $var
-    #> [1] 0.158736
+    #> [1] 0.2420993
     #> 
     #> $method
     #> [1] "hvar"
 
 The next example calculates height range, rugosity and fractal dimension
-for a 3D mesh of a coral colony. Because meshes can have more than one
-`z` coordinate for a given `xy` (i.e., they have overhangs), we advise
-the cube counting fractal dimension method presented in Zawada et
-al. (2019).
+for the coral colony `mcap`. Because 3D meshes can have more than one
+`z` coordinate for a given `xy` (i.e., they have overhangs), we use cube
+counting for fractal dimension.
 
 ``` r
 library(rgl)
 plot3d(mcap)
-```
 
-../../../../../private/var/folders/01/691qkw3s1fb10n3tk3h656sh0000gn/T/RtmpU4F7f2/file107d1414cd40.png
-
-``` r
 # height range
 hr(mcap)
 #> [1] 0.2185397
@@ -119,11 +107,10 @@ rg(mcap, L0 = 0.045)
 #> [1] 2.882813
 
 # fractal dimension
-fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
-#> lvec is set to c(0.053, 0.106, 0.212, 0.423).
+fd(mcap, method = "cubes", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
 ```
 
-<img src="man/figures/README-example2.2-1.png" width="100%" />
+<img src="man/figures/README-example2-1.png" width="100%" /><img src="man/figures/README-example2-2.png" width="100%" />
 
     #> $D
     #> [1] 2.315246
@@ -146,3 +133,5 @@ fd(mcap, diagnose = TRUE, method = "cubes", keep_data = TRUE)
     #> 
     #> $method
     #> [1] "cubes"
+
+../../../../../private/var/folders/01/691qkw3s1fb10n3tk3h656sh0000gn/T/RtmpOVEB5p/file20164c9e0b3c.png
