@@ -67,10 +67,13 @@ fd(dem, method = "hvar", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
 
 The next example calculates height range, rugosity and fractal dimension for the coral colony `mcap`. Because 3D meshes can have more than one `z` coordinate for a given `xy` (i.e., they have overhangs), we use cube counting for fractal dimension.
 
-```{r example2, webgl = TRUE, message=FALSE}
+```{r setup2, message = FALSE}
 library(rgl)
+options(rgl.printRglwidget = TRUE)
 plot3d(mcap)
+```
 
+```{r example2}
 # height range
 hr(mcap)
 

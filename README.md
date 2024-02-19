@@ -96,8 +96,13 @@ counting for fractal dimension.
 
 ``` r
 library(rgl)
+options(rgl.printRglwidget = TRUE)
 plot3d(mcap)
+```
 
+<img src="man/figures/README-setup2-1-rgl.png" width="100%" />
+
+``` r
 # height range
 hr(mcap)
 #> [1] 0.2185397
@@ -108,6 +113,7 @@ rg(mcap, L0 = 0.045)
 
 # fractal dimension
 fd(mcap, method = "cubes", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
+#> lvec is set to c(0.053, 0.106, 0.212, 0.423).
 ```
 
 <img src="man/figures/README-example2-1.png" width="100%" /><img src="man/figures/README-example2-2.png" width="100%" />
@@ -133,5 +139,3 @@ fd(mcap, method = "cubes", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
     #> 
     #> $method
     #> [1] "cubes"
-
-../../../../../private/var/folders/01/691qkw3s1fb10n3tk3h656sh0000gn/T/RtmpOVEB5p/file20164c9e0b3c.png
