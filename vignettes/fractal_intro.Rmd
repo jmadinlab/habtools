@@ -1,8 +1,8 @@
 ---
-title: "Metrics of fractal dimension"
+title: "Fractal dimension methods"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Metrics of fractal dimension}
+  %\VignetteIndexEntry{Fractal dimension methods}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,25 +17,23 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE}
 library(habtools)
 library(raster)
-library(dplyr)
-library(ggplot2)
 ```
 
-This vignette is a brief overview of fractal dimension methods in `habtools`. There are currently five methods:
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. There are currently five methods summarized in the table below.
 
 | Method | Function | Data | Default `lvec` | Notes |
 | :---- | :---- | :---- | :---- | :---- |
-| Height variation | `hvar` | RasterLayer | 10 x res to extent | Invariant to height. Sensitive to non-fractal edges and outliers. |
-| Standard deviation | `sd` | RasterLayer | 10 x res to extent | Invariant to height. Sensitive to non-fractal edges and outliers. |
-| Area | `area` | RasterLayer or mesh3d | res to 1/8 extent | Sensitive to height; approaches 2 for most terrains. Less sensitive to non-fractal anomalies. |
-| Cube counting | `cubes` | RasterLayer or mesh3d | 2 x res to extent | Sensitive to height; approaches 2 for most terrains. More reliable for closed 3D object. Less sensitive to non-fractal anomalies. |
-| Box counting | `boxes` | xy data.frame | 10 x res to extent | For 2D shapes only. Less sensitive to non-fractal anomalies. |
+| Height variation | `hvar` | RasterLayer | 2-10 x resolution to extent | Invariant to height. Sensitive to non-fractal edges and outliers. |
+| Standard deviation | `sd` | RasterLayer | 2-10 x resolution to extent | Invariant to height. Sensitive to non-fractal edges and outliers. |
+| Area | `area` | RasterLayer or mesh3d | resolution to 1/8 extent | Sensitive to height; approaches 2 for most terrains. Less sensitive to non-fractal anomalies. |
+| Cube counting | `cubes` | RasterLayer or mesh3d | 2-10 x resolution to extent | Sensitive to height; approaches 2 for most terrains. More reliable for closed 3D object. Less sensitive to non-fractal anomalies. |
+| Box counting | `boxes` | xy data.frame | 2-10 x resolution to extent | For 2D shapes only. Less sensitive to non-fractal anomalies. |
 
 Each method has inherent biases and so should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, axis-scaling or drop-offs, where others are invariant to them. 
 
 Generally, fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) across a sequence of different resolutions or length scales, and then finding the slope between these scales and measured values. 
 
-Selecting a sensible sequence of scales (i.e., the length vector `lvec`) is therefore critical. The `lvec` should range between the resolution and extent of the surface or mesh, or across a range of scales relevant to the question being address. If you do not enter an `lvec`, each function will estimate one for you based on some rules of thumb for that particular method. For example, `hvar`, `sd`, `cubes` and `boxes` will generate a sequence from 2- to 10-times the resolution to the extent on a log2-scale. `area` will generate a sequence from the resolution to 1/8 the extent on the log2-scale. 
+Selecting a sensible sequence of scales (i.e., the length vector `lvec`) is therefore critical. The `lvec` should range between the resolution and extent of the surface or mesh, or across a range of scales relevant to the question being address. If you do not enter an `lvec`, each function will estimate one for you based on some rules of thumb for that particular method (see Table). For example, `hvar`, `sd`, `cubes` and `boxes` will generate a sequence from 2- to 10-times the resolution to the extent on a log2-scale. `area` will generate a sequence from the resolution to 1/8 the extent on the log2-scale. 
 
 Below a fractal 128 x 128 terrain is simulated and fractal dimension is estimated with the height variation method. Because no `lvec` was provided, one was generated as `c(8, 16, 32, 64, 128)`. 
 
@@ -47,7 +45,7 @@ surf <- sim_dem(L=128, smoothness=0.5)
 fd(surf, method="hvar", plot=TRUE, diagnose=TRUE)
 ```
 
-When `plot=TRUE`, a plot of the surface is generated with red rectangles representing `lvec` to help visualize the scales at which fractal dimension is estimated. When `diagnostic=TRUE`, the relationship between scales and mean surface heights is plotted. The red line in the best-fit line for all point and dashed lines are for each pair-wise scale. For the height range method, D is 3 minus the slope. The diagnostic plot helps identify scales that are problematic (typically the extremes), which then have bias the estimate. The `lvec` is returned and can then be altered, entered explicitly, and fractal dimension estimated again. 
+When `plot=TRUE`, a plot of the surface is generated with red rectangles representing `lvec` to help visualize the scales at which fractal dimension is estimated. When `diagnostic=TRUE`, the relationship between scales and mean surface heights is plotted. The red line in the best-fit line for all point and dashed lines are for each pair-wise scale with localized D estimates. For the height range method, D is 3 minus the slope. The diagnostic plot helps identify scales that are problematic (typically the extremes of `lvec`), which then have bias the estimate. The `lvec` is returned and can then be altered, entered explicitly, and fractal dimension estimated again. 
 
 `hvar` and `sd` methods are not sensitive to z-axis scaling, whereas `area` and `cubes` methods are. Here are estimates for the relative flat surface we simulated with `smoothness=0.5`.
 
@@ -94,6 +92,17 @@ The answer will likely depend on what you are analysing  For example, if you are
 ```{r fig.width=5, fig.height=5}
 # cube counting
 fd(mcap, method = "cubes", plot=TRUE, diagnose=TRUE)
+
+```
+
+Here is an example of 2D box counting for the planar projection of the `mcap` mesh.
+
+```{r fig.width=5, fig.height=5}
+# project coral as xy coordinates
+mcap_2d <- mesh_to_2d(mcap)
+
+# box counting
+fd(mcap_2d, method = "boxes", plot=TRUE, diagnose=TRUE)
 
 ```
 
