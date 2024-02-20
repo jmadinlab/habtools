@@ -87,363 +87,302 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: sp</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'raster'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:habtools':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     extent</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:raster':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, select, union</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-<p>In this vignette, we give a brief overview of fractal dimension
-methods in <code>habtools</code>. We highlight that each method has
-inherent biases and should be used cautiously and consistently. For
-example, some methods are sensitive to particular elements, like
-outliers, z-scaling or drop-offs, where others are invariant to
-them.</p>
-<div class="section level4">
-<h4 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
-</h4>
-<p>There are currently five fractal dimension methods in
-<code>habtools</code>: <code>hvar</code>, <code>sd</code>,
-<code>area</code>, <code>cubes</code> and <code>boxes</code>. The first
-four can be applied to DEMs. <code>area</code> and <code>cubes</code>
-can be applied to meshes. <code>boxes</code> can only be applied to 2D
-outlines, such as generated using the <code>mesh_to_2D</code> function
-that generates the planar outline of a 3D mesh. There are detailed help
-files explain how they work and point to references.</p>
-</div>
-<div class="section level4">
-<h4 id="the-length-vectors-lvec">The length vectors (<code>lvec</code>)<a class="anchor" aria-label="anchor" href="#the-length-vectors-lvec"></a>
-</h4>
-<p>In general, fractal dimension is estimated by measuring values (e.g.,
-counts of cubes, heights, areas) at a sequence of different resolutions
-or length scales, and then finding the slope between these scales and
-the measured values. Therefore, selecting a sensible sequence of scales
-is critical, and can differ among methods. If you don’t enter an
-<code>lvec</code>, the function will estimate one for you based on some
-rules of thumb.</p>
+<p>This vignette is a brief overview of fractal dimension methods in
+<code>habtools</code>. There are currently five methods:</p>
+<table class="table">
+<colgroup>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Method</th>
+<th align="left">Function</th>
+<th align="left">Data</th>
+<th align="left">Default <code>lvec</code>
+</th>
+<th align="left">Notes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Height variation</td>
+<td align="left"><code>hvar</code></td>
+<td align="left">RasterLayer</td>
+<td align="left">10 x res to extent</td>
+<td align="left">Invariant to height. Sensitive to non-fractal edges and
+outliers.</td>
+</tr>
+<tr class="even">
+<td align="left">Standard deviation</td>
+<td align="left"><code>sd</code></td>
+<td align="left">RasterLayer</td>
+<td align="left">10 x res to extent</td>
+<td align="left">Invariant to height. Sensitive to non-fractal edges and
+outliers.</td>
+</tr>
+<tr class="odd">
+<td align="left">Area</td>
+<td align="left"><code>area</code></td>
+<td align="left">RasterLayer or mesh3d</td>
+<td align="left">res to 1/8 extent</td>
+<td align="left">Sensitive to height; approaches 2 for most terrains.
+Less sensitive to non-fractal anomalies.</td>
+</tr>
+<tr class="even">
+<td align="left">Cube counting</td>
+<td align="left"><code>cubes</code></td>
+<td align="left">RasterLayer or mesh3d</td>
+<td align="left">2 x res to extent</td>
+<td align="left">Sensitive to height; approaches 2 for most terrains.
+More reliable for closed 3D object. Less sensitive to non-fractal
+anomalies.</td>
+</tr>
+<tr class="odd">
+<td align="left">Box counting</td>
+<td align="left"><code>boxes</code></td>
+<td align="left">xy data.frame</td>
+<td align="left">10 x res to extent</td>
+<td align="left">For 2D shapes only. Less sensitive to non-fractal
+anomalies.</td>
+</tr>
+</tbody>
+</table>
+<p>Each method has inherent biases and so should be used cautiously and
+consistently. For example, some methods are sensitive to particular
+elements, like outliers, axis-scaling or drop-offs, where others are
+invariant to them.</p>
+<p>Generally, fractal dimension is estimated by measuring values (e.g.,
+counts of cubes, heights, areas) across a sequence of different
+resolutions or length scales, and then finding the slope between these
+scales and measured values.</p>
+<p>Selecting a sensible sequence of scales (i.e., the length vector
+<code>lvec</code>) is therefore critical. The <code>lvec</code> should
+range between the resolution and extent of the surface or mesh, or
+across a range of scales relevant to the question being address. If you
+do not enter an <code>lvec</code>, each function will estimate one for
+you based on some rules of thumb for that particular method. For
+example, <code>hvar</code>, <code>sd</code>, <code>cubes</code> and
+<code>boxes</code> will generate a sequence from 2- to 10-times the
+resolution to the extent on a log2-scale. <code>area</code> will
+generate a sequence from the resolution to 1/8 the extent on the
+log2-scale.</p>
+<p>Below a fractal 128 x 128 terrain is simulated and fractal dimension
+is estimated with the height variation method. Because no
+<code>lvec</code> was provided, one was generated as
+<code>c(8, 16, 32, 64, 128)</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate fractal terrain</span></span>
-<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">128</span>, smoothness<span class="op">=</span><span class="fl">0.5</span>, z_extent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>L<span class="op">=</span><span class="fl">128</span>, smoothness<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># fractal dimension using height variation method</span></span>
-<span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"cubes"</span>, lvec<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span><span class="op">)</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span>, <span class="op">)</span></span>
-<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"cubes"</span>, lvec<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span><span class="op">)</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span>, <span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
-<p>For example the height variation method will generate a log2 sequence
-of length between the resolution x 10 and the extent. So in this
-example,</p>
-<p>The largest scale <code>L</code> is typically that of the object of
-surface. For example, for a section of terrain 1 x 1 m, L would be 1 if
-using the height range of .</p>
-<p>All fractal dimension methods in <code>habtools</code> will
-automatically generate a vector of scales (<code>lvec</code>) based on
-rules of thumb, which differ among methods.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># simulate fractal terrain</span></span>
-<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">256</span>, smoothness<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># fractal dimension using height variation method</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128, 256).</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"hvar"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-1.png" width="480"><img src="fractal_intro_files/figure-html/unnamed-chunk-2-2.png" width="480"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.514363</span></span>
+<span><span class="co">#&gt; [1] 2.508944</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;     l         h</span></span>
-<span><span class="co">#&gt; 1   8 0.2857513</span></span>
-<span><span class="co">#&gt; 2  16 0.4534439</span></span>
-<span><span class="co">#&gt; 3  32 0.6880239</span></span>
-<span><span class="co">#&gt; 4  64 0.9946459</span></span>
-<span><span class="co">#&gt; 5 128 1.2174630</span></span>
-<span><span class="co">#&gt; 6 256 1.5486596</span></span>
+<span><span class="co">#&gt; 1   8 0.4145870</span></span>
+<span><span class="co">#&gt; 2  16 0.6477677</span></span>
+<span><span class="co">#&gt; 3  32 0.9863985</span></span>
+<span><span class="co">#&gt; 4  64 1.3822138</span></span>
+<span><span class="co">#&gt; 5 128 1.5565070</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1]   8  16  32  64 128 256</span></span>
+<span><span class="co">#&gt; [1]   8  16  32  64 128</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.333836 2.398465 2.468276 2.708377 2.652858</span></span>
+<span><span class="co">#&gt; [1] 2.356198 2.393306 2.513262 2.828669</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.1619789</span></span>
+<span><span class="co">#&gt; [1] 0.2146093</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="length-vectors-lvec">Length vectors (<code>lvec</code>)<a class="anchor" aria-label="anchor" href="#length-vectors-lvec"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="diagnostics">Diagnostics<a class="anchor" aria-label="anchor" href="#diagnostics"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="simulated-surfaces">Simulated surfaces<a class="anchor" aria-label="anchor" href="#simulated-surfaces"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="height-invariance-z-scale">Height invariance (<code>z-scale</code>)<a class="anchor" aria-label="anchor" href="#height-invariance-z-scale"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="non-fractal-surfaces">Non-fractal surfaces<a class="anchor" aria-label="anchor" href="#non-fractal-surfaces"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="fractal-terrain">Fractal terrain<a class="anchor" aria-label="anchor" href="#fractal-terrain"></a>
-</h2>
-<p>The first simulated surface included with <code>habtools</code>
-utilizes the diamond-square algorithm. Here is a relatively flat
-simulated terrain.</p>
+<p>When <code>plot=TRUE</code>, a plot of the surface is generated with
+red rectangles representing <code>lvec</code> to help visualize the
+scales at which fractal dimension is estimated. When
+<code>diagnostic=TRUE</code>, the relationship between scales and mean
+surface heights is plotted. The red line in the best-fit line for all
+point and dashed lines are for each pair-wise scale. For the height
+range method, D is 3 minus the slope. The diagnostic plot helps identify
+scales that are problematic (typically the extremes), which then have
+bias the estimate. The <code>lvec</code> is returned and can then be
+altered, entered explicitly, and fractal dimension estimated again.</p>
+<p><code>hvar</code> and <code>sd</code> methods are not sensitive to
+z-axis scaling, whereas <code>area</code> and <code>cubes</code> methods
+are. Here are estimates for the relative flat surface we simulated with
+<code>smoothness=0.5</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># height variation</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.508944</span></span>
+<span></span>
+<span><span class="co"># standard deviation</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.595406</span></span>
+<span></span>
+<span><span class="co"># area</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
+<span><span class="co">#&gt; [1] 2.000443</span></span>
+<span></span>
+<span><span class="co"># cube counting</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.000415</span></span></code></pre></div>
+<p><code>hvar</code> and <code>sd</code> estimates are in the vicinity
+of D=2.5. However, <code>area</code> and <code>cubes</code> methods
+result in estimates close to 2: a flat surface. If we transform the
+z-scale to match the extent (L=128), we get the following.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">surf_z</span> <span class="op">&lt;-</span> <span class="va">surf</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">128</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]   0 127</span></span>
+<span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># height variation</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.508944</span></span>
+<span></span>
+<span><span class="co"># standard deviation</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.595406</span></span>
+<span></span>
+<span><span class="co"># area</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
+<span><span class="co">#&gt; [1] 2.430449</span></span>
+<span></span>
+<span><span class="co"># cube counting</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
+<span><span class="co">#&gt; [1] 2.320155</span></span></code></pre></div>
+<p><code>hvar</code> and <code>sd</code> estimates are identical (i.e.,
+invariant to z-scaling) and <code>area</code> and <code>cubes</code>
+estimates are higher. This dichotomy raises an underlying philosophical
+question about fractal surfaces: does the fractal dimension of an
+surface change if it is transformed along a dimension?</p>
+<p>The answer will likely depend on what you are analysing For example,
+if you are examining landscapes, then <code>area</code> and
+<code>cubes</code> methods will not be much use as they will tend to D=2
+when surfaces a low relative to wide. Whereas, if you are examining
+surfaces that are as high as they are wide, then the <code>area</code>
+and <code>cubes</code> methods might be a better choice. If you are
+examining a closed 3D objects (i.e., watertight), then the
+<code>cubes</code> method is preferable as the 3D analogue to box
+counting on closed shapes like the coastline of the UK.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># simulate 64 by 64 unit surface with smoothness of 1 (less fractal)</span></span>
-<span><span class="va">surf1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p>Here are estimates of fractal dimension for the three methods.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># height variation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.302602</span></span>
-<span></span>
-<span><span class="co"># standard deviation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.409024</span></span>
-<span></span>
-<span><span class="co"># area</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
-<span><span class="co">#&gt; [1] 2.000076</span></span>
-<span></span>
-<span><span class="co"># cube counting</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
-<p>The height variation method estimates that fractal dimension is high,
-whereas the other two method estimate that it is low. This is because
-the height range method is invariant to z-scaling. To demonstrate,
-height of <code>surf1</code> is scaled to equal to the extent.</p>
+<code class="sourceCode R"><span><span class="co"># cube counting</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(0.053, 0.106, 0.212, 0.423).</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-5-1.png" width="480"><img src="fractal_intro_files/figure-html/unnamed-chunk-5-2.png" width="480"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.315246</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;            l   n</span></span>
+<span><span class="co">#&gt; 4 0.05291204 134</span></span>
+<span><span class="co">#&gt; 3 0.10582408  31</span></span>
+<span><span class="co">#&gt; 2 0.21164817   8</span></span>
+<span><span class="co">#&gt; 1 0.42329634   1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.42329634 0.21164817 0.10582408 0.05291204</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 2.111893 1.954196 3.000000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.5638126</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "cubes"</span></span></code></pre>
+<div class="section level3">
+<h3 id="non-fractal-surfaces">Non-fractal surfaces<a class="anchor" aria-label="anchor" href="#non-fractal-surfaces"></a>
+</h3>
+<p>Natural surfaces often have anomalies such as peaks, troughs and
+edges that can result in biased fractal dimension estimates. It is up to
+the user to determine which method is best for their purposes, and to
+demonstrate that a biological or ecological result is robust to the
+choice of method.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># standardize the surface height to match the extent (i.e., 63 midpoints)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">64</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]  0 63</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-1.png" width="700">
-Here are estimates of fractal dimension for the three methods.</p>
+<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-1.png" width="480"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># height variation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.302602</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1, 2).</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-2.png" width="480"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.202029</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;        l          h</span></span>
+<span><span class="co">#&gt; 1 0.0625 0.06263626</span></span>
+<span><span class="co">#&gt; 2 0.1250 0.14528552</span></span>
+<span><span class="co">#&gt; 3 0.2500 0.28145639</span></span>
+<span><span class="co">#&gt; 4 0.5000 0.47621126</span></span>
+<span><span class="co">#&gt; 5 1.0000 0.79498635</span></span>
+<span><span class="co">#&gt; 6 2.0000 0.97669387</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 1.786179 2.045980 2.241310 2.260672 2.703024</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.3365688</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "hvar"</span></span>
 <span></span>
-<span><span class="co"># standard deviation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.409024</span></span>
-<span></span>
-<span><span class="co"># area</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
-<span><span class="co">#&gt; [1] 2.209982</span></span>
-<span></span>
-<span><span class="co"># cube counting</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf1</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.237657</span></span></code></pre></div>
-<p>You can see that the height variation estimate remains unchanged,
-whereas the area and cubes estimates increase. We believe this dichotomy
-raises an underlying philosophical question about fractal surfaces: does
-the fractal dimension of an surface change if it is scaled along one
-dimension?</p>
-<p>There are a variety of ways to explore this question. Let’s start by
-simulating a rough terrain.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># simulate 64 by 64 unit surface with smoothness of 0 (more fractal)</span></span>
-<span><span class="va">surf2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<p>Here are estimates of fractal dimension for the three methods.</p>
+<span><span class="va">dem2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">469</span>, y0 <span class="op">=</span> <span class="fl">1267</span>, L <span class="op">=</span> <span class="fl">1</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-3.png" width="480"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># height variation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.738933</span></span>
-<span></span>
-<span><span class="co"># standard deviation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.883232</span></span>
-<span></span>
-<span><span class="co"># area</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
-<span><span class="co">#&gt; [1] 2.024837</span></span>
-<span></span>
-<span><span class="co"># cube counting</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.14166</span></span></code></pre></div>
-<p>The height variation estimate for fractal dimension is high (closer
-to 3), the area estimate is the same as for the smooth terrain (close to
-2), and the cubes estimate is somewhere in-between. This suggests that
-invariance to z-scaling is better at estimating surface roughness. Let’s
-now scale the rough terrain.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># standardize the surface height to match the extent (i.e., 63 midpoints)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">64</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]  0 63</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-10-1.png" width="700">
-Here are estimates of fractal dimension for the three methods.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># height variation</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.738933</span></span>
-<span></span>
-<span><span class="co"># area</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
-<span><span class="co">#&gt; [1] 2.683916</span></span>
-<span></span>
-<span><span class="co"># cube counting</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf2</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
-<span><span class="co">#&gt; [1] 2.432972</span></span></code></pre></div>
-<p>When the z-values are scaled, the area estimate approaches the height
-variation estimate; the latter of which is unchanged by the
-transformation. Let’s simulate multiple surfaces</p>
-<!-- ```{r} -->
-<!-- i <- 50 -->
-<!-- # simluate i smooth terrains -->
-<!-- surf_smooth <- lapply(1:i, function(x) { sim_dem(64, 1) }) -->
-<!-- # height variation -->
-<!-- hvar_smooth <- sapply(surf_smooth, fd,  method = "hvar", parallel=TRUE) -->
-<!-- # area -->
-<!-- area_smooth <- sapply(surf_smooth, fd,  method = "area") -->
-<!-- # cube counting -->
-<!-- cube_smooth <- sapply(surf_smooth, fd,  method = "cubes") -->
-<!-- dat <- data.frame(z_scale=rep("z_scale=FALSE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth, area_smooth, cube_smooth)) -->
-<!-- surf_smooth_z <- lapply(1:i, function(x) { sim_dem(64, 1, z_extent = TRUE) }) -->
-<!-- # height variation -->
-<!-- hvar_smooth_z <- sapply(surf_smooth_z, fd,  method = "hvar", parallel=TRUE) -->
-<!-- # area -->
-<!-- area_smooth_z <- sapply(surf_smooth_z, fd,  method = "area") -->
-<!-- # cube counting -->
-<!-- cube_smooth_z <- sapply(surf_smooth_z, fd,  method = "cubes") -->
-<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=TRUE", 3*i), smoothness=rep("smooth", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_smooth_z, area_smooth_z, cube_smooth_z))) -->
-<!-- ### 10 simulated rough terrains -->
-<!-- surf_rough <- lapply(1:i, function(x) { sim_dem(64, 0) }) -->
-<!-- # height variation -->
-<!-- hvar_rough <- sapply(surf_rough, fd,  method = "hvar", parallel=TRUE) -->
-<!-- # area -->
-<!-- area_rough <- sapply(surf_rough, fd,  method = "area") -->
-<!-- # cube counting -->
-<!-- cube_rough <- sapply(surf_rough, fd,  method = "cubes") -->
-<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=FALSE", 3 * i), smoothness=rep("rough", 3 * i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_rough, area_rough, cube_rough))) -->
-<!-- surf_rough_z <- lapply(1:i, function(x) { sim_dem(64, 0, z_extent = TRUE) }) -->
-<!-- # height variation -->
-<!-- hvar_rough_z <- sapply(surf_rough_z, fd,  method = "hvar", parallel=TRUE) -->
-<!-- # area -->
-<!-- area_rough_z <- sapply(surf_rough_z, fd,  method = "area") -->
-<!-- # cube counting -->
-<!-- cube_rough_z <- sapply(surf_rough_z, fd,  method = "cubes") -->
-<!-- dat <- rbind(dat, data.frame(z_scale=rep("z_scale=TRUE", 3 *i), smoothness=rep("rough", 3*i), method=c(rep("hvar", i), rep("area", i), rep("cubes", i)), fd=c(hvar_rough_z, area_rough_z, cube_rough_z))) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- ggplot(dat[dat$method != "cubes",], aes(x = method, y = fd)) +  -->
-<!--   geom_boxplot(outlier.shape = NA) + -->
-<!--   geom_jitter(colour = 4) + -->
-<!--   facet_grid(smoothness ~ z_scale) -->
-<!-- ``` -->
-<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- smoothness <- 0 -->
-<!-- z_extent <- FALSE -->
-<!-- lvec <- c(2, 4, 8) -->
-<!-- fd(surf1, lvec, method = "hvar", diagnose = T) -->
-<!-- fd(surf1, method = "area", diagnose = T) -->
-<!-- fd(surf1, lvec, method = "cubes", diagnose = T) -->
-<!-- dev.off() -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- z_extent <- TRUE -->
-<!-- surf2 <- sim_dem(64, smoothness, z_extent) -->
-<!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
-<!-- fd(surf2, method = "hvar", diagnose = T) -->
-<!-- fd(surf2, method = "area", diagnose = T) -->
-<!-- fd(surf2, method = "cubes", diagnose = T) -->
-<!-- ``` -->
-<!-- ### High smoothness -->
-<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- smoothness <- 1 -->
-<!-- z_extent <- FALSE -->
-<!-- surf1 <- sim_dem(64, smoothness, z_extent) -->
-<!-- lvec <- c(4, 8, 16, 32, 64) -->
-<!-- plot(surf1, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
-<!-- fd(surf1, method = "hvar", diagnose = T) -->
-<!-- fd(surf1, method = "area", diagnose = T) -->
-<!-- fd(surf1, method = "cubes", diagnose = T) -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- z_extent <- TRUE -->
-<!-- surf2 <- sim_dem(64, smoothness, z_extent) -->
-<!-- plot(surf2, asp=1, main=paste0("smoothness = ", smoothness, "\n", "z_extent = ", z_extent)) -->
-<!-- fd(surf2, method = "hvar", diagnose = T) -->
-<!-- fd(surf2, method = "area", diagnose = T) -->
-<!-- fd(surf2, method = "cubes", diagnose = T) -->
-<!-- ``` -->
-<!-- # Real reef -->
-<!-- ```{r fig.width=7, fig.height=7, echo=FALSE} -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- surf1 <- crop(horseshoe, raster::extent(horseshoe, 1, 128, 1, 128)) -->
-<!-- res <- raster::res(surf1) -->
-<!-- values(surf1) <- values(surf1) - min(values(surf1)) -->
-<!-- lvec <- c(4, 8, 16, 32, 64, 128) * res -->
-<!-- plot(surf1, asp=1, main=paste0("horseshoe\n", "z_extent = FALSE")) -->
-<!-- fd(surf1, method = "hvar", diagnose = T) -->
-<!-- fd(surf1, method = "area", diagnose = T) -->
-<!-- fd(surf1, method = "cubes", diagnose = T) -->
-<!-- par(mfrow=c(2, 2)) -->
-<!-- surf2 <- surf1 -->
-<!-- values(surf2) <- values(surf1) * (res*128) / max(values(surf1)) -->
-<!-- range(values(surf2)) -->
-<!-- plot(surf2, main=paste0("horseshoe\n", "z_extent = TRUE")) -->
-<!-- fd(surf2, method = "hvar", diagnose = T) -->
-<!-- fd(surf2, method = "area", diagnose = T) -->
-<!-- fd(surf2, method = "cubes", diagnose = T) -->
-<!-- ``` -->
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1).</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-4.png" width="480"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.012966</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;        l          h</span></span>
+<span><span class="co">#&gt; 1 0.0625 0.06651118</span></span>
+<span><span class="co">#&gt; 2 0.1250 0.14884714</span></span>
+<span><span class="co">#&gt; 3 0.2500 0.29152369</span></span>
+<span><span class="co">#&gt; 4 0.5000 0.59073182</span></span>
+<span><span class="co">#&gt; 5 1.0000 1.02141762</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 1.837837 2.030218 1.981110 2.210002</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.1536148</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 

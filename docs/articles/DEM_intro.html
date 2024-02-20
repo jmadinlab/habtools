@@ -87,24 +87,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: sp</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'raster'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:habtools':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     extent</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:raster':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, select, union</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>In this vignette, we go over the basic steps to calculate standard
 complexity metrics for digital elevation models (DEMs). In this example,
@@ -117,7 +100,8 @@ we use a DEM of 8x8m with a resolution of 0.01m.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-2-1.png" width="700">
 Let’s say we want complexity metrics for a certain square of size 2m
-around certain xy-coordinates.</p>
+around certain xy-coordinates. We can start by using the
+<code><a href="../reference/dem_crop.html">dem_crop()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -141,11 +125,19 @@ around certain xy-coordinates.</p>
 <span></span>
 <span><span class="co"># Area method</span></span>
 <span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">dem1</span>, method <span class="op">=</span> <span class="st">"area"</span>, L0 <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.619947</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="fractal-dimension">Fractal dimension<a class="anchor" aria-label="anchor" href="#fractal-dimension"></a>
 </h2>
+<p>The fractal dimension metric provides information about how a surface
+fills a volume and indicates how space varies over various scales.
+<code>habtools</code> provides different methods to estimate fractal
+dimension and the result may change depending on the method chosen. See
+the vignette on fractal dimension for more examples of how the results
+of different methods vary. There are four methods possible: “hvar”,
+“area”, “sd”, and “cubes”. Below we exemplify the use of two methods:
+“hvar” and “area”.</p>
 <div class="section level3">
 <h3 id="height-variation-method">Height variation method<a class="anchor" aria-label="anchor" href="#height-variation-method"></a>
 </h3>
@@ -170,6 +162,38 @@ doubling values for <code>lvec</code>. For example, if the resolution =
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM_intro_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; [1] 2.300395</span></span></code></pre>
+<p>We can visualize the calculation and model fit by setting diagnose
+equal to TRUE. This also allows us to investigate any scale transitions
+in fractal dimension and provides a list of information including the
+estimated fractal dimnsion (D), the data used for the regression, the
+lvec, the D_vec (vector of fractal dimensions across scales), the
+variance of the fractal dimensions across scales, and the method
+used.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, diagnose <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DEM_intro_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.300395</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;       l         h</span></span>
+<span><span class="co">#&gt; 1 0.125 0.1452855</span></span>
+<span><span class="co">#&gt; 2 0.250 0.2814564</span></span>
+<span><span class="co">#&gt; 3 0.500 0.4762113</span></span>
+<span><span class="co">#&gt; 4 1.000 0.7949864</span></span>
+<span><span class="co">#&gt; 5 2.000 0.9766939</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.125 0.250 0.500 1.000 2.000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 2.045980 2.241310 2.260672 2.703024</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.2776664</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="area-method">Area method<a class="anchor" aria-label="anchor" href="#area-method"></a>
@@ -180,37 +204,66 @@ uses surface areas at varying scales and calculates the fractal
 dimension as: <span class="math display">\[D = 2 - b,\]</span> where b
 is the slope of the linear regression between surface area (a) and scale
 (l): <span class="math inline">\(log(a) \sim log(l)\)</span>. The
-surface area is calculated at each scale by aggregating the DEM to the
-resolution of that scale by taking the median. Similar to the above
-method, we suggest a doubling vector for <code>lvec</code>. However, the
-smallest scale can be as small as the resolution of the DEM and the
-largest scale should not approach the extent DEM.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+surface area is calculated at each scale by projecting the DEM to the
+resolution of that scale. Similar to the above method, we suggest a
+doubling vector for <code>lvec</code>. However, the smallest scale can
+be as small as the resolution of the DEM and the largest scale should
+not approach the extent DEM (ideally it stays 4 to 8 times smaller than
+the extent).</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Area method</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="DEM_intro_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; [1] 2.231573</span></span></code></pre>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span><span class="op">)</span>, diagnose <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DEM_intro_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 2.231573</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;         l     area</span></span>
+<span><span class="co">#&gt; 1 0.03125 7.092804</span></span>
+<span><span class="co">#&gt; 2 0.06250 6.144461</span></span>
+<span><span class="co">#&gt; 3 0.12500 5.163649</span></span>
+<span><span class="co">#&gt; 4 0.25000 4.401752</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.03125 0.06250 0.12500 0.25000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 2.207070 2.250895 2.230313</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.02192633</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "area"</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
 <h2 id="multiple-metrics">Multiple metrics<a class="anchor" aria-label="anchor" href="#multiple-metrics"></a>
 </h2>
-<p>Note that the resolution (L0) for the rugosity calculation will be
-set as the smallest value of <code>lvec</code> in the <code><a href="../reference/rdh.html">rdh()</a></code>
-function if method_fd is “hvar”, “cubes”, or “sd”.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, method_fd <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
+<p>It is possible to calculate these three metrics by using the
+<code><a href="../reference/rdh.html">rdh()</a></code> function. Note that the resolution (L0) for the
+rugosity calculation will be set as the smallest value of
+<code>lvec</code> if method_rg is set to “hvar”. This can decrease the
+estimate of R.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, method_fd <span class="op">=</span> <span class="st">"hvar"</span>, method_rg <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; fd calculation using hvar method.</span></span>
+<span><span class="co">#&gt; rg calculation using hvar method.</span></span>
+<span><span class="co">#&gt; L0 is set to 0.125.</span></span>
+<span><span class="co">#&gt;          R        D         H</span></span>
+<span><span class="co">#&gt; 1 1.552032 2.300395 0.9766939</span></span>
+<span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, method_fd <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; fd calculation using hvar method.</span></span>
 <span><span class="co">#&gt; rg calculation using area method.</span></span>
 <span><span class="co">#&gt; L0 is set to the resolution of the raster: 0.01.</span></span>
-<span><span class="co">#&gt;         R        D         H</span></span>
-<span><span class="co">#&gt; 1 2.12501 2.300395 0.9766939</span></span>
+<span><span class="co">#&gt;   R        D         H</span></span>
+<span><span class="co">#&gt; 1 0 2.300395 0.9766939</span></span>
 <span><span class="fu"><a href="../reference/rdh.html">rdh</a></span><span class="op">(</span><span class="va">dem1</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03125</span>, <span class="fl">0.0625</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span><span class="op">)</span>, method_fd <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; fd calculation using area method.</span></span>
 <span><span class="co">#&gt; rg calculation using area method.</span></span>
 <span><span class="co">#&gt; L0 is set to the resolution of the raster: 0.01.</span></span>
-<span><span class="co">#&gt;         R        D         H</span></span>
-<span><span class="co">#&gt; 1 2.12501 2.231573 0.9766939</span></span></code></pre></div>
+<span><span class="co">#&gt;   R        D         H</span></span>
+<span><span class="co">#&gt; 1 0 2.231573 0.9766939</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="multiple-squares">Multiple squares<a class="anchor" aria-label="anchor" href="#multiple-squares"></a>
@@ -219,8 +272,8 @@ function if method_fd is “hvar”, “cubes”, or “sd”.</p>
 into equal parts. Let’s divide the big raster into 2x2m squares. Note
 that this function will only work well if you have a square DEM. You
 also want to choose the size so that the DEM can be divided into equal
-parts.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+parts. You can then calculate metrics for the list of DEMs.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dem_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_split.html">dem_split</a></span><span class="op">(</span><span class="va">dem</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co"># calculate one metric for all squares</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">hr</span><span class="op">)</span></span>
@@ -231,32 +284,43 @@ parts.</p>
 <span><span class="co"># calculate multiple metrics</span></span>
 <span><span class="va">data_rdh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">dem_list</span>, <span class="va">rdh</span>, method_fd <span class="op">=</span> <span class="st">"hvar"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data_rdh</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">R</span>, y <span class="op">=</span> <span class="va">H</span>, color <span class="op">=</span> <span class="va">D</span>, size <span class="op">=</span> <span class="va">D</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="DEM_intro_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="DEM_intro_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="sample-a-random-square">Sample a random square<a class="anchor" aria-label="anchor" href="#sample-a-random-square"></a>
+</h2>
+<p><code>habtools</code> also provides a way to crop a random square out
+of a DEM.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_sample.html">dem_sample</a></span><span class="op">(</span><span class="va">horseshoe</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DEM_intro_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="rules-of-thumb">Rules of thumb<a class="anchor" aria-label="anchor" href="#rules-of-thumb"></a>
 </h2>
 <ul>
 <li>When analyzing and comparing multiple DEMs, make sure that each DEM
-has the same resolution.</li>
+has the same resolution and extent.</li>
 <li>When using the “hvar” method, the smallest value of
 <code>lvec</code> should be between two times and ten higher than the
-resolution</li>
+resolution.</li>
 <li>When using the “hvar” method, the extent (highest value of
 <code>lvec</code>) should ideally be 1 to 2 orders of magnitudes higher
-compared to smallest value of <code>lvec</code> or <code>lvec</code>
-values should match scales of particular interest (e.g. matching body
-sizes of animals inhabiting the surface)</li>
+compared to smallest value of <code>lvec</code>.</li>
+<li>
+<code>lvec</code> values should match scales of particular interest
+(e.g. matching body sizes of animals inhabiting the surface).</li>
 <li>When using the “area” method, the <code>lvec</code> can range from
 the resolution to around 1/8 of the extent. Higher scales will increase
 bias of the method.</li>
 <li>
 <code>lvec</code> and chosen method needs to be the same across all
-calculations to make comparisons</li>
+calculations to make comparisons between DEMs.</li>
 </ul>
 </div>
   </div>
