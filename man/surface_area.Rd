@@ -21,3 +21,6 @@ surface_area(horseshoe)
 surface_area(mesh_to_2d(mcap))
 
 }
+\references{
+Jenness, J.S. Calculating Landscape Surface Area from Digital Elevation Models. Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n
+}

@@ -8,6 +8,9 @@
 #' @return Surface area value.
 #' @export
 #'
+#' @references
+#' Jenness, J.S. Calculating Landscape Surface Area from Digital Elevation Models. Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839n
+#'
 #' @examples
 #' surface_area(mcap)
 #' surface_area(horseshoe)

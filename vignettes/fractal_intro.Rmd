@@ -19,7 +19,7 @@ library(habtools)
 library(raster)
 ```
 
-In this vignette, we give a brief overview of fractal dimension methods in `habtools`. There are currently five methods summarized in the table below.
+In this vignette, we give a brief overview of fractal dimension methods in `habtools`. There are currently five methods summarized in the table below. Each method has inherent biases and so should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, axis-scaling or drop-offs, where others are invariant to them. 
 
 | Method | Function | Data | Default `lvec` | Notes |
 | :---- | :---- | :---- | :---- | :---- |
@@ -29,11 +29,13 @@ In this vignette, we give a brief overview of fractal dimension methods in `habt
 | Cube counting | `cubes` | RasterLayer or mesh3d | 2-10 x resolution to extent | Sensitive to height; approaches 2 for for surfaces with low height variation, relative to the extent. More reliable for closed 3D object. Less sensitive to non-fractal anomalies. |
 | Box counting | `boxes` | xy data.frame | 2-10 x resolution to extent | For 2D shapes only. Less sensitive to non-fractal anomalies. |
 
-Each method has inherent biases and so should be used cautiously and consistently. For example, some methods are sensitive to particular elements, like outliers, axis-scaling or drop-offs, where others are invariant to them. 
-
 Generally, fractal dimension is estimated by measuring values (e.g., counts of cubes, heights, areas) across a sequence of different resolutions or length scales, and then finding the slope between these scales and measured values. 
 
-Selecting a sensible sequence of scales (i.e., the length vector `lvec`) is therefore critical. The `lvec` should range between the resolution and extent of the surface or mesh, or across a range of scales relevant to the question being address. If you do not enter an `lvec`, each function will estimate one for you based on some rules of thumb for that particular method (see Table). For example, `hvar`, `sd`, `cubes` and `boxes` will generate a sequence from 2- to 10-times the resolution to the extent on a log2-scale. `area` will generate a sequence from 2 times the resolution to 1/8 the extent on the log2-scale. The `area` method has increased bias with increased values inside lvec, because of the way surface area is calculated at each scale (using Jenness, 2004). The method calculates surface area of each cell by using the height of the cell and its 8 surrounding cells to create a surface. For border cells, the cells outside of the DEM are assumed to be of equal height as the border cells. This means that border cells may have lower surface area estimates. If the ratio of border cells to total cells inside a DEM is high, there may be an underestimation of surface area, which is the case when values inside lvec are too close to the extent. For example, if lvec contains a scale of extent/2, all the cells are border cells; if it contains extent/4, 75% of the cells are border cells. For this reason, the `area` method may be better suited for larger areas, relative to the lvec. 
+## The `lvec`
+
+Selecting a sensible sequence of scales (i.e., the length vector `lvec`) is critical and should be the same when comparing surfaces and objects. The `lvec` should range between the resolution and extent of the surface or mesh, or across a range of scales relevant to the question being address. If you do not enter an `lvec`, each function will estimate one for you based on some rules of thumb for that particular method (see Table). For example, `hvar`, `sd`, `cubes` and `boxes` will generate a sequence from 2- to 10-times the resolution to the extent on a log2-scale. `area` will generate a sequence from 2 times the resolution to 1/8 the extent on the log2-scale. 
+
+The `area` method has increased bias with increased values inside `lvec`, because of the way surface area is calculated at each scale (using Jenness, 2004). The method calculates surface area of each cell by using the height of the cell and its 8 surrounding cells to create a surface. For border cells, the cells outside of the DEM are assumed to be of equal height as the border cells. This means that border cells may have lower surface area estimates. If the ratio of border cells to total cells inside a DEM is high, there may be an underestimation of surface area, which is the case when values inside `lvec` are too close to the extent. For example, if `lvec` contains a scale of extent/2, all the cells are border cells; if it contains extent/4, 75% of the cells are border cells. For this reason, the `area` method may be better suited for larger areas, relative to the `lvec`. 
 
 Below a fractal 128 x 128 terrain is simulated and fractal dimension is estimated with the height variation method. Because no `lvec` was provided, one was generated as `c(8, 16, 32, 64, 128)`. 
 
@@ -69,7 +71,6 @@ fd(surf, method = "cubes")
 surf_z <- surf
 values(surf_z) <- values(surf_z) * ((128-1) / diff(range(values(surf_z))))
 range(values(surf_z))
-raster::plot(surf_z)
 
 # height variation
 fd(surf_z, method = "hvar")
@@ -106,7 +107,7 @@ fd(mcap_2d, method = "boxes", plot=TRUE, diagnose=TRUE)
 
 ```
 
-### Non-fractal surfaces
+## Non-fractal surfaces
 
 Natural surfaces often have anomalies such as peaks, troughs and edges that can result in biased fractal dimension estimates. It is up to the user to determine which method is best for their purposes, and to demonstrate that a biological or ecological result is robust to the choice of method. The function `detect_drop()` can help to investigate if a DEM has a lot of overhangs or sudden drops. It returns a raster where values mark the areas with sudden drops depending on a given threshold (Default threshold = 0.1).
 
@@ -123,5 +124,9 @@ plot(drop2)
 fd(dem2, method="hvar", diagnose=TRUE)
 ```
 
-In the example above, dem2 has much more and higher drops compared to dem1. We can see its effect on the height variation method by looking at the diagnostics plot. The dots in the diagnostic plot for dem2 follow a curve, and do not fall on a straight line. The variance of D in dem2 (var = 0.44) is also larger than for dem1 (0.24). Moreover, the frequency of drops correlates slightly negatively with the fractal dimension estimates when using the hvar method. Therefore, caution must be used with the interpretation of fractal dimension when the DEM has many drops or overhangs. Changes in D depending on the scale is common for non-fractal surfaces and therefore it is crucial to carefully choose the lvec and keep it the same when comparing across many surfaces. 
+In the example above, `dem2` has much more and higher drops compared to `dem1`. We can see its effect on the height variation method by looking at the diagnostics plot. The dots in the diagnostic plot for `dem2` follow a curve, and do not fall on a straight line. The variance of D in `dem2` (var = 0.44) is also larger than for `dem1` (0.24). Moreover, the frequency of drops correlates slightly negatively with the fractal dimension estimates when using the `hvar` method. Therefore, caution must be used with the interpretation of fractal dimension when the DEM has many drops or overhangs. Changes in D depending on the scale is common for non-fractal surfaces and therefore it is crucial to carefully choose the `lvec` and keep it the same when comparing across many surfaces. 
+
+## References
+
+- Jenness, J.S. Calculating Landscape Surface Area from Digital Elevation Models. Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn, 2004), pp. 829-839.
 
