@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `habtools`: 3D metrics for surfaces and objects
+# habtools
 
 <!-- badges: start -->
 
@@ -11,10 +11,10 @@
 <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 `habtools` is a collection of tools for working with 3D surfaces and
-meshes for biologists and ecologists. There are helper tools for
-sampling and simulating surfaces, as well as tools for estimating
-metrics like surface area, rugosity, fractal dimension, convexity,
-sphericity, second moments of volume, circularity and more.
+objects. There are helper tools for sampling and simulating surfaces, as
+well as tools for estimating metrics like surface area, rugosity,
+fractal dimension, convexity, sphericity, second moments of volume,
+circularity and more.
 
 ### Installation
 
