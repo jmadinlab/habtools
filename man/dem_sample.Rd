@@ -4,7 +4,7 @@
 \alias{dem_sample}
 \title{Sample a random DEM with specified size from a larger DEM}
 \usage{
-dem_sample(data, L, allow_NA = TRUE, plot = FALSE)
+dem_sample(data, L, allow_NA = TRUE, plot = FALSE, max_iter = 100)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer.}

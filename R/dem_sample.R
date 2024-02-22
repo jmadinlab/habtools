@@ -4,6 +4,7 @@
 #' @param L Size of square to cut out of DEM.
 #' @param allow_NA Logical. Allow NAs in the sample? Useful when DEM is not regular.
 #' @param plot Logical. Plot the DEM and the cropped section?
+#' @param max_iter Default
 #'
 #' @note Not allowing NAs may increase sampling time for irregular DEMs that contain a lot of NAs; e.g., structure from motion transects.
 #'
@@ -14,11 +15,15 @@
 #' dem <- dem_sample(horseshoe, L = 4)
 #' raster::plot(dem)
 
-dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE) {
-
+dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE, max_iter=100) {
+  iter <- 1
   sub <- dem_runif(data, L)
   while (sub$NAs != allow_NA) {
     sub <- dem_runif(data, L)
+    iter <- iter + 1
+    if (iter == max_iter) {
+      stop("Maximum iterations reached. Double check that there is actually an area that can be sampled given L. If so, you can increase max_iter, but expect the function to take longer.")
+    }
   }
 
   dem_crop(data, x0 = sub$x0, y0 = sub$y0, L = L, plot=plot)
