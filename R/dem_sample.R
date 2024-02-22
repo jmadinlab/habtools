@@ -2,6 +2,10 @@
 #'
 #' @param data Digital elevation model of class RasterLayer.
 #' @param L Size of square to cut out of DEM.
+#' @param allow_NA Logical. Allow NAs in the sample? Useful when DEM is not regular.
+#' @param plot Logical. Plot the DEM and the cropped section?
+#'
+#' @note Not allowing NAs may increase sampling time for irregular DEMs that contain a lot of NAs; e.g., structure from motion transects.
 #'
 #' @return Digital elevation model of class RasterLayer.
 #' @export
@@ -18,17 +22,6 @@ dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE) {
   }
 
   dem_crop(data, x0 = sub$x0, y0 = sub$y0, L = L, plot=plot)
-
-  # size <- L
-  # mid <- mid_find(data)
-  # sub <- dem_crop(data,
-  #                 x0 = mid$x_mid[1],
-  #                 y0 = mid$y_mid[1],
-  #                 L = raster::extent(data)[2] - raster::extent(data)[1] - size)
-  # xy <- raster::rasterToPoints(sub)
-  # xyi <- xy[sample(1:nrow(xy), size = 1),]
-  #
-  # dem_crop(data, x0 = xyi[1], y0 = xyi[2], L = size, plot=plot)
 }
 
 
