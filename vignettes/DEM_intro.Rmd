@@ -73,7 +73,7 @@ fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), plot = TRUE)
 ```
            
 We can visualize the calculation and model fit by setting `diagnose=TRUE`. 
-This also allows us to investigate any scale transitions in fractal dimension and provides a list of information including the estimated fractal dimnsion (D), the data used for the regression, the lvec, the D_vec (vector of fractal dimensions across scales), the variance of the fractal dimensions across scales, and the method used.  
+This also allows us to investigate any scale transitions in fractal dimension and provides a list of information including the estimated fractal dimension (D), the data used for the regression, the `lvec`, the `D_vec` (vector of fractal dimensions across scales), the variance of the fractal dimensions across scales, and the method used.  
           
 ```{r}
 fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), diagnose = TRUE)
@@ -95,7 +95,7 @@ fd(dem1, method = "area", lvec = c(0.03125, 0.0625, 0.125, 0.25), diagnose = TRU
 
 ## Multiple metrics
 
-It is possible to calculate these three metrics by using the `rdh()` function. Note that the resolution (L0) for the rugosity calculation will be set as the smallest value of `lvec` if method_rg is set to "hvar". This can decrease the estimate of R. 
+It is possible to calculate these three metrics by using the `rdh()` function. Note that the resolution (`L0`) for the rugosity calculation will be set as the smallest value of `lvec` if `method_rg` is set to `"hvar"`. This can decrease the estimate of R. 
 
 ```{r}
 rdh(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), method_fd = "hvar", method_rg = "hvar")
