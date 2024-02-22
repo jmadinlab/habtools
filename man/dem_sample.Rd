@@ -14,6 +14,8 @@ dem_sample(data, L, allow_NA = TRUE, plot = FALSE, max_iter = 100)
 \item{allow_NA}{Logical. Allow NAs in the sample? Useful when DEM is not regular.}
 
 \item{plot}{Logical. Plot the DEM and the cropped section?}
+
+\item{max_iter}{Maximum number of random crops to try when allow_NA = FALSE before failing.}
 }
 \value{
 Digital elevation model of class RasterLayer.
@@ -25,6 +27,6 @@ Sample a random DEM with specified size from a larger DEM
 Not allowing NAs may increase sampling time for irregular DEMs that contain a lot of NAs; e.g., structure from motion transects.
 }
 \examples{
-dem <- dem_sample(horseshoe, L = 4)
+dem <- dem_sample(horseshoe, L = 2)
 raster::plot(dem)
 }
