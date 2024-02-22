@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metrics of fractal dimension • habtools</title>
+<title>Fractal dimension methods • habtools</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Metrics of fractal dimension">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Fractal dimension methods">
 <meta property="og:description" content="habtools">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">habtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+      <a href="../articles/fractal_intro.html">Fractal dimension methods</a>
     </li>
     <li>
       <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
@@ -74,7 +74,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Metrics of fractal dimension</h1>
+      <h1 data-toc-skip>Fractal dimension methods</h1>
             
       
       
@@ -86,11 +86,13 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-<p>This vignette is a brief overview of fractal dimension methods in
-<code>habtools</code>. There are currently five methods:</p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></code></pre></div>
+<p>In this vignette, we give a brief overview of fractal dimension
+methods in <code>habtools</code>. There are currently five methods
+summarized in the table below. Each method has inherent biases and so
+should be used cautiously and consistently. For example, some methods
+are sensitive to particular elements, like outliers, axis-scaling or
+drop-offs, where others are invariant to them.</p>
 <table class="table">
 <colgroup>
 <col width="20%">
@@ -112,7 +114,7 @@
 <td align="left">Height variation</td>
 <td align="left"><code>hvar</code></td>
 <td align="left">RasterLayer</td>
-<td align="left">10 x res to extent</td>
+<td align="left">2-10 x resolution to extent</td>
 <td align="left">Invariant to height. Sensitive to non-fractal edges and
 outliers.</td>
 </tr>
@@ -120,7 +122,7 @@ outliers.</td>
 <td align="left">Standard deviation</td>
 <td align="left"><code>sd</code></td>
 <td align="left">RasterLayer</td>
-<td align="left">10 x res to extent</td>
+<td align="left">2-10 x resolution to extent</td>
 <td align="left">Invariant to height. Sensitive to non-fractal edges and
 outliers.</td>
 </tr>
@@ -128,48 +130,63 @@ outliers.</td>
 <td align="left">Area</td>
 <td align="left"><code>area</code></td>
 <td align="left">RasterLayer or mesh3d</td>
-<td align="left">res to 1/8 extent</td>
-<td align="left">Sensitive to height; approaches 2 for most terrains.
-Less sensitive to non-fractal anomalies.</td>
+<td align="left">2-4 x resolution to 1/8 extent</td>
+<td align="left">Sensitive to height; approaches 2 for surfaces with low
+height variation, relative to the extent. Less sensitive to non-fractal
+anomalies.</td>
 </tr>
 <tr class="even">
 <td align="left">Cube counting</td>
 <td align="left"><code>cubes</code></td>
 <td align="left">RasterLayer or mesh3d</td>
-<td align="left">2 x res to extent</td>
-<td align="left">Sensitive to height; approaches 2 for most terrains.
-More reliable for closed 3D object. Less sensitive to non-fractal
-anomalies.</td>
+<td align="left">2-10 x resolution to extent</td>
+<td align="left">Sensitive to height; approaches 2 for for surfaces with
+low height variation, relative to the extent. More reliable for closed
+3D object. Less sensitive to non-fractal anomalies.</td>
 </tr>
 <tr class="odd">
 <td align="left">Box counting</td>
 <td align="left"><code>boxes</code></td>
 <td align="left">xy data.frame</td>
-<td align="left">10 x res to extent</td>
+<td align="left">2-10 x resolution to extent</td>
 <td align="left">For 2D shapes only. Less sensitive to non-fractal
 anomalies.</td>
 </tr>
 </tbody>
 </table>
-<p>Each method has inherent biases and so should be used cautiously and
-consistently. For example, some methods are sensitive to particular
-elements, like outliers, axis-scaling or drop-offs, where others are
-invariant to them.</p>
 <p>Generally, fractal dimension is estimated by measuring values (e.g.,
 counts of cubes, heights, areas) across a sequence of different
 resolutions or length scales, and then finding the slope between these
 scales and measured values.</p>
+<div class="section level2">
+<h2 id="the-lvec">The <code>lvec</code><a class="anchor" aria-label="anchor" href="#the-lvec"></a>
+</h2>
 <p>Selecting a sensible sequence of scales (i.e., the length vector
-<code>lvec</code>) is therefore critical. The <code>lvec</code> should
-range between the resolution and extent of the surface or mesh, or
-across a range of scales relevant to the question being address. If you
-do not enter an <code>lvec</code>, each function will estimate one for
-you based on some rules of thumb for that particular method. For
-example, <code>hvar</code>, <code>sd</code>, <code>cubes</code> and
+<code>lvec</code>) is critical and should be the same when comparing
+surfaces and objects. The <code>lvec</code> should range between the
+resolution and extent of the surface or mesh, or across a range of
+scales relevant to the question being address. If you do not enter an
+<code>lvec</code>, each function will estimate one for you based on some
+rules of thumb for that particular method (see Table). For example,
+<code>hvar</code>, <code>sd</code>, <code>cubes</code> and
 <code>boxes</code> will generate a sequence from 2- to 10-times the
 resolution to the extent on a log2-scale. <code>area</code> will
-generate a sequence from the resolution to 1/8 the extent on the
+generate a sequence from 2 times the resolution to 1/8 the extent on the
 log2-scale.</p>
+<p>The <code>area</code> method has increased bias with increased values
+inside <code>lvec</code>, because of the way surface area is calculated
+at each scale (using Jenness, 2004). The method calculates surface area
+of each cell by using the height of the cell and its 8 surrounding cells
+to create a surface. For border cells, the cells outside of the DEM are
+assumed to be of equal height as the border cells. This means that
+border cells may have lower surface area estimates. If the ratio of
+border cells to total cells inside a DEM is high, there may be an
+underestimation of surface area, which is the case when values inside
+<code>lvec</code> are too close to the extent. For example, if
+<code>lvec</code> contains a scale of extent/2, all the cells are border
+cells; if it contains extent/4, 75% of the cells are border cells. For
+this reason, the <code>area</code> method may be better suited for
+larger areas, relative to the <code>lvec</code>.</p>
 <p>Below a fractal 128 x 128 terrain is simulated and fractal dimension
 is estimated with the height variation method. Because no
 <code>lvec</code> was provided, one was generated as
@@ -183,24 +200,24 @@ is estimated with the height variation method. Because no
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-1.png" width="480"><img src="fractal_intro_files/figure-html/unnamed-chunk-2-2.png" width="480"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.508944</span></span>
+<span><span class="co">#&gt; [1] 2.507169</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;     l         h</span></span>
-<span><span class="co">#&gt; 1   8 0.4145870</span></span>
-<span><span class="co">#&gt; 2  16 0.6477677</span></span>
-<span><span class="co">#&gt; 3  32 0.9863985</span></span>
-<span><span class="co">#&gt; 4  64 1.3822138</span></span>
-<span><span class="co">#&gt; 5 128 1.5565070</span></span>
+<span><span class="co">#&gt; 1   8 0.3882732</span></span>
+<span><span class="co">#&gt; 2  16 0.5921350</span></span>
+<span><span class="co">#&gt; 3  32 0.8459525</span></span>
+<span><span class="co">#&gt; 4  64 1.1806633</span></span>
+<span><span class="co">#&gt; 5 128 1.5172927</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
 <span><span class="co">#&gt; [1]   8  16  32  64 128</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.356198 2.393306 2.513262 2.828669</span></span>
+<span><span class="co">#&gt; [1] 2.391146 2.485350 2.519051 2.638098</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.2146093</span></span>
+<span><span class="co">#&gt; [1] 0.1020048</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
@@ -209,11 +226,12 @@ red rectangles representing <code>lvec</code> to help visualize the
 scales at which fractal dimension is estimated. When
 <code>diagnostic=TRUE</code>, the relationship between scales and mean
 surface heights is plotted. The red line in the best-fit line for all
-point and dashed lines are for each pair-wise scale. For the height
-range method, D is 3 minus the slope. The diagnostic plot helps identify
-scales that are problematic (typically the extremes), which then have
-bias the estimate. The <code>lvec</code> is returned and can then be
-altered, entered explicitly, and fractal dimension estimated again.</p>
+point and dashed lines are for each pair-wise scale with localized D
+estimates. For the height range method, D is 3 minus the slope. The
+diagnostic plot helps identify scales that are problematic (typically
+the extremes of <code>lvec</code>), which then have bias the estimate.
+The <code>lvec</code> is returned and can then be altered, entered
+explicitly, and fractal dimension estimated again.</p>
 <p><code>hvar</code> and <code>sd</code> methods are not sensitive to
 z-axis scaling, whereas <code>area</code> and <code>cubes</code> methods
 are. Here are estimates for the relative flat surface we simulated with
@@ -222,60 +240,57 @@ are. Here are estimates for the relative flat surface we simulated with
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.508944</span></span>
+<span><span class="co">#&gt; [1] 2.507169</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.595406</span></span>
+<span><span class="co">#&gt; [1] 2.609359</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.000443</span></span>
+<span><span class="co">#&gt; [1] 2.000388</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.000415</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.000075</span></span></code></pre></div>
 <p><code>hvar</code> and <code>sd</code> estimates are in the vicinity
 of D=2.5. However, <code>area</code> and <code>cubes</code> methods
 result in estimates close to 2: a flat surface. If we transform the
 z-scale to match the extent (L=128), we get the following.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">surf_z</span> <span class="op">&lt;-</span> <span class="va">surf</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">128</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">128</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1]   0 127</span></span>
-<span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.508944</span></span>
+<span><span class="co">#&gt; [1] 2.507169</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.595406</span></span>
+<span><span class="co">#&gt; [1] 2.609359</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.430449</span></span>
+<span><span class="co">#&gt; [1] 2.419742</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.320155</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.324968</span></span></code></pre></div>
 <p><code>hvar</code> and <code>sd</code> estimates are identical (i.e.,
 invariant to z-scaling) and <code>area</code> and <code>cubes</code>
 estimates are higher. This dichotomy raises an underlying philosophical
 question about fractal surfaces: does the fractal dimension of an
 surface change if it is transformed along a dimension?</p>
-<p>The answer will likely depend on what you are analysing For example,
+<p>The answer will likely depend on what you are analyzing. For example,
 if you are examining landscapes, then <code>area</code> and
 <code>cubes</code> methods will not be much use as they will tend to D=2
 when surfaces a low relative to wide. Whereas, if you are examining
@@ -284,7 +299,7 @@ and <code>cubes</code> methods might be a better choice. If you are
 examining a closed 3D objects (i.e., watertight), then the
 <code>cubes</code> method is preferable as the 3D analogue to box
 counting on closed shapes like the coastline of the UK.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(0.053, 0.106, 0.212, 0.423).</span></span></code></pre></div>
@@ -310,79 +325,149 @@ counting on closed shapes like the coastline of the UK.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "cubes"</span></span></code></pre>
-<div class="section level3">
-<h3 id="non-fractal-surfaces">Non-fractal surfaces<a class="anchor" aria-label="anchor" href="#non-fractal-surfaces"></a>
-</h3>
+<p>Here is an example of 2D box counting for the planar projection of
+the <code>mcap</code> mesh.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># project coral as xy coordinates</span></span>
+<span><span class="va">mcap_2d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mesh_to_2d.html">mesh_to_2d</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># box counting</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_2d</span>, method <span class="op">=</span> <span class="st">"boxes"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-1.png" width="480"><img src="fractal_intro_files/figure-html/unnamed-chunk-6-2.png" width="480"></p>
+<pre><code><span><span class="co">#&gt; $D</span></span>
+<span><span class="co">#&gt; [1] 1.408013</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt;            l   n</span></span>
+<span><span class="co">#&gt; 6 0.01219243 142</span></span>
+<span><span class="co">#&gt; 5 0.02438486  66</span></span>
+<span><span class="co">#&gt; 4 0.04876971  29</span></span>
+<span><span class="co">#&gt; 3 0.09753943  11</span></span>
+<span><span class="co">#&gt; 2 0.19507886   4</span></span>
+<span><span class="co">#&gt; 1 0.39015772   1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $lvec</span></span>
+<span><span class="co">#&gt; [1] 0.39015772 0.19507886 0.09753943 0.04876971 0.02438486 0.01219243</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $D_vec</span></span>
+<span><span class="co">#&gt; [1] 1.105353 1.186413 1.398549 1.459432 2.000000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $var</span></span>
+<span><span class="co">#&gt; [1] 0.3505302</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $method</span></span>
+<span><span class="co">#&gt; [1] "boxes"</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="non-fractal-surfaces">Non-fractal surfaces<a class="anchor" aria-label="anchor" href="#non-fractal-surfaces"></a>
+</h2>
 <p>Natural surfaces often have anomalies such as peaks, troughs and
 edges that can result in biased fractal dimension estimates. It is up to
 the user to determine which method is best for their purposes, and to
 demonstrate that a biological or ecological result is robust to the
-choice of method.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466</span>, y0 <span class="op">=</span> <span class="fl">1269</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-1.png" width="480"></p>
+choice of method. The function <code><a href="../reference/detect_drop.html">detect_drop()</a></code> can help to
+investigate if a DEM has a lot of overhangs or sudden drops. It returns
+a raster where values mark the areas with sudden drops depending on a
+given threshold (Default threshold = 0.1).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dem1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">470.8104</span>, y0 <span class="op">=</span> <span class="fl">1270.625</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">drop1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/detect_drop.html">detect_drop</a></span><span class="op">(</span><span class="va">dem1</span>, d <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">drop1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-2.png" width="480"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This DEM does not have many drops</span></span>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1, 2).</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-2.png" width="480"></p>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-3.png" width="480"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.202029</span></span>
+<span><span class="co">#&gt; [1] 2.318056</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;        l          h</span></span>
-<span><span class="co">#&gt; 1 0.0625 0.06263626</span></span>
-<span><span class="co">#&gt; 2 0.1250 0.14528552</span></span>
-<span><span class="co">#&gt; 3 0.2500 0.28145639</span></span>
-<span><span class="co">#&gt; 4 0.5000 0.47621126</span></span>
-<span><span class="co">#&gt; 5 1.0000 0.79498635</span></span>
-<span><span class="co">#&gt; 6 2.0000 0.97669387</span></span>
+<span><span class="co">#&gt; 1 0.0625 0.04651577</span></span>
+<span><span class="co">#&gt; 2 0.1250 0.09603534</span></span>
+<span><span class="co">#&gt; 3 0.2500 0.16825392</span></span>
+<span><span class="co">#&gt; 4 0.5000 0.24666635</span></span>
+<span><span class="co">#&gt; 5 1.0000 0.37923605</span></span>
+<span><span class="co">#&gt; 6 2.0000 0.51699162</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
 <span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.786179 2.045980 2.241310 2.260672 2.703024</span></span>
+<span><span class="co">#&gt; [1] 1.954155 2.190997 2.448079 2.379465 2.552955</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.3365688</span></span>
+<span><span class="co">#&gt; [1] 0.2364252</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span>
 <span></span>
-<span><span class="va">dem2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">469</span>, y0 <span class="op">=</span> <span class="fl">1267</span>, L <span class="op">=</span> <span class="fl">1</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-3.png" width="480"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<span><span class="va">dem2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dem_crop.html">dem_crop</a></span><span class="op">(</span><span class="va">horseshoe</span>, x0 <span class="op">=</span> <span class="op">-</span><span class="fl">466.8104</span>, y0 <span class="op">=</span> <span class="fl">1266.625</span>, L <span class="op">=</span> <span class="fl">2</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-4.png" width="480"></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">drop2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/detect_drop.html">detect_drop</a></span><span class="op">(</span><span class="va">dem2</span>, d <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">drop2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-5.png" width="480"></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1).</span></span></code></pre></div>
-<p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-4.png" width="480"></p>
+<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1, 2).</span></span></code></pre></div>
+<p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-6.png" width="480"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.012966</span></span>
+<span><span class="co">#&gt; [1] 2.224109</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;        l          h</span></span>
-<span><span class="co">#&gt; 1 0.0625 0.06651118</span></span>
-<span><span class="co">#&gt; 2 0.1250 0.14884714</span></span>
-<span><span class="co">#&gt; 3 0.2500 0.29152369</span></span>
-<span><span class="co">#&gt; 4 0.5000 0.59073182</span></span>
-<span><span class="co">#&gt; 5 1.0000 1.02141762</span></span>
+<span><span class="co">#&gt; 1 0.0625 0.07903029</span></span>
+<span><span class="co">#&gt; 2 0.1250 0.18499928</span></span>
+<span><span class="co">#&gt; 3 0.2500 0.39988367</span></span>
+<span><span class="co">#&gt; 4 0.5000 0.71864583</span></span>
+<span><span class="co">#&gt; 5 1.0000 0.97061389</span></span>
+<span><span class="co">#&gt; 6 2.0000 1.12180328</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000</span></span>
+<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.837837 2.030218 1.981110 2.210002</span></span>
+<span><span class="co">#&gt; [1] 1.772958 1.887939 2.154299 2.566383 2.791150</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.1536148</span></span>
+<span><span class="co">#&gt; [1] 0.4357646</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
+<p>In the example above, <code>dem2</code> has much more and higher
+drops compared to <code>dem1</code>. We can see its effect on the height
+variation method by looking at the diagnostics plot. The dots in the
+diagnostic plot for <code>dem2</code> follow a curve, and do not fall on
+a straight line. The variance of D in <code>dem2</code> (var = 0.44) is
+also larger than for <code>dem1</code> (0.24). Moreover, the frequency
+of drops correlates slightly negatively with the fractal dimension
+estimates when using the <code>hvar</code> method. Therefore, caution
+must be used with the interpretation of fractal dimension when the DEM
+has many drops or overhangs. Changes in D depending on the scale is
+common for non-fractal surfaces and therefore it is crucial to carefully
+choose the <code>lvec</code> and keep it the same when comparing across
+many surfaces.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ul>
+<li>Jenness, J.S. Calculating Landscape Surface Area from Digital
+Elevation Models. Wildlife Society Bulletin, Vol. 32, No. 3 (Autumn,
+2004), pp. 829-839.</li>
+</ul>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
