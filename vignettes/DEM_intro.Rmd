@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 5,
+  fig.height = 5
 )
 ```
 
@@ -30,6 +32,7 @@ dem <- horseshoe
 res(dem)
 plot(dem)
 ```
+           
 Let's say we want complexity metrics for a certain square of size 2m around certain xy-coordinates. We can start by using the `dem_crop()` function.
 ```{r}
 dem1 <- dem_crop(horseshoe, x0 = -466, y0 = 1269, L = 2, plot = TRUE)
@@ -51,7 +54,7 @@ rg(dem1, method = "hvar", L0 = 0.05, parallel = FALSE) # Parallel = TRUE enables
 # Area method
 rg(dem1, method = "area", L0 = 0.05)
 ```
-
+          
 ## Fractal dimension
 
 The fractal dimension metric provides information about how a surface fills a volume and indicates how space varies over various scales. `habtools` provides different methods to estimate fractal dimension and the result may change depending on the method chosen. See the vignette on fractal dimension for more examples of how the results of different methods vary. Below we focus on two methods: `hvar` and `area`. 
@@ -68,10 +71,10 @@ Because a range of values is needed to calculate a height range the smallest val
 # Height variation method
 fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), plot = TRUE)
 ```
-
+           
 We can visualize the calculation and model fit by setting `diagnose=TRUE`. 
 This also allows us to investigate any scale transitions in fractal dimension and provides a list of information including the estimated fractal dimnsion (D), the data used for the regression, the lvec, the D_vec (vector of fractal dimensions across scales), the variance of the fractal dimensions across scales, and the method used.  
-
+          
 ```{r}
 fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), diagnose = TRUE)
 ```
@@ -115,7 +118,7 @@ data_rdh <- suppressMessages(lapply(dem_list, rdh, method_fd = "hvar", lvec = c(
   bind_rows()
 
 ```
-
+        
 ```{r}
 ggplot(data_rdh) +
   geom_point(aes(x = R, y = H, color = D, size = D)) +
