@@ -1,6 +1,6 @@
 Package: habtools
-Title: 3D metrics for habitats and objects
-Version: 0.0.0.9000
+Title: 3D metrics for surfaces and objects
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Joshua",
            family = "Madin",
@@ -9,18 +9,10 @@ Authors@R:
            comment = c(ORCID = "0000-0002-5005-6227")),
     person(given = "Nina",
        family = "Schiettekatte",
-       role = "aut",
+       role = c("aut", "cre"),
        email = "nina.schiettekatte@gmail.com",
        comment = c(ORCID = "0000-0002-1925-3484")))
-Description: This package is a collection of tools for 3D 
-  meshes and digital elevation models (DEM) targetted at biologists
-  and ecologists. Tools calculate metrics like surface area, rugosity, 
-  fractal dimension, heigh range, convexity, sphericity, second moments
-  of volume and more. The initial set of tools came from two research papers.
-  Zawada et al. (2019) examined morphology of coral colony laser scans. 
-  Torres-Pulliza et al. (2020) examined  complexity of coral reef structure. 
-  It is hoped that the corpus of tools and number of project contributors 
-  will grow through time. 
+Description: habtools is a collection of tools for working with 3D surfaces and meshes for biologists and ecologists. There are helper tools for sampling and simulating surfaces, as well as tools for estimating metrics like surface area, rugosity, fractal dimension, convexity, sphericity, second moments of volume, circularity and more. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
