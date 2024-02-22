@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-5005-6227")),
     person(given = "Nina",
        family = "Schiettekatte",
-       role = c("aut", "cre"),
+       role = c("aut"),
        email = "nina.schiettekatte@gmail.com",
        comment = c(ORCID = "0000-0002-1925-3484")))
 Description: habtools is a collection of tools for working with 3D surfaces and meshes for biologists and ecologists. There are helper tools for sampling and simulating surfaces, as well as tools for estimating metrics like surface area, rugosity, fractal dimension, convexity, sphericity, second moments of volume, circularity and more. 
