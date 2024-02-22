@@ -39,7 +39,7 @@ The `area` method has increased bias with increased values inside `lvec`, becaus
 
 Below a fractal 128 x 128 terrain is simulated and fractal dimension is estimated with the height variation method. Because no `lvec` was provided, one was generated as `c(8, 16, 32, 64, 128)`. 
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 # simulate fractal terrain
 surf <- sim_dem(L=128, smoothness=0.5)
 
@@ -51,7 +51,7 @@ When `plot=TRUE`, a plot of the surface is generated with red rectangles represe
 
 `hvar` and `sd` methods are not sensitive to z-axis scaling, whereas `area` and `cubes` methods are. Here are estimates for the relative flat surface we simulated with `smoothness=0.5`.
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 # height variation
 fd(surf, method = "hvar")
 
@@ -67,7 +67,7 @@ fd(surf, method = "cubes")
 
 `hvar` and `sd` estimates are in the vicinity of D=2.5.  However, `area` and `cubes` methods result in estimates close to 2: a flat surface. If we transform the z-scale to match the extent (L=128), we get the following. 
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 surf_z <- surf
 values(surf_z) <- values(surf_z) * ((128-1) / diff(range(values(surf_z))))
 range(values(surf_z))
@@ -90,7 +90,7 @@ fd(surf_z, method = "cubes")
 
 The answer will likely depend on what you are analyzing. For example, if you are examining landscapes, then `area` and `cubes` methods will not be much use as they will tend to D=2 when surfaces a low relative to wide. Whereas, if you are examining surfaces that are as high as they are wide, then the `area` and `cubes` methods might be a better choice. If you are examining a closed 3D objects (i.e., watertight), then the `cubes` method is preferable as the 3D analogue to box counting on closed shapes like the coastline of the UK.
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 # cube counting
 fd(mcap, method = "cubes", plot=TRUE, diagnose=TRUE)
 
@@ -98,7 +98,7 @@ fd(mcap, method = "cubes", plot=TRUE, diagnose=TRUE)
 
 Here is an example of 2D box counting for the planar projection of the `mcap` mesh.
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 # project coral as xy coordinates
 mcap_2d <- mesh_to_2d(mcap)
 
@@ -111,7 +111,7 @@ fd(mcap_2d, method = "boxes", plot=TRUE, diagnose=TRUE)
 
 Natural surfaces often have anomalies such as peaks, troughs and edges that can result in biased fractal dimension estimates. It is up to the user to determine which method is best for their purposes, and to demonstrate that a biological or ecological result is robust to the choice of method. The function `detect_drop()` can help to investigate if a DEM has a lot of overhangs or sudden drops. It returns a raster where values mark the areas with sudden drops depending on a given threshold (Default threshold = 0.1).
 
-```{r fig.width=5, fig.height=5}
+```{r fig.width=4, fig.height=4}
 dem1 <- dem_crop(horseshoe, x0 = -470.8104, y0 = 1270.625, L = 2, plot = TRUE)
 drop1 <- detect_drop(dem1, d = 0.1)
 plot(drop1)
