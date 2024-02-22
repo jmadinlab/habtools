@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2021 Joshua Madin
+Copyright (c) 2024 Joshua Madin,Nina Schiettekatte
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
