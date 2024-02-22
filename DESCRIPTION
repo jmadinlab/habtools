@@ -12,15 +12,16 @@ Authors@R:
        role = c("aut"),
        email = "nina.schiettekatte@gmail.com",
        comment = c(ORCID = "0000-0002-1925-3484")))
-Description: habtools is a collection of tools for working with 3D surfaces and meshes for biologists and ecologists. There are helper tools for sampling and simulating surfaces, as well as tools for estimating metrics like surface area, rugosity, fractal dimension, convexity, sphericity, second moments of volume, circularity and more. 
+Description: 
+    habtools is a collection of tools for working with 3D surfaces and meshes for biologists and ecologists. There are helper tools for sampling and simulating surfaces, as well as tools for estimating metrics like surface area, rugosity, fractal dimension, convexity, sphericity, second moments of volume, circularity and more. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Depends: 
+Depends:      
     R (>= 2.10)
-Imports: 
+Imports:      
     raster (>= 3.5),
     terra,
     methods,

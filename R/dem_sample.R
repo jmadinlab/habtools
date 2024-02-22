@@ -11,6 +11,8 @@
 #' @return Digital elevation model of class RasterLayer.
 #' @export
 #'
+#' @importFrom stats runif
+#'
 #' @examples
 #' dem <- dem_sample(horseshoe, L = 2)
 #' raster::plot(dem)
