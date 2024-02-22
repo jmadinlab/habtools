@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">habtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -35,7 +35,7 @@
       <a href="../articles/DEM_intro.html">Complexity metrics for DEMs</a>
     </li>
     <li>
-      <a href="../articles/fractal_intro.html">Metrics of fractal dimension</a>
+      <a href="../articles/fractal_intro.html">Fractal dimension methods</a>
     </li>
     <li>
       <a href="../articles/mesh_intro.html">Complexity metrics for 3D meshes</a>
@@ -60,7 +60,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dem_sample</span><span class="op">(</span><span class="va">data</span>, <span class="va">L</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dem_sample</span><span class="op">(</span><span class="va">data</span>, <span class="va">L</span>, allow_NA <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, max_iter <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,6 +72,18 @@
 <dt>L</dt>
 <dd><p>Size of square to cut out of DEM.</p></dd>
 
+
+<dt>allow_NA</dt>
+<dd><p>Logical. Allow NAs in the sample? Useful when DEM is not regular.</p></dd>
+
+
+<dt>plot</dt>
+<dd><p>Logical. Plot the DEM and the cropped section?</p></dd>
+
+
+<dt>max_iter</dt>
+<dd><p>Maximum number of random crops to try when allow_NA = FALSE before failing.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -79,10 +91,14 @@
 
 <p>Digital elevation model of class RasterLayer.</p>
     </div>
+    <div id="note">
+    <h2>Note</h2>
+    <p>Not allowing NAs may increase sampling time for irregular DEMs that contain a lot of NAs; e.g., structure from motion transects.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu">dem_sample</span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu">dem_sample</span><span class="op">(</span><span class="va">horseshoe</span>, L <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="dem_sample-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
