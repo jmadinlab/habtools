@@ -1,6 +1,6 @@
 Package: habtools
 Title: Tools and Metrics for 3D Surfaces and Objects
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     c(person(given = "Joshua",
            family = "Madin",
