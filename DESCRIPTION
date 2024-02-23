@@ -32,7 +32,7 @@ Imports:
     magrittr,
     purrr,
     dplyr
-Suggests: 
+Suggests:    
     knitr,
     rmarkdown,
     rgl,

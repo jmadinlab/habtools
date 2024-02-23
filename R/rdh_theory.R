@@ -16,7 +16,7 @@
 #'
 #' @export
 #'
-#' @references Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat complexity and biodiversity. *Nature Ecology & Evolution* 4:1495-1501. \https://doi.org/10.1038/s41559-020-1281-8
+#' @references Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat complexity and biodiversity. *Nature Ecology & Evolution* 4:1495-1501. \doi{https://doi.org/10.1038/s41559-020-1281-8}
 #'
 #' @examples
 #' rdh_theory(R=4, H=1, L=1, L0=0.01)
