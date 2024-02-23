@@ -13,3 +13,4 @@ dev
 ^manuscript$
 ^\.github$
 ^development$
+^CRAN-SUBMISSION$
