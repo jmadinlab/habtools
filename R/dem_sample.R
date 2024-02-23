@@ -14,8 +14,8 @@
 #' @importFrom stats runif
 #'
 #' @examples
-#' dem <- dem_sample(horseshoe, L = 2)
-#' raster::plot(dem)
+#' dem <- dem_sample(horseshoe, L = 2, plot=TRUE)
+#'
 
 dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE, max_iter=100) {
   iter <- 1
@@ -24,10 +24,9 @@ dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE, max_iter=100) {
     sub <- dem_runif(data, L)
     iter <- iter + 1
     if (iter == max_iter) {
-      stop("Maximum iterations reached. Double check that there is actually an area that can be sampled given L. If so, you can increase max_iter, but expect the function to take longer.")
+      stop("Maximum iterations reached. Double check that there is actually an area that can be sampled given L. If so, you can increase max_iter, but expect the function to take longer to run.")
     }
   }
-
   dem_crop(data, x0 = sub$x0, y0 = sub$y0, L = L, plot=plot)
 }
 

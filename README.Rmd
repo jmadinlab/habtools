@@ -26,7 +26,7 @@ knit_hooks$set(webgl = hook_webgl)
 
 <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
-`habtools` is a collection of tools for working with 3D surfaces and objects. There are helper tools for sampling and simulating surfaces, as well as tools for estimating metrics like surface area, rugosity, fractal dimension, convexity, sphericity, second moments of volume, circularity and more.
+A collection of functions for sampling and simulating 3D surfaces and objects and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, second moments of area and volume, and more.
 
 ### Installation
 

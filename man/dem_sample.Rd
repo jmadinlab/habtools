@@ -27,6 +27,6 @@ Sample a random DEM with specified size from a larger DEM
 Not allowing NAs may increase sampling time for irregular DEMs that contain a lot of NAs; e.g., structure from motion transects.
 }
 \examples{
-dem <- dem_sample(horseshoe, L = 2)
-raster::plot(dem)
+dem <- dem_sample(horseshoe, L = 2, plot=TRUE)
+
 }
