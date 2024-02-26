@@ -27,11 +27,15 @@ options(rgl.printRglwidget = TRUE)
 `habtools` includes a wide range of 3D metrics applicable to meshes. 
 
 Before calculating any metrics, visualize your mesh and make sure that the z orientation is correct, as this may affect some of the calculations.
-```{r}
+```{r, eval=FALSE}
 plot3d(mcap)
 ```
+              
+![](../man/figures/README-setup2-1-rgl.png){width = 4, height = 4}
+            
 
 Depending on how the mesh was generated (e.g. with the use of a laser scanner), the resolutions (distance between vertices inside the mesh) can vary a lot. This may affect calculations such as fractal dimension. Check the distribution of resolution of your object and if needed, remesh to make the resolution more uniform.
+
 
 ```{r}
 resvec <- Rvcg::vcgMeshres(mcap)[[2]] # vector of resolutions
@@ -43,7 +47,6 @@ In our example, the `mcap` object has very variable distances between vertices. 
 
 ```{r}
 mcap_uniform <- Rvcg::vcgUniformRemesh(mcap, silent = TRUE, multiSample = TRUE, voxelSize = min(resvec), mergeClost = TRUE)
-plot3d(mcap_uniform, col = "grey")
 Rvcg::vcgMeshres(mcap_uniform)[[1]]
 summary(Rvcg::vcgMeshres(mcap_uniform)[[2]])
 ```
