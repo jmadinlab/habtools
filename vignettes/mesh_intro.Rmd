@@ -31,7 +31,7 @@ Before calculating any metrics, visualize your mesh and make sure that the z ori
 plot3d(mcap)
 ```
               
-![](../man/figures/README-setup2-1-rgl.png){width = 4, height = 4}
+![](../man/figures/README-setup2-1-rgl.png)
             
 
 Depending on how the mesh was generated (e.g. with the use of a laser scanner), the resolutions (distance between vertices inside the mesh) can vary a lot. This may affect calculations such as fractal dimension. Check the distribution of resolution of your object and if needed, remesh to make the resolution more uniform.
