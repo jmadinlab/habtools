@@ -54,4 +54,6 @@ Caution: When R is provided, the DEM may become increasingly less fractal as it 
 library(raster)
 dem <- sim_dem(L = 32, smoothness = 0.5)
 plot(dem)
+dem <- sim_dem(L = 32, smoothness = 0.2, H = 20)
+plot(dem)
 }
