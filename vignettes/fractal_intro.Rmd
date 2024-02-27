@@ -41,10 +41,10 @@ Below a fractal 128 x 128 terrain is simulated and fractal dimension is estimate
 
 ```{r fig.width=4, fig.height=4}
 # simulate fractal terrain
-surf <- sim_dem(L=128, smoothness=0.5)
+surf <- sim_dem(L = 64, smoothness = 0.5)
 
 # fractal dimension using height variation method
-fd(surf, method="hvar", plot=TRUE, diagnose=TRUE)
+fd(surf, method="hvar", plot = TRUE, diagnose = TRUE)
 ```
 
 When `plot=TRUE`, a plot of the surface is generated with red rectangles representing `lvec` to help visualize the scales at which fractal dimension is estimated. When `diagnostic=TRUE`, the relationship between scales and mean surface heights is plotted. The red line in the best-fit line for all point and dashed lines are for each pair-wise scale with localized D estimates. For the height range method, D is 3 minus the slope. The diagnostic plot helps identify scales that are problematic (typically the extremes of `lvec`), which then have bias the estimate. The `lvec` is returned and can then be altered, entered explicitly, and fractal dimension estimated again. 
@@ -69,8 +69,8 @@ fd(surf, method = "cubes")
 
 ```{r fig.width=4, fig.height=4}
 surf_z <- surf
-values(surf_z) <- values(surf_z) * ((128-1) / diff(range(values(surf_z))))
-range(values(surf_z))
+values(surf_z) <- values(surf_z) * ((64-1) / hr(surf_z))
+hr(surf_z)
 
 # height variation
 fd(surf_z, method = "hvar")
@@ -116,12 +116,12 @@ dem1 <- dem_crop(horseshoe, x0 = -470.8104, y0 = 1270.625, L = 2, plot = TRUE)
 drop1 <- detect_drop(dem1, d = 0.1)
 plot(drop1)
 # This DEM does not have many drops
-fd(dem1, method="hvar", diagnose=TRUE)
+fd(dem1, method = "hvar", lvec = c(1, 0.5, 0.25, 0.125), diagnose=TRUE)
 
 dem2 <- dem_crop(horseshoe, x0 = -466.8104, y0 = 1266.625, L = 2, plot = TRUE)
 drop2 <- detect_drop(dem2, d = 0.1)
 plot(drop2)
-fd(dem2, method="hvar", diagnose=TRUE)
+fd(dem2, method = "hvar", lvec = c(1, 0.5, 0.25, 0.125), diagnose=TRUE)
 ```
 
 In the example above, `dem2` has much more and higher drops compared to `dem1`. We can see its effect on the height variation method by looking at the diagnostics plot. The dots in the diagnostic plot for `dem2` follow a curve, and do not fall on a straight line. The variance of D in `dem2` (var = 0.44) is also larger than for `dem1` (0.24). Moreover, the frequency of drops correlates slightly negatively with the fractal dimension estimates when using the `hvar` method. Therefore, caution must be used with the interpretation of fractal dimension when the DEM has many drops or overhangs. Changes in D depending on the scale is common for non-fractal surfaces and therefore it is crucial to carefully choose the `lvec` and keep it the same when comparing across many surfaces. 

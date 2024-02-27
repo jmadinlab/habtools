@@ -38,6 +38,10 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
                     n = 100, method = "area", parallel = FALSE) {
 
   if(!missing(R) & !missing(H)) {
+    R_min <- (0.5*L*sqrt(2*H^2 + 4*L^2))/(L^2)
+    if (R < R_min) {
+      stop("The chosen R is too low for the specified L and H. Increase R.")
+    }
     d <- round(rdh_theory(R = R, H = H, L0 = 1, L = L)[[1]], 1)
     if(d < 2.91) {d <- d + 0.1}
     smoothness <- 3 - d
