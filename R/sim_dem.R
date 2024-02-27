@@ -31,6 +31,8 @@
 #' library(raster)
 #' dem <- sim_dem(L = 32, smoothness = 0.5)
 #' plot(dem)
+#' dem <- sim_dem(L = 32, smoothness = 0.2, H = 20)
+#' plot(dem)
 
 sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
                     n = 100, method = "area", parallel = FALSE) {
@@ -42,7 +44,7 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
     if (!missing(smoothness)) {message("smoothness is ignored when R and H are given.")}
 
     for(i in 1:10) {
-      r <- sim_diamond(L = L, smoothness = s)
+      r <- sim_diamond(L = L, smoothness = smoothness)
       r@data@values <- r@data@values * H/hr(r)
       r@data@values <- r@data@values - min(r@data@values)
 
