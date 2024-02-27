@@ -47,12 +47,22 @@ hr(dem1)
 
 ## Rugosity
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 # Height variation method
 rg(dem1, method = "hvar", L0 = 0.05, parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores.
 
 # Area method
 rg(dem1, method = "area", L0 = 0.05)
+```
+
+```{r, eval=FALSE}
+# Height variation method
+rg(dem1, method = "hvar", L0 = 0.05, parallel = FALSE) # Parallel = TRUE enables parallel processing using multiple cores to speed up the calculations using the height variation method. Only use this if you have a powerful computer with at least four cores.
+#> [1] 1.6123
+
+# Area method
+rg(dem1, method = "area", L0 = 0.05)
+#> [1] 1.619947
 ```
           
 ## Fractal dimension
@@ -65,20 +75,16 @@ The height variation method is based on the relationship between height range an
 Basically, the DEM is divided into small squares with sizes specified in `lvec`. Within each square, the height range is calculated and logged. This results in a data frame with many height ranges (depending on the scale). This data is then summarized by taking the mean or median. The fractal dimension is finally calculated as:
 $$D = 3- b,$$
 with b being the slope of the linear regression between height range (h) and scale (l) $log(h) \sim log(l)$.
-Because a range of values is needed to calculate a height range the smallest value of `lvec` should always be at least two times the resolution of the DEM, and up to 10 times bigger. The largest value should be the extent of the DEM square. We suggest to choose a vector of doubling values for `lvec`. For example, if the resolution = 0.01m and the extent = 2m, we could choose `lvec` = `c(0.125, 0.25, 0.5, 1, 2)`.
+Because a range of values is needed to calculate a height range the smallest value of `lvec` should always be at least two times the resolution of the DEM, and up to 10 times bigger. The largest value should be the extent of the DEM square. We suggest to choose a vector of doubling values for `lvec`. For example, if the resolution = 0.01m and the extent = 2m, we could choose `lvec` = `c(0.0625, 0.125, 0.25, 0.5, 1, 2)`. However, to speed the example up, we will use one order of magnitude with `lvec` = `c(0.25, 0.5, 1, 2)`.
 
 ```{r}
 # Height variation method
-fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), plot = TRUE)
+fd(dem1, method = "hvar", lvec = c(0.25, 0.5, 1, 2), plot = TRUE, diagnose = TRUE)
 ```
            
-We can visualize the calculation and model fit by setting `diagnose=TRUE`. 
+`diagnose=TRUE` allows us to visualize the calculation and model fit. 
 This also allows us to investigate any scale transitions in fractal dimension and provides a list of information including the estimated fractal dimension (D), the data used for the regression, the `lvec`, the `D_vec` (vector of fractal dimensions across scales), the variance of the fractal dimensions across scales, and the method used.  
           
-```{r}
-fd(dem1, method = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2), diagnose = TRUE)
-```
-
 ### Area method
 
 The area method operates quite differently to height variation, and is therefore not comparable to the height variation method described above. This method uses surface areas at varying scales and calculates the fractal dimension as:
@@ -97,10 +103,31 @@ fd(dem1, method = "area", lvec = c(0.03125, 0.0625, 0.125, 0.25), diagnose = TRU
 
 It is possible to calculate these three metrics by using the `rdh()` function. Note that the resolution (`L0`) for the rugosity calculation will be set as the smallest value of `lvec` if `method_rg` is set to `"hvar"`. This can decrease the estimate of R. 
 
-```{r}
+```{r eval=FALSE, echo=FALSE}
 rdh(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), method_fd = "hvar", method_rg = "hvar")
 rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method_fd = "hvar")
 rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), method_fd = "area")
+```
+
+```{r eval=FALSE}
+rdh(dem1, lvec = c(0.125, 0.25, 0.5, 1, 2), method_fd = "hvar", method_rg = "hvar")
+#> fd calculation using hvar method.
+#> rg calculation using hvar method.
+#> L0 is set to 0.125.
+#>          R        D         H
+#> 1 1.552032 2.300395 0.9766939
+rdh(dem1, lvec = c( 0.125, 0.25, 0.5, 1, 2), method_fd = "hvar")
+#> fd calculation using hvar method.
+#> rg calculation using area method.
+#> L0 is set to the resolution of the raster: 0.01.
+#>         R        D         H
+#> 1 2.12501 2.300395 0.9766939
+rdh(dem1, lvec = c(0.03125, 0.0625, 0.125, 0.25), method_fd = "area")
+#> fd calculation using area method.
+#> rg calculation using area method.
+#> L0 is set to the resolution of the raster: 0.01.
+#>         R        D         H
+#> 1 2.12501 2.231573 0.9766939
 ```
 
 ## Multiple squares
@@ -114,7 +141,7 @@ dem_list <- dem_split(dem, size = 2)
 sapply(dem_list, hr)
 
 # calculate multiple metrics
-data_rdh <- suppressMessages(lapply(dem_list, rdh, method_fd = "hvar", lvec = c(0.125, 0.25, 0.5, 1, 2))) %>%
+data_rdh <- suppressMessages(lapply(dem_list, rdh, method_fd = "hvar", lvec = c(0.25, 0.5, 1, 2))) %>%
   bind_rows()
 
 ```
@@ -129,7 +156,7 @@ ggplot(data_rdh) +
 
 `habtools` also provides a way to crop a random square out of a DEM. 
 ```{r}
-dem <- dem_sample(horseshoe, 2)
+dem <- dem_sample(horseshoe, L=2, plot=TRUE)
 plot(dem)
 ```
 
