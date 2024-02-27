@@ -103,7 +103,7 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
     }
   } else if (!missing(smoothness)) {
     r <- sim_diamond(L = L, smoothness = smoothness)
-    if (!missing(H)) {r <- r * (H / diff(range(r))) }
+    if (!missing(H)) {r <- r * (H / hr(r)) }
   } else {
     stop("Either smoothness or R and H have to be provided.")
   }
