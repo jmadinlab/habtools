@@ -21,5 +21,5 @@ Changes since the previous cran submission:
 
 ## v1.0.1 
 Changes since the previous cran submission:    
-- Rugosity and sphericity are not misspelled.  
+- Confirm that "rugosity"" and "sphericity"" are not misspelled.  
 
