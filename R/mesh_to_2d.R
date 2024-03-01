@@ -44,7 +44,7 @@ mesh_to_2d <- function(mesh, L0 = NULL, plot = FALSE, silent = TRUE){
   }
 
   if (L0 > res) {
-    mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = T)
+    mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = TRUE)
   }
 
   # get normals of faces
@@ -54,7 +54,7 @@ mesh_to_2d <- function(mesh, L0 = NULL, plot = FALSE, silent = TRUE){
   t <- which(n[3,]<0)
   m$it <- m$it[,-t]
   m$vb[3,] <- 0
-  m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = T)
+  m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = TRUE)
   #m <- Rvcg::vcgUniformRemesh(m, voxelSize = L0)
   x <- m$vb[1,]
   y <- m$vb[2,]

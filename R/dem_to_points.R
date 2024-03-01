@@ -15,7 +15,7 @@
 #'
 #'
 
-dem_to_points <-function(dem, bh = NULL, parallel = F){
+dem_to_points <-function(dem, bh = NULL, parallel = FALSE){
 
   res <- res(dem)
   res_x <- res[1]

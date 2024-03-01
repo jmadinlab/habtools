@@ -1,19 +1,24 @@
 Package: habtools
 Title: Tools and Metrics for 3D Surfaces and Objects
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: 
     c(person(given = "Joshua",
            family = "Madin",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "jmadin@hawaii.edu",
            comment = c(ORCID = "0000-0002-5005-6227")),
     person(given = "Nina",
        family = "Schiettekatte",
-       role = c("aut"),
+       role = c("aut", "cre"),
        email = "nina.schiettekatte@gmail.com",
        comment = c(ORCID = "0000-0002-1925-3484")))
-Description: A collection of functions for sampling and simulating 3D surfaces and objects and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, second moments of area and volume, and more.
+Description: 
+    A collection of functions for sampling and simulating 3D surfaces and objects 
+    and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, 
+    second moments of area and volume, and more.   
 License: MIT + file LICENSE
+URL: https://jmadinlab.github.io/habtools/
+BugReports: https://github.com/jmadinlab/habtools/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

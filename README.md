@@ -6,6 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/habtools)](https://CRAN.R-project.org/package=habtools)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://cran.rstudio.com/package=habtools)
 <!-- badges: end -->
 
 <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
@@ -17,8 +20,14 @@ and more.
 
 ### Installation
 
-A CRAN version of `habtools` is forthcoming. You can also install the
-development version from [GitHub](https://github.com/) with:
+The best way to install `habtools` is through cran.
+
+``` r
+install.packages("habtools")
+```
+
+You can also install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -98,8 +107,6 @@ library(rgl)
 options(rgl.printRglwidget = TRUE)
 plot3d(mcap)
 ```
-
-<img src="man/figures/README-setup2-1-rgl.png" width="100%" />
 
 ``` r
 # height range

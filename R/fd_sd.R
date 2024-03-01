@@ -47,7 +47,7 @@ fd_sd <- function(data, lvec,
   out <-
     lapply(lvec, function(l){
       list <- dem_split(data, l, parallel = parallel, ncores = ncores)
-      sd <- sapply(list, function(x){sd(x[], na.rm = T)})
+      sd <- sapply(list, function(x){sd(x[], na.rm = TRUE)})
       data.frame(l = l, sd = sd)
     }) %>% dplyr::bind_rows()
 

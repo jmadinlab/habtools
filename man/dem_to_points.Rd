@@ -4,7 +4,7 @@
 \alias{dem_to_points}
 \title{Transform DEM to 3D pointcloud of raster corners}
 \usage{
-dem_to_points(dem, bh = NULL, parallel = F)
+dem_to_points(dem, bh = NULL, parallel = FALSE)
 }
 \arguments{
 \item{dem}{Digital elevation model of class RasterLayer.}

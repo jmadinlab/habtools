@@ -4,6 +4,11 @@
 
 The one note pertains to the size of the package: installed size is  5.2Mb
 
+## v1.0.5
+Comments pertained to adding a reference describing the methods in the package and using T or F instead of TRUE and FALSE. 
+- We are in the process of writing a publication about the methods presented in this package and will add the reference as soon as the paper is published. 
+- We now use TRUE and FALSE throughout.
+
 ## v1.0.4
 Please reduce the vignette build timings by using
 - Parts of vignettes are now pre-computed

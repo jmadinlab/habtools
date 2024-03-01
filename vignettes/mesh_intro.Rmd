@@ -136,7 +136,7 @@ perimeter(pts)
 circularity(pts)
 
 # fractal dimension
-fd(pts, method = "boxes", keep_data = F, plot = T)
+fd(pts, method = "boxes", keep_data = FALSE, plot = TRUE)
 
 ```
 

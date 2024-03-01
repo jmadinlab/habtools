@@ -84,14 +84,14 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
         k <- K[m]
         j <- J[m]
         r[k,j] <- suppressWarnings(
-          mean(r[c(k-1, k, k+1), c((j-1), j, j+1)], na.rm = T)
+          mean(r[c(k-1, k, k+1), c((j-1), j, j+1)], na.rm = TRUE)
         )
       }
       if (plot) {
         plot(r, legend=FALSE, asp=NA, main=i)
       }
       dev.flush()
-      r@data@values[is.na(r@data@values)] <- mean(r@data@values, na.rm = T)
+      r@data@values[is.na(r@data@values)] <- mean(r@data@values, na.rm = TRUE)
       r@data@values <- r@data@values * H/hr(r)
       r@data@values <- r@data@values - min(r@data@values)
 
@@ -99,7 +99,7 @@ sim_dem <- function(L, smoothness, H, R, plot = FALSE, prop = 0.1,
         ru <- rg(r, L0 = 1, method = "area")
         message(ru)
       } else if (method == "hvar") {
-        ru <- rg(r, L0 = 5, method = "hvar", parallel = T)
+        ru <- rg(r, L0 = 5, method = "hvar", parallel = TRUE)
         message(ru)
       }
 

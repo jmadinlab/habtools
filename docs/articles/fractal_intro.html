@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">habtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
       </span>
     </div>
 
@@ -61,7 +61,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/jmadinlab/habtools/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -77,7 +84,7 @@
       <h1 data-toc-skip>Fractal dimension methods</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jmadinlab/habtools/blob/HEAD/vignettes/fractal_intro.Rmd" class="external-link"><code>vignettes/fractal_intro.Rmd</code></a></small>
       <div class="hidden name"><code>fractal_intro.Rmd</code></div>
 
     </div>
@@ -85,7 +92,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">habtools</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jmadinlab.github.io/habtools/" class="external-link">habtools</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></code></pre></div>
 <p>In this vignette, we give a brief overview of fractal dimension
 methods in <code>habtools</code>. There are currently five methods
@@ -193,31 +200,30 @@ is estimated with the height variation method. Because no
 <code>c(8, 16, 32, 64, 128)</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulate fractal terrain</span></span>
-<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>L<span class="op">=</span><span class="fl">128</span>, smoothness<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">surf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_dem.html">sim_dem</a></span><span class="op">(</span>L <span class="op">=</span> <span class="fl">64</span>, smoothness <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># fractal dimension using height variation method</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"hvar"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method<span class="op">=</span><span class="st">"hvar"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-2-1.png" width="384"><img src="fractal_intro_files/figure-html/unnamed-chunk-2-2.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.496527</span></span>
+<span><span class="co">#&gt; [1] 2.584677</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;     l         h</span></span>
-<span><span class="co">#&gt; 1   8 0.3926687</span></span>
-<span><span class="co">#&gt; 2  16 0.6217089</span></span>
-<span><span class="co">#&gt; 3  32 0.9522432</span></span>
-<span><span class="co">#&gt; 4  64 1.2852455</span></span>
-<span><span class="co">#&gt; 5 128 1.5636151</span></span>
+<span><span class="co">#&gt;    l         h</span></span>
+<span><span class="co">#&gt; 1  8 0.5341111</span></span>
+<span><span class="co">#&gt; 2 16 0.7831081</span></span>
+<span><span class="co">#&gt; 3 32 0.9558129</span></span>
+<span><span class="co">#&gt; 4 64 1.3047584</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1]   8  16  32  64 128</span></span>
+<span><span class="co">#&gt; [1]  8 16 32 64</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.337074 2.384909 2.567358 2.717159</span></span>
+<span><span class="co">#&gt; [1] 2.447928 2.712483 2.551017</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.174619</span></span>
+<span><span class="co">#&gt; [1] 0.1333465</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>
@@ -239,52 +245,52 @@ are. Here are estimates for the relative flat surface we simulated with
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.496527</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.584677</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.584846</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.713655</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.0004</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.00105</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.000339</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 <p><code>hvar</code> and <code>sd</code> estimates are in the vicinity
 of D=2.5. However, <code>area</code> and <code>cubes</code> methods
 result in estimates close to 2: a flat surface. If we transform the
 z-scale to match the extent (L=128), we get the following.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">surf_z</span> <span class="op">&lt;-</span> <span class="va">surf</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">128</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]   0 127</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="fl">64</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">surf_z</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 63</span></span>
 <span></span>
 <span><span class="co"># height variation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"hvar"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.496527</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.584677</span></span>
 <span></span>
 <span><span class="co"># standard deviation</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.584846</span></span>
+<span><span class="co">#&gt; lvec is set to c(8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.713655</span></span>
 <span></span>
 <span><span class="co"># area</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16).</span></span>
-<span><span class="co">#&gt; [1] 2.405381</span></span>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8).</span></span>
+<span><span class="co">#&gt; [1] 2.503622</span></span>
 <span></span>
 <span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">surf_z</span>, method <span class="op">=</span> <span class="st">"cubes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64, 128).</span></span>
-<span><span class="co">#&gt; [1] 2.317111</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(2, 4, 8, 16, 32, 64).</span></span>
+<span><span class="co">#&gt; [1] 2.364232</span></span></code></pre></div>
 <p><code>hvar</code> and <code>sd</code> estimates are identical (i.e.,
 invariant to z-scaling) and <code>area</code> and <code>cubes</code>
 estimates are higher. This dichotomy raises an underlying philosophical
@@ -378,29 +384,26 @@ given threshold (Default threshold = 0.1).</p>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-2.png" width="384"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># This DEM does not have many drops</span></span>
-<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1, 2).</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem1</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.125</span><span class="op">)</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-3.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.318056</span></span>
+<span><span class="co">#&gt; [1] 2.35037</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;        l          h</span></span>
-<span><span class="co">#&gt; 1 0.0625 0.04651577</span></span>
-<span><span class="co">#&gt; 2 0.1250 0.09603534</span></span>
-<span><span class="co">#&gt; 3 0.2500 0.16825392</span></span>
-<span><span class="co">#&gt; 4 0.5000 0.24666635</span></span>
-<span><span class="co">#&gt; 5 1.0000 0.37923605</span></span>
-<span><span class="co">#&gt; 6 2.0000 0.51699162</span></span>
+<span><span class="co">#&gt;       l          h</span></span>
+<span><span class="co">#&gt; 1 0.125 0.09603534</span></span>
+<span><span class="co">#&gt; 2 0.250 0.16825392</span></span>
+<span><span class="co">#&gt; 3 0.500 0.24666635</span></span>
+<span><span class="co">#&gt; 4 1.000 0.37923605</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000</span></span>
+<span><span class="co">#&gt; [1] 0.125 0.250 0.500 1.000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.954155 2.190997 2.448079 2.379465 2.552955</span></span>
+<span><span class="co">#&gt; [1] 2.190997 2.448079 2.379465</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.2364252</span></span>
+<span><span class="co">#&gt; [1] 0.1331159</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span>
@@ -412,29 +415,26 @@ given threshold (Default threshold = 0.1).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">drop2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-5.png" width="384"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, method<span class="op">=</span><span class="st">"hvar"</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.062, 0.125, 0.25, 0.5, 1, 2).</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">dem2</span>, method <span class="op">=</span> <span class="st">"hvar"</span>, lvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.125</span><span class="op">)</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-7-6.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.224109</span></span>
+<span><span class="co">#&gt; [1] 2.198017</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;        l          h</span></span>
-<span><span class="co">#&gt; 1 0.0625 0.07903029</span></span>
-<span><span class="co">#&gt; 2 0.1250 0.18499928</span></span>
-<span><span class="co">#&gt; 3 0.2500 0.39988367</span></span>
-<span><span class="co">#&gt; 4 0.5000 0.71864583</span></span>
-<span><span class="co">#&gt; 5 1.0000 0.97061389</span></span>
-<span><span class="co">#&gt; 6 2.0000 1.12180328</span></span>
+<span><span class="co">#&gt;       l         h</span></span>
+<span><span class="co">#&gt; 1 0.125 0.1849993</span></span>
+<span><span class="co">#&gt; 2 0.250 0.3998837</span></span>
+<span><span class="co">#&gt; 3 0.500 0.7186458</span></span>
+<span><span class="co">#&gt; 4 1.000 0.9706139</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.0625 0.1250 0.2500 0.5000 1.0000 2.0000</span></span>
+<span><span class="co">#&gt; [1] 0.125 0.250 0.500 1.000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.772958 1.887939 2.154299 2.566383 2.791150</span></span>
+<span><span class="co">#&gt; [1] 1.887939 2.154299 2.566383</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.4357646</span></span>
+<span><span class="co">#&gt; [1] 0.3418205</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "hvar"</span></span></code></pre>

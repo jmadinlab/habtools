@@ -85,7 +85,7 @@ fd_area <- function(data, lvec = NULL, keep_data = FALSE, plot = FALSE, scale = 
       if (l == L0) {
         mesh <- data
       } else {
-        mesh <- Rvcg::vcgQEdecim(data, edgeLength = l, silent = T, scaleindi = F)
+        mesh <- Rvcg::vcgQEdecim(data, edgeLength = l, silent = TRUE, scaleindi = FALSE)
       }
       Rvcg::vcgArea(mesh)
       })

@@ -51,7 +51,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
       } else{
         hs <- sapply(dem_list, hr)
       }
-      rg <- mean(sqrt(((hs^2) / (2 * L0^2)) + 1), na.rm = T)
+      rg <- mean(sqrt(((hs^2) / (2 * L0^2)) + 1), na.rm = TRUE)
 
     } else if (method =="area") {
 
@@ -93,11 +93,11 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
       warning("L0 is smaller than mesh resolution")
     }
     if (!L0 == res) {
-      mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0, silent = T)
+      mesh <- Rvcg::vcgQEdecim(data, edgeLength = L0, silent = TRUE)
     } else {
       mesh <- data
     }
-    rg <- Rvcg::vcgArea(mesh)/planar(mesh, silent = T) # method planar or bbbox
+    rg <- Rvcg::vcgArea(mesh)/planar(mesh, silent = TRUE) # method planar or bbbox
   } else {
     stop("data must be of class RasterLayer or mesh3d with triangular mesh")
   }
