@@ -18,7 +18,7 @@ library(rgl)
 knit_hooks$set(webgl = hook_webgl)
 ```
 
-# habtools <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
+# habtools <img src="man/figures/habtools_logo.png" align="right" alt="" width="120"/>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
