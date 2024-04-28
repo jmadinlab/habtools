@@ -18,15 +18,13 @@ library(rgl)
 knit_hooks$set(webgl = hook_webgl)
 ```
 
-# habtools
+# habtools <img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/habtools)](https://CRAN.R-project.org/package=habtools)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://cran.rstudio.com/package=habtools)
 <!-- badges: end -->
-
-<img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 A collection of functions for sampling and simulating 3D surfaces and objects and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, second moments of area and volume, and more.
 
