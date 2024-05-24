@@ -67,7 +67,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
         temp <- raster::raster(xmn=bb[1,1], xmx=bb[1,2],
                                ymn=bb[2,1], ymx=bb[2,2], resolution = L0,
                                crs = raster::crs(data))
-        r <- terra::project(terra::rast(data), terra::rast(temp))
+        r <- terra::project(terra::rast(data), terra::rast(temp), use_gdal = FALSE)
         r <- raster::raster(r)
         g <- as(r, 'SpatialGridDataFrame')
         sa <- sp::surfaceArea(g, byCell = TRUE)
