@@ -53,8 +53,8 @@ fd_sd <- function(data, lvec,
 
   out <- log10(out)
   out <- out[is.finite(rowSums(out)),]
-  out_mean <- aggregate(sd ~ l, out, mean)
-  out_median <- aggregate(sd ~ l, out, median)
+  out_mean <- aggregate(sd ~ l, out, mean, na.rm = TRUE)
+  out_median <- aggregate(sd ~ l, out, median, na.rm = TRUE)
   out_ends <- out_mean[c(1, nrow(out_median)),]
 
   if (regmethod == "raw") {

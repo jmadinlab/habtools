@@ -58,8 +58,8 @@ fd_hvar <- function(data, lvec, regmethod = "mean", keep_data = FALSE, plot = FA
 
   out <- log10(out)
   out <- out[is.finite(rowSums(out)),]
-  data_mean <- aggregate(h ~ l, out, mean)
-  data_median <- aggregate(h ~ l, out, median)
+  data_mean <- aggregate(h ~ l, out, mean, na.rm = TRUE)
+  data_median <- aggregate(h ~ l, out, median, na.rm = TRUE)
   data_ends <- data_mean[c(1, nrow(data_median)),]
 
   if (regmethod == "raw") {
