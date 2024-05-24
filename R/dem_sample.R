@@ -2,7 +2,7 @@
 #'
 #' @param data Digital elevation model of class RasterLayer.
 #' @param L Size of square to cut out of DEM.
-#' @param allow_NA Logical. Allow NAs in the sample? Useful when DEM is not regular.
+#' @param allow_NA Proportion of NA values allowed in the sample. Useful when DEM is not regular.
 #' @param plot Logical. Plot the DEM and the cropped section?
 #' @param max_iter Maximum number of random crops to try when allow_NA = FALSE before failing.
 #'
@@ -17,10 +17,10 @@
 #' dem <- dem_sample(horseshoe, L = 2, plot=TRUE)
 #'
 
-dem_sample <- function(data, L, allow_NA=TRUE, plot=FALSE, max_iter=100) {
+dem_sample <- function(data, L, allow_NA=0, plot=FALSE, max_iter=100) {
   iter <- 1
   sub <- dem_runif(data, L)
-  while (sub$NAs & (!allow_NA)) {
+  while (sub$NAs > allow_NA) {
     sub <- dem_runif(data, L)
     iter <- iter + 1
     if (iter == max_iter) {
@@ -41,7 +41,7 @@ dem_runif <- function(data, L) {
   y0 <- runif(1, ymin, ymax)
 
   sub <- dem_crop(data, x0, y0, L)
-  NAs <- any(is.na(raster::values(sub)))
+  NAs <- sum(is.na(raster::values(sub)))/ncell(sub)
 
   return(list(sub=sub, NAs=NAs, x0=x0, y0=y0))
 }
