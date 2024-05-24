@@ -4,14 +4,14 @@
 \alias{dem_sample}
 \title{Sample a random DEM with specified size from a larger DEM}
 \usage{
-dem_sample(data, L, allow_NA = TRUE, plot = FALSE, max_iter = 100)
+dem_sample(data, L, allow_NA = 0, plot = FALSE, max_iter = 100)
 }
 \arguments{
 \item{data}{Digital elevation model of class RasterLayer.}
 
 \item{L}{Size of square to cut out of DEM.}
 
-\item{allow_NA}{Logical. Allow NAs in the sample? Useful when DEM is not regular.}
+\item{allow_NA}{Proportion of NA values allowed in the sample. Useful when DEM is not regular.}
 
 \item{plot}{Logical. Plot the DEM and the cropped section?}
 
