@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# habtools
+# habtools <img src="man/figures/habtools_logo.png" align="right" alt="" width="120"/>
 
 <!-- badges: start -->
 
@@ -10,8 +10,6 @@
 status](https://www.r-pkg.org/badges/version/habtools)](https://CRAN.R-project.org/package=habtools)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://cran.rstudio.com/package=habtools)
 <!-- badges: end -->
-
-<img src="man/figures/habtools_logo.png" width = 120 alt="fishflux logo"/>
 
 A collection of functions for sampling and simulating 3D surfaces and
 objects and estimating metrics like rugosity, fractal dimension,
@@ -107,6 +105,8 @@ library(rgl)
 options(rgl.printRglwidget = TRUE)
 plot3d(mcap)
 ```
+
+<img src="man/figures/README-setup2-1-rgl.png" width="100%" />
 
 ``` r
 # height range
