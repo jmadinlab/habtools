@@ -1,0 +1,24 @@
+bibentry(
+  bibtype = "Article",
+	author = c(
+	person("Schiettekatte", given = c("Nina", "M.", "D.")),
+	person("Asbury", given = "Mollie"),
+	person("Chen", given = "Guan-Yan"),
+	person("Dornelas", given = "Maria"),
+	person("Reichert", given = "Jessica"),
+	person("Torres-Pulliza", given = "Damaris"),
+	person("Zawada", given = c("Kyle", "J.", "A.")),
+	person("Madin", given = c("Joshua", "S."))),
+	title = "habtools: an R package to calculate 3D metrics for surfaces and objects",
+	year = "2024",
+	doi = "10.1101/2024.09.19.613985",
+	URL = "https://www.biorxiv.org/content/early/2024/09/24/2024.09.19.613985",
+	eprint = "https://www.biorxiv.org/content/early/2024/09/24/2024.09.19.613985.full.pdf",
+	journal = "bioRxiv",
+	 header = "To cite habtools in publications, please use:",
+textVersion = "Schiettekatte NMD, Asbury M, Chen G, Dornelas M, Reichert J,
+Torres-Pulliza D, Zawada KJA, Madin JS (2024). “habtools: an R
+package to calculate 3D metrics for surfaces and objects.”
+bioRxiv. doi:10.1101/2024.09.19.613985
+<https://doi.org/10.1101/2024.09.19.613985>"
+)

@@ -1,210 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DEM_intro.html</loc>
-  </url>
-  <url>
-    <loc>/articles/fractal_intro.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/intro.html</loc>
-  </url>
-  <url>
-    <loc>/articles/mesh_intro.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cell_count.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cell_count_1d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cell_count_2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cell_count_3d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/centroid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/circularity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convexity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/correct_tilt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/covar_shape.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crop_dem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/csf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cubes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dem_crop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dem_sample.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dem_split.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dem_to_mesh.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dem_to_points.html</loc>
-  </url>
-  <url>
-    <loc>/reference/detect_drop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_area.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_boxes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_cubes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_diagnose.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_hvar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fd_sd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/horseshoe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hvar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mcap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mcap2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mesh_to_2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mesh_to_dem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mesh_to_points.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mid_find.html</loc>
-  </url>
-  <url>
-    <loc>/reference/packing.html</loc>
-  </url>
-  <url>
-    <loc>/reference/perimeter.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/planar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rdh.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rdh_theory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rescale.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rg.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sa_triangle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sample_dem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scale_area.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scale_volume.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_origin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_circle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_dem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_terrain.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_xyz.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sma.html</loc>
-  </url>
-  <url>
-    <loc>/reference/smv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sphericity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/split_dem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/surface_area.html</loc>
-  </url>
-  <url>
-    <loc>/reference/svol_triangle.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jmadinlab.github.io/habtools/404.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/LICENSE-text.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/LICENSE.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/articles/DEM_intro.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/articles/fractal_intro.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/articles/index.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/articles/intro.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/articles/mesh_intro.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/authors.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/index.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/news/index.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/cell_count.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/cell_count_1d.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/cell_count_2d.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/cell_count_3d.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/centroid.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/circularity.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/convexity.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/correct_tilt.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/covar_shape.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/crop_dem.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/csf.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/cubes.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/dem_crop.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/dem_sample.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/dem_split.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/dem_to_mesh.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/dem_to_points.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/detect_drop.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/extent.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_area.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_boxes.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_cubes.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_diagnose.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_hvar.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/fd_sd.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/horseshoe.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/hr.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/hvar.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/index.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mcap.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mcap2.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mesh_to_2d.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mesh_to_dem.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mesh_to_points.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/mid_find.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/packing.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/perimeter.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/pipe.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/planar.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/rdh.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/rdh_theory.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/rescale.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/rg.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sa_triangle.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sample_dem.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/scale_area.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/scale_volume.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/set_origin.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sim_circle.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sim_dem.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sim_terrain.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sim_xyz.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sma.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/smv.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/sphericity.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/split_dem.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/surface_area.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/svol_triangle.html</loc></url>
+<url><loc>https://jmadinlab.github.io/habtools/reference/z.html</loc></url>
 </urlset>
+
