@@ -12,13 +12,12 @@ bibentry(
 	title = "habtools: an R package to calculate 3D metrics for surfaces and objects",
 	year = "2024",
 	doi = "10.1101/2024.09.19.613985",
-	URL = "https://www.biorxiv.org/content/early/2024/09/24/2024.09.19.613985",
-	eprint = "https://www.biorxiv.org/content/early/2024/09/24/2024.09.19.613985.full.pdf",
+	URL = "https://www.biorxiv.org/content/10.1101/2024.09.19.613985v1",
 	journal = "bioRxiv",
 	 header = "To cite habtools in publications, please use:",
 textVersion = "Schiettekatte NMD, Asbury M, Chen G, Dornelas M, Reichert J,
 Torres-Pulliza D, Zawada KJA, Madin JS (2024). “habtools: an R
 package to calculate 3D metrics for surfaces and objects.”
 bioRxiv. doi:10.1101/2024.09.19.613985
-<https://doi.org/10.1101/2024.09.19.613985>"
+<https://www.biorxiv.org/content/10.1101/2024.09.19.613985v1>"
 )

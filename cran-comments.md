@@ -4,6 +4,9 @@
 
 The one note pertains to the size of the package: installed size is  5.2Mb
 
+## v1.0.7
+Fixed URLs in readme and citation files
+
 ## v1.0.6
 Minor update, adding citation
 

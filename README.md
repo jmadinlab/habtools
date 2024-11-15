@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jmadinlab/habtools/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/habtools)](https://CRAN.R-project.org/package=habtools)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://cran.rstudio.com/package=habtools)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://CRAN.R-project.org/package=habtools)
 <!-- badges: end -->
 
 A collection of functions for sampling and simulating 3D surfaces and
