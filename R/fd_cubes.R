@@ -34,8 +34,11 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
   } else if (is(data, "mesh3d")) {
     pts <- data.frame(t(data$vb)[,1:3])
     res <- max(Rvcg::vcgMeshres(data)[[2]])
+  } else if (is(data, "data.frame") & ncol(data) == 3){
+    pts <- data
+    res <- min(lvec)
   } else {
-    stop("data must be of class RasterLayer or mesh3d with triangular mesh")
+    stop("data must be of class RasterLayer or mesh3d with triangular mesh or data.frame with 3 colums.")
   }
 
   names(pts) <- c("x", "y", "z")
