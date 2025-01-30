@@ -35,6 +35,7 @@ Imports:
     concaveman,
     magrittr,
     purrr,
+    ks,
     dplyr
 Suggests: 
     knitr,
