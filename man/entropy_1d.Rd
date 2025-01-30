@@ -23,8 +23,8 @@ Calculates entropy in 1 dimension
 \examples{
 x <- rnorm(1000, 5, 1)
 entropy_1d(x, grid_size = 0.1)
-entropy_1d(x, grid_size = 0.1, relative = T)
+entropy_1d(x, grid_size = 0.1, relative = TRUE)
 y <- runif(1000, 1, 10)
 entropy_1d(y, grid_size = 0.1)
-entropy_1d(y, grid_size = 0.1, relative = T)
+entropy_1d(y, grid_size = 0.1, relative = TRUE)
 }
