@@ -9,8 +9,8 @@
 #'
 #' @param mesh A triangular mesh of class mesh3d.
 #' @param axis The axis along which to calculate the second moment of volume z is the default.
-#' @param scale Logical. Scale the object to have a volume = 1? Default = TRUE.
-#' @param origin Logical. Set the origin to the bottom left corner of bounding box? Default = FALSE
+#' @param scale Logical. Scale the object to have a volume = 1? Default = FALSE
+#' @param origin Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE
 #'
 #' @return SMV value.
 #' @export

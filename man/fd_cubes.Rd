@@ -13,7 +13,7 @@ fd_cubes(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale = FALSE)
 
 \item{plot}{Planar representation of cubes superimposed on 3D mesh or DEM for visualizing \code{lvec}. Default = FALSE.}
 
-\item{keep_data}{Logical. Keep calculation data? Default = TRUE.}
+\item{keep_data}{Logical. Keep calculation data? Default = FALSE.}
 
 \item{scale}{Logical. Rescale height values to the extent? Only relevant for RasterLayer objects. (Defaults to FALSE).}
 }

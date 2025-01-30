@@ -3,7 +3,8 @@
 #' @description Diagnoses fractal dimension variation across neighboring scales.
 #'
 #' @param data Output of [fd()] with option keep_data = TRUE.
-#' @param keep_data Logical. Keep diagnostics data?
+#' @param keep_data Logical. Keep diagnostics data? Defaults to TRUE.
+#' @param plot Logical. Show diagnostic plot? Defaults to TRUE.
 #' @return A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.
 #' @export
 #'
@@ -15,7 +16,7 @@
 #' fd_diagnose(fd_data, keep_data = FALSE)
 #'
 
-fd_diagnose <- function(data, keep_data = TRUE) {
+fd_diagnose <- function(data, keep_data = TRUE, plot = TRUE) {
 
   dta <- data[["data"]]
   dta <- dta[order(dta$l),]
@@ -33,21 +34,24 @@ fd_diagnose <- function(data, keep_data = TRUE) {
   } else {
     f <- 3 - f
   }
-  plot(dta[,2] ~ dta[,1],
-       xlab = colnames(dta)[1],
-       ylab = colnames(dta)[2], log = "xy", type = "l",
-       lty=2, col="grey", axes = FALSE, main = paste0('Method: "', method, '"'))
-  axis(1)
-  axis(2, las = 2)
-  points(dta[,2] ~ dta[,1])
-  text(midv(dta[,1]), midv(dta[,2]), round(f, 2), cex=0.8)
-  pred <- predict(lm(log10(dta[,2]) ~ log10(dta[,1])))
-  lines(dta[,1], 10^pred, lty = 1, col = "red")
-  if (method %in% c("hvar", "sd")) {
-    legend("bottomright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
-  } else {
-    legend("topright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
+  if (plot) {
+    plot(dta[,2] ~ dta[,1],
+         xlab = colnames(dta)[1],
+         ylab = colnames(dta)[2], log = "xy", type = "l",
+         lty=2, col="grey", axes = FALSE, main = paste0('Method: "', method, '"'))
+    axis(1)
+    axis(2, las = 2)
+    points(dta[,2] ~ dta[,1])
+    text(midv(dta[,1]), midv(dta[,2]), round(f, 2), cex=0.8)
+    pred <- predict(lm(log10(dta[,2]) ~ log10(dta[,1])))
+    lines(dta[,1], 10^pred, lty = 1, col = "red")
+    if (method %in% c("hvar", "sd")) {
+      legend("bottomright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
+    } else {
+      legend("topright", legend=c(paste0("D = ", round(dval, 2)), paste0("var = ", round(sd(f), 2))), bty="n")
+    }
   }
+
   if (keep_data) {
     return(list(D = unname(dval), data = dta, lvec = lvec, D_vec = f, var = sd(f), method = method))
   }

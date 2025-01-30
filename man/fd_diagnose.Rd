@@ -4,12 +4,14 @@
 \alias{fd_diagnose}
 \title{Diagnose fractal dimension}
 \usage{
-fd_diagnose(data, keep_data = TRUE)
+fd_diagnose(data, keep_data = TRUE, plot = TRUE)
 }
 \arguments{
 \item{data}{Output of \code{\link[=fd]{fd()}} with option keep_data = TRUE.}
 
-\item{keep_data}{Logical. Keep diagnostics data?}
+\item{keep_data}{Logical. Keep diagnostics data? Defaults to TRUE.}
+
+\item{plot}{Logical. Show diagnostic plot? Defaults to TRUE.}
 }
 \value{
 A list with fractal dimension across scales, mean fractal dimension, and sd of fractal dimensions across scales.

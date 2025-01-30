@@ -25,14 +25,7 @@ planar <- function(mesh, L0, silent = FALSE) {
   if (L0 > res) {
     mesh <- Rvcg::vcgQEdecim(mesh, edgeLength = L0, silent = TRUE)
   }
-  # get normals of faces
   m <- mesh
-  n <- Rvcg::vcgFaceNormals(mesh)
-  # remove faces facing downward
-  t <- which(n[3,]<0)
-  m$it <- m$it[,-t]
-  m$vb[3,] <- 0
-  m <- Rvcg::vcgQEdecim(m, edgeLength = L0, silent = TRUE)
   x <- m$vb[1,]
   y <- m$vb[2,]
   dt <- data.frame(x =x, y = y)

@@ -11,9 +11,9 @@ smv(mesh, axis = "z", scale = FALSE, origin = TRUE)
 
 \item{axis}{The axis along which to calculate the second moment of volume z is the default.}
 
-\item{scale}{Logical. Scale the object to have a volume = 1? Default = TRUE.}
+\item{scale}{Logical. Scale the object to have a volume = 1? Default = FALSE}
 
-\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = FALSE}
+\item{origin}{Logical. Set the origin to the bottom left corner of bounding box? Default = TRUE}
 }
 \value{
 SMV value.

@@ -2,7 +2,7 @@
 #'
 #' @param data An object of class RasterLayer or mesh3d.
 #' @param lvec Vector of scales to use for calculation (i.e. cube sizes).
-#' @param keep_data Logical. Keep calculation data? Default = TRUE.
+#' @param keep_data Logical. Keep calculation data? Default = FALSE.
 #' @param plot Planar representation of cubes superimposed on 3D mesh or DEM for visualizing `lvec`. Default = FALSE.
 #' @param scale Logical. Rescale height values to the extent? Only relevant for RasterLayer objects. (Defaults to FALSE).
 #'
