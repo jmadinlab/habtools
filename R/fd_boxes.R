@@ -27,7 +27,7 @@
 fd_boxes <- function(data, lvec, keep_data = FALSE, plot = FALSE) {
 
   pts <- data
-  res <- max(perimeter(pts, keep_data = TRUE)$segments)
+  res <- quantile(perimeter(pts, keep_data = TRUE)$segments, 0.75)
   names(pts) <- c("x", "y")
 
   if (missing(lvec)) {
@@ -46,10 +46,10 @@ fd_boxes <- function(data, lvec, keep_data = FALSE, plot = FALSE) {
 
   # some checks
   if (min(lvec) < res){
-    warning("The smallest scale included in lvec is smaller than recommended.")
+    message("The smallest scale included in lvec is smaller than the resolution. Consider adjusting lvec. ")
   }
   if (max(lvec) < Lmax){
-    warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
+    message("The largest scale included in lvec is smaller than the size of the object.")
   }
 
   x0 <- min(data[,1]) - res/2

@@ -33,7 +33,7 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
     res <- raster::res(data)[1]
   } else if (is(data, "mesh3d")) {
     pts <- data.frame(t(data$vb)[,1:3])
-    res <- max(Rvcg::vcgMeshres(data)[[2]])
+    res <- quantile(Rvcg::vcgMeshres(data)[[2]], 0.75)
   } else if (is(data, "data.frame") & ncol(data) == 3){
     pts <- data
     res <- min(lvec)
@@ -61,10 +61,10 @@ fd_cubes <- function(data, lvec = NULL, plot = FALSE, keep_data = FALSE, scale =
 
   # some checks
   if (min(lvec) < res){
-    warning("The smallest scale included in lvec is smaller than recommended.")
+    message("The smallest scale included in lvec is smaller than the resolution. Consider adjusting lvec.")
   }
   if (max(lvec) < Lmax){
-    warning("The largest scale included in lvec is smaller than recommended. Consider adjusting to a size that encapsulate the entire mesh.")
+    message("The largest scale included in lvec is smaller than the size of the object.")
   }
 
   x0 <- min(pts[,1]) - res/2

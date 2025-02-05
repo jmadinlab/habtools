@@ -31,7 +31,7 @@ rg <- function(data, L0, method = "area", parallel = FALSE,
   if (is(data, "RasterLayer")) {
 
     if (sum(is.na(values(data))) > 0) {
-      message(paste0("data contains ", sum(is.na(values(data))), " NA values. Results may be biased."))
+      message(paste0("data contains ", sum(is.na(values(data))), " NA values."))
     }
 
     if (method == "hvar") {
