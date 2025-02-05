@@ -49,9 +49,9 @@ entropy <- function(data, ...) {
 #' given the number of grid cells? Defaults to FALSE.
 #'
 #' @details 3D entropy consists of three components, including the projected
-#' 2D entropy of the XY plane ($CE_xy$), the projected canopy entropy of the
-#' XZ plane ($CE_xz$), and the projected canopy entropy of the
-#' YZ plane ($CE_yz$), and the final canopy entropy estimate is calculated
+#' 2D entropy of the XY plane ($CE_xy$), the projected entropy of the
+#' XZ plane ($CE_xz$), and the projected entropy of the
+#' YZ plane ($CE_yz$), and the final entropy estimate is calculated
 #' as follows: $sqrt(CE_xy^2 + CE_xz^2 + CE_yz^2)$.
 #'
 #'
