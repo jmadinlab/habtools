@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">habtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,31 +124,31 @@ method for fractal dimension is <code>cubes</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fractal dimension</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_uniform</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, diagnose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.003, 0.006, 0.012, 0.024, 0.048, 0.096, 0.193, 0.386).</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(0.003, 0.006, 0.012, 0.024, 0.048, 0.096, 0.192, 0.385).</span></span></code></pre></div>
 <p><img src="mesh_intro_files/figure-html/unnamed-chunk-5-1.png" width="384"><img src="mesh_intro_files/figure-html/unnamed-chunk-5-2.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.133279</span></span>
+<span><span class="co">#&gt; [1] 2.134741</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;             l     n</span></span>
-<span><span class="co">#&gt; 8 0.003014892 37982</span></span>
-<span><span class="co">#&gt; 7 0.006029783 10405</span></span>
-<span><span class="co">#&gt; 6 0.012059566  2701</span></span>
-<span><span class="co">#&gt; 5 0.024119132   668</span></span>
-<span><span class="co">#&gt; 4 0.048238265   162</span></span>
-<span><span class="co">#&gt; 3 0.096476530    34</span></span>
-<span><span class="co">#&gt; 2 0.192953059     8</span></span>
-<span><span class="co">#&gt; 1 0.385906118     1</span></span>
+<span><span class="co">#&gt; 8 0.003006817 38169</span></span>
+<span><span class="co">#&gt; 7 0.006013634 10463</span></span>
+<span><span class="co">#&gt; 6 0.012027269  2715</span></span>
+<span><span class="co">#&gt; 5 0.024054537   673</span></span>
+<span><span class="co">#&gt; 4 0.048109075   162</span></span>
+<span><span class="co">#&gt; 3 0.096218149    34</span></span>
+<span><span class="co">#&gt; 2 0.192436298     8</span></span>
+<span><span class="co">#&gt; 1 0.384872597     1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.385906118 0.192953059 0.096476530 0.048238265 0.024119132 0.012059566</span></span>
-<span><span class="co">#&gt; [7] 0.006029783 0.003014892</span></span>
+<span><span class="co">#&gt; [1] 0.384872597 0.192436298 0.096218149 0.048109075 0.024054537 0.012027269</span></span>
+<span><span class="co">#&gt; [7] 0.006013634 0.003006817</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.868039 1.945711 2.015574 2.043854 2.252387 2.087463 3.000000</span></span>
+<span><span class="co">#&gt; [1] 1.867105 1.946272 2.012274 2.054613 2.252387 2.087463 3.000000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.3837687</span></span>
+<span><span class="co">#&gt; [1] 0.3834844</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "cubes"</span></span></code></pre>
@@ -159,7 +159,7 @@ method for fractal dimension is <code>cubes</code>.</p>
 <code class="sourceCode R"><span><span class="co"># rugosity</span></span>
 <span><span class="fu"><a href="../reference/rg.html">rg</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span></span>
 <span><span class="co">#&gt; L0 is set to mesh resolution (0.00132821395068341)</span></span>
-<span><span class="co">#&gt; [1] 3.148722</span></span>
+<span><span class="co">#&gt; [1] 3.145419</span></span>
 <span></span>
 <span><span class="co"># height range </span></span>
 <span><span class="fu"><a href="../reference/hr.html">hr</a></span><span class="op">(</span><span class="va">mcap_uniform</span><span class="op">)</span></span>
@@ -176,7 +176,7 @@ you can calculate planar and total surface area of the object.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/planar.html">planar</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
 <span><span class="co">#&gt; L0 is set to mesh resolution (0.00783124724167033)</span></span>
-<span><span class="co">#&gt; [1] 0.08303158</span></span>
+<span><span class="co">#&gt; [1] 0.08368526</span></span>
 <span><span class="fu"><a href="../reference/surface_area.html">surface_area</a></span><span class="op">(</span><span class="va">mcap</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.2698101</span></span></code></pre></div>
 </div>
@@ -279,7 +279,7 @@ and 2 for 2D drawings, rather than 2 and 3 for 3D meshes.</p>
 <span><span class="co"># fractal dimension</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">pts</span>, method <span class="op">=</span> <span class="st">"boxes"</span>, keep_data <span class="op">=</span> <span class="cn">FALSE</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mesh_intro_files/figure-html/unnamed-chunk-10-2.png" width="384"></p>
-<pre><code><span><span class="co">#&gt; [1] 1.263879</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 1.216126</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

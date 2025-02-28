@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">habtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -284,26 +284,28 @@ counting on closed shapes like the coastline of the UK.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># cube counting</span></span>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap</span>, method <span class="op">=</span> <span class="st">"cubes"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lvec is set to c(0.053, 0.106, 0.212, 0.423).</span></span></code></pre></div>
+<span><span class="co">#&gt; lvec is set to c(0.012, 0.024, 0.049, 0.097, 0.194, 0.389).</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-5-1.png" width="384"><img src="fractal_intro_files/figure-html/unnamed-chunk-5-2.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 2.315246</span></span>
+<span><span class="co">#&gt; [1] 2.162501</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
-<span><span class="co">#&gt;            l   n</span></span>
-<span><span class="co">#&gt; 4 0.05291204 134</span></span>
-<span><span class="co">#&gt; 3 0.10582408  31</span></span>
-<span><span class="co">#&gt; 2 0.21164817   8</span></span>
-<span><span class="co">#&gt; 1 0.42329634   1</span></span>
+<span><span class="co">#&gt;            l    n</span></span>
+<span><span class="co">#&gt; 6 0.01214766 1995</span></span>
+<span><span class="co">#&gt; 5 0.02429533  596</span></span>
+<span><span class="co">#&gt; 4 0.04859066  149</span></span>
+<span><span class="co">#&gt; 3 0.09718131   32</span></span>
+<span><span class="co">#&gt; 2 0.19436262    8</span></span>
+<span><span class="co">#&gt; 1 0.38872525    1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.42329634 0.21164817 0.10582408 0.05291204</span></span>
+<span><span class="co">#&gt; [1] 0.38872525 0.19436262 0.09718131 0.04859066 0.02429533 0.01214766</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 2.111893 1.954196 3.000000</span></span>
+<span><span class="co">#&gt; [1] 1.743005 2.000000 2.219169 2.000000 3.000000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.5638126</span></span>
+<span><span class="co">#&gt; [1] 0.4819041</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "cubes"</span></span></code></pre>
@@ -317,25 +319,25 @@ the <code>mcap</code> mesh.</p>
 <span><span class="fu"><a href="../reference/fd.html">fd</a></span><span class="op">(</span><span class="va">mcap_2d</span>, method <span class="op">=</span> <span class="st">"boxes"</span>, plot<span class="op">=</span><span class="cn">TRUE</span>, diagnose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fractal_intro_files/figure-html/unnamed-chunk-6-1.png" width="384"><img src="fractal_intro_files/figure-html/unnamed-chunk-6-2.png" width="384"></p>
 <pre><code><span><span class="co">#&gt; $D</span></span>
-<span><span class="co">#&gt; [1] 1.39879</span></span>
+<span><span class="co">#&gt; [1] 1.410651</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt;            l   n</span></span>
-<span><span class="co">#&gt; 6 0.01219243 138</span></span>
-<span><span class="co">#&gt; 5 0.02438486  65</span></span>
-<span><span class="co">#&gt; 4 0.04876971  28</span></span>
-<span><span class="co">#&gt; 3 0.09753943  11</span></span>
-<span><span class="co">#&gt; 2 0.19507886   4</span></span>
-<span><span class="co">#&gt; 1 0.39015772   1</span></span>
+<span><span class="co">#&gt; 6 0.01205958 137</span></span>
+<span><span class="co">#&gt; 5 0.02411915  70</span></span>
+<span><span class="co">#&gt; 4 0.04823830  31</span></span>
+<span><span class="co">#&gt; 3 0.09647661  11</span></span>
+<span><span class="co">#&gt; 2 0.19295322   4</span></span>
+<span><span class="co">#&gt; 1 0.38590644   1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lvec</span></span>
-<span><span class="co">#&gt; [1] 0.39015772 0.19507886 0.09753943 0.04876971 0.02438486 0.01219243</span></span>
+<span><span class="co">#&gt; [1] 0.38590644 0.19295322 0.09647661 0.04823830 0.02411915 0.01205958</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $D_vec</span></span>
-<span><span class="co">#&gt; [1] 1.086157 1.215013 1.347923 1.459432 2.000000</span></span>
+<span><span class="co">#&gt; [1] 0.9687491 1.1750867 1.4947647 1.4594316 2.0000000</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $var</span></span>
-<span><span class="co">#&gt; [1] 0.3523516</span></span>
+<span><span class="co">#&gt; [1] 0.3896004</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $method</span></span>
 <span><span class="co">#&gt; [1] "boxes"</span></span></code></pre>
