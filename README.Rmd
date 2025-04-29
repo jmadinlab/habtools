@@ -26,7 +26,11 @@ knit_hooks$set(webgl = hook_webgl)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/habtools?color=brightgreen)](https://CRAN.R-project.org/package=habtools)
 <!-- badges: end -->
 
-A collection of functions for sampling and simulating 3D surfaces and objects and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, second moments of area and volume, and more.
+A collection of functions for sampling and simulating 3D surfaces and objects and estimating metrics like rugosity, fractal dimension, convexity, sphericity, circularity, second moments of area and volume, and more.   
+
+### Citation   
+When using `habtools`, please cite the following reference:    
+Schiettekatte, N., Asbury, M., Chen, G. K., Dornelas, M., Reichert, J., Torres-Pulliza, D., Zawada, K. J. A., & Madin, J. S. (2025). habtools: An R package to calculate 3D metrics for surfaces and objects. Methods in Ecology and Evolution, 00, 1–9. https://doi.org/10.1111/2041-210X.70027"
 
 ### Installation
 

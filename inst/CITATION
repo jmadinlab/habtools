@@ -1,7 +1,7 @@
 bibentry(
   bibtype = "Article",
 	author = c(
-	person("Schiettekatte", given = c("Nina", "M.", "D.")),
+	person("Schiettekatte", given = c("Nina")),
 	person("Asbury", given = "Mollie"),
 	person("Chen", given = "Guan-Yan"),
 	person("Dornelas", given = "Maria"),
@@ -10,14 +10,9 @@ bibentry(
 	person("Zawada", given = c("Kyle", "J.", "A.")),
 	person("Madin", given = c("Joshua", "S."))),
 	title = "habtools: an R package to calculate 3D metrics for surfaces and objects",
-	year = "2024",
-	doi = "10.1101/2024.09.19.613985",
-	URL = "https://www.biorxiv.org/content/10.1101/2024.09.19.613985v1",
-	journal = "bioRxiv",
-	 header = "To cite habtools in publications, please use:",
-textVersion = "Schiettekatte NMD, Asbury M, Chen G, Dornelas M, Reichert J,
-Torres-Pulliza D, Zawada KJA, Madin JS (2024). “habtools: an R
-package to calculate 3D metrics for surfaces and objects.”
-bioRxiv. doi:10.1101/2024.09.19.613985
-<https://www.biorxiv.org/content/10.1101/2024.09.19.613985v1>"
+	year = "2025",
+	doi = "https://doi.org/10.1111/2041-210X.70027",
+	URL = "https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.70027",
+	journal = "Methods in Ecology and Evolution",
+	header = "To cite habtools in publications, please use: \n Schiettekatte, N., Asbury, M., Chen, G. K., Dornelas, M., Reichert, J., Torres-Pulliza, D., Zawada, K. J. A., & Madin, J. S. (2025). habtools: An R package to calculate 3D metrics for surfaces and objects. Methods in Ecology and Evolution, 00, 1–9. https://doi.org/10.1111/2041-210X.70027"
 )

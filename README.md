@@ -16,6 +16,15 @@ objects and estimating metrics like rugosity, fractal dimension,
 convexity, sphericity, circularity, second moments of area and volume,
 and more.
 
+### Citation
+
+When using `habtools`, please cite the following reference:  
+Schiettekatte, N., Asbury, M., Chen, G. K., Dornelas, M., Reichert, J.,
+Torres-Pulliza, D., Zawada, K. J. A., & Madin, J. S. (2025). habtools:
+An R package to calculate 3D metrics for surfaces and objects. Methods
+in Ecology and Evolution, 00, 1–9.
+<https://doi.org/10.1111/2041-210X.70027>”
+
 ### Installation
 
 The best way to install `habtools` is through cran.
@@ -63,7 +72,7 @@ hr(dem)
 
 # rugosity
 rg(dem, L0 = 0.0625)
-#> [1] 1.75829
+#> [1] 1.732286
 
 # fractal dimension
 fd(dem, method = "hvar", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
@@ -106,7 +115,7 @@ options(rgl.printRglwidget = TRUE)
 plot3d(mcap)
 ```
 
-<img src="man/figures/README-setup2-1-rgl.png" width="100%" />
+<img src="man/figures/README-setup2-1.-rgl.png" width="100%" />
 
 ``` r
 # height range
@@ -115,33 +124,35 @@ hr(mcap)
 
 # rugosity
 rg(mcap, L0 = 0.045)
-#> [1] 2.882813
+#> [1] 2.790366
 
 # fractal dimension
 fd(mcap, method = "cubes", keep_data = TRUE, plot=TRUE, diagnose = TRUE)
-#> lvec is set to c(0.053, 0.106, 0.212, 0.423).
+#> lvec is set to c(0.012, 0.024, 0.049, 0.097, 0.194, 0.389).
 ```
 
 <img src="man/figures/README-example2-1.png" width="100%" /><img src="man/figures/README-example2-2.png" width="100%" />
 
     #> $D
-    #> [1] 2.315246
+    #> [1] 2.162501
     #> 
     #> $data
-    #>            l   n
-    #> 4 0.05291204 134
-    #> 3 0.10582408  31
-    #> 2 0.21164817   8
-    #> 1 0.42329634   1
+    #>            l    n
+    #> 6 0.01214766 1995
+    #> 5 0.02429533  596
+    #> 4 0.04859066  149
+    #> 3 0.09718131   32
+    #> 2 0.19436262    8
+    #> 1 0.38872525    1
     #> 
     #> $lvec
-    #> [1] 0.42329634 0.21164817 0.10582408 0.05291204
+    #> [1] 0.38872525 0.19436262 0.09718131 0.04859066 0.02429533 0.01214766
     #> 
     #> $D_vec
-    #> [1] 2.111893 1.954196 3.000000
+    #> [1] 1.743005 2.000000 2.219169 2.000000 3.000000
     #> 
     #> $var
-    #> [1] 0.5638126
+    #> [1] 0.4819041
     #> 
     #> $method
     #> [1] "cubes"

@@ -1,11 +1,11 @@
-pandoc: 3.1.1
-pkgdown: 2.1.1
+pandoc: '3.2'
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   DEM_intro: DEM_intro.html
   fractal_intro: fractal_intro.html
   mesh_intro: mesh_intro.html
-last_built: 2025-02-28T01:36Z
+last_built: 2025-04-28T23:38Z
 urls:
   reference: https://jmadinlab.github.io/habtools/reference
   article: https://jmadinlab.github.io/habtools/articles
