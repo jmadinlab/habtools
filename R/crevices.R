@@ -170,6 +170,17 @@ crevices <- function(data,
   gap     <- coarse - fine
   flagged <- terra::ifel(gap >= gap_range[1] & gap <= gap_range[2], 1, NA)
 
+  if (all(is.na(terra::values(flagged)))) {
+    gap_vals <- terra::values(gap)
+    gap_vals <- gap_vals[!is.na(gap_vals)]
+    warning("No cells fall within gap_range [", gap_range[1], ", ", gap_range[2], "]. ",
+            "Actual gap depth range: [", round(min(gap_vals), 5), ", ",
+            round(max(gap_vals), 5), "]. ",
+            "Adjust `gap_range` accordingly.")
+    out <- terra::ifel(is.na(r), NA, 0)
+    if (input_class == "RasterLayer") return(raster::raster(out)) else return(out)
+  }
+
   # ---------------------------------------------------------------------------
   # Step 5: Majority filter (3x3, "HALF" rule).
   # Cleans up speckle in the binary mask. For each cell, look at its eight
@@ -188,6 +199,15 @@ crevices <- function(data,
   patches  <- terra::patches(smoothed, directions = 8, zeroAsNA = TRUE)
   cnt      <- terra::freq(patches)             # cols: layer, value, count
   keep     <- cnt$value[cnt$count > min_cells]
+
+  if (length(keep) == 0) {
+    warning("No patches survived the area filter (min_area = ", min_area,
+            " -> ", min_cells, " cells). ",
+            "Try lowering `min_area` or widening `gap_range`.")
+    out <- terra::ifel(is.na(r), NA, 0)
+    if (input_class == "RasterLayer") return(raster::raster(out)) else return(out)
+  }
+
   retained <- terra::ifel(patches %in% keep, patches, NA)
 
   # ---------------------------------------------------------------------------
